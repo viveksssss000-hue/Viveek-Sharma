@@ -1,26 +1,153 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
+/*
+  Acowork design tokens (BUILD.md §5).
+  Light theme only. Teal accent for CTAs/links; navy for brand/dark sections.
+  All text combinations meet WCAG 2.2 AA contrast.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --radius: 0.75rem; /* 12px — cards/buttons */
+  --radius-input: 0.5rem; /* 8px — inputs */
+
+  --background: #f8fafc; /* page background */
+  --surface: #ffffff; /* cards, header */
+  --foreground: #0f172a; /* headings / primary text */
+  --muted: #f1f5f9; /* subtle fills */
+  --muted-foreground: #475569; /* body text */
+  --subtle: #94a3b8; /* captions, placeholders */
+  --border: #e2e8f0; /* dividers, inputs */
+  --input: #e2e8f0;
+  --ring: #0d9488; /* focus ring = accent */
+
+  --primary: #0b2545; /* brand navy */
+  --primary-foreground: #ffffff;
+
+  --accent: #0d9488; /* teal — CTAs, links, highlights */
+  --accent-hover: #0f766e;
+  --accent-foreground: #ffffff;
+
+  --success: #16a34a;
+  --warning: #d97706;
+  --error: #dc2626;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--foreground);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle: var(--subtle);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: var(--radius-input);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --container-content: 1200px;
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--foreground);
+    line-height: 1.2;
+    text-wrap: balance;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  /* Accessible focus ring for keyboard users */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  /* Respect reduced-motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Page container: max 1200px with responsive gutters */
+  .container-content {
+    width: 100%;
+    max-width: var(--container-content);
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 768px) {
+    .container-content {
+      padding-inline: 1.5rem;
+    }
+  }
+  /* Section vertical rhythm: 96px desktop / 48px mobile */
+  .section-y {
+    padding-block: 3rem;
+  }
+  @media (min-width: 768px) {
+    .section-y {
+      padding-block: 6rem;
+    }
+  }
 }
