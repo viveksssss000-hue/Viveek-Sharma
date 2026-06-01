@@ -1,0 +1,38 @@
+import { Clock, RefreshCcw, CalendarClock, ShieldAlert } from "lucide-react";
+
+import { SectionHeading } from "@/components/sections/SectionHeading";
+import { home } from "@/lib/content";
+
+const icons = [Clock, RefreshCcw, CalendarClock, ShieldAlert];
+
+export function ProblemGrid() {
+  const { problems } = home;
+  return (
+    <section className="section-y">
+      <div className="container-content">
+        <SectionHeading title={problems.heading} />
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {problems.cards.map((card, i) => {
+            const Icon = icons[i] ?? Clock;
+            return (
+              <div
+                key={card.title}
+                className="flex flex-col gap-3 rounded-xl border border-border bg-surface p-6"
+              >
+                <span className="grid size-11 place-items-center rounded-lg bg-accent/10 text-accent">
+                  <Icon className="size-5" />
+                </span>
+                <h3 className="text-lg font-semibold text-foreground">
+                  {card.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {card.body}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
