@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Acowork — marketing website
 
-## Getting Started
+AI bookkeeping & accounting automation for SMBs in the US & EU. Brand of **VSH Enterprise Pvt Ltd** · domain **tryacowork.com**. Primary CTA everywhere is **Book a Demo**; no pricing on the site.
 
-First, run the development server:
+Built per `BUILD.md` (the full build brief, also copied to `CLAUDE.md`).
+
+## Stack
+
+- **Next.js 16** (App Router) + **React 19** + **TypeScript**
+- **Tailwind CSS v4** (CSS-first `@theme` tokens in `src/app/globals.css`)
+- Hand-rolled **shadcn/ui-style** components on Radix primitives + `class-variance-authority` (`src/components/ui`). `components.json` is present so the `shadcn` CLI still works.
+- **react-hook-form** + **zod** (shared client/server schema)
+- **Cal.com** inline embed (Calendly fallback) for booking
+- **Resend** (email), **HubSpot Forms API** or generic webhook (CRM), **Cloudflare Turnstile** + honeypot (spam)
+- **GA4** via `@next/third-parties` gated by **vanilla-cookieconsent** + Google **Consent Mode v2**
+
+> Note: the current `shadcn` CLI is fully interactive (component-library → preset prompts) with no non-interactive flag, so UI components were hand-written in the standard shadcn source style rather than generated. See `BUILD.md` §2 golden rule #2.
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.local.example .env.local   # fill in real values (see below)
+npm run dev                         # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build & run production:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment variables
 
-## Learn More
+See `.env.local.example`. Everything is optional in development — without keys the site still runs:
 
-To learn more about Next.js, take a look at the following resources:
+- **Turnstile** verification is **skipped** if `TURNSTILE_SECRET_KEY` is unset (the form stays testable).
+- **Resend / HubSpot / Slack** calls are **logged instead of sent** when their keys are unset.
+- **GA4** does not load unless `NEXT_PUBLIC_GA_ID` is a real ID (placeholder `G-XXXXXXX` is ignored).
+- **Cal.com** uses `NEXT_PUBLIC_CAL_LINK`; falls back to `NEXT_PUBLIC_CALENDLY_URL`; if neither is set the demo page shows a contact link (never a broken embed).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+  app/            routes (App Router), api/contact, sitemap.ts, robots.ts, opengraph-image.tsx, icon.svg
+  components/
+    ui/           shadcn-style primitives (button, input, select, accordion, sheet, …)
+    layout/       Header, Footer, MobileNav, StickyMobileCTA, Logo
+    sections/     Hero, ProblemGrid, ServicesOverview, ProcessSteps, SecurityBlock, FAQ, CTASection, …
+    forms/        ContactForm
+    booking/      DemoEmbed (Cal.com)
+    consent/      ConsentBanner, CookieSettingsButton
+    analytics/    Analytics (GA4)
+    seo/          JsonLd (Organization + WebSite)
+  lib/            content.ts (all copy), validations.ts, crm.ts, email.ts, turnstile.ts, seo.ts, analytics.ts, utils.ts
+```
 
-## Deploy on Vercel
+**All copy lives in `src/lib/content.ts`** — edit there, not in components.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Things the client must provide (search for `TODO(client)`)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Final logo/wordmark (currently a text wordmark stand-in).
+- Real, named, permissioned **testimonials**, **case studies**, **metrics** (placeholders use `{{tokens}}` and empty states — never fabricated).
+- Confirmed **integrations** (QuickBooks/Xero/Sage/…).
+- **SOC 2 / ISO 27001** status (Security page states it honestly once confirmed).
+- Legal review of **Privacy / Terms / Cookie** pages (`TODO(client/legal)`).
+- LinkedIn URL, CRM/scheduler/email accounts, lead-routing owner.
+
+## Deploy (Vercel)
+
+```bash
+npm i -g vercel
+vercel                 # link/create project
+vercel env add ...     # add each var from .env.local.example (Production + Preview)
+vercel --prod
+```
+
+Then point `tryacowork.com` DNS at Vercel and verify HTTPS. Pre-launch checklist is in `BUILD.md` §13.

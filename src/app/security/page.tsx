@@ -10,7 +10,6 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { SectionHeading } from "@/components/sections/SectionHeading";
 import { CTASection } from "@/components/sections/CTASection";
 import { buildMetadata } from "@/lib/seo";
 import { security } from "@/lib/content";
