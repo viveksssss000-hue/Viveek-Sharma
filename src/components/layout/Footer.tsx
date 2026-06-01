@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { Logo } from "@/components/layout/Logo";
+import { CookieSettingsButton } from "@/components/consent/CookieSettingsButton";
 import { footer, site } from "@/lib/content";
 
 export function Footer() {
@@ -66,6 +67,7 @@ export function Footer() {
                 {link.label}
               </Link>
             ))}
+            <CookieSettingsButton className="transition-colors hover:text-accent" />
             <a
               href={site.linkedin}
               target="_blank"

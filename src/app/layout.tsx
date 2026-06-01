@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { StickyMobileCTA } from "@/components/layout/StickyMobileCTA";
 import { Toaster } from "@/components/ui/sonner";
+import { ConsentBanner } from "@/components/consent/ConsentBanner";
+import { Analytics } from "@/components/analytics/Analytics";
+import { SiteJsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/lib/content";
 
 const inter = Inter({
@@ -31,6 +35,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} h-full`}>
+      <head>
+        {/* Google Consent Mode v2 — default everything to denied until the
+            user opts in via the cookie banner. Runs before GA loads. */}
+        <Script id="consent-default" strategy="beforeInteractive">
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});`}
+        </Script>
+      </head>
       <body className="min-h-full flex flex-col bg-background">
         <a
           href="#main"
@@ -47,7 +58,9 @@ export default function RootLayout({
         <div aria-hidden="true" className="h-16 md:hidden" />
         <StickyMobileCTA />
         <Toaster position="top-center" richColors />
-        {/* Analytics (GA4) + Consent banner are wired in Phase 5. */}
+        <ConsentBanner />
+        <SiteJsonLd />
+        <Analytics />
       </body>
     </html>
   );
