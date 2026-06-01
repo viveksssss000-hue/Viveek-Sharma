@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(git -C C:/xampp/htdocs/Sid7755 status)",
+      "Read(//c/xampp/htdocs/**)",
+      "Bash(mv Sid7755/.claude ./_claude_backup_Sid7755)"
+    ]
+  }
+}
