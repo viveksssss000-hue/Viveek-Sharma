@@ -11,7 +11,7 @@ type BuildMetadataArgs = {
 
 /**
  * Build per-page Metadata with canonical URL + Open Graph + Twitter card.
- * `title` is used verbatim (pages pass their full "<keyword> | Acowork" title).
+ * `title` is used verbatim (pages pass their full "<keyword> | tryacowork" title).
  * The OG/Twitter image is supplied automatically by app/opengraph-image.tsx.
  */
 export function buildMetadata({

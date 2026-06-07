@@ -5,9 +5,9 @@ import { buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/content";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Privacy Policy | Acowork",
+  title: "Privacy Policy | tryacowork",
   description:
-    "How Acowork (VSH Enterprise Pvt Ltd) collects, uses and protects personal data submitted through this website.",
+    "How tryacowork (VSH Enterprise Pvt Ltd) collects, uses and protects personal data submitted through this website.",
   path: "/privacy",
 });
 

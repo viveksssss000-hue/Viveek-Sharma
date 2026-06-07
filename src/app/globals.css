@@ -2,48 +2,55 @@
 @import "tw-animate-css";
 
 /*
-  Acowork design tokens (BUILD.md §5).
-  Light theme only. Teal accent for CTAs/links; navy for brand/dark sections.
+  tryacowork "Flowline" design tokens — from the brand kit (claude.ai/design).
+  Dark identity: ink base, carbon surfaces, electric accents.
+  Violet leads, cyan supports, lime is reserved for the primary action.
   All text combinations meet WCAG 2.2 AA contrast.
 */
 :root {
   --radius: 0.75rem; /* 12px — cards/buttons */
   --radius-input: 0.5rem; /* 8px — inputs */
 
-  --background: #f8fafc; /* page background */
-  --surface: #ffffff; /* cards, header */
-  --foreground: #0f172a; /* headings / primary text */
-  --muted: #f1f5f9; /* subtle fills */
-  --muted-foreground: #475569; /* body text */
-  --subtle: #94a3b8; /* captions, placeholders */
-  --border: #e2e8f0; /* dividers, inputs */
-  --input: #e2e8f0;
-  --ring: #0d9488; /* focus ring = accent */
+  --background: #07070b; /* Ink — page background */
+  --surface: #10101a; /* Carbon — cards, header */
+  --elevated: #181826; /* Slate — elevated surfaces */
+  --foreground: #ececf3; /* Mist — headings / primary text */
+  --muted: #181826; /* subtle fills */
+  --muted-foreground: #b3b3c0; /* body text */
+  --subtle: #8a8a99; /* captions, placeholders */
+  --border: rgba(255, 255, 255, 0.09); /* dividers, inputs */
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --input: rgba(255, 255, 255, 0.14);
+  --ring: #c9ff3d; /* focus ring = lime spark */
 
-  --primary: #0b2545; /* brand navy */
+  --primary: #7c5cff; /* Violet — brand primary */
   --primary-foreground: #ffffff;
 
-  --accent: #0d9488; /* teal — CTAs, links, highlights */
-  --accent-hover: #0f766e;
-  --accent-foreground: #ffffff;
+  --accent: #c9ff3d; /* Lime — the spark. CTAs only. */
+  --accent-hover: #d6ff66;
+  --accent-foreground: #0a0a12;
 
-  --success: #16a34a;
-  --warning: #d97706;
-  --error: #dc2626;
+  --cyan: #1fe3d6; /* Cyan — secondary accent, links/labels */
+
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --error: #f87171;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
+  --color-elevated: var(--elevated);
   --color-card: var(--surface);
   --color-card-foreground: var(--foreground);
-  --color-popover: var(--surface);
+  --color-popover: var(--elevated);
   --color-popover-foreground: var(--foreground);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-subtle: var(--subtle);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-input: var(--input);
   --color-ring: var(--ring);
 
@@ -54,11 +61,14 @@
   --color-accent-hover: var(--accent-hover);
   --color-accent-foreground: var(--accent-foreground);
 
+  --color-cyan: var(--cyan);
+
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-error: var(--error);
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 
   --radius-sm: var(--radius-input);
   --radius-md: calc(var(--radius) - 2px);
@@ -100,19 +110,23 @@
     -webkit-font-smoothing: antialiased;
     line-height: 1.6;
   }
+  ::selection {
+    background: var(--accent);
+    color: #0a0a12;
+  }
   h1,
   h2,
   h3,
   h4 {
     color: var(--foreground);
-    line-height: 1.2;
+    line-height: 1.15;
     text-wrap: balance;
     font-weight: 700;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
   }
   /* Accessible focus ring for keyboard users */
   :focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--ring);
     outline-offset: 2px;
   }
   /* Respect reduced-motion preference */
@@ -149,5 +163,19 @@
     .section-y {
       padding-block: 6rem;
     }
+  }
+  /* Faint violet grid — the Flowline background motif */
+  .grid-motif {
+    background-image: linear-gradient(rgba(124, 92, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124, 92, 255, 0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  /* Mono eyebrow label — "the system talking" */
+  .eyebrow-mono {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--subtle);
   }
 }

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="92" viewBox="0 0 360 92" fill="none">
+<defs>
+
+<linearGradient id="flow" x1="24" y1="47" x2="70" y2="47" gradientUnits="userSpaceOnUse"><stop stop-color="#7C5CFF"></stop><stop offset="1" stop-color="#1FE3D6"></stop></linearGradient>
+</defs>
+<g transform="translate(8,7)">
+<rect x="1.5" y="1.5" width="75" height="75" rx="18" stroke="#7C5CFF" stroke-opacity="0.45" stroke-width="1.5"></rect>
+<path d="M16 50 L32 50 L40 30 L48 50 L62 50" stroke="url(#flow)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"></path>
+<circle cx="16" cy="50" r="5.5" fill="#7C5CFF"></circle><circle cx="40" cy="30" r="5.5" fill="#1FE3D6"></circle><circle cx="62" cy="50" r="6" fill="#C9FF3D"></circle>
+</g>
+<text x="108" y="59" font-family="&#39;Space Grotesk&#39;, sans-serif" font-size="40" font-weight="700" letter-spacing="-1.2"><tspan fill="#07070B">try</tspan><tspan fill="#7C5CFF">a</tspan><tspan fill="#07070B">cowork</tspan></text>
+</svg>

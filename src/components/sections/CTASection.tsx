@@ -11,26 +11,24 @@ type CTASectionProps = {
   className?: string;
 };
 
-/** Reusable final CTA band (navy). Used at the foot of most pages. */
+/** Reusable final CTA band — Flowline contact-card style. Foot of most pages. */
 export function CTASection({
-  title = "Ready to automate your books?",
-  description = "Book a 30-minute demo and we'll map two or three automations for your workflow, live. No obligation.",
+  title = "Let's automate something real.",
+  description = "Start with one task. Book a 30-minute demo and we'll show you the automated version of it — and the hours it gives back.",
   reassurance = "30-minute call · No obligation · No credit card",
   className,
 }: CTASectionProps) {
   return (
     <section className={cn("section-y", className)}>
       <div className="container-content">
-        <div className="relative overflow-hidden rounded-xl bg-primary px-6 py-14 text-center text-primary-foreground sm:px-12 sm:py-16">
+        <div className="relative overflow-hidden rounded-2xl border border-border bg-[linear-gradient(140deg,#0d0d16,#161527)] px-6 py-14 text-center sm:px-12 sm:py-16">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -right-16 -top-16 size-64 rounded-full bg-accent/20 blur-3xl"
+            className="pointer-events-none absolute -right-28 -top-44 size-[32rem] rounded-full bg-[radial-gradient(circle,rgba(124,92,255,.22),transparent_64%)]"
           />
           <div className="relative mx-auto flex max-w-2xl flex-col items-center gap-5">
-            <h2 className="text-3xl text-primary-foreground sm:text-4xl">
-              {title}
-            </h2>
-            <p className="text-lg text-white/80 leading-relaxed">
+            <h2 className="text-3xl sm:text-4xl">{title}</h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
               {description}
             </p>
             <div className="mt-2 flex flex-col items-center gap-3 sm:flex-row">
@@ -40,17 +38,14 @@ export function CTASection({
                   <ArrowRight />
                 </Link>
               </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-white/30 text-primary-foreground hover:bg-white/10"
-              >
+              <Button asChild size="lg" variant="outline">
                 <Link href="/contact">Contact us</Link>
               </Button>
             </div>
             {reassurance ? (
-              <p className="text-sm text-white/60">{reassurance}</p>
+              <p className="font-mono text-xs tracking-wide text-subtle">
+                {reassurance}
+              </p>
             ) : null}
           </div>
         </div>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="150" viewBox="0 0 540 150" fill="none">
+  <title>tryacowork horizontal lockup — for light backgrounds</title>
+  <defs>
+    
+    <linearGradient id="tac_lock_l" x1="16" y1="40" x2="62" y2="40" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7C5CFF"></stop><stop offset="1" stop-color="#16C7BB"></stop>
+    </linearGradient>
+  </defs>
+  <g transform="translate(8 35) scale(1.1)">
+    <path d="M16 50 L32 50 L40 30 L48 50 L62 50" stroke="url(#tac_lock_l)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"></path>
+    <circle cx="16" cy="50" r="5.5" fill="#7C5CFF"></circle>
+    <circle cx="40" cy="30" r="5.5" fill="#16C7BB"></circle>
+    <circle cx="62" cy="50" r="6" fill="#7C5CFF"></circle>
+  </g>
+  <text class="wm" x="112" y="98" fill="#07070B">try<tspan fill="#7C5CFF">a</tspan>cowork</text>
+</svg>

@@ -25,7 +25,7 @@ export async function notifyTeam(data: ContactInput): Promise<void> {
   try {
     if (resend) {
       await resend.emails.send({
-        from: `Acowork Website <${fromEmail}>`,
+        from: `tryacowork Website <${fromEmail}>`,
         to: toEmail,
         replyTo: data.workEmail,
         subject: `New enquiry: ${data.name}${data.company ? ` — ${data.company}` : ""}`,
@@ -73,16 +73,16 @@ export async function sendContactConfirmation(
       return;
     }
     await resend.emails.send({
-      from: `Acowork <${fromEmail}>`,
+      from: `tryacowork <${fromEmail}>`,
       to: data.workEmail,
-      subject: "Thanks for contacting Acowork",
+      subject: "Thanks for contacting tryacowork",
       html: `
         <p>Hi ${escapeHtml(data.name)},</p>
-        <p>Thanks for reaching out to Acowork. We've received your message and
+        <p>Thanks for reaching out to tryacowork. We've received your message and
         will get back to you — usually within one business day.</p>
         <p>In the meantime, if you'd like to skip the queue, you can
         <a href="https://tryacowork.com/book-a-demo">book a 30-minute demo</a>.</p>
-        <p>— The Acowork team</p>
+        <p>— The tryacowork team</p>
       `,
     });
   } catch (err) {

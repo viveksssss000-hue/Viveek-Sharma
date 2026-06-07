@@ -21,8 +21,8 @@ export default function AboutPage() {
       <section className="border-b border-border bg-background">
         <div className="container-content py-12 md:py-16">
           <div className="max-w-3xl">
-            <span className="text-sm font-semibold uppercase tracking-wide text-accent">
-              About Acowork
+            <span className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-cyan">
+              About tryacowork
             </span>
             <h1 className="mt-4 text-4xl sm:text-5xl">{about.h1}</h1>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
@@ -65,7 +65,7 @@ export default function AboutPage() {
         <div className="container-content">
           <SectionHeading
             title="The team"
-            description="Real names, roles and photos build trust — we'll add ours here once finalised."
+            description="The people who design, build and run your workflows."
           />
           {about.team.length === 0 ? (
             <div className="mx-auto mt-10 max-w-md rounded-xl border border-dashed border-border bg-background p-8 text-center">

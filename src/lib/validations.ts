@@ -10,11 +10,11 @@ export const companySizes = [
 ] as const;
 
 export const interests = [
-  "Bookkeeping",
-  "Invoices & AP",
-  "Accounts Receivable",
-  "Month-end close",
-  "Reporting",
+  "Bookkeeping & invoices",
+  "Lead routing & CRM",
+  "Reporting & dashboards",
+  "Inbox & document triage",
+  "Data entry between systems",
   "Other",
 ] as const;
 

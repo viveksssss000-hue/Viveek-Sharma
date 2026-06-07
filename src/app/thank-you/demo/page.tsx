@@ -5,8 +5,8 @@ import { CalendarCheck, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "You're booked | Acowork",
-  description: "Your Acowork demo is confirmed.",
+  title: "You're booked | tryacowork",
+  description: "Your tryacowork demo is confirmed.",
   robots: { index: false, follow: false },
 };
 
@@ -19,8 +19,8 @@ export default function ThankYouDemoPage() {
         </span>
         <h1 className="mt-6 text-4xl sm:text-5xl">You&apos;re booked.</h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          Thanks for scheduling a demo with Acowork. You&apos;ll get a calendar
-          invite with a video link, plus reminders before the call.
+          Thanks for scheduling a demo with tryacowork. You&apos;ll get a
+          calendar invite with a video link, plus reminders before the call.
         </p>
 
         <div className="mx-auto mt-10 max-w-md rounded-xl border border-border bg-surface p-6 text-left">
@@ -28,9 +28,9 @@ export default function ThankYouDemoPage() {
             To get the most from it
           </h2>
           <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-            <li>• Have a rough sense of your monthly invoice and transaction volume.</li>
-            <li>• Note which accounting tools you use today.</li>
             <li>• Think about the one task you&apos;d most like off your plate.</li>
+            <li>• Note which tools that task touches today (inbox, CRM, spreadsheets…).</li>
+            <li>• Have a rough sense of how many hours it eats each week.</li>
           </ul>
         </div>
 

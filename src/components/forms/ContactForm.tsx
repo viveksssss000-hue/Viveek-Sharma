@@ -248,7 +248,7 @@ export function ContactForm({
         />
         <div className="flex flex-col gap-1">
           <Label htmlFor="consent" className="font-normal leading-snug">
-            I agree to Acowork processing my details to respond to my enquiry,
+            I agree to tryacowork processing my details to respond to my enquiry,
             per the{" "}
             <Link href="/privacy" className="text-accent underline">
               Privacy Policy

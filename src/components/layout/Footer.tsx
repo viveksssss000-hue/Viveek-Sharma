@@ -15,7 +15,8 @@ export function Footer() {
           <div className="lg:col-span-1">
             <Logo />
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              AI automation built specifically for accounting &amp; bookkeeping.
+              {site.tagline} We turn complex, manual work into AI workflows
+              that run on their own.
             </p>
             <p className="mt-3 text-sm font-medium text-foreground">
               {site.region}

@@ -25,16 +25,18 @@ const sectionIcons = [Lock, FileCheck, EyeOff, UserCheck, BadgeCheck];
 export default function SecurityPage() {
   return (
     <>
-      <section className="border-b border-border bg-primary text-primary-foreground">
-        <div className="container-content py-16 md:py-20">
+      <section className="relative overflow-hidden border-b border-border bg-[linear-gradient(140deg,#0d0d16,#161527)]">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-28 -top-44 size-[32rem] rounded-full bg-[radial-gradient(circle,rgba(124,92,255,.22),transparent_64%)]"
+        />
+        <div className="container-content relative py-16 md:py-20">
           <div className="max-w-2xl">
-            <span className="text-sm font-semibold uppercase tracking-wide text-accent">
+            <span className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-cyan">
               Security &amp; Compliance
             </span>
-            <h1 className="mt-4 text-4xl text-primary-foreground sm:text-5xl">
-              {security.h1}
-            </h1>
-            <p className="mt-6 text-lg text-white/80 leading-relaxed">
+            <h1 className="mt-4 text-4xl sm:text-5xl">{security.h1}</h1>
+            <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
               {security.intro}
             </p>
           </div>

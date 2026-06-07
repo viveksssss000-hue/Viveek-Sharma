@@ -1,14 +1,17 @@
 /**
  * content.ts — single source of truth for all site copy, navigation, services,
- * FAQs and metric placeholders (BUILD.md §10 / §11). Copy is verbatim from the
- * brief; the client can edit here without touching components.
+ * FAQs and metric placeholders.
+ *
+ * Repositioned to the "Flowline" brand identity (claude.ai/design handoff):
+ * tryacowork is an AI-workflow studio for small teams. Voice: plain-spoken,
+ * precise, never hyped. Outcomes, not tech. Lime is the action.
  *
  * Placeholders use TODO(client) markers and {{token}} metrics — never fabricate
  * testimonials, logos, certifications or numbers.
  */
 
 export const site = {
-  name: "Acowork",
+  name: "tryacowork",
   legalName: "VSH Enterprise Pvt Ltd",
   domain: "tryacowork.com",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://tryacowork.com",
@@ -16,8 +19,8 @@ export const site = {
   salesEmail: "sales@tryacowork.com",
   region: "Serving the US & EU",
   // TODO(client): confirm LinkedIn company URL.
-  linkedin: "https://www.linkedin.com/company/acowork",
-  tagline: "Automate your books, not your judgement.",
+  linkedin: "https://www.linkedin.com/company/tryacowork",
+  tagline: "Workflows, automated.",
 } as const;
 
 /* ------------------------------------------------------------------ */
@@ -28,136 +31,134 @@ export type NavLink = { label: string; href: string };
 
 export const services = [
   {
-    slug: "bookkeeping-automation",
-    title: "Bookkeeping Automation",
-    navLabel: "Bookkeeping Automation",
-    outcome: "Keep the books current without the manual grind.",
+    slug: "workflow-audit",
+    title: "Workflow Audit",
+    navLabel: "Workflow Audit",
+    outcome: "Find out where your hours actually go.",
     problem:
-      "Re-keying transactions and reconciling by hand keeps your books perpetually behind — and every manual touch is a chance for error.",
+      "Most teams can't say which tasks eat the most time — they just feel busy. Until you map the work, you can't automate the right things first.",
     capabilities: [
-      "Automated transaction capture & categorisation",
-      "Bank-feed reconciliation",
-      "Exception flagging for review",
-      "Audit-ready records",
+      "Time-mapping of your team's recurring work",
+      "Repetitive, rules-based tasks identified and ranked by time saved",
+      "A prioritised automation roadmap",
+      "Clear scope before anything gets built",
     ],
     integrationsNote:
-      "Connects to the accounting tools you already use — QuickBooks, Xero, Sage and more. TODO(client): confirm live integrations.",
+      "We audit the tools you already use — inbox, CRM, spreadsheets, accounting software and more. Nothing changes until you say so.",
     securityNote:
-      "Transaction data is encrypted in transit and at rest, and we never use it to train AI models.",
-    metaTitle: "Bookkeeping Automation | Acowork",
+      "Audit access is read-only and least-privilege. Your data is never used to train AI models.",
+    metaTitle: "Workflow Audit | tryacowork",
     metaDesc:
-      "Automate transaction capture, categorisation and bank-feed reconciliation. Keep the books current, accurate and audit-ready. Book a demo.",
+      "We map where your team's hours actually go and rank the repetitive work AI can take over — by time saved. Start with a workflow audit.",
     faqs: [
       {
-        q: "How does automated categorisation stay accurate?",
-        a: "We tune categorisation rules to your chart of accounts and keep a human in the loop to review exceptions, so accuracy improves over time rather than drifting.",
+        q: "What does the audit actually produce?",
+        a: "A short, prioritised roadmap: which tasks to automate first, the hours each one gives back, and what the automated version looks like. No jargon, no 40-page deck.",
       },
       {
-        q: "Will it reconcile against my existing bank feeds?",
-        a: "Yes — we connect to your existing bank feeds and ledger, match transactions automatically, and flag only the exceptions that need a human decision.",
+        q: "How much of our time does it take?",
+        a: "A few conversations with the people who do the work, plus read-only access to the tools involved. Most of the mapping happens on our side.",
       },
       {
-        q: "What happens to transactions it isn't sure about?",
-        a: "Low-confidence items are flagged for review rather than guessed, so nothing posts to your ledger without the right oversight.",
+        q: "Do we have to commit to a build afterwards?",
+        a: "No. The roadmap is yours either way. Most teams continue because the first workflow pays for itself, but there's no obligation.",
       },
     ],
   },
   {
-    slug: "invoice-ap-automation",
-    title: "Invoice & Accounts Payable Automation",
-    navLabel: "Invoice & AP Automation",
-    outcome: "From inbox to ledger, automatically.",
+    slug: "custom-ai-workflows",
+    title: "Custom AI Workflows",
+    navLabel: "Custom AI Workflows",
+    outcome: "Your work, rebuilt to run on its own.",
     problem:
-      "Invoices arrive by email, PDF and post. Capturing line items, matching POs and routing approvals by hand is slow — and duplicates and errors slip through.",
+      "Off-the-shelf tools automate someone else's process, not yours. The tasks that really drain your week are specific to how your business runs.",
     capabilities: [
-      "Capture invoices from email or upload",
-      "Line-item extraction",
-      "PO matching",
-      "Approval routing",
-      "Sync to your ledger",
-      "Duplicate & fraud flags",
+      "Agentic workflows tailored to your tools and your steps",
+      "Workflows that read, decide and act on their own — continuously",
+      "Human review on anything ambiguous or high-stakes",
+      "Built against your real data, not a demo",
     ],
     integrationsNote:
-      "Pushes clean, coded bills into your ledger and approval tools. TODO(client): confirm live integrations.",
+      "Built around the tools you already use — your inbox, CRM, docs, spreadsheets and ledgers — not a new system to learn.",
     securityNote:
-      "Invoice and supplier data is encrypted and access-controlled; we never train AI models on it.",
-    metaTitle: "Invoice & Accounts Payable Automation | Acowork",
+      "Your data is encrypted in transit and at rest, access is least-privilege, and we never train AI models on it.",
+    metaTitle: "Custom AI Workflows | tryacowork",
     metaDesc:
-      "Capture invoices, extract line items, match POs, route approvals and sync to your ledger — with duplicate and fraud flags. Book a demo.",
+      "We design and build agentic AI workflows tailored to your tools and your steps — the kind that read, decide and act on their own. Book a demo.",
     faqs: [
       {
-        q: "Can it match invoices to purchase orders?",
-        a: "Yes — invoices are matched to POs and receipts, and only mismatches are routed for a human decision.",
+        q: "What kinds of tasks can a workflow take over?",
+        a: "Anything repetitive and rules-based: invoice processing, bookkeeping and reconciliation, lead routing, report generation, inbox triage, data entry between systems. If it follows steps, it can usually run on its own.",
       },
       {
-        q: "How do you catch duplicate or fraudulent invoices?",
-        a: "Each invoice is checked against historical bills and supplier patterns, and anything suspicious is flagged before it reaches approval.",
+        q: "What happens when the workflow isn't sure?",
+        a: "It asks. Low-confidence or unusual cases are flagged to a human instead of guessed — so nothing important happens without the right oversight.",
       },
       {
-        q: "Does it work with our approval workflow?",
-        a: "We map your existing approval thresholds and routing so bills go to the right approver automatically.",
+        q: "Will we understand how it works?",
+        a: "Yes. You get a plain-language walkthrough of what the workflow does, when it acts, and when it asks. It's a teammate, not a black box.",
       },
     ],
   },
   {
-    slug: "accounts-receivable-automation",
-    title: "Accounts Receivable Automation",
-    navLabel: "Accounts Receivable Automation",
-    outcome: "Get paid faster, chase less.",
+    slug: "integration-handoff",
+    title: "Integration & Handoff",
+    navLabel: "Integration & Handoff",
+    outcome: "Connected to your tools. Handed over working.",
     problem:
-      "Manual invoicing and inconsistent follow-up stretch out your cash cycle, and matching incoming payments by hand eats hours every week.",
+      "An automation that lives outside your tools just creates another tab to check. It has to plug into where the work already happens.",
     capabilities: [
-      "Invoice generation",
-      "Automated payment reminders",
-      "Payment matching",
-      "AR aging insights",
+      "Connections to your CRM, inbox, docs and spreadsheets",
+      "Tested end-to-end against your real tools",
+      "A walkthrough, not a manual",
+      "Your team trained on the new normal",
     ],
     integrationsNote:
-      "Works with your billing and ledger tools to keep receivables moving. TODO(client): confirm live integrations.",
+      "We connect to the systems you already run on. TODO(client): confirm the integrations you want named here.",
     securityNote:
-      "Customer and payment data is encrypted in transit and at rest, with least-privilege access.",
-    metaTitle: "Accounts Receivable Automation | Acowork",
+      "Integrations use scoped, revocable credentials — least-privilege by default.",
+    metaTitle: "Integration & Handoff | tryacowork",
     metaDesc:
-      "Generate invoices, automate reminders, match payments and surface AR aging insights so you get paid faster and chase less. Book a demo.",
+      "We connect your AI workflow to your CRM, inbox, docs and spreadsheets, then hand over something that just works — with a walkthrough, not a manual.",
     faqs: [
       {
-        q: "Will reminders sound automated or pushy?",
-        a: "Reminder cadence and tone are configured to match your relationships, so follow-up stays professional and on-brand.",
+        q: "Do we need our own developers for this?",
+        a: "No. We build, connect and test everything, then walk your team through it. If you have developers, we're happy to hand off deeper documentation too.",
       },
       {
-        q: "How are incoming payments matched?",
-        a: "Payments are matched to open invoices automatically, with only the ambiguous ones flagged for a quick human check.",
+        q: "What if we change tools later?",
+        a: "Workflows are built in clean, swappable pieces. If you move CRM or accounting software, we re-point the connection rather than rebuilding from scratch.",
       },
     ],
   },
   {
-    slug: "reporting-dashboards",
-    title: "Financial Reporting & Dashboards",
-    navLabel: "Reporting & Dashboards",
-    outcome: "Always-current numbers, on demand.",
+    slug: "continuous-optimization",
+    title: "Continuous Optimization",
+    navLabel: "Continuous Optimization",
+    outcome: "It keeps getting sharper while you grow.",
     problem:
-      "Reports are stale by the time they're built, and pulling period comparisons or cash-flow views by hand means decisions wait on spreadsheets.",
+      "Automations drift: tools update, formats change, edge cases appear. Unwatched, a workflow quietly degrades — and you stop trusting it.",
     capabilities: [
-      "Automated report generation",
-      "Real-time dashboards",
-      "Cash-flow views",
-      "Period comparisons",
+      "Every workflow monitored for accuracy and drift",
+      "Fixes shipped before you notice the problem",
+      "Expansion into the next time-sink as you grow",
+      "A simple retainer — no surprise invoices",
     ],
     integrationsNote:
-      "Pulls from your ledger and source systems to keep every view current. TODO(client): confirm live integrations.",
+      "Monitoring runs quietly alongside your tools — no extra dashboards for your team to babysit.",
     securityNote:
-      "Reporting data stays within your controlled environment; access is least-privilege and audited.",
-    metaTitle: "Financial Reporting & Dashboards | Acowork",
+      "Monitoring sees workflow health, not your private content, wherever possible. Access stays least-privilege and auditable.",
+    metaTitle: "Continuous Optimization | tryacowork",
     metaDesc:
-      "Automated reports, real-time dashboards, cash-flow views and period comparisons — always-current numbers on demand. Book a demo.",
+      "On a simple retainer, we monitor every workflow, fix what drifts, and expand into the next time-sink as your business grows. Book a demo.",
     faqs: [
       {
-        q: "How current are the dashboards?",
-        a: "Dashboards refresh from your source systems, so the numbers you see reflect your latest data rather than last month's export.",
+        q: "What does the retainer cover?",
+        a: "Monitoring, fixes, tuning, and a regular conversation about the next thing worth automating. We scope it to the number of live workflows you run.",
       },
       {
-        q: "Can we get the reports our board already expects?",
-        a: "Yes — we build to the report formats and period comparisons your stakeholders already rely on.",
+        q: "Can we run the workflows ourselves instead?",
+        a: "Yes — handoff is always an option. Most teams keep the retainer because the workflows keep improving without anyone on their side having to think about it.",
       },
     ],
   },
@@ -219,18 +220,19 @@ export const footer = {
 } as const;
 
 /* ------------------------------------------------------------------ */
-/* Metrics — placeholders only (BUILD.md §11). Never invent figures.   */
+/* Metrics — placeholders only. Never invent figures.                  */
+/* Format follows the brand kit's proof section.                       */
 /* ------------------------------------------------------------------ */
 
 export const metrics = [
-  { value: "{{hours_saved}}", label: "Hours saved per month" },
-  { value: "{{accuracy}}", label: "Categorisation accuracy" },
-  { value: "{{time_to_close}}", label: "Faster month-end close" },
+  { value: "{{hours_saved}}", label: "Hours saved per month, per client" },
+  { value: "{{time_to_first}}", label: "Average time to first live workflow" },
+  { value: "{{workflows_shipped}}", label: "Workflows shipped to date" },
 ] as const;
 
 /* ------------------------------------------------------------------ */
 /* Testimonials — placeholder state until client provides real, named  */
-/* quotes (BUILD.md §11). Empty array renders a tasteful empty state.  */
+/* quotes. Empty array renders a tasteful empty state.                 */
 /* ------------------------------------------------------------------ */
 
 export type Testimonial = {
@@ -244,158 +246,160 @@ export type Testimonial = {
 export const testimonials: Testimonial[] = [];
 
 /* ------------------------------------------------------------------ */
-/* Home page copy (BUILD.md §10.1)                                     */
+/* Home page copy — Flowline voice: plain-spoken, precise, never hyped */
 /* ------------------------------------------------------------------ */
 
 export const home = {
   meta: {
-    title: "AI Bookkeeping & Accounting Automation | Acowork",
+    title: "AI Workflow Automation for Small Teams | tryacowork",
     description:
-      "Acowork builds secure AI automations for accounting & bookkeeping — reconciliation, invoices, AP/AR and reporting. Serving SMBs in the US & EU. Book a demo.",
+      "tryacowork turns complex, manual work into AI workflows that run on their own — designed, built and run end-to-end for small teams. Book a demo.",
   },
   hero: {
-    h1: "Automate your books, not your judgement.",
-    sub: "Acowork designs and builds secure AI workflows that handle the repetitive accounting work — reconciliation, invoice processing, AP/AR and reporting — so your team can focus on the decisions that matter.",
+    h1: "Workflows, automated.",
+    sub: "We take the time-consuming, high-manpower tasks that slow your business down — and rebuild them as AI workflows that run continuously in the background. No jargon, no months-long projects. Just your work, automated.",
     primaryCta: "Book a Demo",
     secondaryCta: "See how it works",
     trustLine:
-      "Serving SMBs across the US & EU · Your data encrypted & never used to train AI models.",
+      "Built for small teams · Your data encrypted & never used to train AI models.",
   },
   problems: {
-    heading: "Manual accounting is quietly costing you",
+    heading: "Manual work is quietly costing you",
     cards: [
       {
-        title: "Hours lost to data entry",
-        body: "Re-keying invoices and receipts eats the time your team should spend on analysis.",
+        title: "Hours lost to busywork",
+        body: "Re-keying data, copying between tools, chasing follow-ups — the same task, every day, by hand.",
       },
       {
-        title: "Reconciliation backlogs",
-        body: "Matching transactions by hand is slow and error-prone.",
+        title: "Work that waits on people",
+        body: "Handoffs stall when someone's busy, off, or buried. The task isn't hard — it's just stuck.",
       },
       {
-        title: "A close that drags on",
-        body: "Month-end takes days when it should take hours.",
+        title: "Errors that slip through",
+        body: "Manual repetition breeds mistakes, and mistakes cost more time than the task did.",
       },
       {
-        title: "AI that feels risky",
-        body: "You want automation, but not at the cost of control over your financial data.",
+        title: "AI that feels too complex",
+        body: "You know AI could help — but it feels too technical, too risky, or not built for a team your size.",
       },
     ],
   },
   servicesOverview: {
-    heading: "What we automate",
+    heading: "Designed, built and run — end to end",
     description:
-      "Four focused automations for the accounting work that slows your team down.",
+      "We don't hand you software and walk away. Every engagement moves through the same arc: find the time-sink, automate it, and keep it sharp. From bookkeeping and invoices to lead routing and reporting.",
   },
   security: {
-    heading: "Built for the people who guard the numbers",
-    body: "Your data is encrypted in transit and at rest, access is tightly controlled, and we never train AI models on your financial data. A human reviews the automation — it's a teammate, not a black box.",
+    heading: "Built for people who'd rather not gamble",
+    body: "Your data is encrypted in transit and at rest, access is tightly controlled, and we never train AI models on it. A human reviews the automation — it's a teammate, not a black box.",
     cta: "Read about our security",
   },
   results: {
-    heading: "Results that show up in your books",
+    heading: "The numbers that matter to a busy owner",
     description:
-      "Real, named results land here as our design partners go live. We never publish numbers we can't stand behind.",
+      "Real, named results land here as our clients go live. We never publish numbers we can't stand behind.",
   },
 } as const;
 
 /* ------------------------------------------------------------------ */
-/* How It Works (BUILD.md §10.3)                                       */
+/* How It Works — Map → Design → Automate → Run & refine               */
 /* ------------------------------------------------------------------ */
 
 export const processSteps = [
   {
     number: "01",
-    title: "Discovery & assessment",
-    body: "We map your current accounting workflows and pinpoint where automation saves the most time — before we build anything.",
+    title: "Map",
+    body: "We sit with your team and trace where the hours and friction really live.",
   },
   {
     number: "02",
-    title: "Plan & proposal",
-    body: "A prioritised plan with expected time savings, clear scope, and data-handling defined up front.",
+    title: "Design",
+    body: "We blueprint the AI workflow that replaces it — and agree on what “done” looks like.",
   },
   {
     number: "03",
-    title: "Build & integrate",
-    body: "We build the automation, connect it to the tools you already use, and test it against real data with a human in the loop.",
+    title: "Automate",
+    body: "We build, connect and test it against your real tools until it runs cleanly.",
   },
   {
     number: "04",
-    title: "Optimise & support",
-    body: "We monitor accuracy, refine over time, and support you as you grow.",
+    title: "Run & refine",
+    body: "It goes live and runs continuously. We watch, tune and expand it over time.",
   },
 ] as const;
 
 export const howItWorks = {
   meta: {
-    title: "How Acowork Works — Our Automation Process | Acowork",
+    title: "How It Works — Four Steps to Autopilot | tryacowork",
     description:
-      "Our four-step process: discovery, plan, build & integrate, optimise & support. A credible, low-risk way to automate your accounting. Book a demo.",
+      "Map, Design, Automate, Run & refine. Every project follows the same calm, legible path — you always know what's happening and what's next.",
   },
-  h1: "How Acowork works",
+  h1: "Four steps from chaos to autopilot",
   intro:
-    "A credible, low-risk way to automate your accounting — process-first, security-defined up front, and human-reviewed at every step.",
+    "Every project follows the same calm, legible path. You always know what's happening and what's next.",
   expectations: {
     heading: "What you can expect",
     points: [
       "Clear scope and expected time savings before any build begins.",
       "Data handling and access defined up front, in writing.",
-      "Regular communication and a human reviewing the automation as it goes live.",
+      "A human reviewing the automation as it goes live — and after.",
     ],
   },
 } as const;
 
 /* ------------------------------------------------------------------ */
-/* About (BUILD.md §10.2)                                              */
+/* About                                                               */
 /* ------------------------------------------------------------------ */
 
 export const about = {
   meta: {
-    title: "About Acowork — Accounting Automation Specialists | Acowork",
+    title: "About — The AI Workflow Studio | tryacowork",
     description:
-      "Acowork is built around one thing: automating accounting and bookkeeping safely and accurately for growing businesses in the US & EU. Book a demo.",
+      "tryacowork is an AI-workflow studio for small teams. We design, build and run automations end-to-end — so a five-person team can operate like fifty.",
   },
-  h1: "We're the accounting-automation specialists.",
-  body: "Most automation agencies are generalists who happen to mention finance. Acowork is built around one thing: automating accounting and bookkeeping safely and accurately for growing businesses. We combine finance know-how with modern AI, and we treat your data with the care it deserves.",
+  h1: "We turn complex, manual work into AI workflows that run on their own.",
+  body: "tryacowork is an AI-workflow studio for small teams. We take the time-consuming, high-manpower tasks that slow a business down — and rebuild them as agentic AI workflows that run continuously in the background. We don't sell tools. We design, build and run the workflow end-to-end — and keep improving it.",
   values: [
     {
-      title: "Accuracy",
-      body: "We build for trustworthy numbers, with checks and a human in the loop — never blind automation.",
+      title: "Clarity over cleverness",
+      body: "If a sentence — or a workflow — needs decoding, we rewrite it. Short words, one idea at a time, systems you can actually follow.",
     },
     {
-      title: "Security",
-      body: "Financial data is sensitive. Encryption, least-privilege access, and a no-training promise are the default, not an add-on.",
+      title: "Outcome, not tech",
+      body: "We lead with the result: time saved, mistakes avoided. The “how” comes later, only if you ask.",
     },
     {
-      title: "Partnership",
-      body: "We map your real workflow first and support you as you grow — a teammate, not a vendor.",
+      title: "On your side",
+      body: "We're the coworker, not the vendor. Helpful, patient, and honest about what's worth automating — and what isn't.",
     },
   ],
   whoWeServe: {
-    heading: "Who we serve",
+    heading: "Who it's for",
     items: [
-      "Small and medium businesses that want their books current without the manual grind.",
-      "Accounting and bookkeeping firms automating internal workflows.",
-      "Finance teams who need accuracy and control as they scale.",
+      "Small-business leaders who know AI could help, but think it's too complex, too technical, or not for them.",
+      "Teams drowning in repetitive work — bookkeeping, invoices, lead routing, reporting, inbox triage.",
+      "Founders who want a five-person team to operate like a fifty-person one.",
     ],
   },
-  // TODO(client): real names, roles and photos.
-  team: [] as { name: string; role: string }[],
+  team: [{ name: "Sidharth Sharma", role: "Co-Founder" }] as {
+    name: string;
+    role: string;
+  }[],
 } as const;
 
 /* ------------------------------------------------------------------ */
-/* Security & Compliance (BUILD.md §10.5)                              */
+/* Security & Compliance                                               */
 /* ------------------------------------------------------------------ */
 
 export const security = {
   meta: {
-    title: "Security & Compliance | Acowork",
+    title: "Security & Compliance | tryacowork",
     description:
-      "How Acowork protects your financial data: encryption, least-privilege access, GDPR/CCPA alignment, DPA on request, and a no-training promise. Book a demo.",
+      "How tryacowork protects your business data: encryption, least-privilege access, GDPR/CCPA alignment, DPA on request, and a no-training promise.",
   },
-  h1: "Your financial data, protected.",
+  h1: "Your data, protected.",
   intro:
-    "Security isn't a footnote for us — it's the reason finance teams trust Acowork. Here's how we protect your data and keep you in control.",
+    "Security isn't a footnote for us — it's the reason careful teams trust tryacowork with the work that touches their money, customers and inbox. Here's how we protect your data and keep you in control.",
   sections: [
     {
       title: "Data protection",
@@ -418,12 +422,12 @@ export const security = {
     },
     {
       title: "We don't train on your data",
-      body: "Your financial data is never used to train AI models — full stop.",
+      body: "Your business data is never used to train AI models — full stop.",
       bullets: [],
     },
     {
       title: "Human in the loop",
-      body: "Automations are reviewed and controlled, with accuracy checks. It's a teammate, not a black box.",
+      body: "Automations are reviewed and controlled, with accuracy checks. Anything ambiguous is flagged to a person instead of guessed. It's a teammate, not a black box.",
       bullets: [],
     },
     {
@@ -437,18 +441,18 @@ export const security = {
 } as const;
 
 /* ------------------------------------------------------------------ */
-/* Results (BUILD.md §10 / §11)                                        */
+/* Results                                                             */
 /* ------------------------------------------------------------------ */
 
 export const results = {
   meta: {
-    title: "Results & Case Studies | Acowork",
+    title: "Results & Case Studies | tryacowork",
     description:
-      "Real, named, permissioned results from Acowork accounting automation engagements. We never publish figures we can't stand behind. Book a demo.",
+      "Real, named, permissioned results from tryacowork AI-workflow engagements. We never publish figures we can't stand behind. Book a demo.",
   },
-  h1: "Results that show up in your books",
+  h1: "The numbers that matter to a busy owner",
   intro:
-    "We publish real, named, permissioned results only. As our design partners go live, their outcomes will appear here — never fabricated logos or quotes.",
+    "We publish real, named, permissioned results only. As our clients go live, their outcomes will appear here — never fabricated logos or quotes.",
   // TODO(client): add real case studies (client/sector, problem, what we
   // automated, quantified result, optional quote).
   caseStudies: [] as {
@@ -461,72 +465,76 @@ export const results = {
 } as const;
 
 /* ------------------------------------------------------------------ */
-/* Global FAQ (BUILD.md §10.6) — Home + reused                         */
+/* Global FAQ — Home + reused                                          */
 /* ------------------------------------------------------------------ */
 
 export const globalFaqs = [
   {
-    q: "Will this work with QuickBooks, Xero or Sage?",
-    a: "We connect to the accounting tools you already use. TODO(client): confirm your live integrations so we can list them specifically.",
+    q: "What kinds of work can you automate?",
+    a: "Anything repetitive and rules-based: bookkeeping and reconciliation, invoice processing, lead routing, report generation, inbox triage, data entry between systems. If it follows steps, it can usually run on its own.",
   },
   {
-    q: "How do you keep our financial data secure?",
-    a: "Your data is encrypted in transit and at rest, access is least-privilege, and we never train AI models on it. See our Security & Compliance page for the full picture.",
+    q: "Will this work with the tools we already use?",
+    a: "Yes — workflows are built around your existing inbox, CRM, docs, spreadsheets and accounting software (QuickBooks, Xero and similar), not a new system to learn. TODO(client): confirm integrations to name specifically.",
   },
   {
     q: "Do you train AI on our data?",
-    a: "No. Your financial data is never used to train AI models.",
+    a: "No. Your business data is never used to train AI models.",
+  },
+  {
+    q: "Is AI too complex for a small team like ours?",
+    a: "That's exactly who we build for. You don't manage models or prompts — you tell us which task eats your week, and we hand back the automated version. Start with one task, see it run, then add more.",
   },
   {
     q: "How long does it take to go live?",
-    a: "It depends on scope, but we always follow the same four-step process — discovery, plan, build & integrate, then optimise & support — so timelines and savings are clear up front.",
+    a: "It depends on scope, but every project follows the same four steps — Map, Design, Automate, Run & refine — so timelines and savings are clear up front.",
   },
   {
     q: "Is there a human checking the automations?",
-    a: "Yes. Automations are reviewed and controlled with accuracy checks — a human in the loop, not a black box.",
+    a: "Yes. Automations are reviewed and controlled with accuracy checks, and anything ambiguous is flagged to a person — a human in the loop, not a black box.",
   },
   {
     q: "What does it cost?",
-    a: "We scope each engagement on a quick call, because the right automations depend on your workflow. Book a demo and we'll map two or three for you, live.",
+    a: "We scope each engagement on a quick call, because the right workflows depend on how your business runs. Book a demo and we'll map two or three for you, live.",
   },
 ] as const;
 
 /* ------------------------------------------------------------------ */
-/* Book a Demo (BUILD.md §6.2)                                         */
+/* Book a Demo                                                         */
 /* ------------------------------------------------------------------ */
 
 export const bookDemo = {
   meta: {
-    title: "Book a Demo | Acowork",
+    title: "Book a Demo | tryacowork",
     description:
-      "Book a 30-minute demo. We'll map two or three automations for your accounting workflow, live — no obligation, no credit card. Serving the US & EU.",
+      "Book a 30-minute demo. We'll map two or three workflows we can automate for you, live — no obligation, no credit card.",
   },
   h1: "Book a 30-minute demo",
   valueReminder:
-    "In 30 minutes we'll map 2–3 automations for your books — no obligation.",
+    "Start with one task. We'll show you the automated version of it — and the hours it gives back. No obligation.",
   whatNext: {
     heading: "What happens next",
     points: [
       "Pick a time that works — you'll get a calendar invite with a video link.",
-      "We'll ask a few quick questions about your accounting workflow beforehand.",
-      "On the call, we map 2–3 automations live and outline what going live looks like.",
+      "We'll ask a few quick questions about the work that eats your week.",
+      "On the call, we map 2–3 workflows live and outline what going live looks like.",
     ],
   },
   reassurance: "No credit card. No pressure.",
 } as const;
 
 /* ------------------------------------------------------------------ */
-/* Contact (BUILD.md §6.1)                                             */
+/* Contact                                                             */
 /* ------------------------------------------------------------------ */
 
 export const contact = {
   meta: {
-    title: "Contact Acowork | Acowork",
+    title: "Contact | tryacowork",
     description:
-      "Questions about automating your accounting or bookkeeping? Contact Acowork — we typically reply the same business day. Serving the US & EU.",
+      "Questions about automating the work that slows your team down? Contact tryacowork — we typically reply the same business day.",
   },
-  h1: "Talk to us",
+  h1: "Let's automate something real.",
   intro:
-    "Not quite ready to book a demo? Send us a note and we'll get back to you — usually the same business day.",
+    "Not quite ready to book a demo? Tell us about one task that eats your week and we'll get back to you — usually the same business day.",
   responseTime: "We typically reply within one business day.",
 } as const;

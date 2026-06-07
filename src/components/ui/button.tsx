@@ -9,16 +9,16 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // Primary CTA — teal accent ("Book a Demo")
+        // Primary CTA — lime spark ("Book a Demo"). Lime is the action.
         default: "bg-accent text-accent-foreground hover:bg-accent-hover",
-        // Brand navy fill
-        navy: "bg-primary text-primary-foreground hover:bg-primary/90",
-        // Secondary — navy outline / ghost
+        // Soft violet fill — brand-kit secondary button
+        navy: "bg-primary/15 border border-primary/40 text-[#cbc0ff] hover:bg-primary/25",
+        // Ghost outline — brand-kit tertiary button
         outline:
-          "border border-primary/25 bg-transparent text-primary hover:bg-muted",
+          "border border-border-strong bg-transparent text-foreground hover:bg-muted",
         secondary: "bg-muted text-foreground hover:bg-muted/70",
         ghost: "text-foreground hover:bg-muted",
-        link: "text-accent underline-offset-4 hover:underline",
+        link: "text-cyan underline-offset-4 hover:underline",
       },
       size: {
         default: "h-11 px-6 py-2",

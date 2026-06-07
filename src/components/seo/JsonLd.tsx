@@ -13,7 +13,7 @@ export function SiteJsonLd() {
     url: site.url,
     email: site.email,
     description:
-      "AI automation built specifically for accounting & bookkeeping — reconciliation, invoice processing, AP/AR and reporting — for SMBs in the US & EU.",
+      "AI-workflow studio for small teams. We turn complex, manual work — bookkeeping, invoices, lead routing, reporting — into AI workflows that run on their own.",
     areaServed: ["US", "EU"],
     sameAs: [site.linkedin],
   };

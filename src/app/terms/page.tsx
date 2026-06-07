@@ -5,9 +5,9 @@ import { buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/content";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Terms of Service | Acowork",
+  title: "Terms of Service | tryacowork",
   description:
-    "The terms governing your use of the Acowork (VSH Enterprise Pvt Ltd) website.",
+    "The terms governing your use of the tryacowork (VSH Enterprise Pvt Ltd) website.",
   path: "/terms",
 });
 

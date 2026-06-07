@@ -5,9 +5,9 @@ import { buildMetadata } from "@/lib/seo";
 import { site } from "@/lib/content";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Cookie Policy | Acowork",
+  title: "Cookie Policy | tryacowork",
   description:
-    "How Acowork uses cookies and similar technologies, and how to manage your preferences.",
+    "How tryacowork uses cookies and similar technologies, and how to manage your preferences.",
   path: "/cookies",
 });
 

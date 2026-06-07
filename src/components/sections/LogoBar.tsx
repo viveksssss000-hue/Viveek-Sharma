@@ -9,8 +9,8 @@ export function LogoBar() {
     <section className="border-b border-border bg-surface">
       <div className="container-content flex flex-col items-center gap-4 py-8 text-center sm:flex-row sm:justify-center sm:gap-10">
         <p className="text-sm font-medium text-muted-foreground">
-          {/* TODO(client): swap for permitted integration logos (QuickBooks, Xero, Sage…). */}
-          Works with the accounting tools you already use
+          {/* TODO(client): swap for permitted integration logos once confirmed. */}
+          Works with the tools you already use
         </p>
         <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
           <li className="flex items-center gap-2">

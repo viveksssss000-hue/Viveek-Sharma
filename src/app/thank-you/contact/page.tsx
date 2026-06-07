@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { contact } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Thanks — we'll be in touch | Acowork",
+  title: "Thanks — we'll be in touch | tryacowork",
   description: "Your message has been received.",
   robots: { index: false, follow: false },
 };

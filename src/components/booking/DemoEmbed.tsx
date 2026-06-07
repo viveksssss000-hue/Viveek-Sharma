@@ -20,8 +20,8 @@ export function DemoEmbed() {
     (async () => {
       const cal = await getCalApi();
       cal("ui", {
-        theme: "light",
-        styles: { branding: { brandColor: "#0D9488" } },
+        theme: "dark",
+        styles: { branding: { brandColor: "#7C5CFF" } },
       });
     })();
   }, []);
@@ -37,7 +37,7 @@ export function DemoEmbed() {
   if (calendlyUrl) {
     return (
       <iframe
-        title="Book a demo with Acowork"
+        title="Book a demo with tryacowork"
         src={calendlyUrl}
         className="min-h-[640px] w-full rounded-xl border border-border bg-surface"
       />

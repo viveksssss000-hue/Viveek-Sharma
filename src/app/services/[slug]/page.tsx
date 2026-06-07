@@ -51,7 +51,7 @@ export default async function ServiceDetailPage({
     description: service.outcome,
     provider: { "@type": "Organization", name: site.name, url: site.url },
     areaServed: ["US", "EU"],
-    serviceType: "Accounting & bookkeeping automation",
+    serviceType: "AI workflow automation",
     url: `${site.url}/services/${service.slug}`,
   };
 

@@ -14,20 +14,18 @@ export function SecurityBlock() {
   return (
     <section className="section-y">
       <div className="container-content">
-        <div className="relative overflow-hidden rounded-xl bg-primary px-6 py-12 text-primary-foreground sm:px-12 sm:py-14">
+        <div className="relative overflow-hidden rounded-2xl border border-border bg-[linear-gradient(140deg,#0d0d16,#161527)] px-6 py-12 sm:px-12 sm:py-14">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -left-20 bottom-0 size-72 rounded-full bg-accent/20 blur-3xl"
+            className="pointer-events-none absolute -left-28 bottom-[-10rem] size-[32rem] rounded-full bg-[radial-gradient(circle,rgba(124,92,255,.22),transparent_64%)]"
           />
           <div className="relative grid gap-10 lg:grid-cols-2 lg:items-center">
             <div className="flex flex-col gap-4">
-              <span className="text-sm font-semibold uppercase tracking-wide text-accent">
+              <span className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-cyan">
                 Security &amp; trust
               </span>
-              <h2 className="text-3xl text-primary-foreground sm:text-4xl">
-                {security.heading}
-              </h2>
-              <p className="text-lg text-white/80 leading-relaxed">
+              <h2 className="text-3xl sm:text-4xl">{security.heading}</h2>
+              <p className="text-lg text-muted-foreground leading-relaxed">
                 {security.body}
               </p>
               <Link
@@ -42,12 +40,12 @@ export function SecurityBlock() {
               {badges.map((b) => (
                 <li
                   key={b.label}
-                  className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 px-4 py-3.5"
+                  className="flex items-center gap-3 rounded-lg border border-border bg-white/[0.04] px-4 py-3.5"
                 >
-                  <span className="grid size-9 shrink-0 place-items-center rounded-md bg-accent/20 text-accent">
+                  <span className="grid size-9 shrink-0 place-items-center rounded-md bg-cyan/15 text-cyan">
                     <b.icon className="size-4" />
                   </span>
-                  <span className="text-sm font-medium text-white/90">
+                  <span className="text-sm font-medium text-foreground/90">
                     {b.label}
                   </span>
                 </li>

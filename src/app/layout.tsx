@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
@@ -12,20 +12,28 @@ import { Analytics } from "@/components/analytics/Analytics";
 import { SiteJsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/lib/content";
 
-const inter = Inter({
-  variable: "--font-inter",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "AI Bookkeeping & Accounting Automation | Acowork",
-    template: "%s | Acowork",
+    default: "AI Workflow Automation for Small Teams | tryacowork",
+    template: "%s | tryacowork",
   },
   description:
-    "Acowork builds secure AI automations for accounting & bookkeeping — reconciliation, invoices, AP/AR and reporting. Serving SMBs in the US & EU.",
+    "tryacowork turns complex, manual work into AI workflows that run on their own — designed, built and run end-to-end for small teams. Workflows, automated.",
 };
 
 export default function RootLayout({
@@ -34,7 +42,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full`}>
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full`}
+    >
       <head>
         {/* Google Consent Mode v2 — default everything to denied until the
             user opts in via the cookie banner. Runs before GA loads. */}

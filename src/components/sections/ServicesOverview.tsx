@@ -1,10 +1,10 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  ListChecks,
-  FileText,
-  Banknote,
-  BarChart3,
+  Search,
+  Bot,
+  Plug,
+  RefreshCw,
   type LucideIcon,
 } from "lucide-react";
 
@@ -12,10 +12,10 @@ import { SectionHeading } from "@/components/sections/SectionHeading";
 import { home, services } from "@/lib/content";
 
 export const serviceIcons: Record<string, LucideIcon> = {
-  "bookkeeping-automation": ListChecks,
-  "invoice-ap-automation": FileText,
-  "accounts-receivable-automation": Banknote,
-  "reporting-dashboards": BarChart3,
+  "workflow-audit": Search,
+  "custom-ai-workflows": Bot,
+  "integration-handoff": Plug,
+  "continuous-optimization": RefreshCw,
 };
 
 export function ServicesOverview() {
@@ -29,7 +29,7 @@ export function ServicesOverview() {
         />
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {services.map((s) => {
-            const Icon = serviceIcons[s.slug] ?? ListChecks;
+            const Icon = serviceIcons[s.slug] ?? Search;
             return (
               <Link
                 key={s.slug}

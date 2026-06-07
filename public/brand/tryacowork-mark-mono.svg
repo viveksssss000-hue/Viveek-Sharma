@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="78" height="78" viewBox="0 0 78 78" fill="none">
+  <title>tryacowork mark — monochrome (recolor as needed)</title>
+  <path d="M16 50 L32 50 L40 30 L48 50 L62 50" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"></path>
+  <circle cx="16" cy="50" r="5.5" fill="currentColor"></circle>
+  <circle cx="40" cy="30" r="5.5" fill="currentColor"></circle>
+  <circle cx="62" cy="50" r="6" fill="currentColor"></circle>
+</svg>

@@ -1,0 +1,13 @@
+<svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1.5" y="1.5" width="75" height="75" rx="18" stroke="#7C5CFF" stroke-opacity="0.45" stroke-width="1.5"></rect>
+  <path d="M16 50 L32 50 L40 30 L48 50 L62 50" stroke="url(#flow)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"></path>
+  <circle cx="16" cy="50" r="5.5" fill="#7C5CFF"></circle>
+  <circle cx="40" cy="30" r="5.5" fill="#1FE3D6"></circle>
+  <circle cx="62" cy="50" r="6" fill="#C9FF3D"></circle>
+  <defs>
+    <linearGradient id="flow" x1="16" y1="40" x2="62" y2="40" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7C5CFF"></stop>
+      <stop offset="1" stop-color="#1FE3D6"></stop>
+    </linearGradient>
+  </defs>
+</svg>
