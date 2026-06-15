@@ -4,7 +4,7 @@ import { site } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 /**
- * Flowline brand lockup — the node-path workflow mark plus the lowercase
+ * Flowline brand lockup - the node-path workflow mark plus the lowercase
  * wordmark with the lime "a" (the spark of automation). From the brand kit:
  * keep it lowercase, never swap the spark off the "a".
  */
@@ -12,7 +12,7 @@ export function Logo({ className }: { className?: string; onDark?: boolean }) {
   return (
     <Link
       href="/"
-      aria-label={`${site.name} — home`}
+      aria-label={`${site.name} - home`}
       className={cn(
         "inline-flex items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         className

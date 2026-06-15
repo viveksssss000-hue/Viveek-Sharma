@@ -2,10 +2,10 @@ import { z } from "zod";
 
 /** Select options reused by the contact form UI and the schema. */
 export const companySizes = [
-  "1–10",
-  "11–50",
-  "51–200",
-  "201–500",
+  "1-10",
+  "11-50",
+  "51-200",
+  "201-500",
   "500+",
 ] as const;
 
@@ -67,7 +67,7 @@ export const contactSchema = z.object({
   consent: z.boolean().refine((v) => v === true, {
     message: "Please accept the privacy policy to continue.",
   }),
-  // Hidden anti-spam honeypot — must stay empty.
+  // Hidden anti-spam honeypot - must stay empty.
   company_website: z.string().optional().or(z.literal("")),
   // Cloudflare Turnstile token (verified server-side).
   turnstileToken: z.string().optional(),

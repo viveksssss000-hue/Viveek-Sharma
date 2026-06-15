@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s | tryacowork",
   },
   description:
-    "tryacowork turns complex, manual work into AI workflows that run on their own — designed, built and run end-to-end for small teams. Workflows, automated.",
+    "tryacowork turns complex, manual work into AI workflows that run on their own - designed, built and run end-to-end for small teams. Workflows, automated.",
 };
 
 export default function RootLayout({
@@ -47,7 +47,7 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full`}
     >
       <head>
-        {/* Google Consent Mode v2 — default everything to denied until the
+        {/* Google Consent Mode v2 - default everything to denied until the
             user opts in via the cookie banner. Runs before GA loads. */}
         <Script id="consent-default" strategy="beforeInteractive">
           {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});`}

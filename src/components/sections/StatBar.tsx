@@ -1,7 +1,7 @@
 import { metrics } from "@/lib/content";
 
 /**
- * Metrics row. Values are {{token}} placeholders by default (BUILD.md §11) —
+ * Metrics row. Values are {{token}} placeholders by default (BUILD.md §11) -
  * the client drops in real numbers in content.ts. We never invent figures.
  */
 export function StatBar() {
@@ -21,7 +21,7 @@ export function StatBar() {
                   ? "font-mono text-2xl font-bold text-subtle"
                   : "text-3xl font-bold text-foreground"
               }
-              title={isPlaceholder ? "Placeholder — client to provide" : undefined}
+              title={isPlaceholder ? "Placeholder - client to provide" : undefined}
             >
               {m.value}
             </dd>

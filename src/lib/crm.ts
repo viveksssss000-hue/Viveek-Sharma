@@ -3,7 +3,7 @@ import type { ContactInput } from "@/lib/validations";
 /**
  * Send a lead to the CRM. Swappable behind this one function (BUILD.md §6.1):
  * HubSpot Forms API if configured, else a generic LEAD_WEBHOOK_URL, else log.
- * Never throws — the API route fans out with Promise.allSettled.
+ * Never throws - the API route fans out with Promise.allSettled.
  */
 export async function submitLead(data: ContactInput): Promise<void> {
   const source = "website-contact";
@@ -48,7 +48,7 @@ export async function submitLead(data: ContactInput): Promise<void> {
       return;
     }
 
-    // No CRM configured — log so the lead isn't silently lost in dev.
+    // No CRM configured - log so the lead isn't silently lost in dev.
     console.info("[crm] lead (no CRM configured):", {
       email: data.workEmail,
       company: data.company,

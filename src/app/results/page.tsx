@@ -33,6 +33,44 @@ export default function ResultsPage() {
         <div className="container-content flex flex-col gap-12">
           <StatBar />
 
+          <div>
+            <SectionHeading align="left" title={results.measuresHeading} />
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {results.measures.map((m) => (
+                <div
+                  key={m.metric}
+                  className="flex flex-col gap-2 rounded-xl border border-border bg-surface p-6"
+                >
+                  <h3 className="font-semibold text-foreground">{m.metric}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {m.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <SectionHeading
+              align="left"
+              title={results.examplesHeading}
+              description={results.examplesIntro}
+            />
+            <div className="mt-8 grid gap-6 sm:grid-cols-2">
+              {results.examples.map((ex) => (
+                <div
+                  key={ex.area}
+                  className="flex flex-col gap-2 rounded-xl border border-border bg-surface p-6"
+                >
+                  <h3 className="font-semibold text-foreground">{ex.area}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {ex.outcome}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {results.caseStudies.length === 0 ? (
             <div className="mx-auto max-w-xl rounded-xl border border-dashed border-border bg-surface p-10 text-center">
               <LineChart className="mx-auto size-9 text-subtle" />
@@ -42,7 +80,7 @@ export default function ResultsPage() {
               <p className="mt-2 text-sm text-muted-foreground">
                 {/* TODO(client): add real case studies in content.ts. */}
                 We&apos;re onboarding our first design partners now. Their named,
-                quantified results will appear here — we never publish figures or
+                quantified results will appear here - we never publish figures or
                 logos we can&apos;t stand behind.
               </p>
             </div>
@@ -75,7 +113,7 @@ export default function ResultsPage() {
                   </p>
                   {cs.quote ? (
                     <blockquote className="border-l-2 border-accent pl-4 text-sm italic text-muted-foreground">
-                      “{cs.quote}”
+                      &quot;{cs.quote}&quot;
                     </blockquote>
                   ) : null}
                 </article>

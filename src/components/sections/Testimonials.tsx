@@ -13,7 +13,7 @@ export function Testimonials() {
         <Quote className="mx-auto size-8 text-subtle" />
         <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground">
           We publish named, permissioned client results only. As our design
-          partners go live, their stories will appear here — never invented.
+          partners go live, their stories will appear here - never invented.
         </p>
         {/* TODO(client): add real testimonials in content.ts to populate this section. */}
       </div>
@@ -29,7 +29,7 @@ export function Testimonials() {
         >
           <Quote className="size-6 text-accent" />
           <blockquote className="text-base text-foreground leading-relaxed">
-            “{t.quote}”
+            &quot;{t.quote}&quot;
           </blockquote>
           <figcaption className="mt-auto text-sm">
             <span className="font-semibold text-foreground">{t.name}</span>

@@ -14,10 +14,10 @@ export function SecurityBlock() {
   return (
     <section className="section-y">
       <div className="container-content">
-        <div className="relative overflow-hidden rounded-2xl border border-border bg-[linear-gradient(140deg,#0d0d16,#161527)] px-6 py-12 sm:px-12 sm:py-14">
+        <div className="relative overflow-hidden rounded-2xl border border-border-strong bg-[linear-gradient(140deg,#171d27,#1f2736)] px-6 py-12 sm:px-12 sm:py-14">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -left-28 bottom-[-10rem] size-[32rem] rounded-full bg-[radial-gradient(circle,rgba(124,92,255,.22),transparent_64%)]"
+            className="pointer-events-none absolute -left-28 bottom-[-10rem] size-[32rem] rounded-full bg-[radial-gradient(circle,rgba(109,93,211,.16),transparent_64%)]"
           />
           <div className="relative grid gap-10 lg:grid-cols-2 lg:items-center">
             <div className="flex flex-col gap-4">

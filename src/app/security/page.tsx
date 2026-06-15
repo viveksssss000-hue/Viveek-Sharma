@@ -25,10 +25,10 @@ const sectionIcons = [Lock, FileCheck, EyeOff, UserCheck, BadgeCheck];
 export default function SecurityPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-border bg-[linear-gradient(140deg,#0d0d16,#161527)]">
+      <section className="relative overflow-hidden border-b border-border bg-[linear-gradient(140deg,#171d27,#1f2736)]">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-28 -top-44 size-[32rem] rounded-full bg-[radial-gradient(circle,rgba(124,92,255,.22),transparent_64%)]"
+          className="pointer-events-none absolute -right-28 -top-44 size-[32rem] rounded-full bg-[radial-gradient(circle,rgba(109,93,211,.16),transparent_64%)]"
         />
         <div className="container-content relative py-16 md:py-20">
           <div className="max-w-2xl">

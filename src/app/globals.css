@@ -2,35 +2,40 @@
 @import "tw-animate-css";
 
 /*
-  tryacowork "Flowline" design tokens — from the brand kit (claude.ai/design).
+  tryacowork "Flowline" design tokens - from the brand kit (claude.ai/design).
   Dark identity: ink base, carbon surfaces, electric accents.
   Violet leads, cyan supports, lime is reserved for the primary action.
   All text combinations meet WCAG 2.2 AA contrast.
 */
 :root {
-  --radius: 0.75rem; /* 12px — cards/buttons */
-  --radius-input: 0.5rem; /* 8px — inputs */
+  --radius: 0.75rem; /* 12px - cards/buttons */
+  --radius-input: 0.5rem; /* 8px - inputs */
 
-  --background: #07070b; /* Ink — page background */
-  --surface: #10101a; /* Carbon — cards, header */
-  --elevated: #181826; /* Slate — elevated surfaces */
-  --foreground: #ececf3; /* Mist — headings / primary text */
-  --muted: #181826; /* subtle fills */
-  --muted-foreground: #b3b3c0; /* body text */
-  --subtle: #8a8a99; /* captions, placeholders */
-  --border: rgba(255, 255, 255, 0.09); /* dividers, inputs */
-  --border-strong: rgba(255, 255, 255, 0.14);
-  --input: rgba(255, 255, 255, 0.14);
+  /*
+    Refined dark: lifted off near-black to a softer slate so the site reads
+    premium and trustworthy rather than "gamer-dark". Accents are toned down
+    (muted violet + teal); lime is held back for key CTAs only.
+  */
+  --background: #0e1117; /* page background - soft ink slate */
+  --surface: #161b24; /* cards, header */
+  --elevated: #1c2330; /* elevated surfaces, hovers */
+  --foreground: #e8eaf0; /* headings / primary text */
+  --muted: #1c2330; /* subtle fills */
+  --muted-foreground: #aeb4c2; /* body text - lifted for readability */
+  --subtle: #828a99; /* captions, placeholders */
+  --border: rgba(255, 255, 255, 0.08); /* dividers, inputs - calmer */
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --input: rgba(255, 255, 255, 0.12);
   --ring: #c9ff3d; /* focus ring = lime spark */
 
-  --primary: #7c5cff; /* Violet — brand primary */
+  --primary: #6d5dd3; /* Violet - muted, professional */
   --primary-foreground: #ffffff;
 
-  --accent: #c9ff3d; /* Lime — the spark. CTAs only. */
+  --accent: #c9ff3d; /* Lime - the spark. Key CTAs only. */
   --accent-hover: #d6ff66;
   --accent-foreground: #0a0a12;
 
-  --cyan: #1fe3d6; /* Cyan — secondary accent, links/labels */
+  --cyan: #2ba8a0; /* Teal - muted secondary accent, links/labels */
 
   --success: #4ade80;
   --warning: #fbbf24;
@@ -164,13 +169,13 @@
       padding-block: 6rem;
     }
   }
-  /* Faint violet grid — the Flowline background motif */
+  /* Faint violet grid - the Flowline background motif (softened) */
   .grid-motif {
-    background-image: linear-gradient(rgba(124, 92, 255, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(124, 92, 255, 0.06) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(109, 93, 211, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(109, 93, 211, 0.045) 1px, transparent 1px);
     background-size: 48px 48px;
   }
-  /* Mono eyebrow label — "the system talking" */
+  /* Mono eyebrow label - "the system talking" */
   .eyebrow-mono {
     font-family: var(--font-mono);
     font-size: 0.75rem;

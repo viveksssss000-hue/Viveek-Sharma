@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { contact } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Thanks — we'll be in touch | tryacowork",
+  title: "Thanks - we'll be in touch | tryacowork",
   description: "Your message has been received.",
   robots: { index: false, follow: false },
 };
@@ -18,7 +18,7 @@ export default function ThankYouContactPage() {
         <span className="mx-auto grid size-14 place-items-center rounded-full bg-accent/10 text-accent">
           <CheckCircle2 className="size-7" />
         </span>
-        <h1 className="mt-6 text-4xl sm:text-5xl">Thanks — message received.</h1>
+        <h1 className="mt-6 text-4xl sm:text-5xl">Thanks - message received.</h1>
         <p className="mt-4 text-lg text-muted-foreground">
           We&apos;ve got your note and will get back to you shortly.{" "}
           {contact.responseTime}

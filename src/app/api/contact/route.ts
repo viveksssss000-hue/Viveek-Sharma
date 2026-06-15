@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "bad_json" }, { status: 400 });
   }
 
-  // 1. Honeypot — silently drop bots.
+  // 1. Honeypot - silently drop bots.
   if (body.company_website) {
     return NextResponse.json({ ok: true });
   }
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
     );
   }
 
-  // 4. Fan out — don't block the user on a downstream failure.
+  // 4. Fan out - don't block the user on a downstream failure.
   const data = parsed.data;
   await Promise.allSettled([
     submitLead(data),

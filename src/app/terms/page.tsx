@@ -13,11 +13,11 @@ export const metadata: Metadata = buildMetadata({
 
 export default function TermsPage() {
   return (
-    <LegalLayout title="Terms of Service" lastUpdated="TODO(client/legal)">
+    <LegalLayout title="Terms of Service" lastUpdated="8 June 2026">
       <p>
         These Terms govern your use of {site.domain}, operated by{" "}
-        {site.legalName} (&ldquo;{site.name}&rdquo;). By using this website you
-        agree to these Terms. TODO(client/legal): finalise with counsel.
+        {site.legalName} (&quot;{site.name}&quot;). By using this website you
+        agree to these Terms.
       </p>
 
       <h2>Use of the website</h2>
@@ -41,14 +41,19 @@ export default function TermsPage() {
 
       <h2>Disclaimers &amp; liability</h2>
       <p>
-        The website is provided &ldquo;as is&rdquo; without warranties. To the
-        extent permitted by law, {site.name} is not liable for indirect or
-        consequential loss arising from use of the site. TODO(client/legal):
-        confirm liability and warranty language.
+        The website is provided &quot;as is&quot; without warranties of any
+        kind. To the extent permitted by law, {site.name} is not liable for
+        indirect, incidental or consequential loss arising from your use of the
+        site.
       </p>
 
       <h2>Governing law</h2>
-      <p>TODO(client/legal): specify governing law and jurisdiction.</p>
+      <p>
+        These Terms are governed by the laws of India, and the courts of India
+        have exclusive jurisdiction over any dispute relating to this website,
+        without affecting any mandatory consumer protections available to you in
+        your country of residence.
+      </p>
 
       <h2>Contact</h2>
       <p>

@@ -9,9 +9,9 @@ import { buildMetadata } from "@/lib/seo";
 import { services } from "@/lib/content";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Services — AI Workflow Automation | tryacowork",
+  title: "Services - AI Workflow Automation | tryacowork",
   description:
-    "Workflow audit, custom AI workflows, integration & handoff, continuous optimization — designed, built and run end-to-end. Book a demo.",
+    "Workflow audit, custom AI workflows, integration & handoff, continuous optimization - designed, built and run end-to-end. Book a demo.",
   path: "/services",
 });
 
@@ -24,7 +24,7 @@ export default function ServicesPage() {
             as="h1"
             align="left"
             eyebrow="Services"
-            title="Designed, built and run — end to end"
+            title="Designed, built and run - end to end"
             description="We don't hand you software and walk away. Every engagement moves through the same arc: find the time-sink, automate it, and keep it sharp."
           />
           <div className="mt-12 grid gap-6 sm:grid-cols-2">

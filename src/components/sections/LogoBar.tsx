@@ -2,7 +2,7 @@ import { Plug, ShieldCheck, Globe } from "lucide-react";
 
 /**
  * Trust / integration bar. Per BUILD.md §6.3 we only show real integration
- * logos the client confirms are permitted — until then, use the text fallback.
+ * logos the client confirms are permitted - until then, use the text fallback.
  */
 export function LogoBar() {
   return (

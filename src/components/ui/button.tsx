@@ -9,11 +9,11 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // Primary CTA — lime spark ("Book a Demo"). Lime is the action.
+        // Primary CTA - lime spark ("Book a Demo"). Lime is the action.
         default: "bg-accent text-accent-foreground hover:bg-accent-hover",
-        // Soft violet fill — brand-kit secondary button
+        // Soft violet fill - brand-kit secondary button
         navy: "bg-primary/15 border border-primary/40 text-[#cbc0ff] hover:bg-primary/25",
-        // Ghost outline — brand-kit tertiary button
+        // Ghost outline - brand-kit tertiary button
         outline:
           "border border-border-strong bg-transparent text-foreground hover:bg-muted",
         secondary: "bg-muted text-foreground hover:bg-muted/70",

@@ -83,7 +83,7 @@ export function ContactForm({
         const data = await res.json().catch(() => null);
         toast.error(
           data?.error === "captcha"
-            ? "Spam check failed — please try again."
+            ? "Spam check failed - please try again."
             : "Something went wrong. Please try again or email us directly."
         );
         return;
@@ -148,7 +148,7 @@ export function ContactForm({
             render={({ field }) => (
               <Select value={field.value} onValueChange={field.onChange}>
                 <SelectTrigger id="companySize">
-                  <SelectValue placeholder="Select…" />
+                  <SelectValue placeholder="Select..." />
                 </SelectTrigger>
                 <SelectContent>
                   {companySizes.map((s) => (
@@ -170,7 +170,7 @@ export function ContactForm({
             render={({ field }) => (
               <Select value={field.value} onValueChange={field.onChange}>
                 <SelectTrigger id="country">
-                  <SelectValue placeholder="Select…" />
+                  <SelectValue placeholder="Select..." />
                 </SelectTrigger>
                 <SelectContent>
                   {countries.map((c) => (
@@ -193,7 +193,7 @@ export function ContactForm({
           render={({ field }) => (
             <Select value={field.value} onValueChange={field.onChange}>
               <SelectTrigger id="interest">
-                <SelectValue placeholder="Select…" />
+                <SelectValue placeholder="Select..." />
               </SelectTrigger>
               <SelectContent>
                 {interests.map((i) => (
@@ -221,7 +221,7 @@ export function ContactForm({
         <FieldError id="message-error" message={errors.message?.message} />
       </div>
 
-      {/* Honeypot — visually hidden, off-screen, not announced */}
+      {/* Honeypot - visually hidden, off-screen, not announced */}
       <div className="absolute -left-[9999px]" aria-hidden="true">
         <label htmlFor="company_website">Leave this field empty</label>
         <input
@@ -280,7 +280,7 @@ export function ContactForm({
           {isSubmitting ? (
             <>
               <Loader2 className="animate-spin" />
-              Sending…
+              Sending...
             </>
           ) : (
             "Send message"

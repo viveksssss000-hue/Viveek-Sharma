@@ -1,7 +1,7 @@
 /**
  * Verify a Cloudflare Turnstile token server-side.
  * If no secret is configured (e.g. local dev), verification is skipped so the
- * form remains testable — production must set TURNSTILE_SECRET_KEY.
+ * form remains testable - production must set TURNSTILE_SECRET_KEY.
  */
 export async function verifyTurnstile(
   token: string | undefined,
@@ -9,7 +9,7 @@ export async function verifyTurnstile(
 ): Promise<boolean> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
   if (!secret) {
-    // Not configured — skip (dev/testing). See BUILD.md §8.
+    // Not configured - skip (dev/testing). See BUILD.md §8.
     return true;
   }
   if (!token) return false;

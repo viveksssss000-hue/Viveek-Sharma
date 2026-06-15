@@ -13,20 +13,37 @@ export const metadata: Metadata = buildMetadata({
 
 export default function PrivacyPage() {
   return (
-    <LegalLayout title="Privacy Policy" lastUpdated="TODO(client/legal)">
+    <LegalLayout title="Privacy Policy" lastUpdated="8 June 2026">
       <p>
-        This Privacy Policy explains how {site.legalName} (&ldquo;{site.name}
-        &rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) handles personal data
+        This Privacy Policy explains how {site.legalName} (&quot;{site.name}
+        &quot;, &quot;we&quot;, &quot;us&quot;) handles personal data
         collected through {site.domain}. We serve customers in the US and EU and
-        aim to align with GDPR / UK GDPR and CCPA/CPRA.
+        align our practices with GDPR / UK GDPR and CCPA/CPRA.
       </p>
 
       <h2>What we collect</h2>
       <p>
-        When you submit our contact form or book a demo, we collect the details
-        you provide — such as name, work email, company, role, company size,
-        country and message. We do not collect sensitive financial data through
-        this marketing website.
+        We only collect the information you choose to give us:
+      </p>
+      <ul>
+        <li>
+          <strong>Contact form:</strong> your name, work email, and any
+          details you add (company, role, company size, country, area of
+          interest and message).
+        </li>
+        <li>
+          <strong>Booking a demo:</strong> when you book through our scheduler,
+          your name, email and chosen time are processed by Google Calendar to
+          set up the meeting.
+        </li>
+        <li>
+          <strong>Analytics:</strong> if you accept analytics cookies, limited,
+          aggregated usage data (see our{" "}
+          <a href="/cookies">Cookie Policy</a>).
+        </li>
+      </ul>
+      <p>
+        We do not collect sensitive financial data through this website.
       </p>
 
       <h2>How we use it</h2>
@@ -34,48 +51,69 @@ export default function PrivacyPage() {
         <li>To respond to your enquiry and schedule and run your demo.</li>
         <li>To manage our relationship with you as a lead or customer.</li>
         <li>
-          To improve our website and services (subject to your cookie choices).
+          To improve our website and services (only with your cookie consent).
         </li>
       </ul>
 
       <h2>Legal bases (EU/UK)</h2>
       <p>
-        We rely on your consent and on our legitimate interest in responding to
-        enquiries and operating our business. TODO(client/legal): confirm legal
-        bases for each processing purpose.
+        Where GDPR / UK GDPR applies, we rely on: your <strong>consent</strong>{" "}
+        (analytics cookies, and any direct marketing); our{" "}
+        <strong>legitimate interests</strong> in responding to enquiries and
+        running our business; and <strong>steps taken at your request</strong>{" "}
+        before entering into a contract (responding to demo and sales requests).
       </p>
 
       <h2>Sharing &amp; sub-processors</h2>
       <p>
-        We use trusted service providers (for example, scheduling, email,
-        analytics and CRM) to operate this site. TODO(client/legal): publish the
-        current sub-processor list. We do not sell your personal data.
+        We do not sell your personal data. We share it only with the service
+        providers that help us run this site and respond to you:
       </p>
+      <ul>
+        <li>
+          <strong>Google</strong> - appointment scheduling (Google Calendar)
+          and, with consent, website analytics.
+        </li>
+        <li>
+          <strong>Resend</strong> - sending and receiving enquiry emails.
+        </li>
+        <li>
+          <strong>Cloudflare</strong> - Turnstile spam protection on our forms.
+        </li>
+        <li>
+          <strong>Our hosting provider (Vercel)</strong> - serving the website.
+        </li>
+      </ul>
 
       <h2>Data retention</h2>
       <p>
-        We keep personal data only as long as necessary for the purposes above.
-        TODO(client/legal): define retention periods.
+        We keep enquiry and booking data for as long as needed to deal with your
+        request and our ongoing relationship, and then for a reasonable period
+        to meet legal and record-keeping obligations. You can ask us to delete it
+        sooner at any time.
       </p>
 
       <h2>Your rights</h2>
       <p>
         Depending on your location, you may have rights to access, correct,
-        delete, or restrict processing of your personal data, and to withdraw
-        consent. To exercise these rights, contact us at{" "}
-        <a href={`mailto:${site.email}`}>{site.email}</a>.
+        delete, or restrict processing of your personal data, to data
+        portability, and to withdraw consent. To exercise these rights, contact
+        us at <a href={`mailto:${site.email}`}>{site.email}</a>. You also have
+        the right to complain to your local data-protection authority.
       </p>
 
-      <h2>International transfers &amp; data residency</h2>
+      <h2>International transfers</h2>
       <p>
-        We offer EU data-residency options for EU customers. TODO(client/legal):
-        describe transfer mechanisms (e.g., SCCs) where applicable.
+        Some of our providers process data outside your country. Where personal
+        data is transferred internationally, we rely on appropriate safeguards
+        such as the European Commission&apos;s Standard Contractual Clauses. EU
+        data-residency options are available for engagement data on request.
       </p>
 
       <h2>Contact</h2>
       <p>
-        Questions about this policy? Email{" "}
-        <a href={`mailto:${site.email}`}>{site.email}</a>. {site.legalName}.
+        {site.legalName} is the data controller for this website. Questions about
+        this policy? Email <a href={`mailto:${site.email}`}>{site.email}</a>.
       </p>
     </LegalLayout>
   );

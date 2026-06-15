@@ -60,7 +60,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team — placeholder until client provides real bios/photos */}
+      {/* Team - placeholder until client provides real bios/photos */}
       <section className="bg-surface border-y border-border section-y">
         <div className="container-content">
           <SectionHeading
@@ -77,15 +77,34 @@ export default function AboutPage() {
             </div>
           ) : (
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {about.team.map((member) => (
-                <div
-                  key={member.name}
-                  className="rounded-xl border border-border bg-background p-6"
-                >
-                  <p className="font-semibold text-foreground">{member.name}</p>
-                  <p className="text-sm text-muted-foreground">{member.role}</p>
-                </div>
-              ))}
+              {about.team.map((member) => {
+                const initials = member.name
+                  .split(" ")
+                  .map((part) => part[0])
+                  .slice(0, 2)
+                  .join("");
+                return (
+                  <div
+                    key={member.name}
+                    className="flex items-center gap-4 rounded-xl border border-border bg-background p-6"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="grid size-12 shrink-0 place-items-center rounded-full border border-border-strong bg-elevated font-mono text-sm font-semibold text-primary"
+                    >
+                      {initials}
+                    </span>
+                    <div>
+                      <p className="font-semibold text-foreground">
+                        {member.name}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {member.role}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           )}
         </div>

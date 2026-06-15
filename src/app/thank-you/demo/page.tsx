@@ -29,7 +29,7 @@ export default function ThankYouDemoPage() {
           </h2>
           <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
             <li>• Think about the one task you&apos;d most like off your plate.</li>
-            <li>• Note which tools that task touches today (inbox, CRM, spreadsheets…).</li>
+            <li>• Note which tools that task touches today (inbox, CRM, spreadsheets).</li>
             <li>• Have a rough sense of how many hours it eats each week.</li>
           </ul>
         </div>

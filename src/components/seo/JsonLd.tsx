@@ -13,7 +13,7 @@ export function SiteJsonLd() {
     url: site.url,
     email: site.email,
     description:
-      "AI-workflow studio for small teams. We turn complex, manual work — bookkeeping, invoices, lead routing, reporting — into AI workflows that run on their own.",
+      "AI-workflow studio for small teams. We turn complex, manual work - bookkeeping, invoices, lead routing, reporting - into AI workflows that run on their own.",
     areaServed: ["US", "EU"],
     sameAs: [site.linkedin],
   };

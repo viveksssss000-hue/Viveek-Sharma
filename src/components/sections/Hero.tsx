@@ -4,7 +4,7 @@ import { ArrowRight, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { home } from "@/lib/content";
 
-/** Live-workflow status rows for the hero visual — the brand's node chips. */
+/** Live-workflow status rows for the hero visual - the brand's node chips. */
 const workflows = [
   { name: "invoice-sync", status: "live", dot: "bg-accent" },
   { name: "lead-router", status: "running", dot: "bg-primary" },
@@ -15,14 +15,14 @@ export function Hero() {
   const { hero } = home;
   return (
     <section className="relative overflow-hidden border-b border-border bg-background">
-      {/* Faint violet grid + halo — the Flowline cover motif */}
+      {/* Faint violet grid + halo - the Flowline cover motif */}
       <div
         aria-hidden="true"
         className="grid-motif pointer-events-none absolute inset-0 [mask-image:radial-gradient(110%_90%_at_70%_30%,#000_0%,transparent_72%)]"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-44 -top-56 size-[47rem] rounded-full bg-[radial-gradient(circle,rgba(124,92,255,.20),rgba(31,227,214,.06)_45%,transparent_66%)] blur-[8px]"
+        className="pointer-events-none absolute -right-44 -top-56 size-[47rem] rounded-full bg-[radial-gradient(circle,rgba(109,93,211,.14),rgba(43,168,160,.04)_45%,transparent_66%)] blur-[10px]"
       />
       <div className="container-content relative grid items-center gap-12 py-16 md:py-24 lg:grid-cols-2">
         <div className="flex flex-col gap-6">
@@ -56,7 +56,7 @@ export function Hero() {
 
         {/* Abstract "workflows running" visual (no stock art) */}
         <div className="relative" aria-hidden="true">
-          <div className="rounded-xl border border-border bg-surface p-5 shadow-xl shadow-primary/10">
+          <div className="rounded-xl border border-border-strong bg-surface p-5 shadow-2xl shadow-black/40">
             <div className="flex items-center justify-between border-b border-border pb-4">
               <div className="flex items-center gap-2.5">
                 {/* node-path mark */}
