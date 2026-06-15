@@ -91,7 +91,7 @@ export default function ResultsPage() {
                   key={cs.sector}
                   className="surface-card surface-interactive flex flex-col gap-4 rounded-xl p-6 hover:border-border-strong"
                 >
-                  <span className="text-sm font-semibold uppercase tracking-wide text-accent">
+                  <span className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-cyan">
                     {cs.sector}
                   </span>
                   <div>

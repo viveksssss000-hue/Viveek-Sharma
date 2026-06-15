@@ -7,7 +7,7 @@ export default function NotFound() {
   return (
     <section className="section-y">
       <div className="container-content max-w-2xl text-center">
-        <p className="text-sm font-semibold uppercase tracking-wide text-accent">
+        <p className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-cyan">
           404
         </p>
         <h1 className="mt-3 text-4xl sm:text-5xl">Page not found</h1>

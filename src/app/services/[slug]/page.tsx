@@ -147,9 +147,9 @@ export default async function ServiceDetailPage({
 
       {/* Integrations + security notes */}
       <section className="bg-surface border-y border-border section-y">
-        <div className="container-content grid gap-6 md:grid-cols-2">
-          <div className="flex flex-col gap-3 rounded-xl border border-border bg-background p-6">
-            <span className="grid size-10 place-items-center rounded-lg bg-accent/10 text-accent">
+        <div className="reveal-stagger container-content grid gap-6 md:grid-cols-2">
+          <div className="surface-card surface-interactive flex flex-col gap-3 rounded-xl p-7 hover:border-border-strong">
+            <span className="grid size-10 place-items-center rounded-lg bg-cyan/15 text-cyan ring-1 ring-inset ring-cyan/20">
               <Plug className="size-5" />
             </span>
             <h3 className="text-lg font-semibold text-foreground">
@@ -159,8 +159,8 @@ export default async function ServiceDetailPage({
               {service.integrationsNote}
             </p>
           </div>
-          <div className="flex flex-col gap-3 rounded-xl border border-border bg-background p-6">
-            <span className="grid size-10 place-items-center rounded-lg bg-accent/10 text-accent">
+          <div className="surface-card surface-interactive flex flex-col gap-3 rounded-xl p-7 hover:border-border-strong">
+            <span className="grid size-10 place-items-center rounded-lg bg-cyan/15 text-cyan ring-1 ring-inset ring-cyan/20">
               <ShieldCheck className="size-5" />
             </span>
             <h3 className="text-lg font-semibold text-foreground">

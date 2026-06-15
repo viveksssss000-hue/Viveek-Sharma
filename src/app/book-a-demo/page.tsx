@@ -23,7 +23,7 @@ export default function BookDemoPage() {
     <section className="section-y">
       <div className="container-content">
         <div className="max-w-2xl">
-          <span className="text-sm font-semibold uppercase tracking-wide text-accent">
+          <span className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-cyan">
             Book a Demo
           </span>
           <h1 className="mt-4 text-4xl sm:text-5xl">{bookDemo.h1}</h1>
@@ -32,9 +32,9 @@ export default function BookDemoPage() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-5">
-          {/* Info column */}
-          <aside className="flex flex-col gap-8 lg:col-span-2">
+        <div className="mt-12 grid items-start gap-10 lg:grid-cols-5">
+          {/* Info column - sticks alongside the tall scheduler on desktop */}
+          <aside className="flex flex-col gap-8 lg:col-span-2 lg:sticky lg:top-24">
             <div>
               <h2 className="text-lg font-semibold text-foreground">
                 {bookDemo.whatNext.heading}
@@ -56,8 +56,8 @@ export default function BookDemoPage() {
               </p>
             </div>
 
-            <div className="rounded-xl border border-border bg-surface p-5">
-              <p className="text-xs font-semibold uppercase tracking-wide text-subtle">
+            <div className="surface-card rounded-xl p-5">
+              <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-subtle">
                 Built security-first
               </p>
               <ul className="mt-3 space-y-2.5">
@@ -75,7 +75,7 @@ export default function BookDemoPage() {
 
             <p className="text-sm text-muted-foreground">
               Prefer email?{" "}
-              <Link href="/contact" className="text-accent hover:underline">
+              <Link href="/contact" className="text-cyan hover:underline">
                 Contact us
               </Link>{" "}
               and we&apos;ll find a time.

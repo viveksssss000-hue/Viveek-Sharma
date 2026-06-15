@@ -27,7 +27,7 @@ export default async function ContactPage({
     <section className="section-y">
       <div className="container-content grid gap-12 lg:grid-cols-5">
         <div className="lg:col-span-2">
-          <span className="text-sm font-semibold uppercase tracking-wide text-accent">
+          <span className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-cyan">
             Contact
           </span>
           <h1 className="mt-4 text-4xl sm:text-5xl">{contact.h1}</h1>
@@ -37,21 +37,21 @@ export default async function ContactPage({
 
           <ul className="mt-8 space-y-4">
             <li className="flex items-start gap-3">
-              <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-lg bg-accent/10 text-accent">
+              <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-lg bg-cyan/15 text-cyan ring-1 ring-inset ring-cyan/20">
                 <Mail className="size-4" />
               </span>
               <div>
                 <p className="text-sm font-medium text-foreground">Email us</p>
                 <a
                   href={`mailto:${site.email}`}
-                  className="text-sm text-accent hover:underline"
+                  className="text-sm text-cyan hover:underline"
                 >
                   {site.email}
                 </a>
               </div>
             </li>
             <li className="flex items-start gap-3">
-              <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-lg bg-accent/10 text-accent">
+              <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-lg bg-cyan/15 text-cyan ring-1 ring-inset ring-cyan/20">
                 <Clock className="size-4" />
               </span>
               <div>
@@ -64,7 +64,7 @@ export default async function ContactPage({
               </div>
             </li>
             <li className="flex items-start gap-3">
-              <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-lg bg-accent/10 text-accent">
+              <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-lg bg-cyan/15 text-cyan ring-1 ring-inset ring-cyan/20">
                 <CalendarCheck className="size-4" />
               </span>
               <div>
@@ -73,7 +73,7 @@ export default async function ContactPage({
                 </p>
                 <Link
                   href="/book-a-demo"
-                  className="text-sm text-accent hover:underline"
+                  className="text-sm text-cyan hover:underline"
                 >
                   Book a 30-minute demo
                 </Link>
@@ -83,7 +83,7 @@ export default async function ContactPage({
         </div>
 
         <div className="lg:col-span-3">
-          <div className="rounded-xl border border-border bg-surface p-6 sm:p-8">
+          <div className="surface-card reveal rounded-xl p-6 sm:p-8">
             <ContactForm defaultMessage={defaultMessage} />
           </div>
         </div>
