@@ -12,7 +12,7 @@ export function Logo({ className }: { className?: string; onDark?: boolean }) {
   return (
     <Link
       href="/"
-      aria-label={`${site.name} - home`}
+      aria-label={`${site.name}'s - home`}
       className={cn(
         "inline-flex items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         className
@@ -61,7 +61,7 @@ export function Logo({ className }: { className?: string; onDark?: boolean }) {
       <span className="text-xl font-bold tracking-tight text-foreground">
         try
         <span className="text-accent">a</span>
-        cowork
+        cowork&apos;s
       </span>
     </Link>
   );
