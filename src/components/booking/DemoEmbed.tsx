@@ -38,7 +38,7 @@ export function DemoEmbed() {
         title="Book a demo with tryacowork"
         src={bookingUrl}
         loading="lazy"
-        className="surface-card h-[760px] min-h-[640px] w-full rounded-xl lg:h-[820px]"
+        className="surface-card h-[680px] min-h-[600px] w-full rounded-xl"
       />
     );
   }

@@ -22,6 +22,7 @@ export default function BookDemoPage() {
   return (
     <section className="section-y">
       <div className="container-content">
+        {/* Intro */}
         <div className="max-w-2xl">
           <span className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-cyan">
             Book a Demo
@@ -32,60 +33,51 @@ export default function BookDemoPage() {
           </p>
         </div>
 
-        <div className="mt-12 grid items-start gap-10 lg:grid-cols-5">
-          {/* Info column - sticks alongside the tall scheduler on desktop */}
-          <aside className="flex flex-col gap-8 lg:col-span-2 lg:sticky lg:top-24">
-            <div>
-              <h2 className="text-lg font-semibold text-foreground">
-                {bookDemo.whatNext.heading}
-              </h2>
-              <ul className="mt-4 space-y-3">
-                {bookDemo.whatNext.points.map((point) => (
-                  <li key={point} className="flex items-start gap-3">
-                    <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-accent/10 text-accent">
-                      <Check className="size-3.5" strokeWidth={3} />
-                    </span>
-                    <span className="text-sm text-muted-foreground">
-                      {point}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-4 text-sm font-medium text-foreground">
-                {bookDemo.reassurance}
+        {/* What happens next - compact 3-up strip above the scheduler */}
+        <div className="reveal-stagger mt-12 grid gap-5 sm:grid-cols-3">
+          {bookDemo.whatNext.points.map((point, i) => (
+            <div
+              key={point}
+              className="surface-card surface-interactive flex flex-col gap-3 rounded-xl p-6 hover:border-border-strong"
+            >
+              <span className="grid size-9 place-items-center rounded-lg bg-cyan/15 font-mono text-sm font-semibold text-cyan ring-1 ring-inset ring-cyan/20">
+                {i + 1}
+              </span>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {point}
               </p>
             </div>
+          ))}
+        </div>
 
-            <div className="surface-card rounded-xl p-5">
-              <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-subtle">
-                Built security-first
-              </p>
-              <ul className="mt-3 space-y-2.5">
-                {trustBadges.map((b) => (
-                  <li
-                    key={b.label}
-                    className="flex items-center gap-2.5 text-sm text-muted-foreground"
-                  >
-                    <b.icon className="size-4 text-accent" />
-                    {b.label}
-                  </li>
-                ))}
-              </ul>
-            </div>
+        {/* Scheduler - full width so the embed has room to render cleanly */}
+        <div className="reveal mt-10">
+          <DemoEmbed />
+        </div>
 
-            <p className="text-sm text-muted-foreground">
-              Prefer email?{" "}
-              <Link href="/contact" className="text-cyan hover:underline">
-                Contact us
-              </Link>{" "}
-              and we&apos;ll find a time.
-            </p>
-          </aside>
-
-          {/* Scheduler */}
-          <div className="lg:col-span-3">
-            <DemoEmbed />
-          </div>
+        {/* Trust strip + fallback */}
+        <div className="mt-8 flex flex-col gap-5 rounded-xl border border-border bg-surface/60 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+          <ul className="flex flex-wrap items-center gap-x-7 gap-y-3">
+            {trustBadges.map((b) => (
+              <li
+                key={b.label}
+                className="flex items-center gap-2.5 text-sm text-muted-foreground"
+              >
+                <b.icon className="size-4 text-cyan" />
+                {b.label}
+              </li>
+            ))}
+            <li className="flex items-center gap-2.5 text-sm font-medium text-foreground">
+              <Check className="size-4 text-cyan" strokeWidth={3} />
+              {bookDemo.reassurance}
+            </li>
+          </ul>
+          <p className="shrink-0 text-sm text-muted-foreground">
+            Prefer email?{" "}
+            <Link href="/contact" className="text-cyan hover:underline">
+              Contact us
+            </Link>
+          </p>
         </div>
       </div>
     </section>
