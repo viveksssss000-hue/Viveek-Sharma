@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
@@ -8,21 +8,30 @@ import { Footer } from "@/components/layout/Footer";
 import { StickyMobileCTA } from "@/components/layout/StickyMobileCTA";
 import { Toaster } from "@/components/ui/sonner";
 import { ConsentBanner } from "@/components/consent/ConsentBanner";
+import { ScrollReveal } from "@/components/layout/ScrollReveal";
 import { Analytics } from "@/components/analytics/Analytics";
 import { SiteJsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/lib/content";
 
+// Body face - calm and highly legible for long-form reading.
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+// Display face - geometric character for headings and the wordmark.
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -44,7 +53,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full`}
+      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full`}
     >
       <head>
         {/* Google Consent Mode v2 - default everything to denied until the
@@ -70,6 +79,7 @@ export default function RootLayout({
         <StickyMobileCTA />
         <Toaster position="top-center" richColors />
         <ConsentBanner />
+        <ScrollReveal />
         <SiteJsonLd />
         <Analytics />
       </body>

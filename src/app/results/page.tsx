@@ -35,11 +35,11 @@ export default function ResultsPage() {
 
           <div>
             <SectionHeading align="left" title={results.measuresHeading} />
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="reveal-stagger mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {results.measures.map((m) => (
                 <div
                   key={m.metric}
-                  className="flex flex-col gap-2 rounded-xl border border-border bg-surface p-6"
+                  className="surface-card surface-interactive flex flex-col gap-2 rounded-xl p-6 hover:border-border-strong"
                 >
                   <h3 className="font-semibold text-foreground">{m.metric}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
@@ -56,11 +56,11 @@ export default function ResultsPage() {
               title={results.examplesHeading}
               description={results.examplesIntro}
             />
-            <div className="mt-8 grid gap-6 sm:grid-cols-2">
+            <div className="reveal-stagger mt-8 grid gap-6 sm:grid-cols-2">
               {results.examples.map((ex) => (
                 <div
                   key={ex.area}
-                  className="flex flex-col gap-2 rounded-xl border border-border bg-surface p-6"
+                  className="surface-card surface-interactive flex flex-col gap-2 rounded-xl p-7 hover:border-border-strong"
                 >
                   <h3 className="font-semibold text-foreground">{ex.area}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
@@ -72,7 +72,7 @@ export default function ResultsPage() {
           </div>
 
           {results.caseStudies.length === 0 ? (
-            <div className="mx-auto max-w-xl rounded-xl border border-dashed border-border bg-surface p-10 text-center">
+            <div className="surface-card reveal mx-auto max-w-xl rounded-xl p-10 text-center">
               <LineChart className="mx-auto size-9 text-subtle" />
               <h2 className="mt-4 text-xl font-semibold text-foreground">
                 Early results, published honestly
@@ -89,7 +89,7 @@ export default function ResultsPage() {
               {results.caseStudies.map((cs) => (
                 <article
                   key={cs.sector}
-                  className="flex flex-col gap-4 rounded-xl border border-border bg-surface p-6"
+                  className="surface-card surface-interactive flex flex-col gap-4 rounded-xl p-6 hover:border-border-strong"
                 >
                   <span className="text-sm font-semibold uppercase tracking-wide text-accent">
                     {cs.sector}

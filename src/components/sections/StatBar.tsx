@@ -6,13 +6,13 @@ import { metrics } from "@/lib/content";
  */
 export function StatBar() {
   return (
-    <dl className="grid gap-6 sm:grid-cols-3">
+    <dl className="reveal-stagger grid gap-6 sm:grid-cols-3">
       {metrics.map((m) => {
         const isPlaceholder = m.value.startsWith("{{");
         return (
           <div
             key={m.label}
-            className="flex flex-col items-center gap-1 rounded-xl border border-border bg-surface p-6 text-center"
+            className="surface-card surface-interactive flex flex-col items-center gap-1 rounded-xl p-7 text-center hover:border-border-strong"
           >
             <dt className="sr-only">{m.label}</dt>
             <dd

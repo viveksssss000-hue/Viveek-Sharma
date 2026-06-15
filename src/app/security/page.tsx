@@ -25,7 +25,7 @@ const sectionIcons = [Lock, FileCheck, EyeOff, UserCheck, BadgeCheck];
 export default function SecurityPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-border bg-[linear-gradient(140deg,#171d27,#1f2736)]">
+      <section className="relative overflow-hidden border-b border-border bg-[linear-gradient(140deg,#121823,#1b232f)]">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -right-28 -top-44 size-[32rem] rounded-full bg-[radial-gradient(circle,rgba(109,93,211,.16),transparent_64%)]"
@@ -45,15 +45,15 @@ export default function SecurityPage() {
 
       <section className="section-y">
         <div className="container-content">
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="reveal-stagger grid gap-6 lg:grid-cols-2">
             {security.sections.map((section, i) => {
               const Icon = sectionIcons[i] ?? Lock;
               return (
                 <div
                   key={section.title}
-                  className="flex flex-col gap-4 rounded-xl border border-border bg-surface p-6 sm:p-8"
+                  className="surface-card surface-interactive flex flex-col gap-4 rounded-xl p-6 hover:border-border-strong sm:p-8"
                 >
-                  <span className="grid size-11 place-items-center rounded-lg bg-accent/10 text-accent">
+                  <span className="grid size-11 place-items-center rounded-lg bg-cyan/15 text-cyan ring-1 ring-inset ring-cyan/20">
                     <Icon className="size-5" />
                   </span>
                   <h2 className="text-xl font-semibold text-foreground">
@@ -81,7 +81,7 @@ export default function SecurityPage() {
             })}
           </div>
 
-          <div className="mt-10 flex flex-col items-start gap-3 rounded-xl border border-border bg-surface p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+          <div className="surface-card reveal mt-10 flex flex-col items-start gap-3 rounded-xl p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
             <div>
               <h2 className="text-lg font-semibold text-foreground">
                 Need our DPA or a security overview?

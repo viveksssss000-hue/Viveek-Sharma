@@ -9,7 +9,7 @@ import { testimonials } from "@/lib/content";
 export function Testimonials() {
   if (testimonials.length === 0) {
     return (
-      <div className="rounded-xl border border-dashed border-border bg-surface p-8 text-center">
+      <div className="surface-card reveal rounded-xl p-8 text-center">
         <Quote className="mx-auto size-8 text-subtle" />
         <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground">
           We publish named, permissioned client results only. As our design
@@ -21,11 +21,11 @@ export function Testimonials() {
   }
 
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div className="reveal-stagger grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {testimonials.map((t) => (
         <figure
           key={`${t.name}-${t.company}`}
-          className="flex flex-col gap-4 rounded-xl border border-border bg-surface p-6"
+          className="surface-card surface-interactive flex flex-col gap-4 rounded-xl p-6 hover:border-border-strong"
         >
           <Quote className="size-6 text-accent" />
           <blockquote className="text-base text-foreground leading-relaxed">

@@ -36,7 +36,7 @@ export function ProcessSteps({ condensed = false }: { condensed?: boolean }) {
               : undefined
           }
         />
-        <div className="mt-12 overflow-hidden rounded-xl border border-border bg-surface">
+        <div className="surface-card reveal mt-12 overflow-hidden rounded-xl">
           <ol className="relative grid md:grid-cols-2 lg:grid-cols-4">
             {/* Flow-gradient connecting line - desktop only, behind the node dots */}
             <span

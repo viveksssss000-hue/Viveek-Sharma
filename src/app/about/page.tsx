@@ -36,15 +36,15 @@ export default function AboutPage() {
       <section className="section-y">
         <div className="container-content">
           <SectionHeading title="What we stand for" />
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
+          <div className="reveal-stagger mt-12 grid gap-6 md:grid-cols-3">
             {about.values.map((value, i) => {
               const Icon = valueIcons[i] ?? Target;
               return (
                 <div
                   key={value.title}
-                  className="flex flex-col gap-3 rounded-xl border border-border bg-surface p-6"
+                  className="surface-card surface-interactive flex flex-col gap-3 rounded-xl p-7 hover:border-border-strong"
                 >
-                  <span className="grid size-11 place-items-center rounded-lg bg-accent/10 text-accent">
+                  <span className="grid size-11 place-items-center rounded-lg bg-cyan/15 text-cyan ring-1 ring-inset ring-cyan/20">
                     <Icon className="size-5" />
                   </span>
                   <h3 className="text-lg font-semibold text-foreground">
@@ -76,7 +76,7 @@ export default function AboutPage() {
               </p>
             </div>
           ) : (
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="reveal-stagger mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {about.team.map((member) => {
                 const initials = member.name
                   .split(" ")
@@ -86,11 +86,11 @@ export default function AboutPage() {
                 return (
                   <div
                     key={member.name}
-                    className="flex items-center gap-4 rounded-xl border border-border bg-background p-6"
+                    className="surface-card surface-interactive flex items-center gap-4 rounded-xl p-6 hover:border-border-strong"
                   >
                     <span
                       aria-hidden="true"
-                      className="grid size-12 shrink-0 place-items-center rounded-full border border-border-strong bg-elevated font-mono text-sm font-semibold text-primary"
+                      className="grid size-12 shrink-0 place-items-center rounded-full bg-primary/15 font-mono text-sm font-semibold text-[#b8acff] ring-1 ring-inset ring-primary/25"
                     >
                       {initials}
                     </span>

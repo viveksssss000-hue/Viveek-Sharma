@@ -27,16 +27,16 @@ export function ServicesOverview() {
           title={home.servicesOverview.heading}
           description={home.servicesOverview.description}
         />
-        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+        <div className="reveal-stagger mt-12 grid gap-6 sm:grid-cols-2">
           {services.map((s) => {
             const Icon = serviceIcons[s.slug] ?? Search;
             return (
               <Link
                 key={s.slug}
                 href={`/services/${s.slug}`}
-                className="group flex flex-col gap-3 rounded-xl border border-border bg-background p-6 transition-colors hover:border-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="surface-card surface-interactive group flex flex-col gap-3 rounded-xl p-7 hover:border-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
-                <span className="grid size-11 place-items-center rounded-lg bg-accent/10 text-accent">
+                <span className="grid size-11 place-items-center rounded-lg bg-cyan/15 text-cyan ring-1 ring-inset ring-cyan/20">
                   <Icon className="size-5" />
                 </span>
                 <h3 className="text-xl font-semibold text-foreground">

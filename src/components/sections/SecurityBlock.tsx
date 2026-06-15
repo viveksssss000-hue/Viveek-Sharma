@@ -14,7 +14,7 @@ export function SecurityBlock() {
   return (
     <section className="section-y">
       <div className="container-content">
-        <div className="relative overflow-hidden rounded-2xl border border-border-strong bg-[linear-gradient(140deg,#171d27,#1f2736)] px-6 py-12 sm:px-12 sm:py-14">
+        <div className="reveal relative overflow-hidden rounded-2xl border border-border-strong bg-[linear-gradient(140deg,#161c27,#1d2532)] px-6 py-12 shadow-[0_24px_60px_-30px_rgba(0,0,0,0.8)] sm:px-12 sm:py-14">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute -left-28 bottom-[-10rem] size-[32rem] rounded-full bg-[radial-gradient(circle,rgba(109,93,211,.16),transparent_64%)]"

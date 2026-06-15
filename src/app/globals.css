@@ -12,39 +12,49 @@
   --radius-input: 0.5rem; /* 8px - inputs */
 
   /*
-    Refined dark: lifted off near-black to a softer slate so the site reads
-    premium and trustworthy rather than "gamer-dark". Accents are toned down
-    (muted violet + teal); lime is held back for key CTAs only.
+    Refined dark: a deep, slightly cool ink base with clearly layered carbon
+    surfaces, so the UI reads premium and "lit" rather than flat or "gamer-dark".
+    Each surface step is a real tonal jump for depth; borders are calm hairlines
+    with a subtle top highlight. Violet leads, cyan supports, lime = the action.
   */
-  --background: #0e1117; /* page background - soft ink slate */
-  --surface: #161b24; /* cards, header */
-  --elevated: #1c2330; /* elevated surfaces, hovers */
-  --foreground: #e8eaf0; /* headings / primary text */
-  --muted: #1c2330; /* subtle fills */
-  --muted-foreground: #aeb4c2; /* body text - lifted for readability */
-  --subtle: #828a99; /* captions, placeholders */
-  --border: rgba(255, 255, 255, 0.08); /* dividers, inputs - calmer */
-  --border-strong: rgba(255, 255, 255, 0.12);
+  --background: #0a0d13; /* page background - deep cool ink */
+  --surface: #11161f; /* cards, header (top of card gradient) */
+  --surface-2: #0d1119; /* card gradient bottom - adds depth */
+  --elevated: #1a212d; /* elevated surfaces, hovers, inputs */
+  --foreground: #edeff5; /* headings / primary text - crisp */
+  --muted: #1a212d; /* subtle fills */
+  --muted-foreground: #abb2c2; /* body text - lifted for readability */
+  --subtle: #7b8394; /* captions, placeholders */
+  --border: rgba(255, 255, 255, 0.07); /* dividers, inputs - calm hairline */
+  --border-strong: rgba(255, 255, 255, 0.13);
+  --highlight: rgba(255, 255, 255, 0.05); /* top-edge "lit" highlight */
   --input: rgba(255, 255, 255, 0.12);
   --ring: #c9ff3d; /* focus ring = lime spark */
 
-  --primary: #6d5dd3; /* Violet - muted, professional */
+  --primary: #7b6cf0; /* Violet - refined, professional */
   --primary-foreground: #ffffff;
 
   --accent: #c9ff3d; /* Lime - the spark. Key CTAs only. */
   --accent-hover: #d6ff66;
   --accent-foreground: #0a0a12;
 
-  --cyan: #2ba8a0; /* Teal - muted secondary accent, links/labels */
+  --cyan: #36b3aa; /* Teal - secondary accent, links/labels */
 
   --success: #4ade80;
   --warning: #fbbf24;
   --error: #f87171;
+
+  /* Elevation system - soft, layered shadows for a lit dark UI */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 28px -18px rgba(0, 0, 0, 0.7);
+  --shadow-card-hover: 0 2px 4px rgba(0, 0, 0, 0.45),
+    0 22px 48px -22px rgba(0, 0, 0, 0.8);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-elevated: var(--elevated);
   --color-card: var(--surface);
   --color-card-foreground: var(--foreground);
@@ -72,7 +82,10 @@
   --color-warning: var(--warning);
   --color-error: var(--error);
 
-  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  /* Inter for body (calm, highly legible); Space Grotesk for display headings. */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 
   --radius-sm: var(--radius-input);
@@ -124,10 +137,11 @@
   h3,
   h4 {
     color: var(--foreground);
-    line-height: 1.15;
+    font-family: var(--font-display);
+    line-height: 1.12;
     text-wrap: balance;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
   }
   /* Accessible focus ring for keyboard users */
   :focus-visible {
@@ -182,5 +196,78 @@
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--subtle);
+  }
+
+  /*
+    surface-card: the unified premium card surface. A subtle vertical gradient,
+    a calm hairline border, a soft ambient shadow and a 1px top "lit" highlight
+    so dark cards look lifted off the page rather than flat.
+  */
+  .surface-card {
+    border: 1px solid var(--border);
+    background-image: linear-gradient(180deg, var(--surface), var(--surface-2));
+    box-shadow: var(--shadow-card), inset 0 1px 0 0 var(--highlight);
+  }
+  /* surface-interactive: add to cards that should respond to hover. */
+  .surface-interactive {
+    transition: transform 0.28s cubic-bezier(0.22, 0.61, 0.21, 1),
+      box-shadow 0.28s ease, border-color 0.28s ease;
+  }
+  .surface-interactive:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  }
+
+  /*
+    Scroll reveal. Hidden state only applies once JS has flagged <html.js-reveal>,
+    so the site is fully visible without JS and for crawlers. ScrollReveal adds
+    .reveal-in when the element enters the viewport. Honours reduced-motion.
+  */
+  .js-reveal .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 0.61, 0.21, 1);
+    will-change: opacity, transform;
+  }
+  .js-reveal .reveal.reveal-in {
+    opacity: 1;
+    transform: none;
+  }
+  /* Optional stagger for grids of cards */
+  .js-reveal .reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 0.61, 0.21, 1);
+  }
+  .js-reveal .reveal-stagger.reveal-in > * {
+    opacity: 1;
+    transform: none;
+  }
+  .js-reveal .reveal-stagger.reveal-in > *:nth-child(2) {
+    transition-delay: 0.07s;
+  }
+  .js-reveal .reveal-stagger.reveal-in > *:nth-child(3) {
+    transition-delay: 0.14s;
+  }
+  .js-reveal .reveal-stagger.reveal-in > *:nth-child(4) {
+    transition-delay: 0.21s;
+  }
+  .js-reveal .reveal-stagger.reveal-in > *:nth-child(5) {
+    transition-delay: 0.28s;
+  }
+  .js-reveal .reveal-stagger.reveal-in > *:nth-child(6) {
+    transition-delay: 0.35s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js-reveal .reveal,
+    .js-reveal .reveal-stagger > * {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .surface-interactive:hover {
+      transform: none;
+    }
   }
 }
