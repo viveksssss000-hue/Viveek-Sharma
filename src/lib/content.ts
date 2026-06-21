@@ -595,13 +595,18 @@ export const bookDemo = {
   h1: "Book a 30-minute demo",
   valueReminder:
     "Start with one task. We'll show you the automated version of it - and the hours it gives back. No obligation.",
-  whatNext: {
-    heading: "What happens next",
-    points: [
-      "Pick a time that works - you'll get a calendar invite with a video link.",
-      "We'll ask a few quick questions about the work that eats your week.",
-      "On the call, we map 2-3 workflows live and outline what going live looks like.",
-    ],
+  steps: [
+    { title: "Pick a time", body: "Select a slot that works best for you." },
+    {
+      title: "Tell us about your work",
+      body: "Share a few details so we can prepare.",
+    },
+    { title: "Join the demo", body: "Meet us on Google Meet." },
+  ],
+  // Scheduler card header. Bookings land in this person's Calendly.
+  host: {
+    name: "Naveen Sharma",
+    blurb: "30 min with tryacowork.com",
   },
   reassurance: "No credit card. No pressure.",
 } as const;

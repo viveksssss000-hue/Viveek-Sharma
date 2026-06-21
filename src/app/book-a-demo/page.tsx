@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Check, Lock, EyeOff, UserCheck } from "lucide-react";
+import { Lock, EyeOff, UserCheck, CreditCard, ArrowRight } from "lucide-react";
 
 import { DemoEmbed } from "@/components/booking/DemoEmbed";
 import { buildMetadata } from "@/lib/seo";
@@ -16,6 +16,7 @@ const trustBadges = [
   { icon: Lock, label: "Encrypted & secure" },
   { icon: EyeOff, label: "Never trains on your data" },
   { icon: UserCheck, label: "Human-in-the-loop" },
+  { icon: CreditCard, label: "No credit card required" },
 ];
 
 export default function BookDemoPage() {
@@ -33,51 +34,49 @@ export default function BookDemoPage() {
           </p>
         </div>
 
-        {/* What happens next - compact 3-up strip above the scheduler */}
+        {/* Steps - compact 3-up strip above the scheduler */}
         <div className="reveal-stagger mt-12 grid gap-5 sm:grid-cols-3">
-          {bookDemo.whatNext.points.map((point, i) => (
+          {bookDemo.steps.map((step, i) => (
             <div
-              key={point}
-              className="surface-card surface-interactive flex flex-col gap-3 rounded-xl p-6 hover:border-border-strong"
+              key={step.title}
+              className="surface-card surface-interactive flex flex-col gap-3 rounded-2xl p-6 hover:border-border-strong"
             >
-              <span className="grid size-9 place-items-center rounded-lg bg-primary/10 font-mono text-sm font-semibold text-primary ring-1 ring-inset ring-primary/20">
+              <span className="grid size-10 place-items-center rounded-xl bg-primary/10 font-mono text-base font-semibold text-primary ring-1 ring-inset ring-primary/20">
                 {i + 1}
               </span>
+              <h3 className="text-lg font-semibold text-foreground">
+                {step.title}
+              </h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                {point}
+                {step.body}
               </p>
             </div>
           ))}
         </div>
 
-        {/* Scheduler - full width so the embed has room to render cleanly */}
+        {/* Scheduler - full width so it has room to render cleanly */}
         <div className="reveal mt-10">
           <DemoEmbed />
         </div>
 
-        {/* Trust strip + fallback */}
-        <div className="mt-8 flex flex-col gap-5 rounded-xl border border-border bg-surface/60 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
-          <ul className="flex flex-wrap items-center gap-x-7 gap-y-3">
-            {trustBadges.map((b) => (
-              <li
-                key={b.label}
-                className="flex items-center gap-2.5 text-sm text-muted-foreground"
-              >
-                <b.icon className="size-4 text-primary" />
-                {b.label}
-              </li>
-            ))}
-            <li className="flex items-center gap-2.5 text-sm font-medium text-foreground">
-              <Check className="size-4 text-primary" strokeWidth={3} />
-              {bookDemo.reassurance}
-            </li>
-          </ul>
-          <p className="shrink-0 text-sm text-muted-foreground">
-            Prefer email?{" "}
-            <Link href="/contact" className="text-primary hover:underline">
-              Contact us
-            </Link>
-          </p>
+        {/* Trust bar */}
+        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {trustBadges.map((b) => (
+            <div
+              key={b.label}
+              className="flex items-center justify-center gap-2 rounded-2xl border border-border bg-surface px-4 py-3.5 text-center text-sm text-muted-foreground"
+            >
+              <b.icon className="size-4 shrink-0 text-primary" />
+              {b.label}
+            </div>
+          ))}
+          <Link
+            href="/contact"
+            className="flex items-center justify-center gap-1.5 rounded-2xl border border-border bg-surface px-4 py-3.5 text-center text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-primary/5"
+          >
+            Contact us
+            <ArrowRight className="size-4" />
+          </Link>
         </div>
       </div>
     </section>
