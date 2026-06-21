@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Turnstile } from "@marsidev/react-turnstile";
-import { Loader2 } from "lucide-react";
+import { Loader2, CircleCheck, CalendarClock } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -29,8 +29,20 @@ import {
   interests,
 } from "@/lib/validations";
 import { trackEvent } from "@/lib/analytics";
+import { site } from "@/lib/content";
 
 const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+// After a successful submit the Calendly booking popup opens on the page.
+const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL ?? site.bookingUrl;
+const CAL_SCRIPT = "https://assets.calendly.com/assets/external/widget.js";
+const CAL_CSS = "https://assets.calendly.com/assets/external/widget.css";
+
+declare global {
+  interface Window {
+    Calendly?: { initPopupWidget: (opts: { url: string }) => void };
+  }
+}
 
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
@@ -50,6 +62,37 @@ export function ContactForm({
 }) {
   const router = useRouter();
   const [token, setToken] = useState<string>("");
+  const [submitted, setSubmitted] = useState(false);
+
+  // Preload the Calendly popup assets so booking opens instantly on submit.
+  useEffect(() => {
+    if (!bookingUrl) return;
+    if (!document.querySelector(`link[href="${CAL_CSS}"]`)) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = CAL_CSS;
+      document.head.appendChild(link);
+    }
+    if (!document.querySelector(`script[src="${CAL_SCRIPT}"]`)) {
+      const script = document.createElement("script");
+      script.src = CAL_SCRIPT;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
+
+  const openBooking = () => {
+    if (!bookingUrl) {
+      router.push("/thank-you/contact");
+      return;
+    }
+    const url = `${bookingUrl}?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=6d5dd3`;
+    if (typeof window !== "undefined" && window.Calendly) {
+      window.Calendly.initPopupWidget({ url });
+    } else {
+      window.open(bookingUrl, "_blank", "noopener");
+    }
+  };
 
   const {
     register,
@@ -89,7 +132,10 @@ export function ContactForm({
         return;
       }
       trackEvent("contact_submit");
-      router.push("/thank-you/contact");
+      // Two things on success: the team gets the email (server-side), and the
+      // Calendly booking window opens right here on the page.
+      setSubmitted(true);
+      openBooking();
     } catch {
       toast.error("Network error. Please try again or email us directly.");
     }
@@ -97,6 +143,28 @@ export function ContactForm({
 
   // Require Turnstile only when a site key is configured.
   const captchaSatisfied = !siteKey || token.length > 0;
+
+  if (submitted) {
+    return (
+      <div className="surface-card flex flex-col items-center gap-4 rounded-xl p-8 text-center sm:p-10">
+        <span className="grid size-12 place-items-center rounded-full bg-success/10 text-success">
+          <CircleCheck className="size-6" />
+        </span>
+        <h3 className="text-2xl font-semibold text-foreground">
+          Thanks - your details are on the way.
+        </h3>
+        <p className="max-w-md text-muted-foreground leading-relaxed">
+          We&apos;ve sent your enquiry to our team and will reply within one
+          business day. The booking window should have opened - pick a time and
+          we&apos;ll see you on the call.
+        </p>
+        <Button variant="spark" size="lg" onClick={openBooking}>
+          <CalendarClock className="size-4" />
+          Pick a time
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col gap-5">

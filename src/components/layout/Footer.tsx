@@ -5,8 +5,6 @@ import { CookieSettingsButton } from "@/components/consent/CookieSettingsButton"
 import { footer, site } from "@/lib/content";
 
 export function Footer() {
-  const year = new Date().getFullYear();
-
   return (
     <footer className="mt-auto border-t border-border bg-surface">
       <div className="container-content py-14">
@@ -54,10 +52,7 @@ export function Footer() {
         </div>
 
         {/* Utility row */}
-        <div className="mt-12 flex flex-col gap-4 border-t border-border pt-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {year} {site.legalName}
-          </p>
+        <div className="mt-12 flex flex-col gap-4 border-t border-border pt-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-end">
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             {footer.utility.map((link) => (
               <Link
