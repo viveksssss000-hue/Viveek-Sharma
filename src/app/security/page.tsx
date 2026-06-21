@@ -97,7 +97,7 @@ export default function SecurityPage() {
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button asChild>
-                <Link href="/book-a-demo">Book a Demo</Link>
+                <Link href="/contact">Book a Demo</Link>
               </Button>
               <Button asChild variant="outline">
                 <Link href="/contact?topic=security">

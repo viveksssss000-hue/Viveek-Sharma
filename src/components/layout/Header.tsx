@@ -60,7 +60,7 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <Button asChild className="hidden sm:inline-flex">
-            <Link href="/book-a-demo">Book a Demo</Link>
+            <Link href="/contact">Book a Demo</Link>
           </Button>
           <MobileNav />
         </div>

@@ -44,7 +44,7 @@ export function CTASection({
             </p>
             <div className="mt-2 flex flex-col items-center gap-3 sm:flex-row">
               <Button asChild size="lg" variant="spark">
-                <Link href="/book-a-demo">
+                <Link href="/contact">
                   Book a Demo
                   <ArrowRight />
                 </Link>

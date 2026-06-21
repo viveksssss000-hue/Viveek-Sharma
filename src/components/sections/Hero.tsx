@@ -50,7 +50,7 @@ export function Hero() {
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <Button asChild size="lg" variant="spark">
-              <Link href="/book-a-demo">
+              <Link href="/contact">
                 {hero.primaryCta}
                 <ArrowRight />
               </Link>

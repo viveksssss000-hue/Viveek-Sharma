@@ -63,7 +63,7 @@ export function MobileNav() {
         </nav>
         <div className="mt-auto flex flex-col gap-3 p-4">
           <Button asChild className="w-full" onClick={close}>
-            <Link href="/book-a-demo">Book a Demo</Link>
+            <Link href="/contact">Book a Demo</Link>
           </Button>
           <Button asChild variant="outline" className="w-full" onClick={close}>
             <Link href="/contact">Contact us</Link>

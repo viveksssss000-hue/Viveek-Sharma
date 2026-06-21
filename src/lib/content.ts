@@ -212,7 +212,7 @@ export const footer = {
     {
       heading: "Get started",
       links: [
-        { label: "Book a Demo", href: "/book-a-demo" },
+        { label: "Book a Demo", href: "/contact" },
         { label: "Contact", href: "/contact" },
       ] as NavLink[],
     },

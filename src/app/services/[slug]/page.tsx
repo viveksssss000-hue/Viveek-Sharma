@@ -106,7 +106,7 @@ export default async function ServiceDetailPage({
             </p>
             <div className="mt-8">
               <Button asChild size="lg">
-                <Link href="/book-a-demo">
+                <Link href="/contact">
                   Book a Demo
                   <ArrowRight />
                 </Link>
