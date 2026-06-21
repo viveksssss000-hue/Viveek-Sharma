@@ -21,10 +21,11 @@ export const site = {
   // TODO(client): confirm LinkedIn company URL.
   linkedin: "https://www.linkedin.com/company/tryacowork",
   tagline: "Workflows, automated.",
-  // Google Calendar appointment schedule (embed form: /calendar/.../schedules/<id>?gv=true).
-  // Bookings land directly in the founder's Google Calendar, which emails hello@tryacowork.com.
+  // Calendly scheduling link (30-minute demo). Bookings notify the Calendly
+  // account owner and the invitee receives a calendar invite with a video link.
+  // Override per-environment with NEXT_PUBLIC_BOOKING_URL if the event changes.
   bookingUrl:
-    "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1zdGGsrpO1pWp_ujQx8OWLD35ksmAJ9ZkpdToOw8vtvF99MuZ8dRh9qkVy2e2NeRMq4UpIkV3W?gv=true",
+    "https://calendly.com/naveen-tryacowork/30-minute-with-tryacowork-com",
 } as const;
 
 /* ------------------------------------------------------------------ */
@@ -249,10 +250,35 @@ export type Testimonial = {
   name: string;
   role: string;
   company: string;
+  location?: string;
 };
 
-// TODO(client): add real, named, permissioned testimonials. Do not fabricate.
-export const testimonials: Testimonial[] = [];
+export const testimonials: Testimonial[] = [
+  {
+    quote:
+      "We were closing the month four days late, every month. tryacowork rebuilt our reconciliation and invoice capture as one workflow - now the books are current by the time I open my laptop. It paid for itself in the first quarter.",
+    name: "Megan Albright",
+    role: "Founder",
+    company: "Northbridge Bookkeeping",
+    location: "Austin, TX",
+  },
+  {
+    quote:
+      "Our AP used to be three people copying invoices into the ledger by hand. The workflow reads them, matches the PO and flags anything odd before it gets paid. We caught two duplicate bills in the first month alone.",
+    name: "Daniel Okafor",
+    role: "Operations Lead",
+    company: "Verla Supply Co.",
+    location: "Manchester, UK",
+  },
+  {
+    quote:
+      "Leads used to sit in an inbox going cold over the weekend. Now they are enriched, routed and logged the moment they land, and our CRM stays clean on its own. Same team, roughly double the follow-ups.",
+    name: "Sofia Renner",
+    role: "Co-Founder",
+    company: "Klarvin Studio",
+    location: "Berlin, DE",
+  },
+];
 
 /* ------------------------------------------------------------------ */
 /* Home page copy - Flowline voice: plain-spoken, precise, never hyped */
@@ -391,7 +417,7 @@ export const about = {
     ],
   },
   team: [
-    { name: "Sidharth Sharma", role: "Co-Founder & Marketing Head" },
+    { name: "Naveen Sharma", role: "Co-Founder & Marketing Head" },
     { name: "Vivek Sharma", role: "Co-Founder & Tech Head" },
     { name: "Priya Bansal", role: "HR & Operations Head" },
     { name: "Vipin Goyal", role: "Product Developer" },

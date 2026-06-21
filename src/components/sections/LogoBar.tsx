@@ -14,15 +14,15 @@ export function LogoBar() {
         </p>
         <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
           <li className="flex items-center gap-2">
-            <Plug className="size-4 text-accent" />
+            <Plug className="size-4 text-primary" />
             Secure integrations
           </li>
           <li className="flex items-center gap-2">
-            <ShieldCheck className="size-4 text-accent" />
+            <ShieldCheck className="size-4 text-primary" />
             GDPR &amp; data-secure
           </li>
           <li className="flex items-center gap-2">
-            <Globe className="size-4 text-accent" />
+            <Globe className="size-4 text-primary" />
             Serving the US &amp; EU
           </li>
         </ul>

@@ -36,7 +36,7 @@ export function ServicesOverview() {
                 href={`/services/${s.slug}`}
                 className="surface-card surface-interactive group flex flex-col gap-3 rounded-xl p-7 hover:border-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
-                <span className="grid size-11 place-items-center rounded-lg bg-cyan/15 text-cyan ring-1 ring-inset ring-cyan/20">
+                <span className="grid size-11 place-items-center rounded-lg bg-primary/10 text-primary ring-1 ring-inset ring-primary/20">
                   <Icon className="size-5" />
                 </span>
                 <h3 className="text-xl font-semibold text-foreground">
@@ -45,7 +45,7 @@ export function ServicesOverview() {
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {s.outcome}
                 </p>
-                <span className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-accent">
+                <span className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-primary">
                   Learn more
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                 </span>

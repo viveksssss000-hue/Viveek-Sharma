@@ -2,53 +2,50 @@
 @import "tw-animate-css";
 
 /*
-  tryacowork "Flowline" design tokens - from the brand kit (claude.ai/design).
-  Dark identity: ink base, carbon surfaces, electric accents.
-  Violet leads, cyan supports, lime is reserved for the primary action.
-  All text combinations meet WCAG 2.2 AA contrast.
+  tryacowork design tokens - from the brand kit (claude.ai/design).
+  Light identity: ink-50 base, white surfaces, violet leads, cyan supports,
+  lime reserved for the primary action. All text combinations meet WCAG 2.2 AA.
 */
 :root {
   --radius: 0.75rem; /* 12px - cards/buttons */
-  --radius-input: 0.5rem; /* 8px - inputs */
+  --radius-input: 0.625rem; /* 10px - inputs (design --radius-md) */
 
   /*
-    Refined dark: a deep, slightly cool ink base with clearly layered carbon
-    surfaces, so the UI reads premium and "lit" rather than flat or "gamer-dark".
-    Each surface step is a real tonal jump for depth; borders are calm hairlines
-    with a subtle top highlight. Violet leads, cyan supports, lime = the action.
+    Light theme: a soft ink-50 page with crisp white cards lifted by subtle
+    shadows and calm hairline borders. Violet leads, cyan supports, lime = the
+    action (used scarcely). Mirrors brand/tryacowork.css from the design handoff.
   */
-  --background: #0a0d13; /* page background - deep cool ink */
-  --surface: #11161f; /* cards, header (top of card gradient) */
-  --surface-2: #0d1119; /* card gradient bottom - adds depth */
-  --elevated: #1a212d; /* elevated surfaces, hovers, inputs */
-  --foreground: #edeff5; /* headings / primary text - crisp */
-  --muted: #1a212d; /* subtle fills */
-  --muted-foreground: #abb2c2; /* body text - lifted for readability */
-  --subtle: #7b8394; /* captions, placeholders */
-  --border: rgba(255, 255, 255, 0.07); /* dividers, inputs - calm hairline */
-  --border-strong: rgba(255, 255, 255, 0.13);
-  --highlight: rgba(255, 255, 255, 0.05); /* top-edge "lit" highlight */
-  --input: rgba(255, 255, 255, 0.12);
-  --ring: #c9ff3d; /* focus ring = lime spark */
+  --background: #f4f4f8; /* ink-50 - page background */
+  --surface: #ffffff; /* ink-0 - cards, header */
+  --surface-2: #fbfbfd; /* ink-25 - card gradient bottom */
+  --elevated: #f4f4f8; /* ink-50 - hovers, inputs, subtle fills */
+  --foreground: #0b0b12; /* ink-900 - headings / primary text */
+  --muted: #f4f4f8; /* subtle fills */
+  --muted-foreground: #52525e; /* ink-600 - body text */
+  --subtle: #9a9aa6; /* ink-400 - captions, placeholders */
+  --border: rgba(11, 11, 18, 0.1); /* dividers, inputs - calm hairline */
+  --border-strong: rgba(11, 11, 18, 0.16);
+  --highlight: rgba(255, 255, 255, 0); /* no inset highlight on light cards */
+  --input: rgba(11, 11, 18, 0.16);
+  --ring: #6a45f5; /* focus ring = violet */
 
-  --primary: #7b6cf0; /* Violet - refined, professional */
+  --primary: #6a45f5; /* Violet-500 - refined, professional */
   --primary-foreground: #ffffff;
 
-  --accent: #c9ff3d; /* Lime - the spark. Key CTAs only. */
-  --accent-hover: #d6ff66;
-  --accent-foreground: #0a0a12;
+  --accent: #a8e000; /* Lime-500 - the spark. Key CTAs only. */
+  --accent-hover: #b8e224;
+  --accent-foreground: #2c3a00; /* dark olive text on lime */
 
-  --cyan: #36b3aa; /* Teal - secondary accent, links/labels */
+  --cyan: #0b9087; /* Cyan-600 - accessible teal accent / icons */
 
-  --success: #4ade80;
-  --warning: #fbbf24;
-  --error: #f87171;
+  --success: #12a150;
+  --warning: #e0a100;
+  --error: #e5484d;
 
-  /* Elevation system - soft, layered shadows for a lit dark UI */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
-  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 28px -18px rgba(0, 0, 0, 0.7);
-  --shadow-card-hover: 0 2px 4px rgba(0, 0, 0, 0.45),
-    0 22px 48px -22px rgba(0, 0, 0, 0.8);
+  /* Elevation system - soft, subtle shadows for a light UI */
+  --shadow-sm: 0 1px 2px rgba(11, 11, 18, 0.04);
+  --shadow-card: 0 1px 3px rgba(11, 11, 18, 0.06), 0 1px 2px rgba(11, 11, 18, 0.04);
+  --shadow-card-hover: 0 16px 40px rgba(11, 11, 18, 0.1);
 }
 
 @theme inline {
@@ -136,7 +133,7 @@
   }
   ::selection {
     background: var(--accent);
-    color: #0a0a12;
+    color: var(--accent-foreground);
   }
   h1,
   h2,
@@ -205,23 +202,23 @@
   }
 
   /*
-    surface-card: the unified premium card surface. A subtle vertical gradient,
-    a calm hairline border, a soft ambient shadow and a 1px top "lit" highlight
-    so dark cards look lifted off the page rather than flat.
+    surface-card: the unified card surface. A crisp white face with a calm
+    hairline border and a soft ambient shadow so cards lift off the ink-50 page.
   */
   .surface-card {
     border: 1px solid var(--border);
     background-image: linear-gradient(180deg, var(--surface), var(--surface-2));
-    box-shadow: var(--shadow-card), inset 0 1px 0 0 var(--highlight);
+    box-shadow: var(--shadow-card);
   }
   /* surface-interactive: add to cards that should respond to hover. */
   .surface-interactive {
-    transition: transform 0.28s cubic-bezier(0.22, 0.61, 0.21, 1),
-      box-shadow 0.28s ease, border-color 0.28s ease;
+    transition: transform 0.32s cubic-bezier(0.2, 0.6, 0.2, 1),
+      box-shadow 0.32s ease, border-color 0.32s ease;
   }
   .surface-interactive:hover {
     transform: translateY(-3px);
-    box-shadow: var(--shadow-card-hover), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+    box-shadow: var(--shadow-card-hover);
+    border-color: #c8b8fc; /* violet-200 */
   }
 
   /*
@@ -274,6 +271,155 @@
     }
     .surface-interactive:hover {
       transform: none;
+    }
+  }
+}
+
+/* ============================================================
+   Landing motion - ported from the design handoff (landing.css).
+   Kinetic marquee, floating workflow chips, hero blobs, pulse
+   eyebrow, and the workflow-diagram draw-in. All reduced-motion safe.
+   ============================================================ */
+@layer utilities {
+  /* Pulsing dot inside the hero eyebrow pill */
+  .pulse-dot {
+    position: relative;
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    background: var(--accent);
+    box-shadow: 0 0 0 0 rgba(168, 224, 0, 0.5);
+    animation: pulse-ring 2.4s infinite;
+  }
+  @keyframes pulse-ring {
+    0% {
+      box-shadow: 0 0 0 0 rgba(168, 224, 0, 0.5);
+    }
+    70% {
+      box-shadow: 0 0 0 9px rgba(168, 224, 0, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(168, 224, 0, 0);
+    }
+  }
+
+  /* Soft brand blobs behind the hero */
+  .hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
+    filter: blur(8px);
+    animation: blob-float 11s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+  @keyframes blob-float {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(18px, -22px);
+    }
+  }
+
+  /* Floating "workflow · status" chips */
+  .float-chip {
+    animation: chip-float 6.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+  .float-chip:nth-child(2) {
+    animation-duration: 7.5s;
+    animation-delay: 0.4s;
+  }
+  .float-chip:nth-child(3) {
+    animation-duration: 6.8s;
+    animation-delay: 0.8s;
+  }
+  @keyframes chip-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+
+  /* Kinetic marquee: Map / Design / Automate / Run */
+  .marquee {
+    overflow: hidden;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 2.5rem;
+    width: max-content;
+    white-space: nowrap;
+    animation: marquee 30s linear infinite;
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Workflow diagram: line draws in, end node breathes with a spark ring */
+  .draw-path {
+    stroke-dasharray: 320;
+    stroke-dashoffset: 320;
+    animation: draw 1.6s cubic-bezier(0.2, 0.6, 0.2, 1) 0.2s forwards;
+  }
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  .node-spark {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: node-breathe 2.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+  @keyframes node-breathe {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.14);
+    }
+  }
+  .spark-ring {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: spark-ring 2.6s cubic-bezier(0.2, 0.6, 0.2, 1) infinite;
+  }
+  @keyframes spark-ring {
+    0% {
+      transform: scale(0.6);
+      opacity: 0.55;
+    }
+    70% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pulse-dot,
+    .hero-blob,
+    .float-chip,
+    .marquee-track,
+    .draw-path,
+    .node-spark,
+    .spark-ring {
+      animation: none !important;
+    }
+    .draw-path {
+      stroke-dashoffset: 0;
     }
   }
 }

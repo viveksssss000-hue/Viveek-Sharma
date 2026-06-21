@@ -25,14 +25,18 @@ const sectionIcons = [Lock, FileCheck, EyeOff, UserCheck, BadgeCheck];
 export default function SecurityPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-border bg-[linear-gradient(140deg,#121823,#1b232f)]">
+      <section className="relative overflow-hidden border-b border-border bg-background">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-28 -top-44 size-[32rem] rounded-full bg-[radial-gradient(circle,rgba(109,93,211,.16),transparent_64%)]"
+          className="grid-motif pointer-events-none absolute inset-0 [mask-image:radial-gradient(110%_90%_at_72%_30%,#000,transparent_70%)]"
+        />
+        <div
+          aria-hidden="true"
+          className="hero-blob -right-28 -top-44 size-[32rem] bg-[radial-gradient(circle,rgba(106,69,245,.14),transparent_64%)]"
         />
         <div className="container-content relative py-16 md:py-20">
           <div className="max-w-2xl">
-            <span className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-cyan">
+            <span className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-primary">
               Security &amp; Compliance
             </span>
             <h1 className="mt-4 text-4xl sm:text-5xl">{security.h1}</h1>
@@ -53,7 +57,7 @@ export default function SecurityPage() {
                   key={section.title}
                   className="surface-card surface-interactive flex flex-col gap-4 rounded-xl p-6 hover:border-border-strong sm:p-8"
                 >
-                  <span className="grid size-11 place-items-center rounded-lg bg-cyan/15 text-cyan ring-1 ring-inset ring-cyan/20">
+                  <span className="grid size-11 place-items-center rounded-lg bg-primary/10 text-primary ring-1 ring-inset ring-primary/20">
                     <Icon className="size-5" />
                   </span>
                   <h2 className="text-xl font-semibold text-foreground">
@@ -66,7 +70,7 @@ export default function SecurityPage() {
                     <ul className="space-y-2.5">
                       {section.bullets.map((bullet) => (
                         <li key={bullet} className="flex items-start gap-3">
-                          <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-accent/10 text-accent">
+                          <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-accent/20 text-accent-foreground">
                             <Check className="size-3" strokeWidth={3} />
                           </span>
                           <span className="text-sm text-foreground">

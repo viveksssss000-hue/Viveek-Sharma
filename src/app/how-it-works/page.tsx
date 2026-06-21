@@ -38,7 +38,7 @@ export default function HowItWorksPage() {
           <ul className="mt-6 space-y-4">
             {howItWorks.expectations.points.map((point) => (
               <li key={point} className="flex items-start gap-3">
-                <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-accent/10 text-accent">
+                <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-accent/20 text-accent-foreground">
                   <Check className="size-3.5" strokeWidth={3} />
                 </span>
                 <span className="text-base text-muted-foreground">{point}</span>

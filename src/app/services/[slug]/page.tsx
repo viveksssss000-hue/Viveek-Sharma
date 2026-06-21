@@ -83,13 +83,13 @@ export default async function ServiceDetailPage({
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-1.5 text-sm text-muted-foreground">
               <li>
-                <Link href="/" className="hover:text-accent">
+                <Link href="/" className="hover:text-primary">
                   Home
                 </Link>
               </li>
               <ChevronRight className="size-4" aria-hidden="true" />
               <li>
-                <Link href="/services" className="hover:text-accent">
+                <Link href="/services" className="hover:text-primary">
                   Services
                 </Link>
               </li>
@@ -134,7 +134,7 @@ export default async function ServiceDetailPage({
             <ul className="mt-4 space-y-3">
               {service.capabilities.map((cap) => (
                 <li key={cap} className="flex items-start gap-3">
-                  <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-accent/10 text-accent">
+                  <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-accent/20 text-accent-foreground">
                     <Check className="size-3.5" strokeWidth={3} />
                   </span>
                   <span className="text-base text-foreground">{cap}</span>
@@ -149,7 +149,7 @@ export default async function ServiceDetailPage({
       <section className="bg-surface border-y border-border section-y">
         <div className="reveal-stagger container-content grid gap-6 md:grid-cols-2">
           <div className="surface-card surface-interactive flex flex-col gap-3 rounded-xl p-7 hover:border-border-strong">
-            <span className="grid size-10 place-items-center rounded-lg bg-cyan/15 text-cyan ring-1 ring-inset ring-cyan/20">
+            <span className="grid size-10 place-items-center rounded-lg bg-primary/10 text-primary ring-1 ring-inset ring-primary/20">
               <Plug className="size-5" />
             </span>
             <h3 className="text-lg font-semibold text-foreground">
@@ -160,7 +160,7 @@ export default async function ServiceDetailPage({
             </p>
           </div>
           <div className="surface-card surface-interactive flex flex-col gap-3 rounded-xl p-7 hover:border-border-strong">
-            <span className="grid size-10 place-items-center rounded-lg bg-cyan/15 text-cyan ring-1 ring-inset ring-cyan/20">
+            <span className="grid size-10 place-items-center rounded-lg bg-primary/10 text-primary ring-1 ring-inset ring-primary/20">
               <ShieldCheck className="size-5" />
             </span>
             <h3 className="text-lg font-semibold text-foreground">
@@ -171,7 +171,7 @@ export default async function ServiceDetailPage({
             </p>
             <Link
               href="/security"
-              className="mt-1 inline-flex w-fit items-center gap-1 text-sm font-semibold text-accent hover:underline"
+              className="mt-1 inline-flex w-fit items-center gap-1 text-sm font-semibold text-primary hover:underline"
             >
               Read about our security
               <ArrowRight className="size-4" />

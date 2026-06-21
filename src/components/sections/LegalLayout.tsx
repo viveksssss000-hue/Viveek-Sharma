@@ -19,13 +19,13 @@ export function LegalLayout({ title, lastUpdated, children }: LegalLayoutProps) 
         </p>
 
         <div className="surface-card mt-6 flex items-start gap-3 rounded-lg p-4 text-sm text-muted-foreground">
-          <Info className="mt-0.5 size-4 shrink-0 text-cyan" />
+          <Info className="mt-0.5 size-4 shrink-0 text-primary" />
           <p>
             This page summarises how we handle your data in plain language. For
             our binding Data Processing Agreement, or any questions, email{" "}
             <a
               href={`mailto:${site.email}`}
-              className="text-cyan underline"
+              className="text-primary underline"
             >
               {site.email}
             </a>
@@ -33,7 +33,7 @@ export function LegalLayout({ title, lastUpdated, children }: LegalLayoutProps) 
           </p>
         </div>
 
-        <div className="legal-prose mt-10 flex flex-col gap-6 text-muted-foreground leading-relaxed [&_h2]:mt-4 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-foreground [&_a]:text-cyan [&_a]:underline [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-2">
+        <div className="legal-prose mt-10 flex flex-col gap-6 text-muted-foreground leading-relaxed [&_h2]:mt-4 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-foreground [&_a]:text-primary [&_a]:underline [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-2">
           {children}
         </div>
       </div>

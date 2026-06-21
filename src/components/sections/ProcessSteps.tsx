@@ -69,7 +69,7 @@ export function ProcessSteps({ condensed = false }: { condensed?: boolean }) {
           <div className="mt-8 flex justify-center">
             <Link
               href="/how-it-works"
-              className="inline-flex items-center gap-1 text-sm font-semibold text-accent hover:underline"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
             >
               See the full process
               <ArrowRight className="size-4" />

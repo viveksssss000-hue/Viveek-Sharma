@@ -14,7 +14,7 @@ export default function ThankYouDemoPage() {
   return (
     <section className="section-y">
       <div className="container-content max-w-2xl text-center">
-        <span className="mx-auto grid size-14 place-items-center rounded-full bg-accent/10 text-accent">
+        <span className="mx-auto grid size-14 place-items-center rounded-full bg-accent/20 text-accent-foreground">
           <CalendarCheck className="size-7" />
         </span>
         <h1 className="mt-6 text-4xl sm:text-5xl">You&apos;re booked.</h1>

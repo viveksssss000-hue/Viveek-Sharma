@@ -250,7 +250,7 @@ export function ContactForm({
           <Label htmlFor="consent" className="font-normal leading-snug">
             I agree to tryacowork processing my details to respond to my enquiry,
             per the{" "}
-            <Link href="/privacy" className="text-cyan underline">
+            <Link href="/privacy" className="text-primary underline">
               Privacy Policy
             </Link>
             . <span className="text-error">*</span>

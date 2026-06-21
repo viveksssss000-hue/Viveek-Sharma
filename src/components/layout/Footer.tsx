@@ -23,7 +23,7 @@ export function Footer() {
             </p>
             <a
               href={`mailto:${site.email}`}
-              className="mt-1 inline-block text-sm text-cyan hover:underline"
+              className="mt-1 inline-block text-sm text-primary hover:underline"
             >
               {site.email}
             </a>
@@ -41,7 +41,7 @@ export function Footer() {
                     <li key={`${col.heading}-${link.href}-${link.label}`}>
                       <Link
                         href={link.href}
-                        className="text-sm text-muted-foreground transition-colors hover:text-accent"
+                        className="text-sm text-muted-foreground transition-colors hover:text-primary"
                       >
                         {link.label}
                       </Link>
@@ -56,24 +56,24 @@ export function Footer() {
         {/* Utility row */}
         <div className="mt-12 flex flex-col gap-4 border-t border-border pt-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {year} {site.legalName} · DPA available on request
+            © {year} {site.legalName}
           </p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             {footer.utility.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="transition-colors hover:text-accent"
+                className="transition-colors hover:text-primary"
               >
                 {link.label}
               </Link>
             ))}
-            <CookieSettingsButton className="transition-colors hover:text-accent" />
+            <CookieSettingsButton className="transition-colors hover:text-primary" />
             <a
               href={site.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors hover:text-accent"
+              className="transition-colors hover:text-primary"
             >
               LinkedIn
             </a>

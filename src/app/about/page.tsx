@@ -21,7 +21,7 @@ export default function AboutPage() {
       <section className="border-b border-border bg-background">
         <div className="container-content py-12 md:py-16">
           <div className="max-w-3xl">
-            <span className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-cyan">
+            <span className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-primary">
               About tryacowork
             </span>
             <h1 className="mt-4 text-4xl sm:text-5xl">{about.h1}</h1>
@@ -44,7 +44,7 @@ export default function AboutPage() {
                   key={value.title}
                   className="surface-card surface-interactive flex flex-col gap-3 rounded-xl p-7 hover:border-border-strong"
                 >
-                  <span className="grid size-11 place-items-center rounded-lg bg-cyan/15 text-cyan ring-1 ring-inset ring-cyan/20">
+                  <span className="grid size-11 place-items-center rounded-lg bg-primary/10 text-primary ring-1 ring-inset ring-primary/20">
                     <Icon className="size-5" />
                   </span>
                   <h3 className="text-lg font-semibold text-foreground">
@@ -90,7 +90,7 @@ export default function AboutPage() {
                   >
                     <span
                       aria-hidden="true"
-                      className="grid size-12 shrink-0 place-items-center rounded-full bg-primary/15 font-mono text-sm font-semibold text-[#b8acff] ring-1 ring-inset ring-primary/25"
+                      className="grid size-12 shrink-0 place-items-center rounded-full bg-primary/10 font-mono text-sm font-semibold text-primary ring-1 ring-inset ring-primary/20"
                     >
                       {initials}
                     </span>
@@ -119,7 +119,7 @@ export default function AboutPage() {
           <ul className="mt-6 space-y-4">
             {about.whoWeServe.items.map((item) => (
               <li key={item} className="flex items-start gap-3">
-                <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-accent/10 text-accent">
+                <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-accent/20 text-accent-foreground">
                   <Check className="size-3.5" strokeWidth={3} />
                 </span>
                 <span className="text-base text-muted-foreground">{item}</span>

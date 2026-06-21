@@ -24,7 +24,7 @@ export default function BookDemoPage() {
       <div className="container-content">
         {/* Intro */}
         <div className="max-w-2xl">
-          <span className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-cyan">
+          <span className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-primary">
             Book a Demo
           </span>
           <h1 className="mt-4 text-4xl sm:text-5xl">{bookDemo.h1}</h1>
@@ -40,7 +40,7 @@ export default function BookDemoPage() {
               key={point}
               className="surface-card surface-interactive flex flex-col gap-3 rounded-xl p-6 hover:border-border-strong"
             >
-              <span className="grid size-9 place-items-center rounded-lg bg-cyan/15 font-mono text-sm font-semibold text-cyan ring-1 ring-inset ring-cyan/20">
+              <span className="grid size-9 place-items-center rounded-lg bg-primary/10 font-mono text-sm font-semibold text-primary ring-1 ring-inset ring-primary/20">
                 {i + 1}
               </span>
               <p className="text-sm text-muted-foreground leading-relaxed">
@@ -63,18 +63,18 @@ export default function BookDemoPage() {
                 key={b.label}
                 className="flex items-center gap-2.5 text-sm text-muted-foreground"
               >
-                <b.icon className="size-4 text-cyan" />
+                <b.icon className="size-4 text-primary" />
                 {b.label}
               </li>
             ))}
             <li className="flex items-center gap-2.5 text-sm font-medium text-foreground">
-              <Check className="size-4 text-cyan" strokeWidth={3} />
+              <Check className="size-4 text-primary" strokeWidth={3} />
               {bookDemo.reassurance}
             </li>
           </ul>
           <p className="shrink-0 text-sm text-muted-foreground">
             Prefer email?{" "}
-            <Link href="/contact" className="text-cyan hover:underline">
+            <Link href="/contact" className="text-primary hover:underline">
               Contact us
             </Link>
           </p>

@@ -6,39 +6,50 @@ import { home } from "@/lib/content";
 
 /** Live-workflow status rows for the hero visual - the brand's node chips. */
 const workflows = [
-  { name: "invoice-sync", status: "live", dot: "bg-accent" },
+  { name: "invoice-sync", status: "live", dot: "bg-cyan" },
   { name: "lead-router", status: "running", dot: "bg-primary" },
-  { name: "report-builder", status: "live", dot: "bg-cyan" },
+  { name: "report-builder", status: "done", dot: "bg-accent" },
 ];
+
+const marqueeItems = ["Map", "Design", "Automate", "Run"];
 
 export function Hero() {
   const { hero } = home;
+  // Emphasise the last word of the H1 in violet (e.g. "automated.").
+  const words = hero.h1.trim().split(" ");
+  const last = words.pop();
+  const lead = words.join(" ");
+
   return (
     <section className="relative overflow-hidden border-b border-border bg-background">
-      {/* Faint violet grid + halo - the Flowline cover motif */}
+      {/* Faint violet grid + soft brand blobs - the cover motif */}
       <div
         aria-hidden="true"
-        className="grid-motif pointer-events-none absolute inset-0 [mask-image:radial-gradient(110%_90%_at_70%_30%,#000_0%,transparent_72%)]"
+        className="grid-motif pointer-events-none absolute inset-0 [mask-image:radial-gradient(120%_85%_at_72%_28%,#000_0%,transparent_70%)]"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-44 -top-56 size-[47rem] rounded-full bg-[radial-gradient(circle,rgba(109,93,211,.14),rgba(43,168,160,.04)_45%,transparent_66%)] blur-[10px]"
+        className="hero-blob -right-32 -top-52 size-[36rem] bg-[radial-gradient(circle,rgba(106,69,245,.18),transparent_64%)]"
       />
+      <div
+        aria-hidden="true"
+        className="hero-blob -left-40 top-32 size-[28rem] bg-[radial-gradient(circle,rgba(15,184,172,.14),transparent_66%)]"
+      />
+
       <div className="container-content relative grid items-center gap-12 py-16 md:py-24 lg:grid-cols-2">
         <div className="flex flex-col gap-6">
-          <span className="inline-flex w-fit items-center gap-2.5 rounded-full border border-border-strong px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-subtle">
-            <span
-              aria-hidden="true"
-              className="size-1.5 animate-pulse rounded-full bg-accent"
-            />
-            tryacowork.com · ai workflow studio
+          <span className="inline-flex w-fit items-center gap-2.5 rounded-full border border-border-strong bg-surface px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground shadow-sm">
+            <span aria-hidden="true" className="pulse-dot" />
+            AI workflow studio for small teams
           </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl">{hero.h1}</h1>
+          <h1 className="text-4xl sm:text-5xl lg:text-[3.75rem] lg:leading-[1.02]">
+            {lead} <span className="text-primary">{last}</span>
+          </h1>
           <p className="max-w-xl text-lg text-muted-foreground leading-relaxed">
             {hero.sub}
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Button asChild size="lg">
+            <Button asChild size="lg" variant="spark">
               <Link href="/book-a-demo">
                 {hero.primaryCta}
                 <ArrowRight />
@@ -49,14 +60,14 @@ export function Hero() {
             </Button>
           </div>
           <p className="flex items-start gap-2 text-sm text-muted-foreground">
-            <ShieldCheck className="mt-0.5 size-4 shrink-0 text-cyan" />
+            <ShieldCheck className="mt-0.5 size-4 shrink-0 text-primary" />
             {hero.trustLine}
           </p>
         </div>
 
         {/* Abstract "workflows running" visual (no stock art) */}
         <div className="relative" aria-hidden="true">
-          <div className="rounded-xl border border-border-strong bg-surface p-5 shadow-2xl shadow-black/40">
+          <div className="surface-card rounded-2xl p-5">
             <div className="flex items-center justify-between border-b border-border pb-4">
               <div className="flex items-center gap-2.5">
                 {/* node-path mark */}
@@ -68,9 +79,9 @@ export function Hero() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
-                  <circle cx="16" cy="50" r="5.5" fill="#7C5CFF" />
-                  <circle cx="40" cy="30" r="5.5" fill="#1FE3D6" />
-                  <circle cx="62" cy="50" r="6" fill="#C9FF3D" />
+                  <circle cx="16" cy="50" r="5.5" fill="#6A45F5" />
+                  <circle cx="40" cy="30" r="5.5" fill="#0FB8AC" />
+                  <circle cx="62" cy="50" r="6" fill="#A8E000" />
                   <defs>
                     <linearGradient
                       id="hero_mark"
@@ -80,8 +91,8 @@ export function Hero() {
                       y2="40"
                       gradientUnits="userSpaceOnUse"
                     >
-                      <stop stopColor="#7C5CFF" />
-                      <stop offset="1" stopColor="#1FE3D6" />
+                      <stop stopColor="#6A45F5" />
+                      <stop offset="1" stopColor="#0FB8AC" />
                     </linearGradient>
                   </defs>
                 </svg>
@@ -97,7 +108,7 @@ export function Hero() {
               {workflows.map((row) => (
                 <li
                   key={row.name}
-                  className="flex items-center justify-between rounded-lg bg-elevated/70 px-4 py-3"
+                  className="flex items-center justify-between rounded-lg bg-elevated px-4 py-3"
                 >
                   <span className="flex items-center gap-2.5 font-mono text-sm text-muted-foreground">
                     <span
@@ -106,7 +117,7 @@ export function Hero() {
                     />
                     {row.name}
                   </span>
-                  <span className="font-mono text-xs uppercase tracking-wider text-cyan">
+                  <span className="font-mono text-xs uppercase tracking-wider text-primary">
                     {row.status}
                   </span>
                 </li>
@@ -122,6 +133,28 @@ export function Hero() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Kinetic marquee - Map / Design / Automate / Run */}
+      <div
+        aria-hidden="true"
+        className="marquee relative border-t border-border py-5"
+      >
+        <div className="marquee-track">
+          {Array.from({ length: 2 }).map((_, group) => (
+            <div key={group} className="flex items-center gap-10 pr-10">
+              {marqueeItems.map((item) => (
+                <span
+                  key={`${group}-${item}`}
+                  className="font-display text-3xl font-bold tracking-tight text-border-strong sm:text-5xl"
+                >
+                  {item}
+                  <span className="px-5 text-accent">·</span>
+                </span>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </section>

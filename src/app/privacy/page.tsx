@@ -13,7 +13,7 @@ export const metadata: Metadata = buildMetadata({
 
 export default function PrivacyPage() {
   return (
-    <LegalLayout title="Privacy Policy" lastUpdated="8 June 2026">
+    <LegalLayout title="Privacy Policy" lastUpdated="21 June 2026">
       <p>
         This Privacy Policy explains how {site.legalName} (&quot;{site.name}
         &quot;, &quot;we&quot;, &quot;us&quot;) handles personal data
@@ -33,7 +33,7 @@ export default function PrivacyPage() {
         </li>
         <li>
           <strong>Booking a demo:</strong> when you book through our scheduler,
-          your name, email and chosen time are processed by Google Calendar to
+          your name, email and chosen time are processed by Calendly to
           set up the meeting.
         </li>
         <li>
@@ -71,8 +71,10 @@ export default function PrivacyPage() {
       </p>
       <ul>
         <li>
-          <strong>Google</strong> - appointment scheduling (Google Calendar)
-          and, with consent, website analytics.
+          <strong>Calendly</strong> - scheduling and managing demo bookings.
+        </li>
+        <li>
+          <strong>Google</strong> - with consent, website analytics.
         </li>
         <li>
           <strong>Resend</strong> - sending and receiving enquiry emails.

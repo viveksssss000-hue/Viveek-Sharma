@@ -1,75 +1,90 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
-import Cal, { getCalApi } from "@calcom/embed-react";
 
 import { Button } from "@/components/ui/button";
 import { site } from "@/lib/content";
 
-const calLink = process.env.NEXT_PUBLIC_CAL_LINK;
-const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL;
-// Google Calendar appointment schedule - the live, default scheduler.
+// Calendly scheduling link. Bookings notify the Calendly account owner and the
+// invitee gets a calendar invite with a video link - no custom backend needed.
 const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL ?? site.bookingUrl;
+const CALENDLY_SCRIPT = "https://assets.calendly.com/assets/external/widget.js";
+
+declare global {
+  interface Window {
+    Calendly?: {
+      initInlineWidget: (opts: {
+        url: string;
+        parentElement: HTMLElement;
+      }) => void;
+    };
+  }
+}
 
 /**
- * Inline scheduler. Order of preference:
- *   1. Google Calendar appointment schedule (site.bookingUrl) - bookings go
- *      straight into the founder's calendar and notify hello@tryacowork.com.
- *   2. Cal.com (NEXT_PUBLIC_CAL_LINK)
- *   3. Calendly (NEXT_PUBLIC_CALENDLY_URL)
- * If none is set we never render a broken embed - we link to the contact page.
+ * Inline Calendly scheduler. We initialise the widget by hand (rather than
+ * relying on the script's auto-scan) so it re-renders correctly after a
+ * client-side navigation into this page, where the script is already cached.
+ * If no booking URL is configured we never render a broken embed - we link to
+ * the contact page instead.
  */
 export function DemoEmbed() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    if (bookingUrl || !calLink) return;
-    (async () => {
-      const cal = await getCalApi();
-      cal("ui", {
-        theme: "dark",
-        styles: { branding: { brandColor: "#6D5DD3" } },
-      });
-    })();
+    const el = containerRef.current;
+    if (!bookingUrl || !el) return;
+
+    const url = `${bookingUrl}${bookingUrl.includes("?") ? "&" : "?"}hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=6d5dd3`;
+
+    const init = () => {
+      if (window.Calendly && containerRef.current) {
+        containerRef.current.innerHTML = "";
+        window.Calendly.initInlineWidget({
+          url,
+          parentElement: containerRef.current,
+        });
+      }
+    };
+
+    if (window.Calendly) {
+      init();
+      return;
+    }
+
+    let script = document.querySelector<HTMLScriptElement>(
+      `script[src="${CALENDLY_SCRIPT}"]`
+    );
+    if (!script) {
+      script = document.createElement("script");
+      script.src = CALENDLY_SCRIPT;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    script.addEventListener("load", init);
+    return () => script?.removeEventListener("load", init);
   }, []);
 
-  if (bookingUrl) {
+  if (!bookingUrl) {
     return (
-      <iframe
-        title="Book a demo with tryacowork"
-        src={bookingUrl}
-        loading="lazy"
-        className="surface-card h-[680px] min-h-[600px] w-full rounded-xl"
-      />
-    );
-  }
-
-  if (calLink) {
-    return (
-      <div className="min-h-[640px] w-full overflow-hidden rounded-xl border border-border bg-surface">
-        <Cal calLink={calLink} style={{ width: "100%", height: "100%", minHeight: 640 }} />
+      <div className="flex min-h-[320px] flex-col items-center justify-center gap-4 rounded-xl border border-dashed border-border bg-surface p-8 text-center">
+        <p className="max-w-md text-muted-foreground">
+          Our scheduler isn&apos;t connected yet. In the meantime, send us a note
+          and we&apos;ll find a time that works.
+        </p>
+        <Button asChild>
+          <Link href="/contact">Contact us</Link>
+        </Button>
       </div>
     );
   }
 
-  if (calendlyUrl) {
-    return (
-      <iframe
-        title="Book a demo with tryacowork"
-        src={calendlyUrl}
-        className="min-h-[640px] w-full rounded-xl border border-border bg-surface"
-      />
-    );
-  }
-
   return (
-    <div className="flex min-h-[320px] flex-col items-center justify-center gap-4 rounded-xl border border-dashed border-border bg-surface p-8 text-center">
-      <p className="max-w-md text-muted-foreground">
-        Our scheduler isn&apos;t connected yet. In the meantime, send us a note
-        and we&apos;ll find a time that works.
-      </p>
-      <Button asChild>
-        <Link href="/contact">Contact us</Link>
-      </Button>
-    </div>
+    <div
+      ref={containerRef}
+      className="w-full overflow-hidden rounded-xl border border-border bg-white"
+      style={{ minHeight: 700 }}
+    />
   );
 }

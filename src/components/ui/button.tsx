@@ -9,17 +9,20 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // Primary CTA - lime spark ("Book a Demo"). Lime is the action.
+        // Primary CTA - violet fill (brand-kit .btn--primary).
         default:
-          "bg-accent text-accent-foreground shadow-[0_8px_24px_-12px_rgba(201,255,61,0.5)] hover:bg-accent-hover hover:-translate-y-0.5 hover:shadow-[0_14px_32px_-12px_rgba(201,255,61,0.65)] [&_svg]:group-hover:translate-x-0.5 hover:[&_svg]:translate-x-0.5",
+          "bg-primary text-primary-foreground shadow-sm hover:bg-[#5631e0] hover:-translate-y-0.5 hover:shadow-md [&_svg]:group-hover:translate-x-0.5 hover:[&_svg]:translate-x-0.5",
+        // Spark - the ONE key action on a screen (lime). Keep it scarce.
+        spark:
+          "bg-accent text-accent-foreground shadow-[0_8px_22px_-10px_rgba(168,224,0,0.5)] hover:brightness-105 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_-10px_rgba(168,224,0,0.6)] [&_svg]:group-hover:translate-x-0.5 hover:[&_svg]:translate-x-0.5",
         // Soft violet fill - brand-kit secondary button
-        navy: "bg-primary/15 border border-primary/40 text-[#cbc0ff] hover:bg-primary/25 hover:-translate-y-0.5",
+        navy: "bg-primary/10 border border-primary/20 text-[#4424b8] hover:bg-primary/20 hover:-translate-y-0.5",
         // Ghost outline - brand-kit tertiary button
         outline:
           "border border-border-strong bg-transparent text-foreground hover:bg-muted hover:border-border-strong",
         secondary: "bg-muted text-foreground hover:bg-muted/70",
         ghost: "text-foreground hover:bg-muted",
-        link: "text-cyan underline-offset-4 hover:underline",
+        link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
         default: "h-11 px-6 py-2",
