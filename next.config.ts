@@ -40,6 +40,18 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // "Book a Demo" CTAs all point at /book-a-demo; send them to the contact
+  // page instead. Temporary (307) so it's trivially reversible if the
+  // scheduler is brought back. The scheduler code stays in the repo.
+  async redirects() {
+    return [
+      {
+        source: "/book-a-demo",
+        destination: "/contact",
+        permanent: false,
+      },
+    ];
+  },
   async headers() {
     return [
       {
