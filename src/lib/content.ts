@@ -240,8 +240,19 @@ export const footer = {
 /* Drop SVGs in public/logos/ and add { name, src } entries here.        */
 /* ------------------------------------------------------------------ */
 
-export type ToolLogo = { name: string; src: string; href?: string };
-export const toolLogos: ToolLogo[] = [];
+export type ToolLogo = { name: string; src?: string; href?: string };
+// Confirmed integrations (owner-approved 2026-06-26). Rendered as monochrome
+// wordmarks; add `src: "/logos/<file>.svg"` to swap in an official brand logo.
+export const toolLogos: ToolLogo[] = [
+  { name: "Zapier" },
+  { name: "Make" },
+  { name: "HubSpot" },
+  { name: "Slack" },
+  { name: "Notion" },
+  { name: "Google Sheets" },
+  { name: "Gmail" },
+  { name: "Airtable" },
+];
 
 /* ------------------------------------------------------------------ */
 /* Metrics - placeholders only. Never invent figures.                  */

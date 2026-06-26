@@ -15,15 +15,21 @@ export function LogoBar() {
           <p className="text-sm font-medium text-muted-foreground">
             Works with the tools you already use
           </p>
-          <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-5">
+          <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
             {toolLogos.map((tool) => (
               <li key={tool.name}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={tool.src}
-                  alt={tool.name}
-                  className="h-7 w-auto opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0"
-                />
+                {tool.src ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={tool.src}
+                    alt={tool.name}
+                    className="h-7 w-auto opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0"
+                  />
+                ) : (
+                  <span className="text-lg font-semibold tracking-tight text-foreground/55 transition-colors hover:text-foreground">
+                    {tool.name}
+                  </span>
+                )}
               </li>
             ))}
           </ul>
