@@ -32,6 +32,22 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Founder story - rendered only once the client supplies copy */}
+      {about.founderStory.body ? (
+        <section className="border-b border-border bg-surface">
+          <div className="container-content py-12 md:py-16">
+            <div className="max-w-3xl">
+              <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">
+                {about.founderStory.heading}
+              </h2>
+              <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
+                {about.founderStory.body}
+              </p>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       {/* Values */}
       <section className="section-y">
         <div className="container-content">
@@ -88,12 +104,21 @@ export default function AboutPage() {
                     key={member.name}
                     className="surface-card surface-interactive flex items-center gap-4 rounded-xl p-6 hover:border-border-strong"
                   >
-                    <span
-                      aria-hidden="true"
-                      className="grid size-12 shrink-0 place-items-center rounded-full bg-primary/10 font-mono text-sm font-semibold text-primary ring-1 ring-inset ring-primary/20"
-                    >
-                      {initials}
-                    </span>
+                    {member.photo ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={member.photo}
+                        alt={member.name}
+                        className="size-12 shrink-0 rounded-full object-cover ring-1 ring-inset ring-primary/20"
+                      />
+                    ) : (
+                      <span
+                        aria-hidden="true"
+                        className="grid size-12 shrink-0 place-items-center rounded-full bg-primary/10 font-mono text-sm font-semibold text-primary ring-1 ring-inset ring-primary/20"
+                      >
+                        {initials}
+                      </span>
+                    )}
                     <div>
                       <p className="font-semibold text-foreground">
                         {member.name}

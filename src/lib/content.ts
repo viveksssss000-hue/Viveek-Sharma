@@ -180,6 +180,7 @@ export const services = [
 export type Service = (typeof services)[number];
 
 export const mainNav: NavLink[] = [
+  { label: "Pricing", href: "/pricing" },
   { label: "How It Works", href: "/how-it-works" },
   { label: "Results", href: "/results" },
   { label: "Security", href: "/security" },
@@ -202,6 +203,7 @@ export const footer = {
       links: [
         { label: "About", href: "/about" },
         { label: "How It Works", href: "/how-it-works" },
+        { label: "Pricing", href: "/pricing" },
         { label: "Results", href: "/results" },
       ] as NavLink[],
     },
@@ -564,6 +566,13 @@ export const about = {
       "Founders who want a five-person team to operate like a fifty-person one.",
     ],
   },
+  // Founder story - rendered only when `body` is non-empty.
+  // TODO(client): 1-2 sentences on why you started Acowork (the problem you saw,
+  // what made it worth solving).
+  founderStory: {
+    heading: "Why we built tryacowork",
+    body: "",
+  },
   team: [
     { name: "Naveen Sharma", role: "Co-Founder & Marketing Head" },
     { name: "Vivek Sharma", role: "Co-Founder & Tech Head" },
@@ -573,6 +582,8 @@ export const about = {
   ] as {
     name: string;
     role: string;
+    // TODO(client): drop square photos in public/team/ and set e.g. "/team/naveen.jpg".
+    photo?: string;
   }[],
 } as const;
 
@@ -773,4 +784,62 @@ export const contact = {
   intro:
     "Not quite ready to book a demo? Tell us about one task that eats your week and we'll get back to you - usually the same business day.",
   responseTime: "We typically reply within one business day.",
+} as const;
+
+/* ------------------------------------------------------------------ */
+/* Pricing - structure only, no public figures. Every project is        */
+/* scoped on a call. (Overrides the earlier "no pricing" brief rule.)   */
+/* ------------------------------------------------------------------ */
+
+export const pricing = {
+  meta: {
+    title: "Pricing | tryacowork",
+    description:
+      "How tryacowork is priced: start with a low-commitment Workflow Audit, move to a fixed-scope first build, then a simple monthly retainer. Every project is scoped on a call.",
+  },
+  h1: "Simple, scoped pricing",
+  intro:
+    "We scope every engagement to your workflows, so there's no one-size price tag. Here's the shape of how we work - and where most teams start.",
+  tiers: [
+    {
+      name: "Workflow Audit",
+      tagline: "Start here. Low commitment, high clarity.",
+      forWho: "Teams who feel busy but can't say which tasks to automate first.",
+      includes: [
+        "Time-mapping of your team's recurring work",
+        "Repetitive tasks ranked by hours saved",
+        "A prioritised automation roadmap",
+        "No obligation to build afterwards",
+      ],
+      cta: "Start with an audit",
+      featured: false,
+    },
+    {
+      name: "First Workflow Build",
+      tagline: "Your highest-priority automation, live.",
+      forWho: "Teams ready to automate their biggest time-sink.",
+      includes: [
+        "Design, build and testing against your real tools",
+        "Integration into your CRM, inbox and docs",
+        "Human-in-the-loop review on anything ambiguous",
+        "A walkthrough and handover - not a manual",
+      ],
+      cta: "Scope a build",
+      featured: true,
+    },
+    {
+      name: "Ongoing Management",
+      tagline: "We run it, watch it, and keep it sharp.",
+      forWho: "Teams who want workflows that keep improving as they grow.",
+      includes: [
+        "Monitoring for accuracy and drift",
+        "Fixes shipped before you notice",
+        "Expansion into the next time-sink",
+        "A simple monthly retainer - no surprise invoices",
+      ],
+      cta: "Talk retainers",
+      featured: false,
+    },
+  ],
+  note: "No public price list - because the right workflows depend on how your business runs. Book a call and we'll scope it honestly, starting with the audit.",
 } as const;

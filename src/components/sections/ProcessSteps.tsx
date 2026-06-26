@@ -71,6 +71,9 @@ export function ProcessSteps({ condensed = false }: { condensed?: boolean }) {
             ))}
           </ol>
         </div>
+        <p className="reveal mt-6 text-center text-sm font-medium text-muted-foreground">
+          {processStepsCopy.timeline}
+        </p>
         {condensed ? (
           <div className="mt-8 flex justify-center">
             <Link
