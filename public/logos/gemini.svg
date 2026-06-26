@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="62" height="62" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="gemgrad" x1="8" y1="14" x2="92" y2="86" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4285F4"/><stop offset="0.5" stop-color="#9B72CB"/><stop offset="1" stop-color="#D96570"/>
+    </linearGradient>
+  </defs>
+  <path d="M50 4C54 28 72 46 96 50C72 54 54 72 50 96C46 72 28 54 4 50C28 46 46 28 50 4Z" fill="url(#gemgrad)"/>
+</svg>

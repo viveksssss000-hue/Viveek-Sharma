@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { LineChart } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, LineChart } from "lucide-react";
 
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { StatBar } from "@/components/sections/StatBar";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { CTASection } from "@/components/sections/CTASection";
+import { Button } from "@/components/ui/button";
 import { buildMetadata } from "@/lib/seo";
 import { results } from "@/lib/content";
 
@@ -83,6 +85,15 @@ export default function ResultsPage() {
                 quantified results will appear here - we never publish figures or
                 logos we can&apos;t stand behind.
               </p>
+              <p className="mt-4 text-sm text-muted-foreground">
+                In the meantime, see how these automations are wired together:
+              </p>
+              <Button asChild variant="outline" className="mt-4">
+                <Link href="/examples">
+                  Explore example workflows
+                  <ArrowRight />
+                </Link>
+              </Button>
             </div>
           ) : (
             <div className="grid gap-6 md:grid-cols-2">

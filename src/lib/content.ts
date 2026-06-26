@@ -182,6 +182,7 @@ export type Service = (typeof services)[number];
 export const mainNav: NavLink[] = [
   { label: "Pricing", href: "/pricing" },
   { label: "How It Works", href: "/how-it-works" },
+  { label: "Examples", href: "/examples" },
   { label: "Results", href: "/results" },
   { label: "Security", href: "/security" },
   { label: "About", href: "/about" },
@@ -214,6 +215,7 @@ export const footer = {
     {
       heading: "Resources",
       links: [
+        { label: "Example Workflows", href: "/examples" },
         { label: "Security & Compliance", href: "/security" },
         { label: "Blog", href: "/blog" },
         { label: "FAQ", href: "/#faq" },
@@ -240,19 +242,50 @@ export const footer = {
 /* Drop SVGs in public/logos/ and add { name, src } entries here.        */
 /* ------------------------------------------------------------------ */
 
-export type ToolLogo = { name: string; src?: string; href?: string };
-// Confirmed integrations (owner-approved 2026-06-26). Rendered as monochrome
-// wordmarks; add `src: "/logos/<file>.svg"` to swap in an official brand logo.
+export type ToolLogo = {
+  name: string;
+  src?: string;
+  href?: string;
+  category?: string;
+};
+// Confirmed integrations (owner-approved, expanded from the official logo sheet
+// 2026-06-26). Grouped by `category` for the trust bar. Add `src:
+// "/logos/<file>.svg"` to swap in an official brand logo.
 export const toolLogos: ToolLogo[] = [
-  { name: "Zapier", src: "/logos/zapier.svg" },
-  { name: "Make", src: "/logos/make.svg" },
-  { name: "HubSpot", src: "/logos/hubspot.svg" },
-  { name: "Slack", src: "/logos/slack.svg" },
-  { name: "Notion", src: "/logos/notion.svg" },
-  { name: "Google Sheets", src: "/logos/google-sheets.svg" },
-  { name: "Gmail", src: "/logos/gmail.svg" },
-  { name: "Airtable", src: "/logos/airtable.svg" },
+  // Automation & workspace
+  { name: "Zapier", src: "/logos/zapier.svg", category: "Automation & workspace" },
+  { name: "Make", src: "/logos/make.svg", category: "Automation & workspace" },
+  { name: "HubSpot", src: "/logos/hubspot.svg", category: "Automation & workspace" },
+  { name: "Slack", src: "/logos/slack.svg", category: "Automation & workspace" },
+  { name: "Notion", src: "/logos/notion.svg", category: "Automation & workspace" },
+  { name: "Google Sheets", src: "/logos/google-sheets.svg", category: "Automation & workspace" },
+  { name: "Gmail", src: "/logos/gmail.svg", category: "Automation & workspace" },
+  { name: "Airtable", src: "/logos/airtable.svg", category: "Automation & workspace" },
+  { name: "n8n", src: "/logos/n8n.svg", category: "Automation & workspace" },
+  // AI
+  { name: "Claude", src: "/logos/claude.svg", category: "AI" },
+  { name: "OpenAI", src: "/logos/openai.svg", category: "AI" },
+  { name: "Gemini", src: "/logos/gemini.svg", category: "AI" },
+  // Accounting & finance
+  { name: "QuickBooks", src: "/logos/quickbooks.svg", category: "Accounting & finance" },
+  { name: "Xero", src: "/logos/xero.svg", category: "Accounting & finance" },
+  { name: "Zoho", src: "/logos/zoho.svg", category: "Accounting & finance" },
+  { name: "Stripe", src: "/logos/stripe.svg", category: "Accounting & finance" },
+  // CRM, comms & productivity
+  { name: "Salesforce", src: "/logos/salesforce.svg", category: "CRM, comms & productivity" },
+  { name: "Microsoft Teams", src: "/logos/microsoft-teams.svg", category: "CRM, comms & productivity" },
+  { name: "Zoom", src: "/logos/zoom.svg", category: "CRM, comms & productivity" },
+  { name: "Google Drive", src: "/logos/google-drive.svg", category: "CRM, comms & productivity" },
+  { name: "Dropbox", src: "/logos/dropbox.svg", category: "CRM, comms & productivity" },
+  { name: "Trello", src: "/logos/trello.svg", category: "CRM, comms & productivity" },
+  { name: "Asana", src: "/logos/asana.svg", category: "CRM, comms & productivity" },
+  { name: "Calendly", src: "/logos/calendly.svg", category: "CRM, comms & productivity" },
 ];
+
+/** Look up an integration logo's file path by display name (used by the
+ *  example-workflow blueprints to render the tools in each step). */
+export const toolLogoSrc = (name: string): string | undefined =>
+  toolLogos.find((t) => t.name === name)?.src;
 
 /* ------------------------------------------------------------------ */
 /* Metrics - placeholders only. Never invent figures.                  */
@@ -716,6 +749,224 @@ export const results = {
     quote?: string;
   }[],
 } as const;
+
+/* ------------------------------------------------------------------ */
+/* Example workflows - illustrative blueprints                          */
+/* ------------------------------------------------------------------ */
+
+/*
+ * These are ILLUSTRATIVE example workflows, not measured results from named
+ * clients. The figures are representative of the kind of outcome these
+ * patterns produce, and are clearly labelled as illustrative in the UI. Real,
+ * named, permissioned client outcomes live on /results (results.caseStudies)
+ * and are never mixed in here. When a client agrees to be named with real
+ * telemetry, promote that workflow to a true case study on /results.
+ */
+
+export type WorkflowStep = {
+  phase: string;
+  tools: string[]; // tool names that resolve via toolLogoSrc()
+  title: string;
+  detail: string;
+  accent?: boolean; // highlight the AI-reasoning step
+};
+
+export type WorkflowStat = { value: string; label: string; accent?: boolean };
+
+export type WorkflowSaving = {
+  task: string;
+  tools: string[];
+  manualHours: number;
+  autoHours: number;
+};
+
+export type WorkflowBranch = {
+  label: string;
+  share: string;
+  tools: string[];
+  action: string;
+  tone: "hot" | "warm" | "cold";
+};
+
+export type ExampleWorkflow = {
+  slug: string;
+  scenario: string;
+  title: string;
+  summary: string;
+  kind: "pipeline" | "savings" | "branching";
+  steps?: WorkflowStep[];
+  stats?: WorkflowStat[];
+  savings?: WorkflowSaving[];
+  savingsSummary?: string;
+  reclaimed?: string;
+  branches?: WorkflowBranch[];
+  branchNote?: string;
+};
+
+export const exampleWorkflowsContent = {
+  meta: {
+    title: "Example Workflows | tryacowork",
+    description:
+      "See how AI workflows are wired together - from inbox to invoice, support triage to lead qualification. Illustrative blueprints of the automations we build.",
+  },
+  h1: "What an AI workflow actually looks like",
+  intro:
+    "These are illustrative blueprints of the kind of automations we build - the trigger, the AI reasoning, and every system that updates on its own. The figures are representative examples, not client metrics; your audit pins down the real numbers for your tools and your team.",
+  note: "Illustrative example - figures are representative, not client-specific. Your real numbers come from your workflow audit.",
+};
+
+export const exampleWorkflows: ExampleWorkflow[] = [
+  {
+    slug: "inbox-to-invoice",
+    scenario: "Sales & operations",
+    title: "Inbox to invoice, automated",
+    summary:
+      "An AI agent triages every inbound lead end to end - reading the email, deciding what to do, and updating four systems before a human opens their laptop.",
+    kind: "pipeline",
+    steps: [
+      {
+        phase: "Trigger",
+        tools: ["Gmail"],
+        title: "New lead lands",
+        detail: "An email or form submission hits the shared inbox.",
+      },
+      {
+        phase: "Orchestrate",
+        tools: ["Zapier", "Make", "n8n"],
+        title: "Workflow fires",
+        detail: "Zapier, Make or n8n catches the event and routes it.",
+      },
+      {
+        phase: "AI reasoning",
+        tools: ["Claude"],
+        title: "Reads & decides",
+        detail: "Classifies intent, scores the lead, drafts the reply.",
+        accent: true,
+      },
+      {
+        phase: "Act - 4 systems update",
+        tools: ["HubSpot", "Slack", "Google Sheets", "QuickBooks"],
+        title: "Systems sync",
+        detail:
+          "HubSpot deal created, rep pinged in Slack, row logged to Sheets, and a draft invoice raised in QuickBooks.",
+      },
+    ],
+    stats: [
+      { value: "11s", label: "avg lead-to-CRM" },
+      { value: "94%", label: "leads auto-qualified, no human", accent: true },
+      { value: "3.5h", label: "saved per rep, daily" },
+      { value: "4", label: "systems synced per lead" },
+    ],
+  },
+  {
+    slug: "support-on-autopilot",
+    scenario: "Customer support",
+    title: "Support tickets, auto-resolved",
+    summary:
+      "An agent reads every inbound ticket, answers the routine majority, and escalates the rest with full context - so the team only touches what actually needs a human.",
+    kind: "pipeline",
+    steps: [
+      {
+        phase: "Trigger",
+        tools: ["Slack", "Gmail"],
+        title: "Ticket arrives",
+        detail: "A message lands in Slack or the support inbox.",
+      },
+      {
+        phase: "AI reasoning",
+        tools: ["Claude"],
+        title: "Reads & answers",
+        detail:
+          "Resolves routine questions instantly; escalates the rest with full context.",
+        accent: true,
+      },
+      {
+        phase: "Act",
+        tools: ["Notion", "HubSpot"],
+        title: "Logs & updates",
+        detail:
+          "Reply sent, conversation logged to Notion, ticket updated in HubSpot.",
+      },
+    ],
+    stats: [
+      { value: "-72%", label: "first-response time", accent: true },
+      { value: "88%", label: "tickets auto-resolved" },
+      { value: "3.2×", label: "team capacity" },
+      { value: "264h", label: "saved per 8 weeks" },
+    ],
+  },
+  {
+    slug: "where-the-week-goes",
+    scenario: "Audit snapshot",
+    title: "Where the week goes",
+    summary:
+      "The same five recurring jobs, before and after we automated them - manual hours against what's left once the workflow runs.",
+    kind: "savings",
+    savings: [
+      { task: "Lead intake", tools: ["Gmail"], manualHours: 9.0, autoHours: 0.7 },
+      { task: "Invoicing", tools: ["QuickBooks"], manualHours: 7.0, autoHours: 0.5 },
+      { task: "Reporting", tools: ["Google Sheets"], manualHours: 6.0, autoHours: 0.4 },
+      { task: "Support triage", tools: ["Slack"], manualHours: 8.0, autoHours: 1.2 },
+      { task: "Scheduling", tools: ["Calendly"], manualHours: 4.0, autoHours: 0.3 },
+    ],
+    savingsSummary: "34h manual → 3.1h automated, every week",
+    reclaimed: "31h",
+  },
+  {
+    slug: "qualifying-agent",
+    scenario: "Lead qualification",
+    title: "Anatomy of a qualifying agent",
+    summary:
+      "One workflow reads every new lead, enriches it, scores intent, and routes it down the right path - hot, warm or cold - without anyone lifting a finger.",
+    kind: "branching",
+    steps: [
+      {
+        phase: "Trigger",
+        tools: ["Gmail"],
+        title: "New lead",
+        detail: "email · form · DM",
+      },
+      {
+        phase: "Enrich",
+        tools: ["Notion"],
+        title: "Lookup",
+        detail: "dedupe · add context",
+      },
+      {
+        phase: "AI reasoning",
+        tools: ["Claude"],
+        title: "Qualify & score",
+        detail: "intent · fit · urgency → route",
+        accent: true,
+      },
+    ],
+    branches: [
+      {
+        label: "Hot lead - act now",
+        share: "22%",
+        tools: ["HubSpot", "Slack"],
+        action: "Create deal & ping the rep",
+        tone: "hot",
+      },
+      {
+        label: "Warm - nurture",
+        share: "48%",
+        tools: ["Calendly"],
+        action: "Send a booking link",
+        tone: "warm",
+      },
+      {
+        label: "Cold - log",
+        share: "30%",
+        tools: ["Google Sheets"],
+        action: "Log & drip later",
+        tone: "cold",
+      },
+    ],
+    branchNote:
+      "Every branch runs in under 15 seconds - no lead waits for a human to triage it.",
+  },
+];
 
 /* ------------------------------------------------------------------ */
 /* Global FAQ - Home + reused                                          */

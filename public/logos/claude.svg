@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="66" height="66" viewBox="0 0 100 100">
+  <g fill="#D97757">
+    <path id="clbl" d="M50 50C46.5 34 46.5 20 50 11C53.5 20 53.5 34 50 50Z"/>
+    <use href="#clbl" transform="rotate(30 50 50)"/>
+    <use href="#clbl" transform="rotate(60 50 50)"/>
+    <use href="#clbl" transform="rotate(90 50 50)"/>
+    <use href="#clbl" transform="rotate(120 50 50)"/>
+    <use href="#clbl" transform="rotate(150 50 50)"/>
+    <use href="#clbl" transform="rotate(180 50 50)"/>
+    <use href="#clbl" transform="rotate(210 50 50)"/>
+    <use href="#clbl" transform="rotate(240 50 50)"/>
+    <use href="#clbl" transform="rotate(270 50 50)"/>
+    <use href="#clbl" transform="rotate(300 50 50)"/>
+    <use href="#clbl" transform="rotate(330 50 50)"/>
+  </g>
+</svg>
