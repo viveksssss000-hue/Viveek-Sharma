@@ -209,14 +209,14 @@ export const footer = {
     },
     {
       heading: "Services",
-      links: servicesNav,
+      links: [...servicesNav, { label: "Industries", href: "/industries" }],
     },
     {
       heading: "Resources",
       links: [
         { label: "Security & Compliance", href: "/security" },
+        { label: "Blog", href: "/blog" },
         { label: "FAQ", href: "/#faq" },
-        // Blog is Phase 2 - link added once content exists.
       ] as NavLink[],
     },
     {
@@ -843,3 +843,282 @@ export const pricing = {
   ],
   note: "No public price list - because the right workflows depend on how your business runs. Book a call and we'll scope it honestly, starting with the audit.",
 } as const;
+
+/* ------------------------------------------------------------------ */
+/* Industry / segment landing pages (SEO). Templated route mirrors      */
+/* services/[slug]. Copy is honest capability description - no invented  */
+/* metrics. TODO(client): verify specifics per industry.                 */
+/* ------------------------------------------------------------------ */
+
+export type Industry = {
+  slug: string;
+  navLabel: string;
+  title: string;
+  outcome: string;
+  intro: string;
+  painPoints: string[];
+  exampleAutomations: { title: string; body: string }[];
+  integrationsNote: string;
+  securityNote: string;
+  metaTitle: string;
+  metaDesc: string;
+  faqs: { q: string; a: string }[];
+};
+
+const sharedIndustrySecurity =
+  "Access is least-privilege and revocable, your data is encrypted in transit and at rest, and we never train AI models on it.";
+
+export const industriesSection = {
+  eyebrow: "Industries",
+  heading: "Built for how your industry actually works",
+  description:
+    "The same end-to-end approach, tuned to the tools and tasks that slow your sector down. Don't see yours? We automate any repeatable process.",
+} as const;
+
+export const industries: Industry[] = [
+  {
+    slug: "marketing-agencies",
+    navLabel: "Marketing & Agencies",
+    title: "AI Workflow Automation for Marketing Teams & Agencies",
+    outcome: "Campaigns, content and reporting that run themselves.",
+    intro:
+      "Marketing teams lose hours to reporting, repurposing and chasing leads between tools. We rebuild that busywork as workflows that run in the background - so your team spends its time on the work clients actually pay for.",
+    painPoints: [
+      "Weekly performance reports eat an afternoon of copy-paste.",
+      "Content gets repurposed by hand, channel by channel.",
+      "Leads from campaigns sit unrouted and go cold.",
+      "No one's watching brand mentions until it's too late.",
+    ],
+    exampleAutomations: [
+      {
+        title: "Auto-built performance reports",
+        body: "Pull numbers from your ad, email and analytics tools into one scheduled report - no more Monday-morning assembly.",
+      },
+      {
+        title: "Content repurposing",
+        body: "Turn one asset into channel-ready variants and queue them for approval.",
+      },
+      {
+        title: "Lead capture to CRM",
+        body: "Campaign leads enriched, scored and routed the moment they land.",
+      },
+      {
+        title: "Brand-mention monitoring",
+        body: "Mentions flagged across the web, with the ones that need a human routed to one.",
+      },
+    ],
+    integrationsNote:
+      "We connect to the marketing stack you already run - your CRM, email platform, ad accounts, analytics and social schedulers.",
+    securityNote: sharedIndustrySecurity,
+    metaTitle: "AI Workflow Automation for Marketing Teams & Agencies | tryacowork",
+    metaDesc:
+      "Automate reporting, content repurposing, lead routing and brand monitoring. AI workflows built, run and managed end-to-end for marketing teams and agencies.",
+    faqs: [
+      {
+        q: "Will this work with our existing marketing tools?",
+        a: "Yes. Workflows are built around your current CRM, email platform, ad accounts and analytics - not a new system to learn.",
+      },
+      {
+        q: "Can it handle approvals before anything goes out?",
+        a: "Yes. Anything client-facing can be queued for a human to approve before it publishes.",
+      },
+    ],
+  },
+  {
+    slug: "ecommerce",
+    navLabel: "E-Commerce",
+    title: "AI Automation for E-Commerce Operations",
+    outcome: "Orders, inventory and support that keep pace with your store.",
+    intro:
+      "E-commerce runs on a dozen tools that don't talk to each other. We connect them with workflows that handle the repetitive operations work - so growth doesn't mean more manual hours.",
+    painPoints: [
+      "Low-stock alerts get noticed too late.",
+      "Order and fulfilment data is re-keyed between tools.",
+      "Support tickets pile up at peak.",
+      "Returns and refunds eat staff time.",
+    ],
+    exampleAutomations: [
+      {
+        title: "Inventory & restock alerts",
+        body: "Low-stock and reorder triggers synced to Slack and your purchasing flow before you sell out.",
+      },
+      {
+        title: "Order & fulfilment sync",
+        body: "Order data flows between your store, 3PL and finance tools without manual entry.",
+      },
+      {
+        title: "Support triage",
+        body: "Tickets sorted by urgency with first-draft responses ready for a human.",
+      },
+      {
+        title: "Returns handling",
+        body: "Returns logged, refunds queued and customers updated automatically.",
+      },
+    ],
+    integrationsNote:
+      "We connect to your store platform, 3PL, helpdesk, spreadsheets and finance tools.",
+    securityNote: sharedIndustrySecurity,
+    metaTitle: "AI Automation for E-Commerce Operations | tryacowork",
+    metaDesc:
+      "Automate inventory alerts, order sync, support triage and returns. AI workflows built, run and managed end-to-end for e-commerce operations.",
+    faqs: [
+      {
+        q: "Does it work with our store platform?",
+        a: "Yes - we build around the platform, 3PL and tools you already use, connecting them rather than replacing them.",
+      },
+      {
+        q: "Can it scale for peak season?",
+        a: "That's the point. Workflows run continuously, so peak volume doesn't mean proportionally more manual hours.",
+      },
+    ],
+  },
+  {
+    slug: "recruiting-hr",
+    navLabel: "Recruiting & HR",
+    title: "AI Automation for Recruiting & HR Teams",
+    outcome: "Hiring and onboarding without the back-and-forth.",
+    intro:
+      "Recruiting and HR run on repetitive coordination - screening, scheduling, chasing documents. We automate the admin so your team can focus on people, not process.",
+    painPoints: [
+      "Screening CVs by hand against the same criteria.",
+      "Onboarding checklists chased over email.",
+      "Interview scheduling ping-pong.",
+      "Documentation tracked in a fragile spreadsheet.",
+    ],
+    exampleAutomations: [
+      {
+        title: "Candidate screening",
+        body: "Applications sorted against your criteria, with strong matches surfaced and the rest acknowledged.",
+      },
+      {
+        title: "Onboarding sequences",
+        body: "New-hire steps triggered automatically, with nudges until each one is done.",
+      },
+      {
+        title: "Interview scheduling",
+        body: "Availability matched and invites sent without the email tennis.",
+      },
+      {
+        title: "Document tracking",
+        body: "Outstanding paperwork chased and logged until it's complete.",
+      },
+    ],
+    integrationsNote:
+      "We connect to your ATS, HRIS, calendar, email and document storage.",
+    securityNote: sharedIndustrySecurity,
+    metaTitle: "AI Automation for Recruiting & HR Teams | tryacowork",
+    metaDesc:
+      "Automate candidate screening, onboarding sequences, interview scheduling and document tracking. AI workflows built and run end-to-end for HR teams.",
+    faqs: [
+      {
+        q: "Is candidate data handled securely?",
+        a: "Yes. Access is least-privilege and revocable, data is encrypted, and we never train AI models on it.",
+      },
+      {
+        q: "Does a human stay in the loop on hiring decisions?",
+        a: "Always. Workflows handle coordination and surfacing - people make the calls.",
+      },
+    ],
+  },
+  {
+    slug: "operations-logistics",
+    navLabel: "Operations & Logistics",
+    title: "AI Automation for Operations & Logistics Teams",
+    outcome: "The busywork between your tools, handled.",
+    intro:
+      "Operations is where work falls between systems. We build workflows that move data, raise the right actions and flag exceptions - so nothing stalls waiting on a person.",
+    painPoints: [
+      "Data re-keyed between systems all day.",
+      "Status updates chased across teams.",
+      "Purchase orders raised by hand.",
+      "Delays found too late to fix.",
+    ],
+    exampleAutomations: [
+      {
+        title: "Cross-tool data sync",
+        body: "Records kept in step across your systems without manual entry.",
+      },
+      {
+        title: "Status updates",
+        body: "Progress synced and the right people notified automatically.",
+      },
+      {
+        title: "Purchase-order triggers",
+        body: "POs raised from the right signals and queued for approval.",
+      },
+      {
+        title: "Exception flagging",
+        body: "Delays and anomalies surfaced before they become problems.",
+      },
+    ],
+    integrationsNote:
+      "We connect to your ERP, spreadsheets, inbox, project tools and supplier systems.",
+    securityNote: sharedIndustrySecurity,
+    metaTitle: "AI Automation for Operations & Logistics Teams | tryacowork",
+    metaDesc:
+      "Automate cross-tool data sync, status updates, purchase orders and exception flagging. AI workflows built and run end-to-end for ops and logistics.",
+    faqs: [
+      {
+        q: "We use a lot of different tools - is that a problem?",
+        a: "No. Connecting tools that don't talk to each other is exactly what these workflows do.",
+      },
+      {
+        q: "What happens when something looks wrong?",
+        a: "Anything unusual is flagged to a person instead of pushed through - a human in the loop on the edge cases.",
+      },
+    ],
+  },
+  {
+    slug: "customer-support",
+    navLabel: "Customer Support",
+    title: "AI Automation for Customer Support Teams",
+    outcome: "Faster first responses, fewer dropped tickets.",
+    intro:
+      "Support teams drown in triage and repetitive answers. We build workflows that sort, draft and route - so your team spends its time on the conversations that need a human.",
+    painPoints: [
+      "Tickets triaged by hand, one by one.",
+      "Slow first responses at busy times.",
+      "The same answers typed again and again.",
+      "Escalations missed in the queue.",
+    ],
+    exampleAutomations: [
+      {
+        title: "Ticket triage",
+        body: "Inbound tickets categorised and prioritised the moment they arrive.",
+      },
+      {
+        title: "Draft first responses",
+        body: "A suggested reply ready for an agent to review and send.",
+      },
+      {
+        title: "Routing by urgency",
+        body: "The right ticket to the right person, automatically.",
+      },
+      {
+        title: "Escalation",
+        body: "Edge cases escalated to a human before they slip.",
+      },
+    ],
+    integrationsNote:
+      "We connect to your helpdesk, inbox, CRM and knowledge base.",
+    securityNote: sharedIndustrySecurity,
+    metaTitle: "AI Automation for Customer Support Teams | tryacowork",
+    metaDesc:
+      "Automate ticket triage, draft responses, urgency routing and escalation. AI workflows built and run end-to-end for customer support teams.",
+    faqs: [
+      {
+        q: "Will customers get auto-replies with no human?",
+        a: "No. Drafts are prepared for an agent to review - the human stays in control of what's sent.",
+      },
+      {
+        q: "Can it work alongside our current helpdesk?",
+        a: "Yes. We build around your existing helpdesk rather than replacing it.",
+      },
+    ],
+  },
+];
+
+export const industriesNav: NavLink[] = industries.map((i) => ({
+  label: i.navLabel,
+  href: `/industries/${i.slug}`,
+}));

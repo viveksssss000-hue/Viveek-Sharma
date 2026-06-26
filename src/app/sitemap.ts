@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
-import { site, services } from "@/lib/content";
+import { site, services, industries } from "@/lib/content";
+import { posts } from "@/lib/posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -9,10 +10,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     "/about",
     "/services",
+    "/industries",
     "/how-it-works",
     "/pricing",
     "/results",
     "/security",
+    "/blog",
     "/book-a-demo",
     "/contact",
     "/privacy",
@@ -34,5 +37,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticEntries, ...serviceEntries];
+  const industryEntries: MetadataRoute.Sitemap = industries.map((i) => ({
+    url: `${site.url}/industries/${i.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  const postEntries: MetadataRoute.Sitemap = posts.map((p) => ({
+    url: `${site.url}/blog/${p.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  return [
+    ...staticEntries,
+    ...serviceEntries,
+    ...industryEntries,
+    ...postEntries,
+  ];
 }

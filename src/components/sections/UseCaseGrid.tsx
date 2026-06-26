@@ -1,4 +1,6 @@
+import Link from "next/link";
 import {
+  ArrowRight,
   Target,
   Megaphone,
   Truck,
@@ -10,6 +12,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { useCases, useCasesSection } from "@/lib/content";
 
@@ -58,6 +61,14 @@ export function UseCaseGrid() {
               </div>
             );
           })}
+        </div>
+        <div className="mt-10 flex justify-center">
+          <Button asChild variant="outline">
+            <Link href="/industries">
+              See use cases by industry
+              <ArrowRight />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>
