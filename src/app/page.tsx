@@ -39,12 +39,31 @@ export default function HomePage() {
           />
           <div className="mt-12 flex flex-col gap-10">
             <StatBar />
+            {/* Numeric callouts lifted from the named testimonials below. */}
+            <div className="reveal-stagger grid gap-4 sm:grid-cols-3">
+              {home.results.callouts.map((c) => (
+                <div
+                  key={c.value}
+                  className="surface-card rounded-xl p-6 text-center"
+                >
+                  <p className="text-3xl font-bold tracking-tight text-foreground">
+                    {c.value}
+                  </p>
+                  <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
+                    {c.label}
+                  </p>
+                </div>
+              ))}
+            </div>
             <Testimonials />
+            <p className="text-center text-xs text-muted-foreground">
+              {home.results.verifiedNote}
+            </p>
           </div>
         </div>
       </section>
 
-      <FAQ faqs={globalFaqs} />
+      <FAQ faqs={globalFaqs} defaultValue="item-0" />
       <CTASection />
     </>
   );

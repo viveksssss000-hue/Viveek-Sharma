@@ -13,12 +13,15 @@ type FAQProps = {
   faqs: readonly FaqItem[];
   id?: string;
   className?: string;
+  /** Accordion item value to open by default, e.g. "item-0" for the first. */
+  defaultValue?: string;
 };
 
 export function FAQ({
   title = "Frequently asked questions",
   faqs,
   id = "faq",
+  defaultValue,
 }: FAQProps) {
   if (faqs.length === 0) return null;
 
@@ -36,7 +39,12 @@ export function FAQ({
     <section id={id} className="section-y scroll-mt-20">
       <div className="container-content max-w-3xl">
         <SectionHeading title={title} />
-        <Accordion type="single" collapsible className="mt-8 w-full">
+        <Accordion
+          type="single"
+          collapsible
+          defaultValue={defaultValue}
+          className="mt-8 w-full"
+        >
           {faqs.map((f, i) => (
             <AccordionItem key={f.q} value={`item-${i}`}>
               <AccordionTrigger>{f.q}</AccordionTrigger>

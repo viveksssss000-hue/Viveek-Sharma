@@ -8,6 +8,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { home, services } from "@/lib/content";
 
@@ -42,8 +43,9 @@ export function ServicesOverview() {
                 <h3 className="text-xl font-semibold text-foreground">
                   {s.title}
                 </h3>
+                <p className="font-medium text-foreground">{s.outcome}</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  {s.outcome}
+                  {s.cardDescription}
                 </p>
                 <span className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-primary">
                   Learn more
@@ -52,6 +54,22 @@ export function ServicesOverview() {
               </Link>
             );
           })}
+        </div>
+
+        <div className="reveal mt-10 flex flex-col items-center gap-4 rounded-xl border border-border bg-background p-6 text-center sm:flex-row sm:justify-between sm:text-left">
+          <div>
+            <h3 className="text-lg font-semibold text-foreground">
+              {home.servicesOverview.helpCallout.heading}
+            </h3>
+            <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
+              {home.servicesOverview.helpCallout.body}
+            </p>
+          </div>
+          <Button asChild variant="navy" className="shrink-0">
+            <Link href="/contact?topic=which-service">
+              {home.servicesOverview.helpCallout.ctaLabel}
+            </Link>
+          </Button>
         </div>
       </div>
     </section>

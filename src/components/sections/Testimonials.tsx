@@ -1,4 +1,4 @@
-import { Quote, BadgeCheck } from "lucide-react";
+import { Quote, BadgeCheck, Star } from "lucide-react";
 
 import { testimonials } from "@/lib/content";
 
@@ -38,6 +38,15 @@ export function Testimonials() {
                 <BadgeCheck className="size-3.5" aria-hidden="true" />
                 Verified client
               </span>
+            </div>
+            <div
+              className="flex gap-0.5 text-accent"
+              role="img"
+              aria-label="Rated 5 out of 5"
+            >
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="size-4 fill-current" aria-hidden="true" />
+              ))}
             </div>
             <blockquote className="text-base text-foreground leading-relaxed">
               &quot;{t.quote}&quot;

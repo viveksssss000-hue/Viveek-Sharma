@@ -1,9 +1,10 @@
-import { Clock, RefreshCcw, CalendarClock, ShieldAlert } from "lucide-react";
+import { Clock, RefreshCcw, CalendarClock, ShieldAlert, Users } from "lucide-react";
 
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { home } from "@/lib/content";
 
-const icons = [Clock, RefreshCcw, CalendarClock, ShieldAlert];
+// Order matches home.problems.cards: objection card first, team card last.
+const icons = [ShieldAlert, Clock, RefreshCcw, CalendarClock, Users];
 
 export function ProblemGrid() {
   const { problems } = home;
@@ -11,7 +12,7 @@ export function ProblemGrid() {
     <section className="section-y">
       <div className="container-content">
         <SectionHeading title={problems.heading} />
-        <div className="reveal-stagger mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="reveal-stagger mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {problems.cards.map((card, i) => {
             const Icon = icons[i] ?? Clock;
             return (

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { SectionHeading } from "@/components/sections/SectionHeading";
-import { processSteps } from "@/lib/content";
+import { processSteps, processStepsCopy } from "@/lib/content";
 
 /**
  * Per-step node colour, matching the brand kit's process timeline:
@@ -31,9 +31,7 @@ export function ProcessSteps({ condensed = false }: { condensed?: boolean }) {
           eyebrow="How it works"
           title="A clear, low-risk path to automation"
           description={
-            condensed
-              ? "Four steps from first conversation to numbers you can trust."
-              : undefined
+            condensed ? processStepsCopy.condensedSubtitle : undefined
           }
         />
         <div className="surface-card reveal mt-12 overflow-hidden rounded-xl">
@@ -61,6 +59,14 @@ export function ProcessSteps({ condensed = false }: { condensed?: boolean }) {
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {step.body}
                 </p>
+                {step.output ? (
+                  <p className="mt-1 border-t border-border pt-3 text-sm leading-relaxed text-foreground">
+                    <span className="font-mono text-xs uppercase tracking-[0.1em] text-primary">
+                      Output:{" "}
+                    </span>
+                    {step.output}
+                  </p>
+                ) : null}
               </li>
             ))}
           </ol>

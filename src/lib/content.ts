@@ -40,6 +40,8 @@ export const services = [
     title: "Workflow Audit",
     navLabel: "Workflow Audit",
     outcome: "Find out where your hours actually go.",
+    cardDescription:
+      "We map your team's week and pinpoint the 3-5 tasks eating the most time for the least value. Most owners are surprised by what surfaces.",
     problem:
       "Most teams can't say which tasks eat the most time - they just feel busy. Until you map the work, you can't automate the right things first.",
     capabilities: [
@@ -75,6 +77,8 @@ export const services = [
     title: "Custom AI Workflows",
     navLabel: "Custom AI Workflows",
     outcome: "Your work, rebuilt to run on its own.",
+    cardDescription:
+      "We rebuild the task that drains your week as an agentic workflow that reads, decides and acts - against your real tools, not a demo.",
     problem:
       "Off-the-shelf tools automate someone else's process, not yours. The tasks that really drain your week are specific to how your business runs.",
     capabilities: [
@@ -110,6 +114,8 @@ export const services = [
     title: "Integration & Handoff",
     navLabel: "Integration & Handoff",
     outcome: "Connected to your tools. Handed over working.",
+    cardDescription:
+      "We wire the workflow into your CRM, inbox and docs, test it end-to-end, and hand it over working - with a walkthrough, not a manual.",
     problem:
       "An automation that lives outside your tools just creates another tab to check. It has to plug into where the work already happens.",
     capabilities: [
@@ -141,6 +147,8 @@ export const services = [
     title: "Continuous Optimization",
     navLabel: "Continuous Optimization",
     outcome: "It keeps getting sharper while you grow.",
+    cardDescription:
+      "We watch every live workflow, fix drift before you notice, and expand into the next time-sink as you grow - on a simple retainer.",
     problem:
       "Automations drift: tools update, formats change, edge cases appear. Unwatched, a workflow quietly degrades - and you stop trusting it.",
     capabilities: [
@@ -225,6 +233,15 @@ export const footer = {
 } as const;
 
 /* ------------------------------------------------------------------ */
+/* Tool logos (trust bar) - only show logos the client confirms are     */
+/* permitted to display. Empty array => LogoBar keeps the text fallback. */
+/* Drop SVGs in public/logos/ and add { name, src } entries here.        */
+/* ------------------------------------------------------------------ */
+
+export type ToolLogo = { name: string; src: string; href?: string };
+export const toolLogos: ToolLogo[] = [];
+
+/* ------------------------------------------------------------------ */
 /* Metrics - placeholders only. Never invent figures.                  */
 /* Format follows the brand kit's proof section.                       */
 /* ------------------------------------------------------------------ */
@@ -288,19 +305,31 @@ export const home = {
   meta: {
     title: "AI Workflow Automation for Small Teams | tryacowork",
     description:
-      "tryacowork turns complex, manual work into AI workflows that run on their own - designed, built and run end-to-end for small teams. Book a demo.",
+      "tryacowork builds and runs AI workflows for small teams - across marketing, operations, HR, sales, support and finance. Designed, built and run end-to-end. Book a demo.",
   },
   hero: {
     h1: "Workflows, automated.",
     sub: "We take the time-consuming, high-manpower tasks that slow your business down - and rebuild them as AI workflows that run continuously in the background. No jargon, no months-long projects. Just your work, automated.",
     primaryCta: "Book a Demo",
     secondaryCta: "See how it works",
+    timeToValue: "First workflow live in under 4 weeks.",
     trustLine:
       "Built for small teams · Your data encrypted & never used to train AI models.",
+    // Live-workflow status rows for the hero visual - the brand's node chips.
+    // Deliberately industry-diverse so non-finance visitors see themselves.
+    workflowChips: [
+      { name: "support-triage", status: "live", dot: "bg-cyan" },
+      { name: "onboarding-flow", status: "running", dot: "bg-primary" },
+      { name: "inventory-alert", status: "done", dot: "bg-accent" },
+    ],
   },
   problems: {
     heading: "Manual work is quietly costing you",
     cards: [
+      {
+        title: "AI that feels too complex",
+        body: "You know AI could help - but it feels too technical, too risky, or not built for a team your size.",
+      },
       {
         title: "Hours lost to busywork",
         body: "Re-keying data, copying between tools, chasing follow-ups - the same task, every day, by hand.",
@@ -314,15 +343,20 @@ export const home = {
         body: "Manual repetition breeds mistakes, and mistakes cost more time than the task did.",
       },
       {
-        title: "AI that feels too complex",
-        body: "You know AI could help - but it feels too technical, too risky, or not built for a team your size.",
+        title: "Built a team for the work, not the admin",
+        body: "You hired people for judgement and growth - not copy-paste, chasing and data entry. The admin keeps stealing the work that matters.",
       },
     ],
   },
   servicesOverview: {
     heading: "Designed, built and run - end to end",
     description:
-      "We don't hand you software and walk away. Every engagement moves through the same arc: find the time-sink, automate it, and keep it sharp. From bookkeeping and invoices to lead routing and reporting.",
+      "We don't hand you software and walk away. Every engagement moves through the same arc: find the time-sink, automate it, and keep it sharp. From inbox triage and lead routing to onboarding, reporting, and beyond.",
+    helpCallout: {
+      heading: "Not sure which one you need?",
+      body: "Most teams start with a Workflow Audit. Tell us what slows you down and we'll point you to the right starting place - no commitment.",
+      ctaLabel: "Which service is right for me?",
+    },
   },
   security: {
     heading: "Built for people who'd rather not gamble",
@@ -330,9 +364,18 @@ export const home = {
     cta: "Read about our security",
   },
   results: {
-    heading: "The numbers that matter to a busy owner",
+    heading: "What clients get back",
     description:
-      "Real, named results land here as our clients go live. We never publish numbers we can't stand behind.",
+      "Real outcomes from named clients - pulled straight from the stories below. We never publish numbers we can't stand behind.",
+    // Numeric callouts lifted verbatim from the named testimonials below, so
+    // every figure traces to a real, attributable quote (never fabricated).
+    callouts: [
+      { value: "4 days faster", label: "month-end close — Northbridge Bookkeeping" },
+      { value: "2 duplicate bills", label: "caught in the first 30 days — Verla Supply Co." },
+      { value: "2× follow-ups", label: "same team, no extra headcount — Klarvin Studio" },
+    ],
+    verifiedNote:
+      "“Verified client” means a real, named customer who gave us written permission to publish their words.",
   },
 } as const;
 
@@ -345,23 +388,34 @@ export const processSteps = [
     number: "01",
     title: "Map",
     body: "We sit with your team and trace where the hours and friction really live.",
+    output: "A prioritised list of your top automation opportunities, ranked by time saved.",
   },
   {
     number: "02",
     title: "Design",
     body: 'We blueprint the AI workflow that replaces it - and agree on what "done" looks like.',
+    output: "A workflow blueprint you approve before we build a single thing.",
   },
   {
     number: "03",
     title: "Automate",
     body: "We build, connect and test it against your real tools until it runs cleanly.",
+    output: "A tested workflow running live in your actual tools.",
   },
   {
     number: "04",
     title: "Run & refine",
     body: "It goes live and runs continuously. We watch, tune and expand it over time.",
+    output: "Monthly performance check-ins, proactive fixes, and room to expand.",
   },
 ] as const;
+
+/** Subtitle for the condensed (homepage) process section - industry-neutral. */
+export const processStepsCopy = {
+  condensedSubtitle:
+    "Four steps from first conversation to your work running on autopilot.",
+  timeline: "Most clients go from first call to a live workflow in 3–4 weeks.",
+} as const;
 
 export const howItWorks = {
   meta: {

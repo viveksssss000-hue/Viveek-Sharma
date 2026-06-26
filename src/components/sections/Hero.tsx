@@ -1,15 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, ShieldCheck } from "lucide-react";
+import { ArrowRight, ShieldCheck, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { home } from "@/lib/content";
-
-/** Live-workflow status rows for the hero visual - the brand's node chips. */
-const workflows = [
-  { name: "invoice-sync", status: "live", dot: "bg-cyan" },
-  { name: "lead-router", status: "running", dot: "bg-primary" },
-  { name: "report-builder", status: "done", dot: "bg-accent" },
-];
 
 const marqueeItems = ["Map", "Design", "Automate", "Run"];
 
@@ -55,10 +48,14 @@ export function Hero() {
                 <ArrowRight />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="ghost">
+            <Button asChild size="lg" variant="outline">
               <Link href="/how-it-works">{hero.secondaryCta}</Link>
             </Button>
           </div>
+          <p className="inline-flex w-fit items-center gap-2 rounded-full bg-accent/15 px-3 py-1.5 text-sm font-medium text-foreground ring-1 ring-inset ring-accent/30">
+            <Zap className="size-4 text-[#5a7a00]" aria-hidden="true" />
+            {hero.timeToValue}
+          </p>
           <p className="flex items-start gap-2 text-sm text-muted-foreground">
             <ShieldCheck className="mt-0.5 size-4 shrink-0 text-primary" />
             {hero.trustLine}
@@ -105,7 +102,7 @@ export function Hero() {
               </span>
             </div>
             <ul className="mt-4 space-y-3">
-              {workflows.map((row) => (
+              {hero.workflowChips.map((row) => (
                 <li
                   key={row.name}
                   className="flex items-center justify-between rounded-lg bg-elevated px-4 py-3"
