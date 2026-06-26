@@ -23,7 +23,8 @@ export function LogoBar() {
                   <img
                     src={tool.src}
                     alt={tool.name}
-                    className="h-7 w-auto opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0"
+                    title={tool.name}
+                    className="h-8 w-auto opacity-90 transition hover:opacity-100 hover:-translate-y-0.5"
                   />
                 ) : (
                   <span className="text-lg font-semibold tracking-tight text-foreground/55 transition-colors hover:text-foreground">

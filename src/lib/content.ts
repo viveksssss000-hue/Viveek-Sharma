@@ -244,14 +244,14 @@ export type ToolLogo = { name: string; src?: string; href?: string };
 // Confirmed integrations (owner-approved 2026-06-26). Rendered as monochrome
 // wordmarks; add `src: "/logos/<file>.svg"` to swap in an official brand logo.
 export const toolLogos: ToolLogo[] = [
-  { name: "Zapier" },
-  { name: "Make" },
-  { name: "HubSpot" },
-  { name: "Slack" },
-  { name: "Notion" },
-  { name: "Google Sheets" },
-  { name: "Gmail" },
-  { name: "Airtable" },
+  { name: "Zapier", src: "/logos/zapier.svg" },
+  { name: "Make", src: "/logos/make.svg" },
+  { name: "HubSpot", src: "/logos/hubspot.svg" },
+  { name: "Slack", src: "/logos/slack.svg" },
+  { name: "Notion", src: "/logos/notion.svg" },
+  { name: "Google Sheets", src: "/logos/google-sheets.svg" },
+  { name: "Gmail", src: "/logos/gmail.svg" },
+  { name: "Airtable", src: "/logos/airtable.svg" },
 ];
 
 /* ------------------------------------------------------------------ */
