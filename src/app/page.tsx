@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 
 import { Hero } from "@/components/sections/Hero";
+import { IndustryTicker } from "@/components/sections/IndustryTicker";
 import { LogoBar } from "@/components/sections/LogoBar";
 import { ProblemGrid } from "@/components/sections/ProblemGrid";
 import { ServicesOverview } from "@/components/sections/ServicesOverview";
+import { WorkflowDiagram } from "@/components/sections/WorkflowDiagram";
+import { UseCaseGrid } from "@/components/sections/UseCaseGrid";
+import { WhoItsFor } from "@/components/sections/WhoItsFor";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { SecurityBlock } from "@/components/sections/SecurityBlock";
 import { StatBar } from "@/components/sections/StatBar";
@@ -24,9 +28,13 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <IndustryTicker />
       <LogoBar />
       <ProblemGrid />
       <ServicesOverview />
+      <WorkflowDiagram />
+      <UseCaseGrid />
+      <WhoItsFor />
       <ProcessSteps condensed />
       <SecurityBlock />
 

@@ -380,6 +380,100 @@ export const home = {
 } as const;
 
 /* ------------------------------------------------------------------ */
+/* Use-case / industry grid - shows breadth beyond finance.            */
+/* `icon` maps to a lucide icon in UseCaseGrid; `href` optional (added  */
+/* once the matching /industries page exists).                         */
+/* ------------------------------------------------------------------ */
+
+export const useCasesSection = {
+  eyebrow: "Use cases",
+  heading: "We automate work across every corner of your business",
+  description:
+    "Not just the books. If a task is repeatable and eats your team's time, it can run on its own - whatever industry you're in.",
+} as const;
+
+export type UseCase = {
+  title: string;
+  body: string;
+  icon: string;
+  href?: string;
+};
+
+export const useCases: UseCase[] = [
+  {
+    icon: "sales",
+    title: "Sales & CRM",
+    body: "Auto-qualify leads, route them to the right person, and update your CRM without manual entry. Never let a lead go cold again.",
+  },
+  {
+    icon: "marketing",
+    title: "Marketing & Content",
+    body: "Schedule campaigns, repurpose content across channels, monitor brand mentions, and generate weekly performance reports.",
+  },
+  {
+    icon: "operations",
+    title: "Operations & Logistics",
+    body: "Sync inventory alerts, automate supplier comms, trigger purchase orders, and flag delivery delays before they cause problems.",
+  },
+  {
+    icon: "hr",
+    title: "HR & Hiring",
+    body: "Screen candidates, send onboarding sequences, track documentation, and schedule interviews without the back-and-forth.",
+  },
+  {
+    icon: "finance",
+    title: "Finance & Reporting",
+    body: "Reconcile transactions, capture invoices, generate monthly reports, and flag anomalies before month-end.",
+  },
+  {
+    icon: "support",
+    title: "Customer Support",
+    body: "Triage inbound tickets, route by urgency, draft first responses, and escalate edge cases to a human.",
+  },
+  {
+    icon: "projects",
+    title: "Project & Team Ops",
+    body: "Trigger task creation from emails, sync status updates across tools, and send automated client progress updates.",
+  },
+  {
+    icon: "custom",
+    title: "Custom / Any Process",
+    body: "If it's repeatable and it takes your team's time, we can automate it. Tell us what it is.",
+  },
+];
+
+/* Auto-scrolling industry ticker under the hero. */
+export const industriesTicker: string[] = [
+  "Marketing teams",
+  "Law firms",
+  "Ops leads",
+  "HR managers",
+  "E-commerce stores",
+  "Agencies",
+  "Consultancies",
+  "SaaS companies",
+  "Logistics",
+  "Recruiting",
+  "Customer support",
+  "Finance teams",
+];
+
+/* Illustrated 5-step workflow diagram (homepage). */
+export const workflowDiagram = {
+  eyebrow: "What automation looks like",
+  heading: "One workflow, working while you don't",
+  caption:
+    "Every workflow we build follows the same shape - triggered, understood, decided, done - with a human on anything it's unsure about.",
+  steps: [
+    { label: "Trigger", detail: "A new email, form or record lands." },
+    { label: "Read", detail: "It extracts the details that matter." },
+    { label: "Decide", detail: "It applies your rules - and asks if unsure." },
+    { label: "Act", detail: "It updates your CRM, docs and tools." },
+    { label: "Log", detail: "Everything is recorded and confirmed." },
+  ],
+} as const;
+
+/* ------------------------------------------------------------------ */
 /* How It Works - Map → Design → Automate → Run & refine               */
 /* ------------------------------------------------------------------ */
 
