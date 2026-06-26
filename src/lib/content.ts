@@ -146,11 +146,11 @@ export const services = [
     slug: "continuous-optimization",
     title: "Continuous Optimization",
     navLabel: "Continuous Optimization",
-    outcome: "It keeps getting sharper while you grow.",
+    outcome: "We never hand it back - it keeps getting sharper as you grow.",
     cardDescription:
       "We watch every live workflow, fix drift before you notice, and expand into the next time-sink as you grow - on a simple retainer.",
     problem:
-      "Automations drift: tools update, formats change, edge cases appear. Unwatched, a workflow quietly degrades - and you stop trusting it.",
+      "Automations drift: tools update, formats change, edge cases appear. Unwatched, a workflow quietly degrades - and you stop trusting it. Most agencies hand you the workflow and leave you to maintain it. We don't - we run it.",
     capabilities: [
       "Every workflow monitored for accuracy and drift",
       "Fixes shipped before you notice the problem",
@@ -322,7 +322,7 @@ export const home = {
   },
   hero: {
     h1: "Workflows, automated.",
-    sub: "We take the time-consuming, high-manpower tasks that slow your business down - and rebuild them as AI workflows that run continuously in the background. No jargon, no months-long projects. Just your work, automated.",
+    sub: "We design, build and run the AI workflows that take the busywork off your team - then we keep running them for good. No handover, no maintenance burden on you. Just your work, handled.",
     primaryCta: "Book a Demo",
     secondaryCta: "See how it works",
     timeToValue: "First workflow live in under 4 weeks.",
@@ -364,7 +364,7 @@ export const home = {
   servicesOverview: {
     heading: "Designed, built and run - end to end",
     description:
-      "We don't hand you software and walk away. Every engagement moves through the same arc: find the time-sink, automate it, and keep it sharp. From inbox triage and lead routing to onboarding, reporting, and beyond.",
+      "We don't hand you software and walk away. We find the time-sink, automate it, and then keep running it for you - watching, fixing and expanding it as you grow. From inbox triage and lead routing to onboarding, reporting, and beyond.",
     helpCallout: {
       heading: "Not sure which one you need?",
       body: "Most teams start with a Workflow Audit. Tell us what slows you down and we'll point you to the right starting place - no commitment.",
@@ -582,7 +582,7 @@ export const about = {
   // what made it worth solving).
   founderStory: {
     heading: "Why we built tryacowork",
-    body: "",
+    body: "We started tryacowork after watching small teams burn their best hours on work software should have handled - re-keying data, chasing approvals, rebuilding the same report every week. The tools to automate it existed, but they were built for engineers, not for a five-person team trying to grow. So we built a studio that does it for you: we design the workflow, build it, and keep running it - so the technology stays our problem, and the growth stays yours.",
   },
   team: [
     { name: "Naveen Sharma", role: "Co-Founder & Marketing Head" },

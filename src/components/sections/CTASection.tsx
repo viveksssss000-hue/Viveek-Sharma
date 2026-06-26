@@ -14,7 +14,7 @@ type CTASectionProps = {
 /** Reusable final CTA band - Flowline contact-card style. Foot of most pages. */
 export function CTASection({
   title = "Let's automate something real.",
-  description = "Start with one task. Book a 30-minute demo and we'll show you the automated version of it - and the hours it gives back.",
+  description = "Start with one task. Book a 30-minute demo and we'll show you the automated version - the hours it gives back, and how we keep it running so you never have to.",
   reassurance = "30-minute call · No obligation · No credit card",
   className,
 }: CTASectionProps) {
