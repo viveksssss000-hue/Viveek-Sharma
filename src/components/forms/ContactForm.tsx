@@ -33,6 +33,11 @@ import { site } from "@/lib/content";
 
 const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
+// Web3Forms access key. This key is PUBLIC by design (it only allows sending to
+// the address registered with it - hello@tryacowork.com), so it is safe to keep
+// in client code. Submissions are emailed straight to that inbox.
+const WEB3FORMS_ACCESS_KEY = "36d49236-a30c-4596-9dc7-ffeec040294c";
+
 // After a successful submit the Calendly booking popup opens on the page.
 const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL ?? site.bookingUrl;
 const CAL_SCRIPT = "https://assets.calendly.com/assets/external/widget.js";
@@ -116,24 +121,47 @@ export function ContactForm({
   });
 
   const onSubmit = async (values: ContactInput) => {
+    // Honeypot - silently drop bots (show success so they don't retry).
+    if (values.company_website) {
+      setSubmitted(true);
+      openBooking();
+      return;
+    }
     try {
-      const res = await fetch("/api/contact", {
+      // Send the enquiry to hello@tryacowork.com via Web3Forms (no server/secret
+      // needed). `email` is used by Web3Forms as the reply-to so we can reply
+      // straight to the enquirer.
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, turnstileToken: token }),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `New enquiry: ${values.name}${
+            values.company ? ` - ${values.company}` : ""
+          }`,
+          from_name: "tryacowork website",
+          name: values.name,
+          email: values.workEmail,
+          company: values.company || "-",
+          role: values.role || "-",
+          company_size: values.companySize || "-",
+          country: values.country || "-",
+          interested_in: values.interest || "-",
+          message: values.message,
+        }),
       });
-      if (!res.ok) {
-        const data = await res.json().catch(() => null);
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data?.success) {
         toast.error(
-          data?.error === "captcha"
-            ? "Spam check failed - please try again."
-            : "Something went wrong. Please try again or email us directly."
+          "Something went wrong. Please try again or email us directly."
         );
         return;
       }
       trackEvent("contact_submit");
-      // Two things on success: the team gets the email (server-side), and the
-      // Calendly booking window opens right here on the page.
+      // On success the booking (Calendly) window opens right here on the page.
       setSubmitted(true);
       openBooking();
     } catch {
