@@ -3,7 +3,8 @@ import type { NextConfig } from "next";
 /**
  * Content-Security-Policy allowing the third parties this site uses:
  * Google Calendar (scheduler), Cal.com / Calendly (fallback schedulers),
- * Google Tag Manager / Analytics, Cloudflare Turnstile, and HubSpot Forms.
+ * Google Tag Manager / Analytics, Cloudflare Turnstile, HubSpot Forms, and
+ * Web3Forms (contact-form delivery).
  *
  * Note: 'unsafe-inline' is permitted for scripts/styles because GA, the consent
  * banner, the Cal embed and JSON-LD inject inline. A nonce-based policy is the
@@ -15,7 +16,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline' https://assets.calendly.com",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  "connect-src 'self' https://*.cal.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://challenges.cloudflare.com https://api.hsforms.com https://forms.hscollectedforms.net",
+  "connect-src 'self' https://*.cal.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://challenges.cloudflare.com https://api.hsforms.com https://forms.hscollectedforms.net https://api.web3forms.com",
   "frame-src https://*.cal.com https://challenges.cloudflare.com https://calendly.com https://calendar.google.com",
   "frame-ancestors 'none'",
   "base-uri 'self'",
