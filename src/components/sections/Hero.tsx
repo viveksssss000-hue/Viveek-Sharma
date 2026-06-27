@@ -3,6 +3,7 @@ import { ArrowRight, ShieldCheck, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { WordRotator } from "@/components/ui/WordRotator";
+import { CountUp } from "@/components/ui/CountUp";
 import { home } from "@/lib/content";
 
 const automations = [
@@ -160,7 +161,7 @@ export function Hero() {
             <div className="mt-4 rounded-lg border border-dashed border-border-strong p-4">
               <div className="mb-2 flex items-center justify-between font-mono text-xs text-muted-foreground">
                 <span>tasks run without human touch</span>
-                <span className="font-medium text-foreground">92%</span>
+                <CountUp value="92%" className="font-medium text-foreground" />
               </div>
               <div className="h-2 w-full overflow-hidden rounded-full bg-elevated">
                 <div className="h-full w-[92%] rounded-full bg-gradient-to-r from-primary via-cyan to-accent" />

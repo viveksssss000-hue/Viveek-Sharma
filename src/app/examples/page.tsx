@@ -126,7 +126,7 @@ function SavingsChart({
         </ul>
         {reclaimed ? (
           <div className="flex items-center gap-2 rounded-full bg-[#0b0b12] px-4 py-1.5 text-white">
-            <span className="text-lg font-bold text-accent">{reclaimed}</span>
+            <CountUp value={reclaimed} className="text-lg font-bold text-accent" />
             <span className="text-xs text-white/70">reclaimed / week</span>
           </div>
         ) : null}
@@ -154,9 +154,10 @@ function SavingsChart({
                     className="h-3.5 rounded-sm bg-border-strong"
                     style={{ width: `${(row.manualHours / max) * 100}%` }}
                   />
-                  <span className="text-xs text-muted-foreground">
-                    {row.manualHours.toFixed(1)}h
-                  </span>
+                  <CountUp
+                    value={`${row.manualHours.toFixed(1)}h`}
+                    className="text-xs text-muted-foreground"
+                  />
                 </div>
                 <div className="flex items-center gap-2">
                   <span
@@ -165,14 +166,16 @@ function SavingsChart({
                       width: `${Math.max((row.autoHours / max) * 100, 1.5)}%`,
                     }}
                   />
-                  <span className="text-xs font-semibold text-foreground">
-                    {row.autoHours.toFixed(1)}h
-                  </span>
+                  <CountUp
+                    value={`${row.autoHours.toFixed(1)}h`}
+                    className="text-xs font-semibold text-foreground"
+                  />
                 </div>
               </div>
-              <span className="font-mono text-sm font-medium text-cyan sm:w-16 sm:text-right">
-                -{delta}h
-              </span>
+              <CountUp
+                value={`-${delta}h`}
+                className="font-mono text-sm font-medium text-cyan sm:w-16 sm:text-right"
+              />
             </div>
           );
         })}
