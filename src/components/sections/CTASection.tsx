@@ -35,6 +35,7 @@ export function CTASection({
             aria-hidden="true"
             className="pointer-events-none absolute -right-28 -top-44 size-[32rem] rounded-full bg-[radial-gradient(circle,rgba(106,69,245,.3),transparent_64%)]"
           />
+          <div aria-hidden="true" className="aurora opacity-70" />
           <div className="relative mx-auto flex max-w-2xl flex-col items-center gap-5">
             <h2 className="text-3xl text-white sm:text-4xl">
               {lead} <span className="text-accent">{last}</span>

@@ -216,7 +216,7 @@
       box-shadow 0.32s ease, border-color 0.32s ease;
   }
   .surface-interactive:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
     box-shadow: var(--shadow-card-hover);
     border-color: #c8b8fc; /* violet-200 */
   }
@@ -228,7 +228,7 @@
   */
   .js-reveal .reveal {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(28px);
     transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 0.61, 0.21, 1);
     will-change: opacity, transform;
   }
@@ -239,7 +239,7 @@
   /* Optional stagger for grids of cards */
   .js-reveal .reveal-stagger > * {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(28px);
     transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 0.61, 0.21, 1);
   }
   .js-reveal .reveal-stagger.reveal-in > * {
@@ -426,6 +426,206 @@
     }
     .draw-path {
       stroke-dashoffset: 0;
+    }
+  }
+}
+
+/* ============================================================
+   Extra motion (bold set). Count-up is JS (CountUp.tsx); the rest
+   is CSS: hero entrance, primary-CTA sheen, and the "living
+   pipeline" node-glow + connector-pulse. Reduced-motion safe.
+   ============================================================ */
+@layer utilities {
+  /* Hero entrance: rise + fade on load (stagger via inline delay) */
+  .hero-rise {
+    opacity: 0;
+    animation: hero-rise 0.7s cubic-bezier(0.22, 0.61, 0.21, 1) both;
+  }
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Primary CTA: a soft light sweeps across on hover */
+  .btn-sheen {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-sheen::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      100deg,
+      transparent,
+      rgba(255, 255, 255, 0.5),
+      transparent
+    );
+    transform: skewX(-18deg);
+    transition: left 0.6s ease;
+    pointer-events: none;
+  }
+  .btn-sheen:hover::after {
+    left: 150%;
+  }
+
+  /* Living pipeline: nodes glow + connector arrows pulse in sequence
+     (stagger via inline animation-delay on each element) */
+  .flow-node {
+    animation: flow-node-glow 3s ease-in-out infinite;
+  }
+  @keyframes flow-node-glow {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(106, 69, 245, 0);
+    }
+    50% {
+      box-shadow: 0 0 0 1px rgba(106, 69, 245, 0.35),
+        0 14px 34px -16px rgba(106, 69, 245, 0.5);
+    }
+  }
+  .flow-arrow {
+    animation: flow-arrow-pulse 3s ease-in-out infinite;
+  }
+  @keyframes flow-arrow-pulse {
+    0%,
+    100% {
+      color: var(--border-strong);
+      opacity: 0.55;
+    }
+    50% {
+      color: var(--primary);
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-rise {
+      opacity: 1;
+      animation: none;
+    }
+    .btn-sheen::after {
+      display: none;
+    }
+    .flow-node,
+    .flow-arrow {
+      animation: none !important;
+    }
+  }
+}
+
+/* ============================================================
+   Advanced motion: aurora background, "watch it run" packets that
+   travel the pipeline connectors, and pointer-tilt cards (JS-driven).
+   Reduced-motion safe.
+   ============================================================ */
+@layer utilities {
+  /* Aurora: a slow, shifting brand-colour glow behind a section */
+  .aurora {
+    position: absolute;
+    inset: -25%;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+        42% 48% at 20% 30%,
+        rgba(106, 69, 245, 0.28),
+        transparent 60%
+      ),
+      radial-gradient(40% 46% at 82% 22%, rgba(15, 184, 172, 0.22), transparent 62%),
+      radial-gradient(46% 50% at 62% 82%, rgba(168, 224, 0, 0.16), transparent 64%);
+    filter: blur(44px);
+    will-change: transform;
+    animation: aurora-shift 18s ease-in-out infinite alternate;
+  }
+  @keyframes aurora-shift {
+    0% {
+      transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    }
+    100% {
+      transform: translate3d(2%, -3%, 0) rotate(8deg) scale(1.12);
+    }
+  }
+
+  /* "Watch it run": a glowing packet travels each connector while the
+     nodes glow (.flow-node). Vertical on mobile, horizontal at lg. */
+  .flow-conn {
+    position: relative;
+    overflow: visible;
+  }
+  .flow-conn-dot {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    background: var(--primary);
+    box-shadow: 0 0 10px 2px rgba(106, 69, 245, 0.6);
+    left: 50%;
+    margin-left: -3.5px;
+    animation: packet-v 1.8s linear infinite;
+  }
+  @keyframes packet-v {
+    0% {
+      top: -6px;
+      opacity: 0;
+    }
+    14% {
+      opacity: 1;
+    }
+    86% {
+      opacity: 1;
+    }
+    100% {
+      top: 100%;
+      opacity: 0;
+    }
+  }
+  @media (min-width: 1024px) {
+    .flow-conn-dot {
+      left: -6px;
+      margin-left: 0;
+      top: 50%;
+      margin-top: -3.5px;
+      animation: packet-h 1.8s linear infinite;
+    }
+    @keyframes packet-h {
+      0% {
+        left: -6px;
+        opacity: 0;
+      }
+      14% {
+        opacity: 1;
+      }
+      86% {
+        opacity: 1;
+      }
+      100% {
+        left: 100%;
+        opacity: 0;
+      }
+    }
+  }
+
+  /* Pointer-tilt cards - JS sets the transform; this hints the compositor */
+  .tilt {
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aurora {
+      animation: none;
+    }
+    .flow-conn-dot {
+      animation: none;
+      opacity: 0;
     }
   }
 }

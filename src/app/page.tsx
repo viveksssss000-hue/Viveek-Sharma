@@ -15,6 +15,7 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTASection } from "@/components/sections/CTASection";
 import { SectionHeading } from "@/components/sections/SectionHeading";
+import { CountUp } from "@/components/ui/CountUp";
 import { buildMetadata } from "@/lib/seo";
 import { home, globalFaqs } from "@/lib/content";
 
@@ -55,7 +56,7 @@ export default function HomePage() {
                   className="surface-card rounded-xl p-6 text-center"
                 >
                   <p className="text-3xl font-bold tracking-tight text-foreground">
-                    {c.value}
+                    <CountUp value={c.value} />
                   </p>
                   <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
                     {c.label}

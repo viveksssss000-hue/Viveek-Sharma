@@ -11,10 +11,10 @@ const buttonVariants = cva(
       variant: {
         // Primary CTA - violet fill (brand-kit .btn--primary).
         default:
-          "bg-primary text-primary-foreground shadow-sm hover:bg-[#5631e0] hover:-translate-y-0.5 hover:shadow-md [&_svg]:group-hover:translate-x-0.5 hover:[&_svg]:translate-x-0.5",
+          "btn-sheen bg-primary text-primary-foreground shadow-sm hover:bg-[#5631e0] hover:-translate-y-0.5 hover:shadow-md [&_svg]:group-hover:translate-x-1 hover:[&_svg]:translate-x-1",
         // Spark - the ONE key action on a screen (lime). Keep it scarce.
         spark:
-          "bg-accent text-accent-foreground shadow-[0_8px_22px_-10px_rgba(168,224,0,0.5)] hover:brightness-105 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_-10px_rgba(168,224,0,0.6)] [&_svg]:group-hover:translate-x-0.5 hover:[&_svg]:translate-x-0.5",
+          "btn-sheen bg-accent text-accent-foreground shadow-[0_8px_22px_-10px_rgba(168,224,0,0.5)] hover:brightness-105 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_-10px_rgba(168,224,0,0.6)] [&_svg]:group-hover:translate-x-1 hover:[&_svg]:translate-x-1",
         // Soft violet fill - brand-kit secondary button
         navy: "bg-primary/10 border border-primary/20 text-[#4424b8] hover:bg-primary/20 hover:-translate-y-0.5",
         // Ghost outline - brand-kit tertiary button

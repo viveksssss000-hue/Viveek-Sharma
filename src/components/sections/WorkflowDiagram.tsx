@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import { ArrowRight } from "lucide-react";
 
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { workflowDiagram } from "@/lib/content";
@@ -26,7 +25,10 @@ export function WorkflowDiagram() {
               const isLast = i === steps.length - 1;
               return (
                 <Fragment key={step.label}>
-                  <li className="flex-1 rounded-xl border border-border bg-elevated p-4 text-center">
+                  <li
+                    className="flow-node flex-1 rounded-xl border border-border bg-elevated p-4 text-center"
+                    style={{ animationDelay: `${i * 0.5}s` }}
+                  >
                     <p
                       className={`font-mono text-sm font-semibold ${
                         isLast ? "text-cyan" : "text-foreground"
@@ -39,10 +41,15 @@ export function WorkflowDiagram() {
                     </p>
                   </li>
                   {!isLast ? (
-                    <ArrowRight
+                    <span
                       aria-hidden="true"
-                      className="mx-auto size-5 shrink-0 rotate-90 self-center text-primary lg:rotate-0"
-                    />
+                      className="flow-conn mx-auto h-7 w-0.5 shrink-0 self-center rounded-full bg-border-strong lg:h-0.5 lg:w-auto lg:min-w-8 lg:flex-1"
+                    >
+                      <span
+                        className="flow-conn-dot"
+                        style={{ animationDelay: `${i * 0.3}s` }}
+                      />
+                    </span>
                   ) : null}
                 </Fragment>
               );

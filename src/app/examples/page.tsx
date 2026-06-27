@@ -6,6 +6,7 @@ import { ArrowRight, FlaskConical, Info } from "lucide-react";
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { CTASection } from "@/components/sections/CTASection";
 import { Button } from "@/components/ui/button";
+import { CountUp } from "@/components/ui/CountUp";
 import { buildMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import {
@@ -43,15 +44,16 @@ function ToolMark({ name }: { name: string }) {
   );
 }
 
-function StepCard({ step }: { step: WorkflowStep }) {
+function StepCard({ step, index = 0 }: { step: WorkflowStep; index?: number }) {
   return (
     <li
       className={cn(
-        "flex flex-1 flex-col gap-3 rounded-xl border p-4",
+        "flow-node flex flex-1 flex-col gap-3 rounded-xl border p-4",
         step.accent
-          ? "border-primary/40 bg-primary/5 shadow-[0_0_0_1px_rgba(106,69,245,0.06)]"
+          ? "border-primary/40 bg-primary/5"
           : "border-border bg-elevated"
       )}
+      style={{ animationDelay: `${index * 0.5}s` }}
     >
       <span
         className={cn(
@@ -81,12 +83,17 @@ function Pipeline({ steps }: { steps: WorkflowStep[] }) {
     <ol className="flex flex-col items-stretch gap-3 lg:flex-row lg:gap-2">
       {steps.map((step, i) => (
         <Fragment key={step.title}>
-          <StepCard step={step} />
+          <StepCard step={step} index={i} />
           {i < steps.length - 1 ? (
-            <ArrowRight
+            <span
               aria-hidden="true"
-              className="mx-auto size-5 shrink-0 rotate-90 self-center text-primary lg:rotate-0"
-            />
+              className="flow-conn mx-auto h-7 w-0.5 shrink-0 self-center rounded-full bg-border-strong lg:h-0.5 lg:w-auto lg:min-w-8 lg:flex-1"
+            >
+              <span
+                className="flow-conn-dot"
+                style={{ animationDelay: `${i * 0.3}s` }}
+              />
+            </span>
           ) : null}
         </Fragment>
       ))}
@@ -194,15 +201,20 @@ function Branching({ workflow }: { workflow: ExampleWorkflow }) {
   return (
     <div className="flex flex-col gap-6">
       {workflow.steps ? (
-        <ol className="flex flex-col items-stretch gap-3 sm:flex-row sm:gap-2">
+        <ol className="flex flex-col items-stretch gap-3 lg:flex-row lg:gap-2">
           {workflow.steps.map((step, i) => (
             <Fragment key={step.title}>
-              <StepCard step={step} />
+              <StepCard step={step} index={i} />
               {i < workflow.steps!.length - 1 ? (
-                <ArrowRight
+                <span
                   aria-hidden="true"
-                  className="mx-auto size-5 shrink-0 rotate-90 self-center text-primary sm:rotate-0"
-                />
+                  className="flow-conn mx-auto h-7 w-0.5 shrink-0 self-center rounded-full bg-border-strong lg:h-0.5 lg:w-auto lg:min-w-8 lg:flex-1"
+                >
+                  <span
+                    className="flow-conn-dot"
+                    style={{ animationDelay: `${i * 0.3}s` }}
+                  />
+                </span>
               ) : null}
             </Fragment>
           ))}
@@ -216,7 +228,7 @@ function Branching({ workflow }: { workflow: ExampleWorkflow }) {
         <span className="h-px flex-1 bg-border" />
       </div>
 
-      <div className="grid gap-3 md:grid-cols-3">
+      <div className="reveal-stagger grid gap-3 md:grid-cols-3">
         {workflow.branches?.map((branch) => (
           <div
             key={branch.label}
@@ -273,7 +285,7 @@ function WorkflowStats({
               s.accent ? "text-primary" : "text-foreground"
             )}
           >
-            {s.value}
+            <CountUp value={s.value} />
           </p>
           <p className="mt-1 text-xs leading-snug text-muted-foreground">
             {s.label}

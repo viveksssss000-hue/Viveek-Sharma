@@ -9,6 +9,7 @@ import { StickyMobileCTA } from "@/components/layout/StickyMobileCTA";
 import { Toaster } from "@/components/ui/sonner";
 import { ConsentBanner } from "@/components/consent/ConsentBanner";
 import { ScrollReveal } from "@/components/layout/ScrollReveal";
+import { TiltCards } from "@/components/layout/TiltCards";
 import { Analytics } from "@/components/analytics/Analytics";
 import { SiteJsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/lib/content";
@@ -80,6 +81,7 @@ export default function RootLayout({
         <Toaster position="top-center" richColors />
         <ConsentBanner />
         <ScrollReveal />
+        <TiltCards />
         <SiteJsonLd />
         <Analytics />
       </body>

@@ -47,7 +47,7 @@ export function UseCaseGrid() {
             return (
               <div
                 key={uc.title}
-                className="surface-card surface-interactive flex flex-col gap-3 rounded-xl p-6 hover:border-border-strong"
+                className="surface-card surface-interactive tilt flex flex-col gap-3 rounded-xl p-6 hover:border-border-strong"
               >
                 <span className="grid size-11 place-items-center rounded-lg bg-primary/10 text-primary ring-1 ring-inset ring-primary/20">
                   <Icon className="size-5" />
