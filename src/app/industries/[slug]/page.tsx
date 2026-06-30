@@ -28,10 +28,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const industry = getIndustry(slug);
   if (!industry) return {};
+  // Parked for a later phase: noindexed and excluded from the sitemap until we
+  // rebuild proper, finance/back-office-aligned industry pages.
   return buildMetadata({
     title: industry.metaTitle,
     description: industry.metaDesc,
     path: `/industries/${industry.slug}`,
+    noindex: true,
   });
 }
 

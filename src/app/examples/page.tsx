@@ -18,10 +18,14 @@ import {
   type WorkflowStep,
 } from "@/lib/content";
 
+// Parked for a later phase: the example blueprints are generalist (support,
+// lead qualification, sales) rather than finance/back-office, so the page is
+// kept in the repo but noindexed and out of the sitemap for now.
 export const metadata: Metadata = buildMetadata({
   title: exampleWorkflowsContent.meta.title,
   description: exampleWorkflowsContent.meta.description,
   path: "/examples",
+  noindex: true,
 });
 
 /** Small brand-logo chip used inside workflow steps. */
