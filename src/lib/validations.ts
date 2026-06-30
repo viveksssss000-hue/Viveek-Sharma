@@ -18,6 +18,9 @@ export const interests = [
   "Other",
 ] as const;
 
+/** Accounting software the lead uses (Website P2 follow-up, item 2). */
+export const softwareOptions = ["QuickBooks", "Xero", "Other"] as const;
+
 /** US + EU/UK + Other (US/EU markets per BUILD.md). */
 export const countries = [
   "United States",
@@ -63,6 +66,9 @@ export const contactSchema = z.object({
   companySize: z.enum(companySizes).optional(),
   country: z.enum(countries).optional(),
   interest: z.enum(interests).optional(),
+  // Optional qualifying context (Website P2 follow-up, item 2).
+  software: z.enum(softwareOptions).optional(),
+  timeSink: z.string().optional().or(z.literal("")),
   message: z.string().min(10, "Please add a little more detail (10+ chars)."),
   consent: z.boolean().refine((v) => v === true, {
     message: "Please accept the privacy policy to continue.",

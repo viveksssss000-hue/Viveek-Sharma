@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTASection } from "@/components/sections/CTASection";
+import { TrackView } from "@/components/analytics/TrackView";
 import { buildMetadata } from "@/lib/seo";
 import { pricing, globalFaqs } from "@/lib/content";
 
@@ -18,6 +19,7 @@ export const metadata: Metadata = buildMetadata({
 export default function PricingPage() {
   return (
     <>
+      <TrackView event="pricing_view" />
       <section className="section-y">
         <div className="container-content">
           <SectionHeading

@@ -5,6 +5,7 @@ import { ArrowRight, Check, Gauge, Plug, ChevronRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { CTASection } from "@/components/sections/CTASection";
+import { TrackView } from "@/components/analytics/TrackView";
 import { buildMetadata } from "@/lib/seo";
 import { solutions, site } from "@/lib/content";
 
@@ -75,6 +76,7 @@ export default async function SolutionDetailPage({
 
   return (
     <>
+      <TrackView event="package_page_view" params={{ slug: solution.slug }} />
       {/* Hero - H1: package name + outcome; sub: who it's for + the result */}
       <section className="border-b border-border bg-background">
         <div className="container-content py-12 md:py-16">

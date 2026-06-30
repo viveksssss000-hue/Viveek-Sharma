@@ -8,9 +8,9 @@ import { buildMetadata } from "@/lib/seo";
 import { posts } from "@/lib/posts";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Blog - Automation, in plain English | tryacowork",
+  title: "Blog - Back-Office Automation, in plain English | tryacowork",
   description:
-    "Practical, jargon-free writing on AI workflow automation for small teams: lead follow-up, ops busywork, tooling and time saved. From tryacowork.",
+    "Practical, jargon-free writing on automating your bookkeeping, bills and back-office: month-end close, AP, onboarding and the hours they give back. From tryacowork.",
   path: "/blog",
 });
 
@@ -34,7 +34,7 @@ export default function BlogPage() {
             align="left"
             eyebrow="Blog"
             title="Automation, in plain English"
-            description="Practical writing on automating the work that slows small teams down - no jargon, no hype."
+            description="Practical writing on automating the bookkeeping, bills and back-office that slow your business down - no jargon, no hype."
           />
         </div>
       </section>
