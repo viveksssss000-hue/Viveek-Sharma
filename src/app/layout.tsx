@@ -12,6 +12,7 @@ import { ConsentBanner } from "@/components/consent/ConsentBanner";
 import { ScrollReveal } from "@/components/layout/ScrollReveal";
 import { TiltCards } from "@/components/layout/TiltCards";
 import { Analytics } from "@/components/analytics/Analytics";
+import { ConversionTracking } from "@/components/analytics/ConversionTracking";
 import { SiteJsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/lib/content";
 
@@ -86,6 +87,7 @@ export default function RootLayout({
         <TiltCards />
         <SiteJsonLd />
         <Analytics />
+        <ConversionTracking />
       </body>
     </html>
   );

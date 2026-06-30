@@ -27,6 +27,7 @@ import {
   companySizes,
   countries,
   interests,
+  softwareOptions,
 } from "@/lib/validations";
 import { trackEvent } from "@/lib/analytics";
 import { site } from "@/lib/content";
@@ -34,9 +35,16 @@ import { site } from "@/lib/content";
 const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 // Web3Forms access key. This key is PUBLIC by design (it only allows sending to
-// the address registered with it - hello@tryacowork.com), so it is safe to keep
-// in client code. Submissions are emailed straight to that inbox.
-const WEB3FORMS_ACCESS_KEY = "36d49236-a30c-4596-9dc7-ffeec040294c";
+// the address registered with it), so it is safe to keep in client code.
+// Web3Forms always emails the address the key is registered to, so the routing
+// destination is the key, not a request field. To send enquiries to
+// Naveen@tryacowork.com (P2 follow-up, item 2), register the key to that inbox
+// in the Web3Forms dashboard, or set NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY to a key
+// created under Naveen@tryacowork.com. The fallback below is the original
+// hello@tryacowork.com key so the form keeps working until that is done.
+const WEB3FORMS_ACCESS_KEY =
+  process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ??
+  "36d49236-a30c-4596-9dc7-ffeec040294c";
 
 // After a successful submit the Calendly booking popup opens on the page.
 const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL ?? site.bookingUrl;
@@ -113,6 +121,7 @@ export function ContactForm({
       workEmail: "",
       company: "",
       role: "",
+      timeSink: "",
       message: defaultMessage ?? "",
       interest: defaultInterest,
       consent: false,
@@ -150,6 +159,8 @@ export function ContactForm({
           company_size: values.companySize || "-",
           country: values.country || "-",
           interested_in: values.interest || "-",
+          software_used: values.software || "-",
+          biggest_time_sink: values.timeSink || "-",
           message: values.message,
         }),
       });
@@ -301,6 +312,39 @@ export function ContactForm({
             </Select>
           )}
         />
+      </div>
+
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="software">What software do you use?</Label>
+          <Controller
+            control={control}
+            name="software"
+            render={({ field }) => (
+              <Select value={field.value} onValueChange={field.onChange}>
+                <SelectTrigger id="software">
+                  <SelectValue placeholder="Select..." />
+                </SelectTrigger>
+                <SelectContent>
+                  {softwareOptions.map((s) => (
+                    <SelectItem key={s} value={s}>
+                      {s}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          />
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="timeSink">Biggest time-sink?</Label>
+          <Input
+            id="timeSink"
+            placeholder="e.g. month-end close, chasing bills"
+            {...register("timeSink")}
+          />
+        </div>
       </div>
 
       <div className="flex flex-col gap-1.5">

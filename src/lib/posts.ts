@@ -2,8 +2,10 @@
  * posts.ts - typed blog content (no MDX dependency). Each post is structured
  * data so the blog index + /blog/[slug] render without extra tooling.
  *
- * TODO(client): these four articles are DRAFTS for review - edit freely or
- * replace. `date` is ISO (YYYY-MM-DD); newest first drives ordering.
+ * Focused on finance/back-office (Website P2 follow-up, item 3). Older
+ * generalist drafts are kept but flagged `noindex` so they stay out of search
+ * and the sitemap while the indexed blog matches the new positioning.
+ * `date` is ISO (YYYY-MM-DD); newest first drives ordering.
  */
 
 export type PostBlock =
@@ -21,9 +23,182 @@ export type Post = {
   metaTitle: string;
   metaDesc: string;
   body: PostBlock[];
+  /** When true, the post is kept but noindexed and excluded from the sitemap. */
+  noindex?: boolean;
 };
 
 export const posts: Post[] = [
+  {
+    slug: "cut-month-end-close-with-ai",
+    title: "How to cut your month-end close by 4 days with AI",
+    excerpt:
+      "Month-end shouldn't drag into the second week. Here's how an automated, human-reviewed close gives a few days back, every month.",
+    date: "2026-06-28",
+    author: "tryacowork",
+    readingMins: 5,
+    metaTitle: "How to Cut Your Month-End Close by 4 Days with AI | tryacowork",
+    metaDesc:
+      "Automate reconciliation prep, categorization and the close checklist so your team reviews instead of keys - and closes the books days sooner.",
+    body: [
+      {
+        type: "p",
+        text: "For a lot of small businesses and the firms that keep their books, month-end has a familiar shape: it drags into the second week. Not because the work is hard, but because it's manual - matching transactions, categorizing them, chasing the last few documents, and rebuilding the same checklist every period.",
+      },
+      { type: "h2", text: "Where the days actually go" },
+      {
+        type: "p",
+        text: "Most of a slow close isn't analysis. It's preparation: pulling transactions, matching them against statements, categorizing against your rules, and flagging the handful that don't fit. That prep is repetitive and rules-based, which is exactly what an AI workflow handles well.",
+      },
+      { type: "h2", text: "What an automated close looks like" },
+      {
+        type: "ul",
+        items: [
+          "Transactions are pulled and matched automatically, so reconciliation starts from a clean base.",
+          "Entries are categorized against your rules, with anything unusual flagged for a person.",
+          "The recurring close checklist assembles itself, so nothing is missed or re-typed.",
+          "Your team reviews and signs off, instead of keying for days.",
+        ],
+      },
+      {
+        type: "p",
+        text: "The point isn't to remove the human - it's to move the human to the top of the process. A reviewer checking flagged exceptions is faster and more accurate than a person doing every step by hand. One reference client cut their close time by four days this way.",
+      },
+      {
+        type: "p",
+        text: "That's the idea behind our Month-End Close Autopilot: automate the prep, keep human review on the judgement, and give the days back. If your close runs long, a Workflow Audit maps exactly where the hours go before anything is built.",
+      },
+    ],
+  },
+  {
+    slug: "bookkeeping-tasks-to-automate",
+    title: "5 bookkeeping tasks small businesses should automate this quarter",
+    excerpt:
+      "If your team still does these five bookkeeping jobs by hand, they're strong candidates to automate first - here's why.",
+    date: "2026-06-24",
+    author: "tryacowork",
+    readingMins: 5,
+    metaTitle:
+      "5 Bookkeeping Tasks Small Businesses Should Automate This Quarter | tryacowork",
+    metaDesc:
+      "Five repetitive bookkeeping tasks - data entry, categorization, reconciliation prep, bill capture and reporting - that are cheaper and more accurate as AI workflows.",
+    body: [
+      {
+        type: "p",
+        text: "Bookkeeping is full of work that's repetitive, rules-based and easy to get slightly wrong when it's done by hand. Those three traits are the signal that a task is worth automating. Here are five that almost always qualify.",
+      },
+      { type: "h2", text: "1. Transaction data entry" },
+      {
+        type: "p",
+        text: "Re-keying transactions from statements and receipts is slow and error-prone. Capturing and importing them automatically removes the typing, and the typos.",
+      },
+      { type: "h2", text: "2. Categorization" },
+      {
+        type: "p",
+        text: "Coding transactions against the same rules every month is a job for a workflow. It applies your rules consistently and flags only the ones that need a human eye.",
+      },
+      { type: "h2", text: "3. Reconciliation prep" },
+      {
+        type: "p",
+        text: "Matching transactions to statements before the close is pure preparation. Automating the match means reconciliation starts from a clean base instead of a blank page.",
+      },
+      { type: "h2", text: "4. Bill capture and entry" },
+      {
+        type: "p",
+        text: "Reading incoming bills, extracting the line items and entering them is repetitive and a common source of duplicate payments. A workflow captures and checks them before they're paid.",
+      },
+      { type: "h2", text: "5. Recurring reports" },
+      {
+        type: "p",
+        text: "Any report built from the same sources on the same cadence should build itself, leaving the judgement to a person.",
+      },
+      {
+        type: "p",
+        text: "You don't have to automate all five at once. A Workflow Audit maps where your hours actually go and ranks what to automate first, so you start with the biggest time-sink.",
+      },
+    ],
+  },
+  {
+    slug: "stop-paying-duplicate-bills",
+    title: "AP automation: how to stop paying duplicate bills",
+    excerpt:
+      "Duplicate payments slip through manual AP and cost real money. Here's how automated bill capture catches them before they're paid.",
+    date: "2026-06-20",
+    author: "tryacowork",
+    readingMins: 4,
+    metaTitle: "AP Automation: How to Stop Paying Duplicate Bills | tryacowork",
+    metaDesc:
+      "Duplicate and anomalous bills slip through manual accounts payable. Automated bill capture extracts, matches and flags them for review before payment.",
+    body: [
+      {
+        type: "p",
+        text: "Paying the same bill twice is one of the quieter costs of manual accounts payable. A bill arrives by email, gets keyed in, and a near-identical one arrives a week later under a slightly different reference. By the time anyone notices, it's been paid.",
+      },
+      { type: "h2", text: "Why duplicates get through" },
+      {
+        type: "p",
+        text: "Manual AP relies on someone remembering they've seen an invoice before. With dozens of bills a month across email and uploads, that's an unfair thing to ask of a person. Vendors resend, references change, and PDFs look alike.",
+      },
+      { type: "h2", text: "What automated bill capture does" },
+      {
+        type: "ul",
+        items: [
+          "Captures incoming bills from email and uploads automatically.",
+          "Extracts the line items, so nothing is re-keyed.",
+          "Detects duplicates and anomalies against what's already come through.",
+          "Routes anything unusual to a human for approval, before payment.",
+        ],
+      },
+      {
+        type: "p",
+        text: "The result is fewer hours on AP data entry and duplicate payments caught early instead of written off. One reference client caught two duplicate bills in the first thirty days.",
+      },
+      {
+        type: "p",
+        text: "That's what our AP & Bill-Capture Bot is built to do: take the keying and the watching off your team, and keep a human on the approvals. Start with a Workflow Audit to see how many bills you handle and where they leak.",
+      },
+    ],
+  },
+  {
+    slug: "client-onboarding-weeks-to-hours",
+    title: "Client onboarding: from weeks to hours",
+    excerpt:
+      "New-client onboarding shouldn't take weeks of chasing documents. Here's how automating the intake gets it down to hours.",
+    date: "2026-06-16",
+    author: "tryacowork",
+    readingMins: 4,
+    metaTitle: "Client Onboarding: From Weeks to Hours | tryacowork",
+    metaDesc:
+      "Automate document collection, follow-ups and file setup so onboarding a new client or customer takes hours, not weeks - with more handled by the same team.",
+    body: [
+      {
+        type: "p",
+        text: "Onboarding a new client or customer is mostly coordination: requesting documents, chasing the ones that don't come back, organizing what arrives, and setting up the file before any real work starts. Done by hand, it stretches a job that should take hours into weeks.",
+      },
+      { type: "h2", text: "The bottleneck is the chase" },
+      {
+        type: "p",
+        text: "The slow part of onboarding usually isn't the work - it's waiting on documents and remembering to follow up. That waiting and chasing is repetitive, which means it can run on its own.",
+      },
+      { type: "h2", text: "What an onboarding engine handles" },
+      {
+        type: "ul",
+        items: [
+          "Sends and tracks document requests, so you know what's outstanding.",
+          "Follows up automatically on missing items, without anyone remembering to.",
+          "Organizes files as they arrive, ready for the next step.",
+          "Kicks off the next workflow once the file is complete.",
+        ],
+      },
+      {
+        type: "p",
+        text: "The team's time moves from chasing to reviewing, and more onboardings get handled without adding people. One reference client doubled their follow-ups with no extra headcount.",
+      },
+      {
+        type: "p",
+        text: "That's our Client / Customer Onboarding & Document Engine. If intake is your bottleneck, a Workflow Audit shows where the time goes before anything is built.",
+      },
+    ],
+  },
   {
     slug: "automate-lead-follow-up-without-a-developer",
     title: "How to automate your lead follow-up without a developer",
@@ -36,6 +211,8 @@ export const posts: Post[] = [
       "How to Automate Lead Follow-Up Without a Developer | tryacowork",
     metaDesc:
       "A practical guide to automating lead follow-up - enrichment, routing and first-touch - without hiring a developer. Built and run for you end-to-end.",
+    // Off-topic (sales) for the back-office positioning: kept but noindexed.
+    noindex: true,
     body: [
       {
         type: "p",
@@ -84,6 +261,8 @@ export const posts: Post[] = [
       "5 Tasks Your Ops Team Should Never Do Manually in 2026 | tryacowork",
     metaDesc:
       "Five repetitive operations tasks that are cheaper, faster and more accurate as AI workflows - and how to know which to automate first.",
+    // Off-topic (generic ops) for the back-office positioning: kept but noindexed.
+    noindex: true,
     body: [
       {
         type: "p",
