@@ -13,9 +13,9 @@ type CTASectionProps = {
 
 /** Reusable final CTA band - Flowline contact-card style. Foot of most pages. */
 export function CTASection({
-  title = "Let's automate something real.",
-  description = "Start with one task. Book a 30-minute demo and we'll show you the automated version - the hours it gives back, and how we keep it running so you never have to.",
-  reassurance = "30-minute call · No obligation · No credit card",
+  title = "See where your business is losing hours.",
+  description = "Book a 30-minute workflow audit. You'll leave with a prioritized list of what to automate first and a clear, fixed quote.",
+  reassurance = "30-minute audit · No obligation · No credit card",
   className,
 }: CTASectionProps) {
   // Render the headline with the last word emphasised in lime (e.g. "real.").
@@ -46,7 +46,7 @@ export function CTASection({
             <div className="mt-2 flex flex-col items-center gap-3 sm:flex-row">
               <Button asChild size="lg" variant="spark">
                 <Link href="/contact">
-                  Book a Demo
+                  Book your Workflow Audit
                   <ArrowRight />
                 </Link>
               </Button>

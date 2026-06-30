@@ -13,7 +13,7 @@ export function SiteJsonLd() {
     url: site.url,
     email: site.email,
     description:
-      "AI-workflow studio for small teams. We turn complex, manual work - bookkeeping, invoices, lead routing, reporting - into AI workflows that run on their own.",
+      "AI automation for your bookkeeping, bills and back-office. We build and manage AI workflows - month-end close, AP and bill capture, invoicing, reporting and onboarding - for small businesses and the firms that serve them.",
     areaServed: ["US", "EU"],
     sameAs: [site.linkedin],
   };

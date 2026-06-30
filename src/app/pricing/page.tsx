@@ -76,9 +76,17 @@ export default function PricingPage() {
               </div>
             ))}
           </div>
-          <p className="mt-8 max-w-2xl text-sm text-muted-foreground leading-relaxed">
-            {pricing.note}
-          </p>
+          <div className="mt-10 flex flex-col items-start gap-4">
+            <Button asChild size="lg" variant="spark">
+              <Link href="/contact">
+                Book your Workflow Audit
+                <ArrowRight />
+              </Link>
+            </Button>
+            <p className="max-w-2xl text-sm text-muted-foreground leading-relaxed">
+              {pricing.note}
+            </p>
+          </div>
         </div>
       </section>
 

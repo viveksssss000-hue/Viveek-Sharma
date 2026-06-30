@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { mainNav, servicesNav } from "@/lib/content";
+import { mainNav, solutionsNav } from "@/lib/content";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
@@ -37,9 +37,9 @@ export function MobileNav() {
         </SheetHeader>
         <nav aria-label="Mobile" className="flex flex-1 flex-col gap-1 px-4">
           <p className="px-2 pb-1 pt-2 text-xs font-semibold uppercase tracking-wide text-subtle">
-            Services
+            Solutions
           </p>
-          {servicesNav.map((link) => (
+          {solutionsNav.map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -63,7 +63,7 @@ export function MobileNav() {
         </nav>
         <div className="mt-auto flex flex-col gap-3 p-4">
           <Button asChild className="w-full" onClick={close}>
-            <Link href="/contact">Book a Demo</Link>
+            <Link href="/contact">Book your Workflow Audit</Link>
           </Button>
           <Button asChild variant="outline" className="w-full" onClick={close}>
             <Link href="/contact">Contact us</Link>

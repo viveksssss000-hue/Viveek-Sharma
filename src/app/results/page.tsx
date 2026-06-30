@@ -4,6 +4,7 @@ import { ArrowRight, LineChart } from "lucide-react";
 
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { StatBar } from "@/components/sections/StatBar";
+import { CaseStudies } from "@/components/sections/CaseStudies";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { CTASection } from "@/components/sections/CTASection";
 import { Button } from "@/components/ui/button";
@@ -33,6 +34,17 @@ export default function ResultsPage() {
 
       <section className="section-y">
         <div className="container-content flex flex-col gap-12">
+          <div>
+            <SectionHeading
+              align="left"
+              title="Before and after"
+              description="Real, named clients - reframed as the before and the after, mapped to the package that delivered it."
+            />
+            <div className="mt-8">
+              <CaseStudies />
+            </div>
+          </div>
+
           <StatBar />
 
           <div>
