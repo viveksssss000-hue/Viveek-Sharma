@@ -7,6 +7,12 @@ type BuildMetadataArgs = {
   description: string;
   /** Path beginning with "/" (e.g. "/security"). Home is "/". */
   path?: string;
+  /**
+   * When true, emit a noindex, nofollow robots directive. The page stays
+   * reachable by URL and crawlable (so the directive is seen), but is kept out
+   * of search indexes. Used for pages parked for a later phase.
+   */
+  noindex?: boolean;
 };
 
 /**
@@ -18,12 +24,14 @@ export function buildMetadata({
   title,
   description,
   path = "/",
+  noindex = false,
 }: BuildMetadataArgs): Metadata {
   const url = path === "/" ? site.url : `${site.url}${path}`;
   return {
     title: { absolute: title },
     description,
     alternates: { canonical: url },
+    ...(noindex ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       type: "website",
       siteName: site.name,

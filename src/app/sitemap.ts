@@ -1,20 +1,20 @@
 import type { MetadataRoute } from "next";
 
-import { site, services, solutions, industries } from "@/lib/content";
+import { site, services, solutions } from "@/lib/content";
 import { posts } from "@/lib/posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
+  // /industries and /examples are parked for a later phase - kept in the repo
+  // but noindexed and intentionally excluded from the sitemap.
   const staticPaths = [
     "/",
     "/about",
     "/solutions",
     "/services",
-    "/industries",
     "/how-it-works",
     "/pricing",
-    "/examples",
     "/results",
     "/security",
     "/blog",
@@ -46,13 +46,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  const industryEntries: MetadataRoute.Sitemap = industries.map((i) => ({
-    url: `${site.url}/industries/${i.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }));
-
   const postEntries: MetadataRoute.Sitemap = posts.map((p) => ({
     url: `${site.url}/blog/${p.slug}`,
     lastModified: now,
@@ -64,7 +57,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticEntries,
     ...solutionEntries,
     ...serviceEntries,
-    ...industryEntries,
     ...postEntries,
   ];
 }

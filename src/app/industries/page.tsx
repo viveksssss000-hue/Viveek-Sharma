@@ -7,11 +7,14 @@ import { CTASection } from "@/components/sections/CTASection";
 import { buildMetadata } from "@/lib/seo";
 import { industries, industriesSection } from "@/lib/content";
 
+// Parked for a later phase: kept in the repo but noindexed and out of the
+// sitemap until we rebuild proper, finance/back-office-aligned industry pages.
 export const metadata: Metadata = buildMetadata({
   title: "Industries We Automate For | tryacowork",
   description:
-    "AI workflow automation tuned to your sector - marketing, e-commerce, HR, operations and support. Built, run and managed end-to-end. Book a demo.",
+    "AI workflow automation tuned to your sector - marketing, e-commerce, HR, operations and support. Built, run and managed end-to-end.",
   path: "/industries",
+  noindex: true,
 });
 
 export default function IndustriesPage() {
