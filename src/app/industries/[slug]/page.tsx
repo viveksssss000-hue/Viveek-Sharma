@@ -110,7 +110,7 @@ export default async function IndustryDetailPage({
             <div className="mt-8">
               <Button asChild size="lg">
                 <Link href="/contact">
-                  Book a Demo
+                  Book your Workflow Audit
                   <ArrowRight />
                 </Link>
               </Button>

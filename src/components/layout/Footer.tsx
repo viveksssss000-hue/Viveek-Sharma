@@ -15,8 +15,8 @@ export function Footer() {
           <div className="lg:col-span-1">
             <Logo />
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              {site.tagline} We turn complex, manual work into AI workflows
-              that run on their own.
+              We build and manage the AI workflows that handle your bookkeeping,
+              bills and back-office - done for you, and kept running.
             </p>
             <p className="mt-3 text-sm font-medium text-foreground">
               {site.region}

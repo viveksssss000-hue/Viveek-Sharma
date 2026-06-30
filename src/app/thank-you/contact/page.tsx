@@ -27,7 +27,7 @@ export default function ThankYouContactPage() {
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button asChild>
             <Link href="/book-a-demo">
-              Book a Demo instead
+              Book your Workflow Audit instead
               <ArrowRight />
             </Link>
           </Button>

@@ -2,9 +2,10 @@
  * content.ts - single source of truth for all site copy, navigation, services,
  * FAQs and metric placeholders.
  *
- * Repositioned to the "Flowline" brand identity (claude.ai/design handoff):
- * tryacowork is an AI-workflow studio for small teams. Voice: plain-spoken,
- * precise, never hyped. Outcomes, not tech. Lime is the action.
+ * Positioned (Website Change Document, Final 30 Jun 2026): AI automation for
+ * your bookkeeping, bills & back-office, for small businesses and the firms
+ * that serve them. Voice: plain, confident, outcome-led. No hype, no em dashes.
+ * Talk in hours saved, faster close, fewer errors, reclaimed time.
  *
  * Placeholders use TODO(client) markers and {{token}} metrics - never fabricate
  * testimonials, logos, certifications or numbers.
@@ -17,10 +18,10 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://tryacowork.com",
   email: "hello@tryacowork.com",
   salesEmail: "sales@tryacowork.com",
-  region: "Serving the US & EU",
+  region: "Built for small businesses and the firms that serve them",
   // TODO(client): confirm LinkedIn company URL.
   linkedin: "https://www.linkedin.com/company/tryacowork",
-  tagline: "Workflows, automated.",
+  tagline: "Automate the busywork your business runs on.",
   // Calendly scheduling link (30-minute demo). Bookings notify the Calendly
   // account owner and the invitee receives a calendar invite with a video link.
   // Override per-environment with NEXT_PUBLIC_BOOKING_URL if the event changes.
@@ -39,9 +40,9 @@ export const services = [
     slug: "workflow-audit",
     title: "Workflow Audit",
     navLabel: "Workflow Audit",
-    outcome: "Find out where your hours actually go.",
+    outcome: "We map where your hours actually go and rank what to automate first.",
     cardDescription:
-      "We map your team's week and pinpoint the 3-5 tasks eating the most time for the least value. Most owners are surprised by what surfaces.",
+      "We map your team's week and pinpoint the 3-5 back-office tasks eating the most time for the least value - bookkeeping, bills, invoicing, reporting, onboarding. Most owners are surprised by what surfaces.",
     problem:
       "Most teams can't say which tasks eat the most time - they just feel busy. Until you map the work, you can't automate the right things first.",
     capabilities: [
@@ -76,9 +77,9 @@ export const services = [
     slug: "custom-ai-workflows",
     title: "Custom AI Workflows",
     navLabel: "Custom AI Workflows",
-    outcome: "Your work, rebuilt to run on its own.",
+    outcome: "Your highest-value workflow, built and integrated with the tools you already use.",
     cardDescription:
-      "We rebuild the task that drains your week as an agentic workflow that reads, decides and acts - against your real tools, not a demo.",
+      "Your highest-value workflow, designed, built, tested and integrated with the tools you already use (QuickBooks, Xero, and more) - against your real data, not a demo.",
     problem:
       "Off-the-shelf tools automate someone else's process, not yours. The tasks that really drain your week are specific to how your business runs.",
     capabilities: [
@@ -113,9 +114,9 @@ export const services = [
     slug: "integration-handoff",
     title: "Integration & Handoff",
     navLabel: "Integration & Handoff",
-    outcome: "Connected to your tools. Handed over working.",
+    outcome: "Live in your tools, with human review built in.",
     cardDescription:
-      "We wire the workflow into your CRM, inbox and docs, test it end-to-end, and hand it over working - with a walkthrough, not a manual.",
+      "We wire the workflow into your accounting software, inbox and docs, test it end-to-end, and hand it over working - live in your tools, with human review built in.",
     problem:
       "An automation that lives outside your tools just creates another tab to check. It has to plug into where the work already happens.",
     capabilities: [
@@ -146,9 +147,9 @@ export const services = [
     slug: "continuous-optimization",
     title: "Continuous Optimization",
     navLabel: "Continuous Optimization",
-    outcome: "We never hand it back - it keeps getting sharper as you grow.",
+    outcome: "We monitor, fix and expand it every month. We never just hand it back.",
     cardDescription:
-      "We watch every live workflow, fix drift before you notice, and expand into the next time-sink as you grow - on a simple retainer.",
+      "We monitor every live workflow, fix drift before you notice, and expand into the next time-sink every month - on a simple retainer. We never just hand it back.",
     problem:
       "Automations drift: tools update, formats change, edge cases appear. Unwatched, a workflow quietly degrades - and you stop trusting it. Most agencies hand you the workflow and leave you to maintain it. We don't - we run it.",
     capabilities: [
@@ -179,11 +180,94 @@ export const services = [
 
 export type Service = (typeof services)[number];
 
+/* ------------------------------------------------------------------ */
+/* Solutions - productized package pages (Website Change Document §3).  */
+/* Modular /solutions/ section; more use-case packages can be added     */
+/* later without rework. Each renders from the same template.           */
+/* ------------------------------------------------------------------ */
+
+export const solutions = [
+  {
+    slug: "month-end-close",
+    name: "Month-End Close Autopilot",
+    navLabel: "Month-End Close",
+    outcome: "Close the books faster, every month, without the late nights.",
+    forWho:
+      "Whether you close your own books or your clients', we automate reconciliation prep, categorization, and the recurring close checklist so your team reviews instead of keys.",
+    whatItDoes: [
+      "Pulls and matches transactions",
+      "Auto-categorizes against your rules",
+      "Flags exceptions for human review",
+      "Assembles the close checklist and reports",
+    ],
+    whatYouGetBack:
+      "A faster, more predictable close (a reference client cut close time by 4 days) and fewer month-end nights.",
+    worksWith: ["QuickBooks Online", "Xero", "Dext"],
+    metaTitle: "Month-End Close Automation | tryacowork",
+    metaDesc:
+      "Close the books days faster with an automated, human-reviewed month-end workflow built for your business.",
+  },
+  {
+    slug: "ap-bill-capture",
+    name: "AP & Bill-Capture Bot",
+    navLabel: "AP & Bill Capture",
+    outcome: "Stop keying bills and chasing duplicates.",
+    forWho:
+      "We capture incoming bills, extract the data, match them, and route exceptions to a human, before they become problems.",
+    whatItDoes: [
+      "Captures bills from email/upload",
+      "Extracts line items",
+      "Detects duplicates and anomalies",
+      "Routes for approval",
+    ],
+    whatYouGetBack:
+      "Hours of AP data entry eliminated and costly duplicate payments caught early (a reference client caught 2 duplicate bills in the first 30 days).",
+    worksWith: ["QuickBooks Online", "Xero", "Bill", "Email inboxes"],
+    metaTitle: "Automated Accounts Payable & Bill Capture | tryacowork",
+    metaDesc:
+      "Eliminate AP data entry and catch duplicate bills automatically. Built for small businesses and the firms that serve them.",
+  },
+  {
+    slug: "client-onboarding",
+    name: "Client / Customer Onboarding & Document Engine",
+    navLabel: "Client/Customer Onboarding",
+    outcome: "Turn messy intake into a smooth, automated onboarding.",
+    forWho:
+      "We collect documents, chase what's missing, and set up the file, so onboarding a new client or customer takes hours, not weeks.",
+    whatItDoes: [
+      "Sends and tracks document requests",
+      "Auto-follows-up on missing items",
+      "Organizes files",
+      "Kicks off the next workflow",
+    ],
+    whatYouGetBack:
+      "Faster onboarding and more follow-ups handled with the same team (a reference client doubled follow-ups with no extra headcount).",
+    worksWith: [
+      "Your portal",
+      "Email",
+      "Google Drive/SharePoint",
+      "Practice/CRM tools",
+    ],
+    metaTitle: "Client & Customer Onboarding Automation | tryacowork",
+    metaDesc:
+      "Automate document collection and intake so onboarding takes hours, not weeks.",
+  },
+] as const;
+
+export type Solution = (typeof solutions)[number];
+
+/** Homepage "Packages" teaser heading + supporting copy. */
+export const solutionsSection = {
+  eyebrow: "Packages",
+  heading: "Ready-made automations for the back-office",
+  description:
+    "Three productized workflows we build and run for small businesses and the firms that serve them. Each one is scoped to how your business runs, then kept running for good.",
+} as const;
+
 export const mainNav: NavLink[] = [
-  { label: "Pricing", href: "/pricing" },
   { label: "How It Works", href: "/how-it-works" },
-  { label: "Examples", href: "/examples" },
-  { label: "Results", href: "/results" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Case Studies", href: "/results" },
   { label: "Security", href: "/security" },
   { label: "About", href: "/about" },
 ];
@@ -191,6 +275,11 @@ export const mainNav: NavLink[] = [
 export const servicesNav: NavLink[] = services.map((s) => ({
   label: s.navLabel,
   href: `/services/${s.slug}`,
+}));
+
+export const solutionsNav: NavLink[] = solutions.map((s) => ({
+  label: s.navLabel,
+  href: `/solutions/${s.slug}`,
 }));
 
 /* ------------------------------------------------------------------ */
@@ -204,13 +293,13 @@ export const footer = {
       links: [
         { label: "About", href: "/about" },
         { label: "How It Works", href: "/how-it-works" },
+        { label: "Case Studies", href: "/results" },
         { label: "Pricing", href: "/pricing" },
-        { label: "Results", href: "/results" },
       ] as NavLink[],
     },
     {
-      heading: "Services",
-      links: [...servicesNav, { label: "Industries", href: "/industries" }],
+      heading: "Solutions",
+      links: [...solutionsNav],
     },
     {
       heading: "Resources",
@@ -224,7 +313,7 @@ export const footer = {
     {
       heading: "Get started",
       links: [
-        { label: "Book a Demo", href: "/contact" },
+        { label: "Book your Workflow Audit", href: "/contact" },
         { label: "Contact", href: "/contact" },
       ] as NavLink[],
     },
@@ -288,6 +377,17 @@ export const toolLogoSrc = (name: string): string | undefined =>
   toolLogos.find((t) => t.name === name)?.src;
 
 /* ------------------------------------------------------------------ */
+/* Trust bar - persistent strip under the header on every page          */
+/* (Website Change Document §2.2). Three short, true safety promises.   */
+/* ------------------------------------------------------------------ */
+
+export const trustBar: string[] = [
+  "We never train AI on your data",
+  "Human review on every workflow",
+  "Data terms agreed in writing up front",
+];
+
+/* ------------------------------------------------------------------ */
 /* Metrics - placeholders only. Never invent figures.                  */
 /* Format follows the brand kit's proof section.                       */
 /* ------------------------------------------------------------------ */
@@ -344,64 +444,109 @@ export const testimonials: Testimonial[] = [
 ];
 
 /* ------------------------------------------------------------------ */
+/* Case studies - Before -> After framing (Website Change Document §4). */
+/* Each reframes a named client into before/after plus the package it    */
+/* maps to. Figures trace to the named testimonials above.               */
+/* ------------------------------------------------------------------ */
+
+export type CaseStudy = {
+  client: string;
+  result: string;
+  before: string;
+  after: string;
+  packageName: string;
+  packageHref: string;
+};
+
+export const caseStudies: CaseStudy[] = [
+  {
+    client: "Northbridge Bookkeeping",
+    result: "4 days faster month-end close",
+    before: "The close dragged into the second week.",
+    after: "Books close 4 days sooner, every month.",
+    packageName: "Month-End Close Autopilot",
+    packageHref: "/solutions/month-end-close",
+  },
+  {
+    client: "Verla Supply Co.",
+    result: "2 duplicate bills caught in the first 30 days",
+    before: "Duplicates slipped through manual AP.",
+    after: "Caught automatically before payment.",
+    packageName: "AP & Bill-Capture Bot",
+    packageHref: "/solutions/ap-bill-capture",
+  },
+  {
+    client: "Klarvin Studio",
+    result: "2x follow-ups, same team, no extra headcount",
+    before: "Follow-ups fell through the cracks.",
+    after: "Double the follow-ups, zero new hires.",
+    packageName: "Client / Customer Onboarding & Document Engine",
+    packageHref: "/solutions/client-onboarding",
+  },
+];
+
+/* ------------------------------------------------------------------ */
 /* Home page copy - Flowline voice: plain-spoken, precise, never hyped */
 /* ------------------------------------------------------------------ */
 
 export const home = {
   meta: {
-    title: "AI Workflow Automation for Small Teams | tryacowork",
+    title: "AI Automation for Small Businesses & Accounting Firms | tryacowork",
     description:
-      "tryacowork builds and runs AI workflows for small teams - across marketing, operations, HR, sales, support and finance. Designed, built and run end-to-end. Book a demo.",
+      "Done-for-you AI workflows for bookkeeping, bills, invoicing and onboarding. Built and managed for small businesses and the firms that serve them. First workflow live in 4 weeks. Book a free audit.",
   },
   hero: {
-    h1: "Workflows, automated.",
-    sub: "We design, build and run the AI workflows that take the busywork off your team - then we keep running them for good. No handover, no maintenance burden on you. Just your work, handled.",
-    primaryCta: "Book a Demo",
+    h1: "Automate the busywork your business runs on.",
+    sub: "We build and manage AI workflows that handle your bookkeeping, bills, invoicing, reporting, and onboarding, so you and your team stop doing repetitive admin. Built for small businesses and the firms that serve them.",
+    primaryCta: "Book your Workflow Audit",
     secondaryCta: "See how it works",
     timeToValue: "First workflow live in under 4 weeks.",
     trustLine:
-      "Built for small teams · Your data encrypted & never used to train AI models.",
+      "Built for small businesses and the firms that serve them · Your data is never used to train AI models.",
     // Live-workflow status rows for the hero visual - the brand's node chips.
-    // Deliberately industry-diverse so non-finance visitors see themselves.
+    // Back-office workflows so the target visitor sees their own work.
     workflowChips: [
-      { name: "support-triage", status: "live", dot: "bg-cyan" },
-      { name: "onboarding-flow", status: "running", dot: "bg-primary" },
-      { name: "inventory-alert", status: "done", dot: "bg-accent" },
+      { name: "month-end-close", status: "live", dot: "bg-cyan" },
+      { name: "bill-capture", status: "running", dot: "bg-primary" },
+      { name: "client-onboarding", status: "done", dot: "bg-accent" },
     ],
   },
   problems: {
-    heading: "Manual work is quietly costing you",
+    heading: "Your team is too valuable to spend its day on admin.",
+    description:
+      "Whether you run the business or keep the books for others, the same hours vanish every week into data entry, chasing documents, and manual bookkeeping. Most teams have tried AI tools. Few have got them actually working day to day. We close that gap.",
+    stat: "Most small businesses have adopted AI, but only ~14% have it actually embedded in daily operations.",
     cards: [
       {
-        title: "AI that feels too complex",
-        body: "You know AI could help - but it feels too technical, too risky, or not built for a team your size.",
+        title: "AI that never quite landed",
+        body: "You've tried the tools. Few teams have got AI actually working day to day - we close that gap.",
       },
       {
-        title: "Hours lost to busywork",
-        body: "Re-keying data, copying between tools, chasing follow-ups - the same task, every day, by hand.",
+        title: "Hours lost to bookkeeping busywork",
+        body: "Re-keying bills, categorizing transactions, chasing documents - the same admin, every week, by hand.",
       },
       {
-        title: "Work that waits on people",
-        body: "Handoffs stall when someone's busy, off, or buried. The task isn't hard - it's just stuck.",
+        title: "A close that drags into the second week",
+        body: "Reconciliation and the month-end checklist pile up, so the books are always a step behind.",
       },
       {
-        title: "Errors that slip through",
-        body: "Manual repetition breeds mistakes, and mistakes cost more time than the task did.",
+        title: "Errors and duplicates that slip through",
+        body: "Manual AP breeds duplicate payments and miskeyed numbers - and they cost far more than the task did.",
       },
       {
-        title: "Built a team for the work, not the admin",
-        body: "You hired people for judgement and growth - not copy-paste, chasing and data entry. The admin keeps stealing the work that matters.",
+        title: "You hired for judgement, not data entry",
+        body: "Your team is too valuable to spend its day keying invoices and copying between tools. The admin keeps stealing the work that matters.",
       },
     ],
   },
   servicesOverview: {
-    heading: "Designed, built and run - end to end",
+    heading: "Done for you, and kept running",
     description:
-      "We don't hand you software and walk away. We find the time-sink, automate it, and then keep running it for you - watching, fixing and expanding it as you grow. From inbox triage and lead routing to onboarding, reporting, and beyond.",
+      "We don't hand you software and walk away. We map where your hours go, build your highest-value workflow, connect it to the tools you already use, then keep running it for you every month - bookkeeping, bills, invoicing, reporting and onboarding.",
     helpCallout: {
-      heading: "Not sure which one you need?",
+      heading: "Not sure where to start?",
       body: "Most teams start with a Workflow Audit. Tell us what slows you down and we'll point you to the right starting place - no commitment.",
-      ctaLabel: "Which service is right for me?",
+      ctaLabel: "Book your Workflow Audit",
     },
   },
   security: {
@@ -410,15 +555,15 @@ export const home = {
     cta: "Read about our security",
   },
   results: {
-    heading: "What clients get back",
+    heading: "Before and after, in hours and dollars",
     description:
-      "Real outcomes from named clients - pulled straight from the stories below. We never publish numbers we can't stand behind.",
+      "Real outcomes from named clients - reframed as the before and the after. We never publish numbers we can't stand behind.",
     // Numeric callouts lifted verbatim from the named testimonials below, so
     // every figure traces to a real, attributable quote (never fabricated).
     callouts: [
-      { value: "4 days faster", label: "month-end close — Northbridge Bookkeeping" },
-      { value: "2 duplicate bills", label: "caught in the first 30 days — Verla Supply Co." },
-      { value: "2× follow-ups", label: "same team, no extra headcount — Klarvin Studio" },
+      { value: "4 days faster", label: "month-end close - Northbridge Bookkeeping" },
+      { value: "2 duplicate bills", label: "caught in the first 30 days - Verla Supply Co." },
+      { value: "2× follow-ups", label: "same team, no extra headcount - Klarvin Studio" },
     ],
     verifiedNote:
       "“Verified client” means a real, named customer who gave us written permission to publish their words.",
@@ -488,20 +633,19 @@ export const useCases: UseCase[] = [
   },
 ];
 
-/* Auto-scrolling industry ticker under the hero. */
+/* Auto-scrolling audience ticker under the hero - small businesses and the
+   firms that serve them (not a list of unrelated industries). */
 export const industriesTicker: string[] = [
-  "Marketing teams",
-  "Law firms",
-  "Ops leads",
-  "HR managers",
+  "Bookkeeping firms",
+  "Accounting practices",
+  "Small businesses",
   "E-commerce stores",
   "Agencies",
-  "Consultancies",
-  "SaaS companies",
-  "Logistics",
-  "Recruiting",
-  "Customer support",
+  "Clinics",
+  "Contractors",
+  "Real estate",
   "Finance teams",
+  "Owner-operators",
 ];
 
 /* Illustrated 5-step workflow diagram (homepage). */
@@ -582,12 +726,12 @@ export const howItWorks = {
 
 export const about = {
   meta: {
-    title: "About - The AI Workflow Studio | tryacowork",
+    title: "About - AI Automation for the Back-Office | tryacowork",
     description:
-      "tryacowork is an AI-workflow studio for small teams. We design, build and run automations end-to-end - so a five-person team can operate like fifty.",
+      "tryacowork builds and manages AI automation for the bookkeeping, bills and back-office that small businesses - and the firms that serve them - run on.",
   },
-  h1: "We turn complex, manual work into AI workflows that run on their own.",
-  body: "tryacowork is an AI-workflow studio for small teams. We take the time-consuming, high-manpower tasks that slow a business down - and rebuild them as agentic AI workflows that run continuously in the background. We don't sell tools. We design, build and run the workflow end-to-end - and keep improving it.",
+  h1: "We build and manage automation for the bookkeeping, bills and back-office that small businesses run on.",
+  body: "tryacowork builds and manages AI workflows for small businesses and the accounting and bookkeeping firms that serve them. We take the back-office busywork that slows a business down - month-end close, bills and AP, invoicing, reporting, onboarding - and rebuild it as workflows that run continuously, with a human in the loop. We don't sell tools. We design, build and run the workflow end-to-end, and keep improving it.",
   values: [
     {
       title: "Clarity over cleverness",
@@ -605,9 +749,9 @@ export const about = {
   whoWeServe: {
     heading: "Who it's for",
     items: [
-      "Small-business leaders who know AI could help, but think it's too complex, too technical, or not for them.",
-      "Teams drowning in repetitive work - bookkeeping, invoices, lead routing, reporting, inbox triage.",
-      "Founders who want a five-person team to operate like a fifty-person one.",
+      "Small businesses that handle their own bookkeeping and admin - e-commerce, agencies, clinics, contractors, real estate and more.",
+      "Accounting and bookkeeping firms that do the books for their clients.",
+      "Owners and teams drowning in back-office busywork - month-end close, bills, invoicing, reporting and onboarding.",
     ],
   },
   // Founder story - rendered only when `body` is non-empty.
@@ -615,7 +759,7 @@ export const about = {
   // what made it worth solving).
   founderStory: {
     heading: "Why we built tryacowork",
-    body: "We started tryacowork after watching small teams burn their best hours on work software should have handled - re-keying data, chasing approvals, rebuilding the same report every week. The tools to automate it existed, but they were built for engineers, not for a five-person team trying to grow. So we built a studio that does it for you: we design the workflow, build it, and keep running it - so the technology stays our problem, and the growth stays yours.",
+    body: "We started tryacowork after watching small businesses and the firms that serve them burn their best hours on work software should have handled - re-keying bills, reconciling accounts, chasing documents, rebuilding the same report every month. The tools to automate it existed, but few teams ever got them actually running day to day. So we built a studio that does it for you: we design the workflow, build it, and keep running it - so the technology stays our problem, and the growth stays yours.",
   },
   team: [
     { name: "Naveen Sharma", role: "Co-Founder & Marketing Head" },
@@ -688,9 +832,9 @@ export const security = {
 
 export const results = {
   meta: {
-    title: "Results & Case Studies | tryacowork",
+    title: "Case Studies & Results | tryacowork",
     description:
-      "Real, named, permissioned results from tryacowork AI-workflow engagements. We never publish figures we can't stand behind. Book a demo.",
+      "Real, named, permissioned results from tryacowork back-office automation - reframed before and after. We never publish figures we can't stand behind. Book your Workflow Audit.",
   },
   h1: "The numbers that matter to a busy owner",
   intro:
@@ -986,7 +1130,7 @@ export const globalFaqs = [
     a: "No. Your business data is never used to train AI models.",
   },
   {
-    q: "Is AI too complex for a small team like ours?",
+    q: "Is AI too complex for a business like ours?",
     a: "That's exactly who we build for. You don't manage models or prompts - you tell us which task eats your week, and we hand back the automated version. Start with one task, see it run, then add more.",
   },
   {
@@ -999,35 +1143,38 @@ export const globalFaqs = [
   },
   {
     q: "What does it cost?",
-    a: "We scope each engagement on a quick call, because the right workflows depend on how your business runs. Book a demo and we'll map two or three for you, live.",
+    a: "There's no public price list, because the right workflows depend on how your business runs. Book your Workflow Audit and you'll leave with a prioritized list of what to automate first and a clear, fixed quote.",
   },
 ] as const;
 
 /* ------------------------------------------------------------------ */
-/* Book a Demo                                                         */
+/* Book your Workflow Audit (booking flow)                             */
 /* ------------------------------------------------------------------ */
 
 export const bookDemo = {
   meta: {
-    title: "Book a Demo | tryacowork",
+    title: "Book your Workflow Audit | tryacowork",
     description:
-      "Book a 30-minute demo. We'll map two or three workflows we can automate for you, live - no obligation, no credit card.",
+      "Book a 30-minute workflow audit. You'll leave with a prioritized list of what to automate first and a clear, fixed quote - no obligation, no credit card.",
   },
-  h1: "Book a 30-minute demo",
+  h1: "Book your Workflow Audit",
   valueReminder:
-    "Start with one task. We'll show you the automated version of it - and the hours it gives back. No obligation.",
+    "Book a 30-minute workflow audit. You'll leave with a prioritized list of what to automate first and a clear, fixed quote. No obligation.",
   steps: [
     { title: "Pick a time", body: "Select a slot that works best for you." },
     {
-      title: "Tell us about your work",
-      body: "Share a few details so we can prepare.",
+      title: "Tell us about your back-office",
+      body: "Share a few details about your books and tools so we can prepare.",
     },
-    { title: "Join the demo", body: "Meet us on Google Meet." },
+    {
+      title: "Get your roadmap",
+      body: "We map where your hours go and what to automate first, on Google Meet.",
+    },
   ],
   // Scheduler card header. Bookings land in this person's Calendly.
   host: {
     name: "Naveen Sharma",
-    blurb: "30 min with tryacowork.com",
+    blurb: "30-minute workflow audit",
   },
   reassurance: "No credit card. No pressure.",
 } as const;
@@ -1044,7 +1191,7 @@ export const contact = {
   },
   h1: "Let's automate something real.",
   intro:
-    "Not quite ready to book a demo? Tell us about one task that eats your week and we'll get back to you - usually the same business day.",
+    "Not quite ready to book your Workflow Audit? Tell us about one back-office task that eats your week and we'll get back to you - usually the same business day.",
   responseTime: "We typically reply within one business day.",
 } as const;
 
@@ -1055,9 +1202,9 @@ export const contact = {
 
 export const pricing = {
   meta: {
-    title: "Pricing | tryacowork",
+    title: "Pricing | AI Automation for Your Back-Office | tryacowork",
     description:
-      "How tryacowork is priced: start with a low-commitment Workflow Audit, move to a fixed-scope first build, then a simple monthly retainer. Every project is scoped on a call.",
+      "Simple build + managed retainer. Start with a low-commitment workflow audit.",
   },
   h1: "Simple, scoped pricing",
   intro:
@@ -1065,45 +1212,48 @@ export const pricing = {
   tiers: [
     {
       name: "Workflow Audit",
-      tagline: "Start here. Low commitment, high clarity.",
-      forWho: "Teams who feel busy but can't say which tasks to automate first.",
+      tagline: "Start here.",
+      forWho:
+        "A low-commitment audit that maps where your hours go and gives you a prioritized roadmap and a custom quote.",
       includes: [
         "Time-mapping of your team's recurring work",
-        "Repetitive tasks ranked by hours saved",
-        "A prioritised automation roadmap",
+        "Repetitive back-office tasks ranked by hours saved",
+        "A prioritized automation roadmap",
         "No obligation to build afterwards",
       ],
-      cta: "Start with an audit",
+      cta: "Book your Workflow Audit",
       featured: false,
     },
     {
       name: "First Workflow Build",
-      tagline: "Your highest-priority automation, live.",
-      forWho: "Teams ready to automate their biggest time-sink.",
+      tagline: "Your highest-priority workflow, live.",
+      forWho:
+        "Your highest-priority workflow, designed, built, tested and integrated. Scoped to you, so pricing is custom.",
       includes: [
         "Design, build and testing against your real tools",
-        "Integration into your CRM, inbox and docs",
+        "Integration into your accounting software, inbox and docs",
         "Human-in-the-loop review on anything ambiguous",
         "A walkthrough and handover - not a manual",
       ],
-      cta: "Scope a build",
+      cta: "Book your Workflow Audit",
       featured: true,
     },
     {
       name: "Ongoing Management",
-      tagline: "We run it, watch it, and keep it sharp.",
-      forWho: "Teams who want workflows that keep improving as they grow.",
+      tagline: "We never just hand it back.",
+      forWho:
+        "A simple monthly retainer to monitor, fix and expand your workflows. We never just hand it back.",
       includes: [
         "Monitoring for accuracy and drift",
         "Fixes shipped before you notice",
         "Expansion into the next time-sink",
         "A simple monthly retainer - no surprise invoices",
       ],
-      cta: "Talk retainers",
+      cta: "Book your Workflow Audit",
       featured: false,
     },
   ],
-  note: "No public price list - because the right workflows depend on how your business runs. Book a call and we'll scope it honestly, starting with the audit.",
+  note: "No public price list, because the right workflows depend on how your business runs. Book an audit and we'll give you a clear, fixed quote.",
 } as const;
 
 /* ------------------------------------------------------------------ */

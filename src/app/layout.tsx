@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 
 import { Header } from "@/components/layout/Header";
+import { TrustBar } from "@/components/sections/TrustBar";
 import { Footer } from "@/components/layout/Footer";
 import { StickyMobileCTA } from "@/components/layout/StickyMobileCTA";
 import { Toaster } from "@/components/ui/sonner";
@@ -39,11 +40,11 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "AI Workflow Automation for Small Teams | tryacowork",
+    default: "AI Automation for Small Businesses & Accounting Firms | tryacowork",
     template: "%s | tryacowork",
   },
   description:
-    "tryacowork turns complex, manual work into AI workflows that run on their own - designed, built and run end-to-end for small teams. Workflows, automated.",
+    "Done-for-you AI workflows for bookkeeping, bills, invoicing and onboarding. Built and managed for small businesses and the firms that serve them. First workflow live in 4 weeks.",
 };
 
 export default function RootLayout({
@@ -71,6 +72,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <Header />
+        <TrustBar />
         <main id="main" className="flex-1">
           {children}
         </main>

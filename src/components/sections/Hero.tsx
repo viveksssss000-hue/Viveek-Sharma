@@ -8,20 +8,33 @@ import { home } from "@/lib/content";
 
 const automations = [
   "bookkeeping",
-  "onboarding",
-  "support tickets",
+  "bills & AP",
+  "invoicing",
   "reporting",
-  "lead routing",
+  "month-end close",
+  "onboarding",
 ];
 
 const marqueeItems = ["Map", "Design", "Automate", "Run"];
 
 export function Hero() {
   const { hero } = home;
-  // Emphasise the last word of the H1 in violet (e.g. "automated.").
-  const words = hero.h1.trim().split(" ");
-  const last = words.pop();
-  const lead = words.join(" ");
+  // Emphasise a key word of the H1 in violet (e.g. "busywork"); fall back to
+  // the last word if the keyword isn't present.
+  const keyword = "busywork";
+  const kwIndex = hero.h1.toLowerCase().indexOf(keyword);
+  const h1Parts =
+    kwIndex === -1
+      ? (() => {
+          const words = hero.h1.trim().split(" ");
+          const accent = words.pop() ?? "";
+          return { before: `${words.join(" ")} `, accent, after: "" };
+        })()
+      : {
+          before: hero.h1.slice(0, kwIndex),
+          accent: hero.h1.slice(kwIndex, kwIndex + keyword.length),
+          after: hero.h1.slice(kwIndex + keyword.length),
+        };
 
   return (
     <section className="relative overflow-hidden border-b border-border bg-background">
@@ -39,21 +52,23 @@ export function Hero() {
             style={{ animationDelay: "0.05s" }}
           >
             <span aria-hidden="true" className="pulse-dot" />
-            AI workflow studio for small teams
+            AI automation for your back-office
           </span>
           <h1
             className="hero-rise text-4xl sm:text-5xl lg:text-[3.75rem] lg:leading-[1.02]"
             style={{ animationDelay: "0.12s" }}
           >
-            {lead} <span className="text-primary">{last}</span>
+            {h1Parts.before}
+            <span className="text-primary">{h1Parts.accent}</span>
+            {h1Parts.after}
           </h1>
           <p
             className="hero-rise flex items-center gap-2 font-mono text-base text-muted-foreground"
             style={{ animationDelay: "0.16s" }}
           >
             <span className="sr-only">
-              We automate bookkeeping, onboarding, support tickets, reporting,
-              lead routing and more.
+              We automate bookkeeping, bills and AP, invoicing, reporting,
+              month-end close and onboarding.
             </span>
             <span aria-hidden="true" className="inline-flex items-center gap-2">
               <span className="text-subtle">now automating</span>

@@ -25,7 +25,7 @@ export function LogoBar() {
               Works with the tools you already use
             </p>
             <p className="max-w-xl text-sm text-muted-foreground">
-              From the AI models we build on to the apps your team lives in —
+              From the AI models we build on to the apps your team lives in -
               we connect to your stack, not the other way around.
             </p>
           </div>

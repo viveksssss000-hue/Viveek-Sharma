@@ -26,7 +26,7 @@ export default function BookDemoPage() {
         {/* Intro */}
         <div className="max-w-2xl">
           <span className="font-mono text-xs font-medium uppercase tracking-[0.22em] text-primary">
-            Book a Demo
+            Workflow Audit
           </span>
           <h1 className="mt-4 text-4xl sm:text-5xl">{bookDemo.h1}</h1>
           <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
