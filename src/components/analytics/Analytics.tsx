@@ -11,7 +11,10 @@ const DEFAULT_GA_ID = "G-8BFL9YEGKE";
  * opt-in, so no events are sent until the visitor accepts analytics cookies.
  */
 export function Analytics() {
-  const envId = process.env.NEXT_PUBLIC_GA_ID;
+  // Accept either env var name (NEXT_PUBLIC_GA_MEASUREMENT_ID is preferred);
+  // fall back to the built-in default so tracking works without any env set.
+  const envId =
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? process.env.NEXT_PUBLIC_GA_ID;
   const id = envId && envId !== "G-XXXXXXX" ? envId : DEFAULT_GA_ID;
   if (!id) return null;
   return <GoogleAnalytics gaId={id} />;
