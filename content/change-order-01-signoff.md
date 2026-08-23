@@ -13,7 +13,7 @@ v1.0, 22 August 2026.
 | CO-04 | Build-consequence note edited | **Not applicable to the build** | A specification-document edit with no site copy. The intent is recorded where it matters: `reservedRoutes` in `src/content/global.ts` names audit support as the future second service page, and no navigation, template or card grid assumes more than one service line. |
 | CO-05 | Two URLs reserved and returning 404 | **Done** | Recorded in `reservedRoutes`. Both return HTTP 404, appear in no sitemap, navigation, mobile menu or footer, and are mentioned in no copy, alt text, meta tag or structured data. `npm run qa` checks all of it. |
 | CO-06 | Navigation data-driven and tested at six items | **Done, with a fix** | Both the desktop header and the mobile menu already read one array (`mainNav` + `mobileNavExtra`). The six-item test **failed** at 1024px: six links plus the button needed 944px against 928px available, and the nav wrapped. Fixed with two of CO-06's three permitted remedies, applied conditionally on item count so today's five-link header is visually unchanged: 12px gaps and 15px links below 1280px, only when six or more items exist. Re-measured at 888px. No dropdown. Mobile menu confirmed at eight items. |
-| CO-07 | Logo note added, phrase banned site-wide | **Phrase ban done. Wordmark rule NEEDS A DECISION - see below.** | "Accounting and Compliance Outsourcing" removed from the codebase entirely, not merely hidden, and `npm run qa` fails if it returns anywhere including meta tags and JSON-LD. "Compliant" near a security framework is likewise checked. The wordmark instruction conflicts with a later instruction from the client; see the open question below. |
+| CO-07 | Logo note added, phrase banned site-wide | **Done, with one deviation the client authorised** | Phrase ban: "Accounting and Compliance Outsourcing" removed from the codebase entirely, not merely hidden, and `npm run qa` fails if it returns anywhere including meta tags and JSON-LD. "Compliant" near a security framework is likewise checked. **Wordmark: the client chose tryACOwork on 23 August, overriding CO-07's instruction to set the wordmark as "Tryacowork" and not to build the ACO treatment in markup.** See the deviation note below. |
 | CO-08 | Two Security page blocks added | **Done** | Block A2 on SQMS No. 1 and the quality management system, inserted after the bookkeeping block. Block C2 on PCAOB registration and Form AP, inserted after "what never transfers", which itself gained the closing sentence about the exclusions list. Both new blocks render a visible `[CONFIRM WITH US CPA]` marker. No download, form or gated asset was built for the protocol - the copy says "ask us on the call", as instructed. |
 | CO-09 | Certification wording rules added | **Done** | Recorded against the copy in `src/content/security.ts` and enforced: `npm run qa` fails on "compliant" used near a framework. The three existing `[CONFIRM]` certification lines are untouched pending Section 3 item 3. |
 | CO-10 | Claims policy rules added | **Done, and blocking** | The US CPA sign-off requirement is recorded in `content/settings.json` under `professionalStandardsSignOff` and reported by `npm run handover` until a name and date are entered. It blocks launch of the Home page and the Security page. The no-extension rule for research findings and the no-implied-certification rule are recorded in `content/blog-plan.md` and in the security copy. |
@@ -50,21 +50,42 @@ pages only in the five approved places, all verified by `npm run qa`:
 "workpaper" appears nowhere on the launch pages. The blog is exempt, as the
 change order allows, because article 15's title legitimately contains the word.
 
-## One contradiction, not resolved
+## Authorised deviation - CO-07, the wordmark
 
-The change order says: *if any change seems to contradict another, stop and ask
-before you build it. Do not resolve a contradiction by choosing.* So this one is
-being raised rather than decided.
+CO-07 says the wordmark is "Tryacowork", and MUST NOT be split into spans or have
+the ACO letter treatment built in CSS. Its stated reason: a wordmark rebuilt in
+HTML will not match the client's master file, and will break at some size.
 
-**CO-07 says the wordmark is "Tryacowork", and MUST NOT split it into spans or
-build the ACO letter treatment in CSS** - because a wordmark rebuilt in HTML will
-not match the client's master file and will break at some size.
+The client instructed otherwise on 23 August - *"Tryacowork please write it like
+this everywhere: tryACOwork"* - and confirmed that choice when the conflict was
+put to them. **So the client's instruction governs and CO-07's wordmark paragraph
+is superseded.** Specification v1.0 section 4.6 and CO-07 should both be
+corrected to record it.
 
-**The client separately instructed, in writing on 23 August: "Tryacowork please
-write it like this everywhere: tryACOwork".** That was applied across the whole
-site, and the header lockup is built from live text with the ACO in spans - which
-is what CO-07 forbids.
+What that means in the build:
 
-Both instructions are the client's, both dated 23 August, and they cannot both be
-followed. Neither has been reversed unilaterally. See the open question in the
-handover message for the two ways forward.
+- The name is written **tryACOwork** in all copy, and stays lower-case at the
+  start of a sentence. `npm run qa` fails on "Tryacowork", "TRYACOWORK",
+  "TryACOwork" or "Try a cowork" appearing in rendered text, so it cannot drift
+  back - including if someone later works from v1.0.
+- The header and footer lockup is built from live text: Spectral for "try" and
+  "work", Archivo caps in ochre for "ACO", with the square mark alongside. This
+  is the treatment CO-07 prohibited.
+- The domain, the email address and every URL stay all-lower-case
+  (tryacowork.com), because that is what they are.
+
+**CO-07's technical worry was legitimate and has been addressed rather than
+dismissed.** Two mitigations:
+
+1. `npm run interactions` now checks the lockup at both sizes it is used at, in
+   both colour variants, asserting the ACO carries the accent colour, the lockup
+   stays on one line, and it never overflows its container. If it breaks at a
+   size, a test says so rather than a customer.
+2. Live text degrades safely: if Spectral fails to load, "try" and "work" fall
+   back to Georgia and "ACO" to a system sans, both keeping their colours and
+   weights. The lockup stays legible and correctly coloured.
+
+**The cleaner fix remains available and is still recommended:** supply an SVG
+master with the ACO treatment baked in, and `src/components/layout/Logo.tsx` can
+be swapped for an `<Image>` in one edit. That would satisfy CO-07's intent and
+the client's spelling at the same time.

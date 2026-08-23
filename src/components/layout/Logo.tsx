@@ -3,6 +3,20 @@ import { cn } from "@/lib/utils";
 /**
  * The tryACOwork lockup, built as live text rather than an image file.
  *
+ * AUTHORISED DEVIATION FROM CHANGE ORDER 01, CO-07
+ * CO-07 forbids exactly what this component does - splitting the wordmark into
+ * spans to build the ACO treatment in markup - on the grounds that a wordmark
+ * rebuilt in HTML will not match the master file and will break at some size.
+ * The client overrode that on 23 August, choosing "tryACOwork" everywhere and
+ * confirming it when the conflict was put to them.
+ *
+ * The worry was fair, so it is guarded rather than ignored:
+ * `npm run interactions` asserts the lockup renders on one line at both sizes
+ * used, in both variants, with the ACO in the accent colour and no overflow.
+ *
+ * If a real SVG master arrives, replace this whole component with an <Image>.
+ * That is the better answer and nothing else needs to change.
+ *
  * WHY LIVE TEXT AND NOT AN SVG FILE (spec 4.6 asks for SVG)
  * The brand kit ships PNGs only. Rendering the lockup from the real webfonts
  * gives everything the SVG requirement was asking for - resolution
