@@ -20,7 +20,15 @@ import { useConsent } from "@/lib/hooks";
  * property, not here.
  */
 export function Analytics() {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  /**
+   * Two names, because the previous site on this domain used
+   * NEXT_PUBLIC_GA_MEASUREMENT_ID and that is what is already configured in
+   * hosting. Reading only NEXT_PUBLIC_GA_ID would have meant analytics silently
+   * collecting nothing after the changeover, which is the kind of failure nobody
+   * notices for a month. Either name works; the newer one wins if both are set.
+   */
+  const gaId =
+    process.env.NEXT_PUBLIC_GA_ID ?? process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
   const consent = useConsent();
 
   const enabled =
