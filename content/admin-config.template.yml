@@ -131,6 +131,30 @@ collections:
               - { name: founderName, label: Founder name, widget: string }
               - { name: founderRole, label: Founder role, widget: string }
 
+          - name: search
+            label: Search engines
+            widget: object
+            collapsed: true
+            fields:
+              - name: googleSiteVerification
+                label: Google Search Console token
+                widget: string
+                required: false
+                hint: >
+                  From Google Search Console, "HTML tag" verification. Paste only
+                  the content value, not the whole tag - the long string after
+                  content=. Verifying is what lets you ask Google to recrawl a
+                  page instead of waiting for it. Do NOT use the Google
+                  Analytics verification option: this site does not load
+                  Analytics until a visitor accepts cookies, so that check finds
+                  nothing and fails.
+              - name: bingSiteVerification
+                label: Bing Webmaster Tools token
+                widget: string
+                required: false
+                hint: >
+                  Optional, and the same idea for Bing. Blank renders no tag.
+
           - name: booking
             label: Booking
             widget: object

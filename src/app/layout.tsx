@@ -11,6 +11,7 @@ import { StickyMobileCTA } from "@/components/layout/StickyMobileCTA";
 import { OrganizationSchema, WebSiteSchema } from "@/components/seo/JsonLd";
 import { microcopy } from "@/content/global";
 import { meta } from "@/content/seo";
+import { searchSettings } from "@/lib/settings";
 import { site } from "@/lib/site";
 
 /**
@@ -62,6 +63,18 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
+  /**
+   * Search-console ownership, when a token has been entered in settings. Both
+   * keys are omitted entirely while empty - Next renders no tag for undefined,
+   * and an empty one reads to Google as a failed verification.
+   *
+   * Verifying is what unlocks "Request indexing", which is the only way to ask
+   * Google to recrawl a page rather than wait for it.
+   */
+  verification: {
+    ...(searchSettings.google ? { google: searchSettings.google } : {}),
+    ...(searchSettings.bing ? { other: { "msvalidate.01": searchSettings.bing } } : {}),
+  },
   // The favicon and the Apple touch icon come from app/icon.png and
   // app/apple-icon.png, which Next.js links automatically, so there is no
   // hand-written icon list here to fall out of step with the files.

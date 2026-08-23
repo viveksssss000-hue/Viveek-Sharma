@@ -26,11 +26,43 @@ import { NextResponse, type NextRequest } from "next/server";
  * engines, and nothing more.
  */
 
+/**
+ * Keeps every deployment except the real domain out of the search index.
+ *
+ * Vercel gives each push its own permanent *.vercel.app URL, and each branch
+ * one too. They serve the identical site, so anything Google finds there is a
+ * duplicate of the live domain competing with it - and the branch holding the
+ * PREVIOUS site is the worst case, because it would keep the old business
+ * crawlable long after the domain stopped serving it.
+ *
+ * Matching on the .vercel.app suffix rather than on an allowlist of production
+ * hostnames is deliberate. An allowlist has a failure mode this does not: add a
+ * custom domain, forget to list it, and the live site quietly goes noindex.
+ * This rule cannot misfire that way - it can only ever apply to a Vercel
+ * deployment URL, never to a domain the client owns.
+ *
+ * X-Robots-Tag rather than a robots.txt rule, because robots.txt is prerendered
+ * at build time and cannot see which host the request arrived on. The header is
+ * also the stronger signal: it removes a URL already in the index, where a
+ * disallow only stops the recrawl that would have removed it.
+ */
+function isPreviewHost(request: NextRequest) {
+  const host = (request.headers.get("host") ?? "").split(":")[0].toLowerCase();
+  return host.endsWith(".vercel.app");
+}
+
 export function middleware(request: NextRequest) {
   const password = process.env.STAGING_PASSWORD;
 
   // Production leaves this unset, so the site is public as normal.
-  if (!password) return NextResponse.next();
+  if (!password) {
+    if (isPreviewHost(request)) {
+      const response = NextResponse.next();
+      response.headers.set("X-Robots-Tag", "noindex, nofollow");
+      return response;
+    }
+    return NextResponse.next();
+  }
 
   const header = request.headers.get("authorization");
 

@@ -12,6 +12,8 @@
  *   13.2  every internal link resolves; the 404 returns a real 404
  *    5.2  every URL the previous site published still resolves, permanently
  *         and in a single hop
+ *    9.2  the live domain is indexable - no noindex header, meta tag or
+ *         blanket robots.txt disallow
  *   13.3  no horizontal scrolling at 360, 390, 768, 1024, 1280, 1440
  *   13.5  one H1 per page, no skipped heading levels, alt text on every image,
  *         a label for every form field, a skip link, correct landmarks,
@@ -604,6 +606,42 @@ for (const width of WIDTHS) {
     if (status >= 400) record("FAIL", href, `internal link returns HTTP ${status}`);
   }
   await page.close();
+}
+
+/* ------------------------------------------------------------------ */
+/* Indexability: the real domain must never be noindex                   */
+/* ------------------------------------------------------------------ */
+
+/**
+ * The counterweight to the noindex rule in middleware.ts, which keeps Vercel's
+ * *.vercel.app deployment URLs out of the index.
+ *
+ * That rule matches on a hostname suffix, so it cannot fire on a real domain -
+ * but a noindex reaching production is the single most expensive mistake
+ * available on a website, it is invisible in the page, and it would be found by
+ * a client watching traffic disappear rather than by anyone reading code. So it
+ * gets a check of its own, from both directions: the header and the meta tag.
+ *
+ * Skipped when NEXT_PUBLIC_STAGING is set, which is a deployment that is
+ * SUPPOSED to be unindexable.
+ */
+if (process.env.NEXT_PUBLIC_STAGING !== "true") {
+  const response = await fetch(BASE);
+  const header = response.headers.get("x-robots-tag") ?? "";
+  if (/noindex/i.test(header)) {
+    record("FAIL", "/", `the live site sends X-Robots-Tag: ${header}`);
+  }
+
+  const html = await response.text();
+  const robotsMeta = /<meta[^>]+name="robots"[^>]+content="([^"]*)"/i.exec(html);
+  if (robotsMeta && /noindex/i.test(robotsMeta[1])) {
+    record("FAIL", "/", `the live site has <meta name="robots" content="${robotsMeta[1]}">`);
+  }
+
+  const robotsTxt = await (await fetch(`${BASE}/robots.txt`)).text();
+  if (/^\s*Disallow:\s*\/\s*$/im.test(robotsTxt)) {
+    record("FAIL", "/robots.txt", "the live site disallows crawling of everything");
+  }
 }
 
 /* ------------------------------------------------------------------ */

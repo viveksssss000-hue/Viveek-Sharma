@@ -71,6 +71,26 @@ export const business = {
   founderRole: value(settings.business.founderRole) ?? "Co-founder",
 } as const;
 
+/**
+ * Search-console ownership tokens.
+ *
+ * Both are the "HTML tag" verification method, which is a meta tag in the head.
+ * Empty means no tag is rendered at all - an empty content attribute would be a
+ * failed verification rather than an absent one.
+ *
+ * The DNS method is the alternative and needs no deploy, but this one is here
+ * because it is the option that does not require touching the domain's records.
+ *
+ * DO NOT use Search Console's Google Analytics verification method on this site.
+ * It looks for the gtag snippet in the page, and this site does not load GA
+ * until a visitor accepts cookies (spec 11.1), so the check finds nothing and
+ * fails - for a reason that is nowhere near where anyone would look for it.
+ */
+export const searchSettings = {
+  google: value(settings.search?.googleSiteVerification),
+  bing: value(settings.search?.bingSiteVerification),
+} as const;
+
 export const bookingSettings = {
   /** Env wins, so staging can point at a test event without a commit. */
   calLink: process.env.NEXT_PUBLIC_CAL_LINK ?? value(settings.booking.calLink),
