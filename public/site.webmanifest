@@ -1,0 +1,21 @@
+{
+  "name": "tryACOwork",
+  "short_name": "tryACOwork",
+  "description": "Trained, dedicated bookkeepers in India for US CPA and accounting firms.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#faf8f4",
+  "theme_color": "#faf8f4",
+  "icons": [
+    {
+      "src": "/brand/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

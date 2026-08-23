@@ -1,0 +1,277 @@
+# Editor configuration for /admin (Sveltia CMS, Decap-compatible schema).
+#
+# What this exists to satisfy: spec 9.1 requires that the client can edit page
+# copy and publish blog articles without the developer. Everything the business
+# actually needs to change is here - prices, the office city, staff profiles,
+# testimonials, the founder story, the legal pages, and the blog.
+#
+# Saving commits to the repository, which triggers a deploy. So an edit is
+# always reflected in the code, and the code is always what the site shows.
+#
+# THIS IS A TEMPLATE, NOT THE LIVE CONFIG.
+# scripts/build-admin-config.mjs copies it to public/admin/config.yml at build
+# time, filling the repo placeholder below from the GITHUB_REPO environment
+# variable. Edit this file; the generated one is gitignored and rewritten every
+# build.
+
+backend:
+  name: github
+  repo: __GITHUB_REPO__
+  branch: main
+  # The OAuth handshake is served by this site's own API routes, so there is no
+  # third-party auth proxy to depend on or pay for.
+  base_url: https://www.tryacowork.com
+  auth_endpoint: api/admin/auth
+
+# Uploaded photographs land here and are referenced as /images/<file>.
+media_folder: public/images
+public_folder: /images
+
+publish_mode: simple
+site_url: https://www.tryacowork.com
+display_url: https://www.tryacowork.com
+
+collections:
+  # ---------------------------------------------------------------- Articles
+  - name: posts
+    label: Blog articles
+    label_singular: article
+    folder: content/posts
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}}"
+    sortable_fields: [date, title]
+    description: >
+      One file per article. The slug becomes the URL, so make it the keyword
+      phrase and never change it after publishing - see the content plan in the
+      build specification, section 12.
+    fields:
+      - { name: title, label: Title, widget: string, hint: "Shown as the article's H1." }
+      - name: metaTitle
+        label: Title tag (search results)
+        widget: string
+        required: false
+        hint: "Up to 60 characters. Leave blank to use the title plus | tryACOwork."
+      - name: description
+        label: Meta description
+        widget: text
+        hint: "150 to 158 characters. This is the sentence people read in Google."
+      - { name: date, label: Published, widget: datetime, date_format: YYYY-MM-DD, time_format: false, picker_utc: true }
+      - { name: updated, label: Last updated, widget: datetime, date_format: YYYY-MM-DD, time_format: false, picker_utc: true, required: false }
+      - { name: author, label: Author, widget: string, required: false, default: "Naveen Gupta" }
+      - { name: authorRole, label: Author role, widget: string, required: false, default: "Co-founder" }
+      - { name: image, label: Header image, widget: image, required: false, hint: "800x450. Optional." }
+      - name: imageAlt
+        label: Header image description
+        widget: string
+        required: false
+        hint: "Describe what is in the photograph, in a sentence, for someone who cannot see it. Not keywords."
+      - name: category
+        label: Category
+        widget: string
+        required: false
+        hint: "Stored but not displayed yet. Safe to leave blank."
+      - name: related
+        label: Related article slugs
+        widget: list
+        required: false
+        field: { name: slug, label: Slug, widget: string }
+        hint: "Two slugs. Shown as Read next at the end of the article."
+      - name: draft
+        label: Draft
+        widget: boolean
+        default: true
+        hint: "A draft is not published, not listed, and not in the sitemap."
+      - name: body
+        label: Article
+        widget: markdown
+        hint: >
+          Use ## for main sections and ### for sub-points, in order. Every
+          statistic needs its source and year named in the text.
+
+  # ------------------------------------------------------- Business settings
+  - name: settings
+    label: Site settings
+    files:
+      - name: business
+        label: Business details and prices
+        file: content/settings.json
+        description: >
+          The facts the website states about the firm. Changing a price here
+          changes it on the Home page, the Services page, the comparison table,
+          the FAQ, the search-engine data and the social sharing image at once.
+        fields:
+          - name: business
+            label: The firm
+            widget: object
+            fields:
+              - { name: legalName, label: Registered company name, widget: string, hint: "Exactly as registered. Appears in the footer and the legal pages." }
+              - { name: officeCity, label: Office city, widget: string, hint: "The city in India where the office is." }
+              - { name: addressStreet, label: Street address, widget: string, required: false }
+              - { name: addressRegion, label: State, widget: string, required: false }
+              - { name: addressPostalCode, label: Postcode, widget: string, required: false }
+              - { name: email, label: Contact email, widget: string, hint: "A real mailbox that is monitored." }
+              - name: phone
+                label: Phone number
+                widget: string
+                required: false
+                hint: >
+                  Leave blank unless the number will actually be answered during
+                  US business hours. Blank hides it everywhere.
+              - { name: linkedin, label: LinkedIn company page, widget: string, required: false, hint: "Blank hides the link. An empty social link is worse than none." }
+              - name: teamSizeStatement
+                label: Team size sentence
+                widget: string
+                required: false
+                hint: >
+                  For example "There are nine of us today." An honest small
+                  number is more credible than silence. Blank omits the sentence.
+              - { name: founderName, label: Founder name, widget: string }
+              - { name: founderRole, label: Founder role, widget: string }
+
+          - name: booking
+            label: Booking
+            widget: object
+            fields:
+              - name: calLink
+                label: Cal.com event link
+                widget: string
+                required: false
+                hint: >
+                  In the form "username/20min". The Cal.com event must be set to
+                  redirect to /thank-you-call after a booking, or bookings will
+                  not be counted. Blank shows an email fallback instead of a
+                  broken calendar.
+
+          - name: pricing
+            label: Prices
+            widget: object
+            fields:
+              - { name: fullTimeMonthly, label: Full-time, per month (USD), widget: number, value_type: int, min: 1 }
+              - { name: partTimeMonthly, label: Part-time, per month (USD), widget: number, value_type: int, min: 1 }
+              - { name: extraHourlyRate, label: Extra hours, per hour (USD), widget: number, value_type: int, min: 1 }
+              - { name: usHoursPremiumMonthly, label: Full US-hours premium, per month (USD), widget: number, value_type: int, min: 0 }
+
+          - name: pilot
+            label: Free pilot
+            widget: object
+            fields:
+              - name: monthlyLimitLine
+                label: Monthly limit sentence
+                widget: text
+                required: false
+                hint: "Blank removes the line rather than publishing a vague limit."
+
+          - name: staff
+            label: Staff profiles (Home page)
+            widget: object
+            fields:
+              - name: profilesConfirmed
+                label: These are real people who have given permission
+                widget: boolean
+                default: false
+                hint: >
+                  Leave off until every profile below describes an actual team
+                  member, with their photograph and their permission. While it
+                  is off, the page shows the hiring standard instead - which is
+                  honest. Publishing invented people would destroy the trust
+                  this section exists to create.
+              - name: profiles
+                label: Profiles
+                widget: list
+                required: false
+                fields:
+                  - { name: name, label: Name, widget: string, hint: "First name and last initial only, e.g. Priya S." }
+                  - { name: role, label: Role line, widget: string, hint: "e.g. Senior bookkeeper - 6 years on US books" }
+                  - { name: credentials, label: Credentials, widget: list, field: { name: item, label: Credential, widget: string }, hint: "Up to three." }
+                  - { name: software, label: Software, widget: list, field: { name: item, label: Package, widget: string }, hint: "Up to five. Names only, no logos." }
+                  - { name: overlap, label: Working hours overlap, widget: string, hint: "e.g. Overlaps 7:00am to 11:00am Eastern" }
+                  - { name: photo, label: Photograph, widget: image, required: false, hint: "400x400. A real photograph of this person, or none at all." }
+
+          - name: testimonials
+            label: Testimonials (Home page)
+            widget: list
+            required: false
+            summary: "{{fields.name}} - {{fields.firm}}"
+            fields:
+              - { name: quote, label: Quote, widget: text }
+              - { name: name, label: Full name, widget: string }
+              - { name: role, label: Role, widget: string }
+              - { name: firm, label: Firm, widget: string, hint: "If permission for the firm name was not given, use e.g. 6-person CPA firm." }
+              - { name: state, label: State, widget: string }
+              - { name: photo, label: Photograph, widget: image, required: false, hint: "The real person's photograph, or none. Never a stock headshot." }
+
+          - name: about
+            label: About page
+            widget: object
+            fields:
+              - name: founderStory
+                label: Why we started
+                widget: text
+                required: false
+                hint: >
+                  150 to 250 words in your own voice: what you did before this,
+                  the moment that led to starting tryACOwork, and what you think
+                  most offshore providers get wrong. Specific beats polished.
+                  Leave a blank line between paragraphs.
+
+          - name: security
+            label: Security page
+            widget: object
+            fields:
+              - name: insuranceStatement
+                label: Insurance cover
+                widget: text
+                required: false
+                hint: >
+                  For example "Professional indemnity and cyber liability cover
+                  of $X, held with Y." Blank omits the item entirely, which is
+                  better than describing it vaguely.
+
+          - name: images
+            label: Photographs
+            widget: object
+            fields:
+              - name: hero
+                label: Home page hero
+                widget: image
+                required: false
+                hint: >
+                  1600x1100. Two bookkeepers at a desk in daylight, one pointing
+                  at a screen. Real, warm, unposed - never stock photography.
+
+  # ------------------------------------------------------------ Legal pages
+  - name: legal
+    label: Legal pages
+    files:
+      - name: privacy
+        label: Privacy Policy
+        file: content/legal/privacy-policy.md
+        description: >
+          The real policy must be written for this business and checked before
+          launch. While Status is "brief", the page shows a notice saying so.
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: updated, label: Last updated, widget: datetime, date_format: YYYY-MM-DD, time_format: false, picker_utc: true }
+          - name: status
+            label: Status
+            widget: select
+            options: [brief, draft, live]
+            hint: >
+              draft = describes the site accurately but not lawyer-reviewed;
+              live = your adviser has approved it. Only live removes the notice
+              from the top of the page.
+          - { name: body, label: Policy, widget: markdown }
+      - name: terms
+        label: Terms of Service
+        file: content/legal/terms.md
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: updated, label: Last updated, widget: datetime, date_format: YYYY-MM-DD, time_format: false, picker_utc: true }
+          - name: status
+            label: Status
+            widget: select
+            options: [brief, draft, live]
+          - { name: body, label: Terms, widget: markdown }

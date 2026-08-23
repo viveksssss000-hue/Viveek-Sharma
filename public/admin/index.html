@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>tryACOwork editor</title>
+    <link rel="icon" href="/brand/favicon-256.png" />
+    <style>
+      /* Shown only until the editor boots, or if it cannot. */
+      #boot {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        max-width: 34rem;
+        margin: 12vh auto;
+        padding: 0 1.5rem;
+        color: #1b1a17;
+        line-height: 1.6;
+      }
+      #boot h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+      #boot code { background: #efebe3; padding: 0.1em 0.3em; border-radius: 4px; }
+      body { background: #faf8f4; margin: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="boot">
+      <h1>Loading the editor…</h1>
+      <p>
+        If this message stays on screen, the editor could not start. The usual
+        cause is that the GitHub sign-in is not configured yet: the deployment
+        needs <code>GITHUB_OAUTH_CLIENT_ID</code> and
+        <code>GITHUB_OAUTH_CLIENT_SECRET</code> set, and
+        <code>backend.repo</code> in <code>/admin/config.yml</code> pointing at
+        the right repository.
+      </p>
+      <p><a href="/">Back to the website</a></p>
+    </div>
+
+    <!--
+      The editor bundle is served from this domain rather than a CDN. Two
+      reasons: the site's Content-Security-Policy does not allow third-party
+      scripts, and a CDN outage should not be able to take the editor down.
+      Update it by re-downloading the file - see README, "Updating the editor".
+    -->
+    <script src="/admin/sveltia-cms.js" type="module"></script>
+  </body>
+</html>

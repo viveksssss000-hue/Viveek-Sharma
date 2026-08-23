@@ -1,0 +1,47 @@
+{
+  "name": "tryacowork-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "predev": "node scripts/build-admin-config.mjs",
+    "dev": "next dev",
+    "prebuild": "node scripts/build-admin-config.mjs",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "handover": "node scripts/handover.mjs",
+    "qa": "node scripts/qa.mjs",
+    "interactions": "node scripts/interactions.mjs",
+    "shots": "node scripts/shots.mjs"
+  },
+  "dependencies": {
+    "@calcom/embed-react": "^1.5.3",
+    "@next/third-parties": "^16.2.6",
+    "@radix-ui/react-slot": "^1.2.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "gray-matter": "^4.0.3",
+    "marked": "^18.0.10",
+    "next": "16.2.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "resend": "^6.12.4",
+    "tailwind-merge": "^3.6.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "puppeteer-core": "^24.43.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "allowScripts": {
+    "sharp@0.34.5": true,
+    "unrs-resolver@1.12.2": true
+  }
+}

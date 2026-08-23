@@ -1,0 +1,10 @@
+Blog articles live here, one markdown file per article.
+
+The editor at /admin writes them; they can equally be added by hand. The file
+name becomes the URL, so make it the keyword phrase and never change it after
+publishing - a published URL must not move without a 301 (spec 5.2).
+
+The six-month content plan is section 12 of the build specification: 24 articles
+in priority order, each with its target search phrase and what must be in it.
+Article 1, "What an offshore bookkeeper actually costs a CPA firm in 2026", is
+the highest-intent search in the category.
