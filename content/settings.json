@@ -41,7 +41,7 @@
   "professionalStandardsSignOff": {
     "cpaName": "",
     "date": "",
-    "note": "Written sign-off from a named US CPA on every statement about what the AICPA Code, the PCAOB, SQMS No. 1 or the IRC requires. Blocks launch of the Home page and the Security page (CO-10)."
+    "note": "The client decided on 23 August to publish without a sign-off on file, so the [CONFIRM WITH US CPA] markers no longer render. CO-10 recommended one. The copy is hedged - it opens by saying it is a summary, not legal advice, and to confirm your own position with your adviser or state board - and that hedge is what makes publishing it defensible. Getting a CPA to read it remains worth doing; it is now a recommendation rather than a launch blocker."
   },
   "confirmed": [
     "legalName",
@@ -49,7 +49,10 @@
     "address",
     "noTeamSizeSentence",
     "noInsuranceStatement",
-    "monthlyPrices"
+    "monthlyPrices",
+    "extraHourlyRate",
+    "usHoursPremium",
+    "professionalStandardsWording"
   ],
   "deferred": [
     "testimonials",

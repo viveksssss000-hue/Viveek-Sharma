@@ -83,19 +83,22 @@ need(
   "The price block AND Home FAQ answer 4. Both render from one variable, so they resolve together"
 );
 
-// CO-10 and Section 3 item 4.
+// CO-10 and Section 3 item 4. The client chose on 23 August to publish without
+// a sign-off, so this is a recommendation now rather than a launch blocker - but
+// it stays on the list, because "decided against for now" and "forgotten" look
+// identical six months later.
 need(
-  !String(settings.professionalStandardsSignOff?.cpaName ?? "").trim() ||
-    !String(settings.professionalStandardsSignOff?.date ?? "").trim(),
-  "The name and date of the US CPA who signed off the professional-standards wording, in writing",
-  "BLOCKS LAUNCH of the Home page and the Security page. Covers /security's obligations section, Home FAQ answer 3, the Security FAQ, and blog articles 2 and 13"
+  !String(settings.professionalStandardsSignOff?.cpaName ?? "").trim(),
+  "RECOMMENDED, not blocking: have a US CPA read the professional-standards wording",
+  "/security's obligations section, Home FAQ 3, the Security FAQ, and blog articles 2 and 13. Published without sign-off by decision; the copy is hedged as a summary and not legal advice",
+  "professionalStandardsWording"
 );
 
 // CO-08: the page now offers to send this, so it has to exist.
 need(
   !confirmed.has("supervisionProtocol"),
-  "The supervision and confidentiality protocol, at least a draft",
-  "/security offers to send it on the call. No download is built, per CO-08 - but the offer must be real"
+  "The supervision and confidentiality protocol, at least a draft - THE LIVE PAGE NOW PROMISES IT",
+  "/security says \"ask for it on the call and we will send it before you sign anything\". That is a promise to a prospect from day one, so the document needs to exist. No download is built, per CO-08"
 );
 
 // CO-09 and Section 3 item 3.

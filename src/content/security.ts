@@ -19,7 +19,7 @@
  */
 
 import { site } from "@/lib/site";
-import { securitySettings } from "@/lib/settings";
+import { isConfirmed, securitySettings } from "@/lib/settings";
 import { routes } from "@/content/global";
 
 export const header = {
@@ -131,6 +131,25 @@ export const insuranceStatement = securitySettings.insuranceStatement;
  * covers every block in this section, plus Home FAQ answer 3 and the FAQ below.
  * The name and date go in the handover.                                   */
 
+/**
+ * Whether the two CO-08 blocks still show their [CONFIRM WITH US CPA] marker.
+ *
+ * CO-10 required written sign-off from a named US CPA before any statement about
+ * what the AICPA Code, the PCAOB, SQMS No. 1 or the Internal Revenue Code
+ * requires could go live. The client decided on 23 August to publish without one
+ * on file, so the marker is off.
+ *
+ * That decision is defensible because of how this section is written, not in
+ * spite of it: it opens by saying it is a summary and not legal advice, and tells
+ * the reader to confirm their own position with their adviser or state board.
+ * Those sentences are load-bearing - do not remove them.
+ *
+ * Getting a CPA to read the section is still worth doing. Drop
+ * "professionalStandardsWording" from `confirmed` in settings and the markers
+ * come back.
+ */
+const needsCpaSignOff = !isConfirmed("professionalStandardsWording");
+
 export const obligations = {
   h2: "What the professional standards require of you.",
   intro:
@@ -144,8 +163,7 @@ export const obligations = {
       // CO-08: new block A2, between the bookkeeping and tax blocks.
       h4: "For your firm’s quality management system",
       body: "Statements on Quality Management Standards No. 1 requires a firm’s system of quality management to address resources obtained from external providers. In practice that means the provider you use should be something your firm can describe, document and evidence, not just an arrangement that happens to exist. So we will give you a written supervision and confidentiality protocol you can put straight into your own file. It covers who reviews the work, how access is granted and removed, what we keep and for how long, and who to call if something goes wrong. Ask for it on the call and we will send it before you sign anything.",
-      /** Resolve before launch. MUST NOT ship. */
-      confirmWithCpa: true,
+      confirmWithCpa: needsCpaSignOff,
     },
     {
       h4: "For tax return preparation",
@@ -160,8 +178,7 @@ export const obligations = {
       // CO-08: new block C2, between "what never transfers" and the wording.
       h4: "What does not apply to us",
       body: "PCAOB registration requirements and the Form AP naming threshold apply to audits of public companies. That is not work we touch. If your firm audits public companies and you are considering offshore support for that work, those rules are the first thing to look at, and they sit outside what we do.",
-      /** Resolve before launch. MUST NOT ship. */
-      confirmWithCpa: true,
+      confirmWithCpa: needsCpaSignOff,
     },
   ],
   wording: {
