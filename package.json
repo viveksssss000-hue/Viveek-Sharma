@@ -13,7 +13,8 @@
     "handover": "node scripts/handover.mjs",
     "qa": "node scripts/qa.mjs",
     "interactions": "node scripts/interactions.mjs",
-    "shots": "node scripts/shots.mjs"
+    "shots": "node scripts/shots.mjs",
+    "icons": "node scripts/build-icons.mjs"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",

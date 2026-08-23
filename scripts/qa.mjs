@@ -10,12 +10,16 @@
  * What it verifies, and the spec section each comes from:
  *   13.1  no placeholder text left in the rendered HTML; no banned words
  *   13.2  every internal link resolves; the 404 returns a real 404
+ *    5.2  every URL the previous site published still resolves, permanently
+ *         and in a single hop
  *   13.3  no horizontal scrolling at 360, 390, 768, 1024, 1280, 1440
  *   13.5  one H1 per page, no skipped heading levels, alt text on every image,
  *         a label for every form field, a skip link, correct landmarks,
  *         44px minimum touch targets
  *   13.6  unique title and meta description, canonical, Open Graph, JSON-LD
  *    9.3  JavaScript budget under 100KB compressed
+ *          the favicon exists, is the brand mark, and is a square multiple of
+ *          48px so Google will actually use it
  *    4.2  H1 never more than two lines on desktop
  *
  * Change order 01, CO-16 adds fifteen more:
@@ -92,6 +96,51 @@ const APPROVED_AUDIT_CONTEXTS = [
   "bookkeeping, accounting and auditing clerks",
   // (e) the Wall Street Journal statistic
   "US accountants and auditors left their jobs",
+];
+
+/**
+ * Every URL the previous site published in its sitemap, plus the two sub-page
+ * families it linked internally.
+ *
+ * Taken from that build's own sitemap.xml rather than from memory, so the list
+ * is what Google was actually told about. Each must answer 200 or redirect in
+ * one hop - a 404 here is a URL Google has indexed, still shows the old
+ * business for, and will eventually drop along with whatever links pointed at
+ * it. Not listed in the old sitemap but included anyway: /blog/where-the-week-goes,
+ * which existed as a page, and the root.
+ */
+const LEGACY_URLS = [
+  "/",
+  "/about",
+  "/blog",
+  "/blog/ai-workflow-automation-vs-zapier",
+  "/blog/automate-lead-follow-up-without-a-developer",
+  "/blog/how-much-time-does-ai-automation-save",
+  "/blog/tasks-your-ops-team-should-not-do-manually",
+  "/blog/where-the-week-goes",
+  "/book-a-demo",
+  "/contact",
+  "/cookies",
+  "/examples",
+  "/how-it-works",
+  "/industries",
+  "/industries/customer-support",
+  "/industries/ecommerce",
+  "/industries/marketing-agencies",
+  "/industries/operations-logistics",
+  "/industries/recruiting-hr",
+  "/pricing",
+  "/privacy",
+  "/results",
+  "/security",
+  "/services",
+  "/services/continuous-optimization",
+  "/services/custom-ai-workflows",
+  "/services/integration-handoff",
+  "/services/workflow-audit",
+  "/terms",
+  "/thank-you/contact",
+  "/thank-you/demo",
 ];
 
 /** CO-05: reserved for a later phase. Must 404 and appear nowhere. */
@@ -555,6 +604,186 @@ for (const width of WIDTHS) {
     if (status >= 400) record("FAIL", href, `internal link returns HTTP ${status}`);
   }
   await page.close();
+}
+
+/* ------------------------------------------------------------------ */
+/* Legacy URLs: every URL the previous site published still resolves     */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Spec 5.2: a published URL must never simply disappear, and a redirect must be
+ * permanent and a single hop. Chains are checked too - two hops loses PageRank
+ * and is slow, and it is the usual result of adding a redirect later without
+ * looking at the ones already there.
+ */
+{
+  for (const url of LEGACY_URLS) {
+    const first = await fetch(`${BASE}${url}`, { redirect: "manual" });
+
+    if (first.status === 200) continue;
+
+    if (first.status === 404) {
+      record(
+        "FAIL",
+        url,
+        "a URL the previous site published now 404s - it needs a redirect (spec 5.2)"
+      );
+      continue;
+    }
+
+    if (![301, 308].includes(first.status)) {
+      record("FAIL", url, `legacy URL answers HTTP ${first.status}`);
+      continue;
+    }
+
+    const target = first.headers.get("location") ?? "";
+    const second = await fetch(new URL(target, BASE), { redirect: "manual" });
+    if ([301, 302, 307, 308].includes(second.status)) {
+      record(
+        "FAIL",
+        url,
+        `redirect chain: ${url} -> ${target} -> ${second.headers.get("location")} (spec 5.2 allows one hop)`
+      );
+    } else if (second.status !== 200) {
+      record("FAIL", url, `redirects to ${target}, which returns HTTP ${second.status}`);
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Favicon: present, the brand mark, and large enough for Google        */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Added after the launch showed the previous site's icon in search results and
+ * in the browser.
+ *
+ * Two failures were possible and both were silent. /favicon.ico returned the
+ * 404 page as HTML, which several crawlers read as "no icon"; and the only PNG
+ * offered was 32x32, below the multiple-of-48 square Google requires before it
+ * will use a favicon for a result at all - so the result showed a generic globe
+ * and nothing anywhere said why.
+ *
+ * Neither would ever surface in a page test, which is exactly why it belongs
+ * here.
+ */
+{
+  const page = await browser.newPage();
+  await page.goto(BASE, { waitUntil: "domcontentloaded", timeout: 30000 });
+
+  const icons = await page.evaluate(() =>
+    [...document.querySelectorAll('link[rel~="icon"], link[rel="apple-touch-icon"]')].map(
+      (link) => ({
+        rel: link.getAttribute("rel") ?? "",
+        href: link.href,
+        sizes: link.getAttribute("sizes") ?? "",
+      })
+    )
+  );
+  await page.close();
+
+  if (icons.length === 0) {
+    record("FAIL", "/", "the page declares no favicon at all");
+  }
+
+  // Every declared icon must actually be an image, not the 404 page.
+  for (const icon of icons) {
+    const response = await fetch(icon.href);
+    const type = response.headers.get("content-type") ?? "";
+    if (!response.ok) {
+      record("FAIL", "/", `${icon.rel} ${icon.href} returns HTTP ${response.status}`);
+    } else if (!type.startsWith("image/")) {
+      record("FAIL", "/", `${icon.rel} ${icon.href} serves ${type}, not an image`);
+    }
+  }
+
+  // /favicon.ico is the path crawlers and older clients try regardless of what
+  // the markup says, so it has to resolve even though the markup is correct.
+  const ico = await fetch(`${BASE}/favicon.ico`);
+  const icoType = ico.headers.get("content-type") ?? "";
+  if (!ico.ok || icoType.startsWith("text/")) {
+    record(
+      "FAIL",
+      "/favicon.ico",
+      `must serve an icon; got HTTP ${ico.status} ${icoType}`
+    );
+  }
+
+  /**
+   * Google: "your favicon must be a square that is a multiple of 48px". A
+   * declared size that fails this is not an error anywhere else in the stack -
+   * the icon simply goes unused in search results.
+   */
+  const googleUsable = icons.some((icon) => {
+    if (icon.rel.includes("apple")) return false;
+    const match = /^(\d+)x(\d+)$/.exec(icon.sizes.trim());
+    if (!match) return false;
+    const [width, height] = [Number(match[1]), Number(match[2])];
+    return width === height && width % 48 === 0;
+  });
+  if (!googleUsable) {
+    record(
+      "FAIL",
+      "/",
+      "no favicon is a square multiple of 48px, so Google will not use one " +
+        `(declared: ${icons.map((i) => i.sizes || "no size").join(", ") || "none"})`
+    );
+  }
+
+  /**
+   * The icon must be the brand mark, framed to be readable at 16px.
+   *
+   * Measured by the share of pixels carrying brand ochre. The thresholds are
+   * the measured values, not guesses - `node scripts/build-icons.mjs` prints
+   * the same numbers:
+   *
+   *   0.0%  the previous site's purple-and-teal chevron  -> wrong artwork
+   *   1.6%  the brand kit's own favicon-256 framing      -> letters too small
+   *   3.9%  a correctly framed 512 tile
+   *   5.9%  a correctly framed 96 tile
+   *
+   * So below 1% means somebody shipped a different image; below 3% means the
+   * mark is the right one but framed too loosely to read in a tab.
+   */
+  // Sharp cannot decode ICO, so measure the PNG. Both come from the same
+  // source tile, so checking one is checking both.
+  const iconLink = icons.find(
+    (icon) => !icon.rel.includes("apple") && /\.png(\?|$)/.test(icon.href)
+  );
+  if (!iconLink) {
+    record("WARN", "/", "no PNG favicon to inspect, so its artwork went unchecked");
+  } else {
+    const bytes = Buffer.from(await (await fetch(iconLink.href)).arrayBuffer());
+    const { default: sharp } = await import("sharp");
+    const { data, info } = await sharp(bytes)
+      .resize(48, 48, { fit: "fill" })
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+
+    // Brand ochre-light #e0a95c on ink #1b1a17.
+    let ochre = 0;
+    for (let i = 0; i < data.length; i += info.channels) {
+      const [r, g, b] = [data[i], data[i + 1], data[i + 2]];
+      if (Math.abs(r - 0xe0) < 40 && Math.abs(g - 0xa9) < 40 && Math.abs(b - 0x5c) < 40)
+        ochre += 1;
+    }
+    const share = ochre / (48 * 48);
+    if (share < 0.01) {
+      record(
+        "FAIL",
+        iconLink.href,
+        `only ${(share * 100).toFixed(1)}% of the icon is brand ochre - this is ` +
+          "probably not the tryACOwork mark"
+      );
+    } else if (share < 0.03) {
+      record(
+        "WARN",
+        iconLink.href,
+        `the mark fills only ${(share * 100).toFixed(1)}% of the icon - it will ` +
+          "be hard to read in a tab; run npm run icons"
+      );
+    }
+  }
 }
 
 /* ------------------------------------------------------------------ */

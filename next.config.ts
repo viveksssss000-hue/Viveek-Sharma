@@ -100,6 +100,27 @@ const nextConfig: NextConfig = {
       // Legal pages moved to their spec URLs.
       { source: "/privacy", destination: "/privacy-policy", permanent },
       { source: "/cookies", destination: "/privacy-policy", permanent },
+      /**
+       * The previous site's four published articles, plus one that existed but
+       * was never listed in its sitemap.
+       *
+       * Listed one by one on purpose. A `/blog/:slug` wildcard would be shorter
+       * and would also swallow every article this site publishes, sending each
+       * new post to the blog index the moment it went live - a redirect loop in
+       * spirit and an invisible one, because the article would still build and
+       * still appear in the sitemap.
+       *
+       * They go to the index rather than a topic match because there is no
+       * topic match: these were about AI workflow automation, and that is not
+       * what this firm does any more. The index is the honest nearest page, and
+       * it beats a 404 for anyone arriving from an old link or a search result
+       * that has not been recrawled yet.
+       */
+      { source: "/blog/ai-workflow-automation-vs-zapier", destination: "/blog", permanent },
+      { source: "/blog/automate-lead-follow-up-without-a-developer", destination: "/blog", permanent },
+      { source: "/blog/how-much-time-does-ai-automation-save", destination: "/blog", permanent },
+      { source: "/blog/tasks-your-ops-team-should-not-do-manually", destination: "/blog", permanent },
+      { source: "/blog/where-the-week-goes", destination: "/blog", permanent },
     ];
   },
 
