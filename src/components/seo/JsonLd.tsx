@@ -1,4 +1,4 @@
-import { annualFullTime, pricing, site } from "@/lib/site";
+import { site } from "@/lib/site";
 import { routes } from "@/content/global";
 
 /**
@@ -77,65 +77,28 @@ export function WebSiteSchema() {
  * a price gives a direct structured-data advantage, so the offers block carries
  * the real monthly figure.
  */
-export function ServiceSchema() {
+export function ServiceSchema({
+  name = "Dedicated offshore bookkeeping for US accounting firms",
+  serviceType = "Bookkeeping",
+  description = "One dedicated bookkeeper, working only for your firm, inside your own software: reconciliations, payables, receivables, month-end close and cleanup work, handed back to you for review.",
+  path = routes.servicesForFirms,
+}: {
+  name?: string;
+  serviceType?: string;
+  description?: string;
+  path?: string;
+} = {}) {
   return (
     <JsonLd
       data={{
         "@context": "https://schema.org",
         "@type": "Service",
-        name: "Dedicated offshore bookkeeping for US accounting firms",
-        serviceType: "Bookkeeping",
+        name,
+        serviceType,
         provider: { "@id": `${site.url}/#organization` },
         areaServed: { "@type": "Country", name: "United States" },
-        description:
-          "One dedicated bookkeeper, working only for your firm, inside your own software: reconciliations, payables, receivables, month-end close and cleanup work, handed back to you for review.",
-        url: `${site.url}${routes.services}`,
-        offers: [
-          {
-            "@type": "Offer",
-            name: "Full-time bookkeeper",
-            price: pricing.fullTime,
-            priceCurrency: "USD",
-            priceSpecification: {
-              "@type": "UnitPriceSpecification",
-              price: pricing.fullTime,
-              priceCurrency: "USD",
-              unitText: "MON",
-              referenceQuantity: {
-                "@type": "QuantitativeValue",
-                value: 160,
-                unitText: "HUR",
-              },
-            },
-            url: `${site.url}${routes.pricing}`,
-          },
-          {
-            "@type": "Offer",
-            name: "Part-time bookkeeper",
-            price: pricing.partTime,
-            priceCurrency: "USD",
-            priceSpecification: {
-              "@type": "UnitPriceSpecification",
-              price: pricing.partTime,
-              priceCurrency: "USD",
-              unitText: "MON",
-              referenceQuantity: {
-                "@type": "QuantitativeValue",
-                value: 80,
-                unitText: "HUR",
-              },
-            },
-            url: `${site.url}${routes.pricing}`,
-          },
-        ],
-        // The annual equivalent, so the figure in the comparison table and the
-        // figure a machine reads can never disagree.
-        additionalProperty: {
-          "@type": "PropertyValue",
-          name: "Annual cost, full-time",
-          value: annualFullTime,
-          unitCode: "USD",
-        },
+        description,
+        url: `${site.url}${path}`,
       }}
     />
   );

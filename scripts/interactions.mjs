@@ -204,36 +204,6 @@ const browser = await puppeteer.launch({
 }
 
 /* ------------------------------------------------------------------ */
-/* The checklist form (spec 8.2)                                       */
-/* ------------------------------------------------------------------ */
-
-{
-  console.log("\n-- checklist form --");
-  const page = await browser.newPage();
-  await page.setViewport({ width: 1280, height: 900 });
-  await page.goto(`${BASE}/about`, { waitUntil: "networkidle0" });
-
-  await page.type("#checklist-footer-firstName", "Jane");
-  await page.type("#checklist-footer-workEmail", "jane@hendrickscpa.com");
-  check(
-    "ticking the checklist consent registers",
-    await check_box(page, "#checklist-footer-consent")
-  );
-  // Clear the timing check, which discards anything submitted in under 2.5s.
-  await wait(2600);
-  await page.click('form:has(#checklist-footer-consent) button[type="submit"]');
-  await page.waitForNavigation({ waitUntil: "networkidle0", timeout: 20000 }).catch(() => {});
-  await wait(400);
-  check(
-    "submitting redirects and carries the form location",
-    page.url().includes("/thank-you-checklist?from=footer"),
-    page.url()
-  );
-
-  await page.close();
-}
-
-/* ------------------------------------------------------------------ */
 /* The logo lockup (change order 01, CO-07 deviation)                  */
 /* ------------------------------------------------------------------ */
 

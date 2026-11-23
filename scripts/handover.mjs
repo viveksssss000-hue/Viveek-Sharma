@@ -70,18 +70,10 @@ need(
 
 /* --- Change order 01: the open figures and the sign-off ------------- */
 
-// CO-01 and Section 3 items 1 and 2. Both markers are visible on the site until
-// these land, and the site cannot go live with a marker showing.
-need(
-  !confirmed.has("extraHourlyRate"),
-  "The extra-hours hourly rate. $12 is on file as a recommendation - $1,600 for 160 hours is $10 an hour, so $12 is a 20 percent overage premium",
-  "The price block's not-included list, on Home and Services. [CONFIRM RATE] is showing"
-);
-need(
-  !confirmed.has("usHoursPremium"),
-  "The US-hours coverage premium. NOT yet recommended - $150 on $1,600 is about 9 percent for a night shift and there is no benchmark behind it. Check the real cost first: a published figure is a promise",
-  "The price block AND Home FAQ answer 4. Both render from one variable, so they resolve together"
-);
+// CO-01's two open rate figures were RETIRED on 22 November 2026: the site no
+// longer publishes any price (they are quoted in writing after a call), so the
+// price block, its [CONFIRM RATE] markers and the comparison table are gone.
+// scripts/qa.mjs now FAILS if a price figure reappears on Home or Services.
 
 // CO-10 and Section 3 item 4. The client chose on 23 August to publish without
 // a sign-off, so this is a recommendation now rather than a launch blocker - but
@@ -108,14 +100,7 @@ need(
   "/security. The recommendation on file is to keep all three exactly as written - they are true today and the honesty is the persuasive device"
 );
 
-/* --- Prices -------------------------------------------------------- */
-
-need(
-  true,
-  "Confirm or correct the two monthly prices",
-  "Home, Services, comparison table, Service schema, social image",
-  "monthlyPrices"
-);
+/* --- Prices: retired 22 November 2026 - no prices are published. ---- */
 
 /* --- Booking ------------------------------------------------------- */
 
@@ -178,14 +163,6 @@ for (const [file, label] of [
 
 /* --- Assets and accounts ------------------------------------------- */
 
-const pdf = "public/12-questions-offshore-bookkeeper-checklist.pdf";
-need(
-  fs.readFileSync(path.join(root, pdf), "latin1").includes("PLACEHOLDER"),
-  "The 12-questions checklist PDF (a placeholder is in place)",
-  "Footer signup, blog signup, /thank-you-checklist, the autoresponder",
-  "checklistPdf"
-);
-
 need(
   !process.env.GITHUB_REPO,
   "Set GITHUB_REPO to the repository, e.g. tryacowork/website",
@@ -238,7 +215,7 @@ const manual = [
   ],
   [
     "All three conversion events seen firing in GA4 real-time",
-    "call_booked, pilot_requested, checklist_downloaded. Screenshot each for the handover.",
+    "call_booked and pilot_requested. Screenshot each for the handover.",
   ],
   [
     "Blog article 22 matches the Services exclusions list word for word",
@@ -246,7 +223,7 @@ const manual = [
   ],
   [
     "The expansion evidence is attached to the handover",
-    "Run `node scripts/expansion-tests.mjs` - three header screenshots at 1024/1152/1280 with six nav items, the mobile menu at eight, and the price block with a third card. Required by CO-16.",
+    "Run `node scripts/expansion-tests.mjs` - three header screenshots at 1024/1152/1280 with six nav items, and the mobile menu at eight. Required by CO-16. (The price-card expansion test was retired with the price block.)",
   ],
 ];
 

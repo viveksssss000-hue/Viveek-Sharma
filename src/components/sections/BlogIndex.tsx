@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Fragment } from "react";
 
-import { ChecklistForm } from "@/components/forms/ChecklistForm";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { microcopy, routes } from "@/content/global";
 import { blogIndex } from "@/content/pilot";
@@ -18,7 +17,7 @@ import { cn } from "@/lib/utils";
  * Pagination after twelve articles, using real links with page numbers - not
  * infinite scroll, which is bad for search engines and for accessibility.
  *
- * The checklist signup appears once, after the sixth card.
+ * No signup block: the checklist lead magnet was removed on 23 November.
  */
 
 export const POSTS_PER_PAGE = 12;
@@ -57,27 +56,24 @@ export function BlogIndex({
           {posts.length === 0 ? (
             <div className="max-w-text">
               <p className="measure text-body">{blogIndex.empty}</p>
-              <div className="mt-10 rounded-[12px] border border-border bg-sand p-6 lg:p-8">
-                <ChecklistBlock />
-              </div>
+              <p className="mt-8">
+                <Link
+                  href={routes.bookACall}
+                  className="text-fern underline decoration-2 underline-offset-4 hover:decoration-[3px]"
+                >
+                  {microcopy.bookCall}
+                </Link>
+              </p>
             </div>
           ) : (
             <>
               <ul className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {posts.map((post, index) => (
+                {posts.map((post) => (
                   <Fragment key={post.slug}>
                     <li>
                       <ArticleCard post={post} />
                     </li>
 
-                    {/* Once, after the sixth card. */}
-                    {isFirstPage && index === 5 && (
-                      <li className="rounded-[12px] border border-border bg-sand p-6 md:col-span-2 lg:col-span-3 lg:p-8">
-                        <div className="max-w-text">
-                          <ChecklistBlock location="blog_index" />
-                        </div>
-                      </li>
-                    )}
                   </Fragment>
                 ))}
               </ul>
@@ -97,7 +93,7 @@ function ArticleCard({ post }: { post: Post }) {
   return (
     <Link
       href={`${routes.blog}/${post.slug}`}
-      className="group flex h-full flex-col overflow-hidden rounded-[12px] border border-border bg-surface shadow-rest transition-[border-color,box-shadow] duration-150 hover:border-fern hover:shadow-lift"
+      className="group flex h-full flex-col overflow-hidden rounded-[16px] border border-border bg-surface shadow-rest transition-[border-color,box-shadow] duration-150 hover:border-fern hover:shadow-lift"
     >
       <PlaceholderImage
         src={post.image}
@@ -117,24 +113,6 @@ function ArticleCard({ post }: { post: Post }) {
         <p className="mt-3 text-body text-ink-muted">{post.description}</p>
       </div>
     </Link>
-  );
-}
-
-function ChecklistBlock({
-  location = "blog_index",
-}: {
-  location?: "blog_index";
-}) {
-  return (
-    <div className="grid gap-6 lg:grid-cols-2 lg:items-start lg:gap-12">
-      <div>
-        <h2 className="text-h3">{microcopy.checklistHeading}</h2>
-        <p className="mt-3 text-body text-ink-muted">
-          {microcopy.checklistBody}
-        </p>
-      </div>
-      <ChecklistForm location={location} />
-    </div>
   );
 }
 

@@ -39,6 +39,7 @@
   --color-fern: #0f5f4c; /* links, icons, secondary buttons              */
   --color-fern-dark: #0a4436; /* fern hover / pressed                        */
   --color-forest: #123d33; /* footer and full-width dark bands            */
+  --color-forest-deep: #0c2b23; /* the bottom of the band gradient             */
 
   --color-ochre: #9a6b22; /* ACTIONS ONLY. Primary button fill.           */
   --color-ochre-dark: #7e561b; /* primary button hover / pressed              */
@@ -56,7 +57,7 @@
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
   /* Fluid scale, mobile (360px) to desktop (1280px), from spec 4.2.2. */
-  --text-h1: clamp(2.125rem, 1.587rem + 2.391vw, 3.5rem); /* 34 -> 56 */
+  --text-h1: clamp(2.25rem, 1.59rem + 2.935vw, 3.875rem); /* 36 -> 62 */
   --text-h1--line-height: 1.1;
   --text-h1--letter-spacing: -0.02em;
   --text-h2: clamp(1.6875rem, 1.4185rem + 1.196vw, 2.375rem); /* 27 -> 38 */
@@ -81,7 +82,7 @@
 
   /* --- Radius -------------------------------------------------------------
      Nothing square, nothing circular except avatars.                      */
-  --radius-card: 12px;
+  --radius-card: 16px;
   --radius-control: 10px;
   --radius-pill: 999px;
 
@@ -102,6 +103,18 @@
    spacing value is a bug (spec 4.3). */
 
 @layer base {
+  /* Modern CSS niceties: headings wrap to even lines instead of leaving an
+     orphan word, and text selection is in the brand's own colours. */
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  ::selection {
+    background-color: var(--color-ochre-light);
+    color: var(--color-ink);
+  }
+
   *,
   *::before,
   *::after {
@@ -342,18 +355,433 @@
     font-weight: 600;
   }
 
-  /* The one permitted entrance animation: a 12px rise, once, never on
-     scroll back up (spec 4.8). Applied by ScrollReveal. */
+  /* The marker highlight: a soft ochre-light swipe behind a few words of
+     display type, sitting on the lower third of the line like a highlighter
+     pass. Ink stays the text colour, so contrast is untouched. */
+  .hl-marker {
+    background-image: linear-gradient(
+      to top,
+      rgb(224 169 92 / 0.45),
+      rgb(224 169 92 / 0.45)
+    );
+    background-repeat: no-repeat;
+    background-size: 100% 0.42em;
+    background-position: 0 72%;
+    padding-inline: 0.04em;
+    border-radius: 3px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  /* Dark bands get depth: a quiet vertical fade from forest into a deeper
+     green, instead of one flat fill. Contrast only improves toward the
+     bottom (paper on forest is 11.4:1 and forest-deep is darker still). */
+  .band-grad {
+    background-image: linear-gradient(
+      180deg,
+      var(--color-forest),
+      var(--color-forest-deep)
+    );
+    background-color: var(--color-forest);
+  }
+
+  /* Entrance choreography (spec 4.8, extended at the client's request on
+     22 November). Still one grammar - things rise into place, once, never
+     again on the way back up - but now with direction variants and a child
+     cascade. Applied by ScrollReveal; every class here is added BY
+     JavaScript, so a browser without it shows a complete, still page.
+
+     The curve is an exponential ease-out: fast out of the gate, long settle.
+     It reads as assured rather than bouncy, which suits an accounting firm
+     better than a spring that overshoots. */
   .reveal {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(18px);
+  }
+  /* :where() keeps these at (0,1,0) so the later .reveal-in - same
+     specificity - wins on source order and the element actually settles.
+     A bare attribute selector here would out-specify the end state and
+     freeze the variant mid-flight forever. */
+  .reveal:where([data-rv="left"]) {
+    transform: translateX(-24px);
+  }
+  .reveal:where([data-rv="right"]) {
+    transform: translateX(24px);
+  }
+  .reveal:where([data-rv="scale"]) {
+    transform: scale(0.96) translateY(10px);
   }
   .reveal-in {
     opacity: 1;
     transform: none;
     transition:
-      opacity 250ms ease-out,
-      transform 250ms ease-out;
+      opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* The cascade: children marked .rv-item stagger in 70ms apart once their
+     section reveals. --i is assigned by ScrollReveal and capped at 14, so a
+     long list never keeps a reader waiting more than ~1.1s for its tail. */
+  .reveal-stagger .rv-item {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  .reveal-stagger.reveal-in .rv-item {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 550ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 550ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: calc(var(--i, 0) * 70ms + 120ms);
+  }
+
+  /* Check and cross icons draw themselves as their list item lands. The
+     dash start state lives under .reveal-stagger, which only JavaScript
+     adds - with scripts off every icon is simply visible. Paths carry
+     pathLength={1} so the dash arithmetic is unit-free. */
+  .reveal-stagger .icon-draw path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  .reveal-stagger.reveal-in .icon-draw path {
+    animation: icon-draw 500ms cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+    animation-delay: calc(var(--i, 0) * 70ms + 240ms);
+  }
+
+  /* The keyboard fast path: when focus lands inside a not-yet-revealed
+     section, ScrollReveal adds .reveal-now and everything must appear at
+     once - no cascade, no drawn icons, nothing between the user and the
+     control they just focused. */
+  .reveal-now.reveal-in,
+  .reveal-now.reveal-in .rv-item {
+    transition-duration: 150ms;
+    transition-delay: 0ms !important;
+  }
+  .reveal-now.reveal-stagger .icon-draw path {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+
+  /* The hero cannot wait for an observer - it is on screen at first paint -
+     so it enters on load with a 90ms stagger. Pure CSS: it runs with
+     JavaScript off, and never runs at all for a visitor who asked for less
+     motion, because the start state lives inside the media query. */
+  @media (prefers-reduced-motion: no-preference) {
+    .enter {
+      animation: reveal-rise 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .enter-1 {
+      animation-delay: 90ms;
+    }
+    .enter-2 {
+      animation-delay: 180ms;
+    }
+    .enter-3 {
+      animation-delay: 270ms;
+    }
+    .enter-4 {
+      animation-delay: 360ms;
+    }
+  }
+
+  /* Nav links: an ochre underline that grows from the centre on hover and
+     keyboard focus. Ochre is the action colour, and a growing underline is
+     exactly an action cue. The current page keeps its static underline. */
+  .nav-anim {
+    position: relative;
+  }
+  .nav-anim::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    bottom: 6px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-ochre);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 250ms cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  .nav-anim:hover::after,
+  .nav-anim:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  /* Primary buttons carry a light sheen that sweeps across once on hover.
+     Gated to hover-capable devices with no motion preference; otherwise the
+     pseudo-element just parks off-canvas. --ink flips the gradient for
+     paper-coloured buttons inside forest bands, where white is invisible. */
+  .btn-sheen {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-sheen::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 40%;
+    transform: translateX(-160%) skewX(-18deg);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(255 255 255 / 0.35),
+      transparent
+    );
+    pointer-events: none;
+  }
+  .btn-sheen--ink::after {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(27 26 23 / 0.1),
+      transparent
+    );
+  }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .btn-sheen:hover::after {
+      animation: sheen 700ms ease-out;
+    }
+  }
+
+  /* The reading-progress bar: pure CSS, driven by a scroll timeline - zero
+     JavaScript. Browsers without scroll timelines, and every visitor who
+     asked for less motion, never see it at all. */
+  .scroll-progress {
+    display: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: scroll()) {
+      .scroll-progress {
+        display: block;
+        position: fixed;
+        inset-inline: 0;
+        top: 0;
+        height: 3px;
+        z-index: 60;
+        transform-origin: 0 50%;
+        transform: scaleX(0);
+        background: linear-gradient(
+          90deg,
+          var(--color-ochre),
+          var(--color-ochre-light)
+        );
+        animation: progress-grow linear both;
+        animation-timeline: scroll(root block);
+      }
+    }
+  }
+
+  /* FAQ panels: the modern grid-rows collapse. visibility (delayed on the
+     way shut) keeps a closed answer out of the accessibility tree, exactly
+     as the old hidden attribute did. The no-JS fallback is a noscript
+     override in FAQ.tsx, same as before. */
+  .faq-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition:
+      grid-template-rows 350ms cubic-bezier(0.2, 0.7, 0.3, 1),
+      visibility 0s linear 350ms;
+  }
+  .faq-panel > div {
+    overflow: hidden;
+    min-height: 0;
+  }
+  .faq-panel[data-open="true"] {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    transition:
+      grid-template-rows 350ms cubic-bezier(0.2, 0.7, 0.3, 1),
+      visibility 0s;
+  }
+
+  /* The forest band's ambient glow: two soft lights panning very slowly.
+     isolation + z-index:-1 keeps the glow above the band's background but
+     below every word on it. */
+  .band-glow {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .band-glow::before {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        600px 420px at 18% 30%,
+        rgb(224 169 92 / 0.12),
+        transparent 60%
+      ),
+      radial-gradient(
+        520px 380px at 82% 72%,
+        rgb(250 248 244 / 0.07),
+        transparent 60%
+      );
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .band-glow::before {
+      animation: glow-pan 18s ease-in-out infinite alternate;
+    }
+  }
+
+  /* Decorative artwork: a slow vertical float and, where the browser has
+     view timelines, a parallax drift tied to scroll. The two compose
+     because one animates transform and the other the translate property. */
+  @media (prefers-reduced-motion: no-preference) {
+    .float-slow {
+      animation: float-y 9s ease-in-out infinite alternate;
+    }
+    @supports (animation-timeline: view()) {
+      .drift-view {
+        animation: view-drift linear both;
+        animation-timeline: view();
+        animation-range: entry 0% exit 100%;
+      }
+    }
+  }
+
+  /* Artwork bars rise from their baseline on load. Start states live inside
+     the media query, so with reduced motion - or in a browser that never
+     runs the animation - the artwork is simply whole. */
+  @media (prefers-reduced-motion: no-preference) {
+    .lm-bar {
+      transform-box: fill-box;
+      transform-origin: 50% 100%;
+      animation: bar-rise 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: var(--d, 0ms);
+    }
+  }
+
+  /* The mobile menu: the dialog settles into place and its links cascade.
+     Only reachable through JavaScript (showModal), so the animation start
+     states cost nothing with scripts off. */
+  @media (prefers-reduced-motion: no-preference) {
+    dialog.m-dialog[open] {
+      animation: menu-in 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    dialog.m-dialog[open]::backdrop {
+      animation: fade-in 300ms ease-out;
+    }
+    dialog.m-dialog[open] .m-link {
+      animation: reveal-rise 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: calc(60ms + var(--i, 0) * 45ms);
+    }
+    /* Tabbing immediately after opening must never land on a link the
+       stagger is still hiding: focus defeats the entrance. */
+    dialog.m-dialog[open] .m-link:focus-visible {
+      animation: none;
+    }
+  }
+
+  /* Cross-page transition: each page settles up into place on navigation.
+     Applied by app/template.tsx, which remounts per route. */
+  @media (prefers-reduced-motion: no-preference) {
+    .page-enter {
+      animation: page-in 450ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+  }
+}
+
+/* One vocabulary of movement. Rise is the only entrance; everything else
+   is either a response to the pointer (sheen) or ambient and decorative
+   (glow, float, drift), and all of it dies under prefers-reduced-motion. */
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes icon-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes sheen {
+  to {
+    transform: translateX(420%) skewX(-18deg);
+  }
+}
+@keyframes progress-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes glow-pan {
+  from {
+    transform: translate3d(-4%, -3%, 0);
+  }
+  to {
+    transform: translate3d(4%, 3%, 0);
+  }
+}
+@keyframes float-y {
+  from {
+    transform: translateY(-6px);
+  }
+  to {
+    transform: translateY(10px);
+  }
+}
+@keyframes view-drift {
+  from {
+    translate: 0 48px;
+  }
+  to {
+    translate: 0 -48px;
+  }
+}
+@keyframes bar-rise {
+  from {
+    transform: scaleY(0);
+  }
+}
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+/* Print is a layout the IntersectionObserver never fires for, so every
+   JS-hidden state must be forced visible or below-the-fold sections print
+   as blank pages. The ambient layers are ink on paper nobody asked for. */
+@media print {
+  .reveal,
+  .reveal-stagger .rv-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .reveal-stagger .icon-draw path {
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+  }
+  .scroll-progress,
+  .band-glow::before {
+    display: none !important;
   }
 }
 
@@ -366,12 +794,22 @@
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
     scroll-behavior: auto !important;
   }
-  .reveal {
+  .reveal,
+  .reveal-stagger .rv-item {
     opacity: 1;
     transform: none;
+  }
+  .reveal-stagger .icon-draw path {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+  .scroll-progress {
+    display: none !important;
   }
 }

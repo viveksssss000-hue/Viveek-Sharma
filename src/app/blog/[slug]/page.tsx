@@ -136,7 +136,7 @@ export default async function ArticlePage({ params }: Params) {
           {showToc && (
             <nav
               aria-labelledby="toc-heading"
-              className="mt-10 rounded-[12px] border border-border bg-surface p-6"
+              className="mt-10 rounded-[16px] border border-border bg-surface p-6"
             >
               <h2 id="toc-heading" className="font-sans text-h4 font-semibold">
                 In this article
@@ -170,7 +170,7 @@ export default async function ArticlePage({ params }: Params) {
 
           {/* The standard end-of-article call to action, same copy on every
               article (spec 7.8.2). */}
-          <div className="mt-12 rounded-[12px] border border-border bg-sand p-6 lg:p-8">
+          <div className="mt-12 rounded-[16px] border border-border bg-sand p-6 lg:p-8">
             <h2 className="text-h3">{blogIndex.articleCta.heading}</h2>
             <p className="mt-3 measure text-body">{blogIndex.articleCta.body}</p>
             <div className="mt-6">

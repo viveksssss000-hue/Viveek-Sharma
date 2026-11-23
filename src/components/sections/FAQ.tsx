@@ -19,10 +19,11 @@ import { cn } from "@/lib/utils";
  *  2. "Keyboard operable with Enter and Space" - it is a real <button>, so
  *     that comes for free and cannot regress.
  *  3. "MUST work with JavaScript disabled by defaulting to open" - the panels
- *     are collapsed with the `hidden` attribute, and the <noscript> stylesheet
- *     below overrides it. With JavaScript the initial server and client render
- *     agree, so nothing flashes and nothing shifts; without it, every answer
- *     is readable.
+ *     are collapsed by CSS (grid-template-rows: 0fr + visibility, which keeps
+ *     a closed answer out of the accessibility tree exactly as the old hidden
+ *     attribute did, but lets it ANIMATE open), and the <noscript> stylesheet
+ *     below forces every panel open. With JavaScript the initial server and
+ *     client render agree, so nothing flashes and nothing shifts.
  *  4. "The plus and minus indicator is an inline SVG that rotates" - see
  *     PlusMinusIcon. Never a font icon and never a unicode character.
  *
@@ -68,10 +69,10 @@ export function FaqList({
 
   return (
     <>
-      {/* Without JavaScript every answer is visible. `display:block` beats the
-          UA's `[hidden]{display:none}` because of the !important. */}
+      {/* Without JavaScript every answer is visible: the override beats the
+          collapsed grid row and the visibility, both marked !important. */}
       <noscript>
-        <style>{`.faq-panel[hidden]{display:block !important}`}</style>
+        <style>{`.faq-panel{grid-template-rows:1fr !important;visibility:visible !important}`}</style>
       </noscript>
 
       <div className={cn("divide-y divide-border border-y border-border", className)}>
@@ -111,10 +112,16 @@ export function FaqList({
                 id={panelId}
                 role="region"
                 aria-labelledby={buttonId}
-                hidden={!open}
-                className="faq-panel pb-6"
+                data-open={open}
+                className="faq-panel"
               >
-                <p className="measure text-body text-ink-muted">{item.a}</p>
+                {/* The inner div is the grid item that clips; padding lives
+                    on the paragraph so the closed height is truly zero. */}
+                <div>
+                  <p className="measure pb-6 text-body text-ink-muted">
+                    {item.a}
+                  </p>
+                </div>
               </div>
             </div>
           );

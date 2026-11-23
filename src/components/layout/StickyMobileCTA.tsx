@@ -36,7 +36,7 @@ export function StickyMobileCTA() {
       className={cn(
         "fixed inset-x-0 bottom-0 z-40 border-t border-border bg-paper md:hidden",
         "shadow-[0_-8px_24px_rgb(27_26_23_/_0.10)]",
-        "transition-[opacity,transform] duration-150 ease-out",
+        "transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
         visible
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-full opacity-0"

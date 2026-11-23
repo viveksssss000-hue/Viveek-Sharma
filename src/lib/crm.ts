@@ -1,4 +1,4 @@
-import type { ChecklistInput, PilotInput } from "@/lib/validations";
+import type { PilotInput } from "@/lib/validations";
 
 /**
  * Storing submissions (spec 8.4).
@@ -17,9 +17,7 @@ import type { ChecklistInput, PilotInput } from "@/lib/validations";
  * outage cannot cost the visitor their submission.
  */
 
-type Lead =
-  | ({ form: "free_pilot" } & PilotInput)
-  | ({ form: "checklist" } & ChecklistInput);
+type Lead = { form: "free_pilot" } & PilotInput;
 
 export async function storeLead(lead: Lead): Promise<void> {
   const webhook = process.env.LEAD_WEBHOOK_URL;
@@ -47,24 +45,17 @@ export async function storeLead(lead: Lead): Promise<void> {
   }
 
   if (portalId && formGuid) {
-    const fields =
-      lead.form === "free_pilot"
-        ? [
-            { name: "firstname", value: lead.name },
-            { name: "email", value: lead.workEmail },
-            { name: "company", value: lead.firmName },
-            { name: "website", value: lead.firmWebsite ?? "" },
-            { name: "state", value: lead.state },
-            { name: "software", value: lead.software.join(", ") },
-            { name: "message", value: lead.scope },
-            { name: "hours_per_week", value: lead.hours },
-            { name: "lead_source", value: "website-free-pilot" },
-          ]
-        : [
-            { name: "firstname", value: lead.firstName },
-            { name: "email", value: lead.workEmail },
-            { name: "lead_source", value: `website-checklist-${lead.formLocation}` },
-          ];
+    const fields = [
+      { name: "firstname", value: lead.name },
+      { name: "email", value: lead.workEmail },
+      { name: "company", value: lead.firmName },
+      { name: "website", value: lead.firmWebsite ?? "" },
+      { name: "state", value: lead.state },
+      { name: "software", value: lead.software.join(", ") },
+      { name: "message", value: lead.scope },
+      { name: "hours_per_week", value: lead.hours },
+      { name: "lead_source", value: "website-free-pilot" },
+    ];
 
     await fetch(
       `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`,

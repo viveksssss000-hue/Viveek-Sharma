@@ -1,9 +1,8 @@
 import Link from "next/link";
 
-import { ChecklistForm } from "@/components/forms/ChecklistForm";
 import { CookieSettingsButton } from "@/components/consent/CookieSettingsButton";
 import { Logo } from "@/components/layout/Logo";
-import { footer, microcopy } from "@/content/global";
+import { footer } from "@/content/global";
 import { site } from "@/lib/site";
 
 /**
@@ -20,11 +19,11 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="on-dark bg-forest text-paper">
+    <footer className="on-dark band-grad text-paper">
       <div className="gutter mx-auto max-w-content py-16 lg:py-24">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           {/* Column 1 - identity */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-4">
             <Logo height={36} variant="reversed" />
             <p className="mt-6 max-w-[34ch] text-body text-paper">
               {footer.blurb[0]}
@@ -37,11 +36,11 @@ export function Footer() {
           {/* Columns 2 and 3 - links. "Get started" gets the wider column
               because "Book a 20-minute call" breaks mid-phrase in a narrow
               one, and the button label is fixed by Appendix C. */}
-          {footer.columns.map((column, index) => (
+          {footer.columns.map((column) => (
             <nav
               key={column.heading}
               aria-label={column.heading}
-              className={index === 0 ? "lg:col-span-2" : "lg:col-span-3"}
+              className="lg:col-span-4"
             >
               <h2 className="font-sans text-small font-semibold uppercase tracking-[0.08em] text-ochre-light">
                 {column.heading}
@@ -60,22 +59,6 @@ export function Footer() {
               </ul>
             </nav>
           ))}
-
-          {/* Column 4 - the checklist lead magnet */}
-          <div className="lg:col-span-4">
-            <h2 className="font-sans text-small font-semibold uppercase tracking-[0.08em] text-ochre-light">
-              Get the checklist
-            </h2>
-            <p className="mt-4 text-body text-paper">
-              {microcopy.checklistHeading}
-            </p>
-            <p className="mt-2 text-small text-paper/70">
-              {microcopy.checklistBody}
-            </p>
-            <div className="mt-6">
-              <ChecklistForm location="footer" tone="dark" />
-            </div>
-          </div>
         </div>
 
         {/* Bottom bar */}

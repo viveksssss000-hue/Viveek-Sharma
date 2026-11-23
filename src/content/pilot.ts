@@ -65,7 +65,7 @@ export const atTheEnd = {
 export const limits = {
   h2: "The honest limits",
   items: [
-    "One pilot per firm.",
+    "One pilot per client.",
     "Bookkeeping work only - it is the only thing we do.",
     ...(pilotSettings.monthlyLimitLine ? [pilotSettings.monthlyLimitLine] : []),
   ],
@@ -187,7 +187,7 @@ export const blogIndex = {
   intro:
     "Practical writing about offshoring bookkeeping - what it costs, how to manage it, what goes wrong and how to avoid it. Written by us, from doing the work.",
   empty:
-    "The first articles are being written. In the meantime, the checklist below covers the questions firm owners ask us most.",
+    "The first articles are being written. In the meantime, the fastest way to get a question answered is a 20-minute call.",
   articleCta: {
     heading: "Wondering what this would cost your firm?",
     body: "We publish our prices, and we will tell you on a 20-minute call how many of your clients one bookkeeper could carry.",

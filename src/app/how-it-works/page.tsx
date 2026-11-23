@@ -53,7 +53,7 @@ export default function HowItWorksPage() {
                 className="absolute left-0 top-2 hidden size-4 rounded-full bg-fern lg:block"
               />
 
-              <div className="rounded-[12px] border border-border bg-surface p-6 lg:border-0 lg:bg-transparent lg:p-0">
+              <div className="rounded-[16px] border border-border bg-surface p-6 lg:border-0 lg:bg-transparent lg:p-0">
                 <p className="font-sans text-small font-semibold uppercase tracking-[0.08em] text-ochre-text">
                   Stage {stage.number} · {stage.days}
                 </p>
@@ -80,8 +80,8 @@ export default function HowItWorksPage() {
         <h2>{whatWeNeed.h2}</h2>
         <ul className="mt-8 grid gap-3">
           {whatWeNeed.items.map((item) => (
-            <li key={item} className="flex items-start gap-3">
-              <CheckIcon size={20} className="mt-1 text-fern" />
+            <li key={item} className="rv-item flex items-start gap-3">
+              <CheckIcon size={20} className="icon-draw mt-1 text-fern" />
               <span className="text-body">{item}</span>
             </li>
           ))}
@@ -98,7 +98,7 @@ export default function HowItWorksPage() {
           {rhythm.items.map((item) => (
             <li
               key={item}
-              className="border-l-4 border-fern pl-6 text-body text-ink"
+              className="rv-item border-l-4 border-fern pl-6 text-body text-ink"
             >
               {item}
             </li>
@@ -131,7 +131,7 @@ export default function HowItWorksPage() {
               <tr
                 key={row.what}
                 role="row"
-                className="mb-4 block rounded-[12px] border border-border bg-surface p-6 last:mb-0 md:mb-0 md:table-row md:rounded-none md:border-0 md:border-b md:bg-transparent md:p-0"
+                className="mb-4 block rounded-[16px] border border-border bg-surface p-6 last:mb-0 md:mb-0 md:table-row md:rounded-none md:border-0 md:border-b md:bg-transparent md:p-0"
               >
                 <th
                   role="rowheader"

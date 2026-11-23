@@ -1,16 +1,11 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 
-import {
-  trackCallBooked,
-  trackChecklistDownloaded,
-  trackPilotRequested,
-} from "@/lib/analytics";
+import { trackCallBooked, trackPilotRequested } from "@/lib/analytics";
 
 /**
- * Fires the three key conversions on the thank-you page load (spec 11.2).
+ * Fires the two key conversions on the thank-you page load (spec 11.2).
  *
  * WHY ON THE PAGE, NOT ON THE FORM SUBMIT
  * Spec 11.4: the reliable way to track a booking made inside a third-party
@@ -25,9 +20,8 @@ import {
 export function ConversionTracker({
   event,
 }: {
-  event: "call_booked" | "pilot_requested" | "checklist_downloaded";
+  event: "call_booked" | "pilot_requested";
 }) {
-  const searchParams = useSearchParams();
   const fired = useRef(false);
 
   useEffect(() => {
@@ -39,19 +33,8 @@ export function ConversionTracker({
       return;
     }
 
-    if (event === "pilot_requested") {
-      trackPilotRequested();
-      return;
-    }
-
-    // Where the checklist form was submitted from, passed through the redirect.
-    const from = searchParams.get("from");
-    const location =
-      from === "footer" || from === "blog_index" || from === "article"
-        ? from
-        : "unknown";
-    trackChecklistDownloaded(location);
-  }, [event, searchParams]);
+    trackPilotRequested();
+  }, [event]);
 
   return null;
 }

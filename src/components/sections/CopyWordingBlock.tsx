@@ -38,7 +38,7 @@ export function CopyWordingBlock({ text }: { text: string }) {
   }
 
   return (
-    <div className="mt-6 rounded-[12px] border border-border bg-surface p-6">
+    <div className="mt-6 rounded-[16px] border border-border bg-surface p-6">
       <blockquote>
         <p className="measure text-body italic">&ldquo;{text}&rdquo;</p>
       </blockquote>

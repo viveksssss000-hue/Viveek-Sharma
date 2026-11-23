@@ -1,6 +1,6 @@
 ---
 title: Privacy Policy
-updated: 2026-08-23
+updated: 2026-11-23
 status: draft
 ---
 
@@ -10,8 +10,8 @@ describes what actually happens rather than what a template assumes.
 
 ## Who is responsible for your information
 
-**VSH Enterprise Pvt Ltd**, trading as tryACOwork, of A-113, Rishal Garden,
-Ranhola, Nangloi, New Delhi 110041, India, is the controller of the information
+**Vision Accounting Pvt Ltd**, trading as tryACOwork, of Plot No.C, 001, Sector 16B,
+Noida, Uttar Pradesh 201301, India, is the controller of the information
 described here.
 
 For any question about this policy, or to make any of the requests set out
@@ -29,10 +29,7 @@ description of the work you would like us to do, roughly how many hours a week
 of bookkeeping you might hand over, anything else you want to tell us, and your
 consent to us replying. Only the website field and the last note are optional.
 
-**The checklist request**, in the footer of every page and inside the blog. We
-ask for your first name, your work email address, and your consent.
-
-Both forms also carry two hidden fields used only to filter automated
+The form also carries two hidden fields used only to filter automated
 submissions: a field a person never sees, and the time the form was opened. They
 tell us nothing about you and are discarded rather than stored.
 
@@ -83,7 +80,7 @@ We name them rather than describing them vaguely:
 
 - **Vercel** - hosting. Serves every page and holds the server logs.
 - **Resend** - email delivery. Sends your submission to us, and sends you the
-  acknowledgement or the checklist.
+  acknowledgement.
 - **Cal.com** - the calendar on the booking page.
 - **Google** - Analytics 4, and only after you accept cookies.
 - **GitHub** - stores the website's own content and code. Your enquiry is not
@@ -94,12 +91,11 @@ enquiry is not held in email alone, that destination is added to this list befor
 it is switched on.
 
 **We do not sell your information, and we do not share it for advertising.** We
-do not add you to a mailing list you did not ask for. The checklist form promises
-one email and no sales sequence, and that is what it does.
+do not add you to a mailing list you did not ask for.
 
 ## Where your information is processed
 
-We are based in New Delhi, India, so our team reads and answers your enquiry from
+We are based in Noida, Uttar Pradesh, India, so our team reads and answers your enquiry from
 India. The site is hosted on servers operated by our hosting provider, which may
 be located in the United States, Europe or elsewhere.
 
@@ -113,7 +109,6 @@ place for a particular provider.
 
 - **To answer you.** You asked us to, by ticking the consent box. You can
   withdraw that at any time and we will stop.
-- **To send you the checklist.** Same: you asked for it.
 - **To run and protect the website.** Our legitimate interest in a working,
   non-abused site. Server logs only.
 - **Analytics.** Your consent, and nothing happens without it.
@@ -123,7 +118,6 @@ place for a particular provider.
 - **Enquiries and pilot requests:** twenty-four months from your last contact
   with us, then deleted. If you become a client, your records are kept under our
   service agreement instead of this policy.
-- **Checklist requests:** until you ask us to delete them.
 - **Server logs:** as long as our hosting provider retains them, which is a
   matter of weeks.
 - **Analytics:** according to the retention period set in our Google Analytics

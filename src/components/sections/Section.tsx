@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { cn } from "@/lib/utils";
 
 /**
@@ -34,7 +35,7 @@ const toneClass = {
   paper: "bg-paper text-ink",
   sand: "bg-sand text-ink",
   // `on-dark` flips the focus ring and any nested link colours.
-  forest: "on-dark bg-forest text-paper",
+  forest: "on-dark band-grad text-paper",
 } as const;
 
 const widthClass = {
@@ -63,7 +64,12 @@ export function Section({
         className
       )}
     >
-      <div className={cn("gutter mx-auto", widthClass[width])}>{children}</div>
+      {/* Every section rises into view once (spec 4.8); children marked
+          rv-item cascade. Sections already on screen are left alone - see
+          ScrollReveal. */}
+      <ScrollReveal className={cn("gutter mx-auto", widthClass[width])}>
+        {children}
+      </ScrollReveal>
     </section>
   );
 }
@@ -131,7 +137,11 @@ export function Eyebrow({
   return (
     <p
       className={cn(
-        "text-small font-semibold uppercase tracking-[0.08em]",
+        // The dash is the modern editorial cue: a 24px rule in the label's
+        // own colour, leading the eye in. inline-flex keeps it centred when
+        // a parent sets text-center.
+        "inline-flex items-center gap-2 text-small font-semibold uppercase tracking-[0.08em]",
+        "before:inline-block before:h-[2px] before:w-6 before:rounded-full before:bg-current before:opacity-70",
         onDark ? "text-ochre-light" : "text-ochre-text",
         className
       )}

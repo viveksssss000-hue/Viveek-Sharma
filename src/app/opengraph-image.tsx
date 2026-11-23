@@ -2,14 +2,13 @@ import { ImageResponse } from "next/og";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-import { pricing, usd } from "@/lib/site";
 
 /**
  * The default Open Graph image (spec 10.4), 1200x630.
  *
  * MUST NOT be the logo on a white square, which looks unfinished when shared.
  * So this is a designed card in the brand's own ink and ochre, carrying the
- * tagline and the published price - the two things that make someone click.
+ * tagline and the two offers - prices are no longer published.
  *
  * Fonts are read from disk at build time rather than fetched, so image
  * generation does not depend on a network call and the Content-Security-Policy
@@ -40,7 +39,7 @@ export default async function OpengraphImage() {
   // One string, not an interpolated fragment: satori treats each text run as a
   // separate child node and rejects a div with several children unless it is
   // explicitly a flex container.
-  const priceLine = `From ${usd(pricing.fullTime)} a month. Everything included.`;
+  const strapline = "Professional Services · Dedicated Staffing";
 
   return new ImageResponse(
     (
@@ -109,7 +108,7 @@ export default async function OpengraphImage() {
               maxWidth: "900px",
             }}
           >
-            Bookkeeping capacity for US accounting firms.
+            Your accounting team. Without the overhead.
           </div>
 
           <div
@@ -120,7 +119,7 @@ export default async function OpengraphImage() {
               color: ochreLight,
             }}
           >
-            {priceLine}
+            {strapline}
           </div>
         </div>
 

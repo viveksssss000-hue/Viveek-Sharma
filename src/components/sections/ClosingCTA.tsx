@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 
+import { BandBars } from "@/components/brand/Decor";
+import { Magnetic } from "@/components/motion/Magnetic";
 import { Button } from "@/components/ui/button";
 import { ArrowRightIcon } from "@/components/ui/icons";
 import { closingCta, routes } from "@/content/global";
@@ -18,23 +20,26 @@ import { trackCtaClick } from "@/lib/analytics";
  */
 export function ClosingCTA() {
   return (
-    <section className="on-dark bg-forest text-paper">
-      <div className="gutter mx-auto max-w-text py-16 text-center lg:py-24">
+    <section className="band-glow band-grad on-dark text-paper">
+      {/* A faint echo of the brand bars in the corner, behind the words. */}
+      <BandBars className="absolute -bottom-4 -right-6 -z-10 w-44 md:w-56" />
+      <div className="gutter relative mx-auto max-w-text py-16 text-center lg:py-24">
         <h2>{closingCta.h2}</h2>
         <p className="mx-auto mt-6 measure text-lead text-paper/85">
           {closingCta.body}
         </p>
 
         <div className="mt-10 flex flex-col items-center gap-6">
-          <Button
-            asChild
-            variant="onDark"
-            full
-            className="sm:w-auto"
-            onClick={() => trackCtaClick("book_call", "closing_band")}
-          >
-            <Link href={routes.bookACall}>{closingCta.buttonLabel}</Link>
-          </Button>
+          <Magnetic className="w-full sm:w-auto">
+            <Button
+              asChild
+              variant="onDark"
+              full
+              onClick={() => trackCtaClick("book_call", "closing_band")}
+            >
+              <Link href={routes.bookACall}>{closingCta.buttonLabel}</Link>
+            </Button>
+          </Magnetic>
 
           <Link
             href={closingCta.linkHref}

@@ -22,6 +22,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const pages: MetadataRoute.Sitemap = [
     { url: url(routes.home), lastModified: now, changeFrequency: "monthly", priority: 1 },
     { url: url(routes.services), lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: url(routes.staffing), lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: url(routes.servicesForFirms), lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: url(routes.bookACall), lastModified: now, changeFrequency: "yearly", priority: 0.9 },
     { url: url(routes.howItWorks), lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: url(routes.security), lastModified: now, changeFrequency: "monthly", priority: 0.8 },

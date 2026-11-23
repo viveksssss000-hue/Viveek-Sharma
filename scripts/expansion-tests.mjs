@@ -94,26 +94,24 @@ try {
   const eol = original.includes("\r\n") ? "\r\n" : "\n";
   let patched = original;
 
-  // CO-06: a sixth nav item, using the longest anticipated label.
-  patched = patched.replace(
-    /( *\{ label: "Resources", href: routes\.blog \},)(\r?\n\] as const;)/,
-    (_match, resourcesLine, close) =>
-      `${resourcesLine}${eol}  { label: "Audit Support", href: routes.services },${close}`
-  );
+  // CO-06 asked the header to survive a SIXTH item. Since 23 November the
+  // nav carries six for real (Dedicated Staff joined), so the contract is
+  // met by the live nav itself: when six or more are present, test the
+  // header exactly as shipped instead of inventing a seventh the change
+  // order never asked for.
+  const liveNavCount = (original.match(/export const mainNav = \[[\s\S]*?\] as const;/)?.[0] ?? "").match(/\{ label:/g)?.length ?? 0;
+  if (liveNavCount < 6) {
+    patched = patched.replace(
+      /( *\{ label: "Resources", href: routes\.blog \},)(\r?\n\] as const;)/,
+      (_match, resourcesLine, close) =>
+        `${resourcesLine}${eol}  { label: "Audit Support", href: routes.services },${close}`
+    );
+  }
 
-  // CO-01: a third price card, inserted before the part-time one.
-  patched = patched.replace(
-    / *\{\r?\n( *)label: "Part-time bookkeeper",/,
-    (match, indent) =>
-      [
-        `    {`,
-        `${indent}label: "Audit support",`,
-        `${indent}amount: 2100,`,
-        `${indent}sub: "A third card, added only to prove the grid takes one without a layout rewrite.",`,
-        `    },`,
-        match.trimStart().replace(/^\{\r?\n */, `{${eol}${indent}`),
-      ].join(eol)
-  );
+  // CO-01's third-price-card edit was RETIRED on 22 November 2026: the
+  // price block (and the cards array it patched) no longer exists, because
+  // the site publishes no prices. The CO-06 header and menu tests below are
+  // still live and still required.
 
   /**
    * Verify by counting what actually changed, not by looking for a substring.
@@ -125,24 +123,20 @@ try {
     (text.match(/export const mainNav = \[[\s\S]*?\] as const;/)?.[0] ?? "").match(
       /\{ label:/g
     )?.length ?? 0;
-  const cardEntries = (text) =>
-    (text.match(/ {2}cards: \[[\s\S]*?\r?\n {2}\],/)?.[0] ?? "").match(/label:/g)
-      ?.length ?? 0;
-
   const navBefore = navEntries(original);
   const navAfter = navEntries(patched);
-  const cardsBefore = cardEntries(original);
-  const cardsAfter = cardEntries(patched);
+  const expectedAfter = navBefore < 6 ? navBefore + 1 : navBefore;
 
-  if (navAfter !== navBefore + 1 || cardsAfter !== cardsBefore + 1) {
+  if (navAfter !== expectedAfter) {
     throw new Error(
-      `Could not apply the data edits (nav ${navBefore} -> ${navAfter}, ` +
-        `cards ${cardsBefore} -> ${cardsAfter}). The data shape in ` +
-        "content/global.ts has changed - update this script."
+      `Could not apply the nav edit (${navBefore} -> ${navAfter}). The data ` +
+        "shape in content/global.ts has changed - update this script."
     );
   }
   console.log(
-    `Data edits: nav ${navBefore} -> ${navAfter} items, price cards ${cardsBefore} -> ${cardsAfter}.`
+    navBefore < 6
+      ? `Data edit: nav ${navBefore} -> ${navAfter} items.`
+      : `Nav already carries ${navBefore} items - testing it as shipped.`
   );
 
   await fs.writeFile(GLOBAL, patched, "utf8");
@@ -263,38 +257,9 @@ try {
     await page.close();
   }
 
-  /* --- CO-01: the price block with a third card -------------------- */
-
-  {
-    const page = await browser.newPage();
-    await page.setViewport({ width: 1280, height: 1000 });
-    await page.goto(`${BASE}/bookkeeping-services-for-cpa-firms#pricing`, {
-      waitUntil: "networkidle0",
-    });
-    const block = await page.evaluate(() => {
-      const section = document.getElementById("pricing");
-      const cards = section?.querySelectorAll("[data-price]") ?? [];
-      const rows = new Set(
-        [...cards].map((c) =>
-          Math.round(c.closest("div")?.getBoundingClientRect().top ?? 0)
-        )
-      );
-      return {
-        count: cards.length,
-        rows: rows.size,
-        overflowX: document.documentElement.scrollWidth > window.innerWidth,
-      };
-    });
-    const section = await page.$("#pricing");
-    await section?.screenshot({ path: path.join(OUT, "co01-price-block-3-cards.png") });
-    const ok = block.count === 3 && block.rows === 1 && !block.overflowX;
-    results.push({ test: "CO-01 price block with 3 cards", ok, detail: `${block.count} cards on ${block.rows} row(s), overflowX ${block.overflowX}` });
-    console.log(
-      `${ok ? "PASS" : "FAIL"}  price block - ${block.count} cards on ${block.rows} row(s), ` +
-        `horizontal overflow ${block.overflowX}`
-    );
-    await page.close();
-  }
+  /* --- CO-01: RETIRED 22 November 2026. The price block is gone - no
+     prices are published - so there is no card grid to expand. qa.mjs now
+     fails the build if a price figure ever comes back. ----------------- */
 
   await browser.close();
   stopServer();

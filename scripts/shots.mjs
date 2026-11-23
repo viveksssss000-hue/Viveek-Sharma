@@ -35,7 +35,6 @@ const ROUTES = [
   ["terms", "/terms"],
   ["thank-you-call", "/thank-you-call"],
   ["thank-you", "/thank-you"],
-  ["thank-you-checklist", "/thank-you-checklist"],
   ["404", "/no-such-page"],
 ];
 

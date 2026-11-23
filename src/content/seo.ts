@@ -14,14 +14,24 @@ type Meta = { title: string; description: string; noindex?: boolean };
 
 export const meta: Record<string, Meta> = {
   [routes.home]: {
-    title: "Offshore Bookkeeping for CPA Firms | tryACOwork",
+    title: "Bookkeeping, Accounting and Dedicated Staff | tryACOwork",
     description:
-      "Hire a trained, dedicated bookkeeper for your US accounting firm. Works in your software, on your clients. Published prices. Free 20-hour pilot.",
+      "Outsourced bookkeeping and accounting for US businesses and CPA firms - or hire a dedicated professional through us. Quoted in writing. Free 20-hour pilot.",
   },
   [routes.services]: {
+    title: "Bookkeeping and Accounting Services | tryACOwork",
+    description:
+      "Bookkeeping and accounting run by our own team: reconciliations, payables, receivables, payroll support, month-end close and reporting, returned for your review.",
+  },
+  [routes.servicesForFirms]: {
     title: "Outsourced Bookkeeping for CPA Firms | tryACOwork",
     description:
-      "Reconciliations, payables, month-end close and cleanups, done by one dedicated bookkeeper inside your own systems. See exactly what it costs.",
+      "Reconciliations, payables, month-end close and cleanups, done by one dedicated bookkeeper inside your own systems. Scoped and quoted for your firm.",
+  },
+  [routes.staffing]: {
+    title: "Hire Dedicated Accounting Staff | tryACOwork",
+    description:
+      "An experienced accounting professional who works only for you, on our payroll - your software, your hours, with equipment, cover and a free replacement included.",
   },
   [routes.howItWorks]: {
     title: "How It Works: Hiring an Offshore Bookkeeper",
@@ -72,12 +82,6 @@ export const meta: Record<string, Meta> = {
     description: "Your 20-minute call is booked. Here is what happens next.",
     noindex: true,
   },
-  [routes.thankYouChecklist]: {
-    title: "Your checklist | tryACOwork",
-    description:
-      "The 12 questions to ask before you hire an offshore bookkeeper.",
-    noindex: true,
-  },
   "/404": {
     title: "Page not found | tryACOwork",
     description: "That page has moved, or never existed.",
@@ -106,8 +110,10 @@ assertUniqueMeta();
 /** Primary keyword per page (spec 10.1). One page per phrase - never target
  *  the same phrase twice or the two pages compete with each other. */
 export const keywords: Record<string, string> = {
-  [routes.home]: "offshore bookkeeping for CPA firms",
-  [routes.services]: "outsourced bookkeeping for CPA firms",
+  [routes.home]: "outsourced bookkeeping and accounting services",
+  [routes.services]: "bookkeeping and accounting services for businesses",
+  [routes.servicesForFirms]: "outsourced bookkeeping for CPA firms",
+  [routes.staffing]: "hire dedicated offshore accounting staff",
   [routes.howItWorks]: "how offshore bookkeeping works for accounting firms",
   [routes.security]: "is offshore bookkeeping safe for CPA firms",
   [routes.about]: "about tryACOwork",

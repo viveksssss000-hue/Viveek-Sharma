@@ -25,7 +25,7 @@ export function ConsentBanner() {
     <div
       role="region"
       aria-label="Cookie notice"
-      className="fixed bottom-4 left-4 z-50 w-[calc(100vw-32px)] max-w-[380px] rounded-[12px] border border-border bg-surface p-6 shadow-lift max-md:bottom-[84px]"
+      className="fixed bottom-4 left-4 z-50 w-[calc(100vw-32px)] max-w-[380px] rounded-[16px] border border-border bg-surface p-6 shadow-lift max-md:bottom-[84px]"
     >
       <p className="text-small text-ink">
         {microcopy.cookieText}{" "}

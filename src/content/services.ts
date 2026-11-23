@@ -9,12 +9,11 @@
  * menu and the 404 page all point at it. There is no separate pricing page.
  */
 
-import { pricing, usd } from "@/lib/site";
-import { routes } from "@/content/global";
+
 
 export const header = {
   eyebrow: "Bookkeeping services for CPA and accounting firms",
-  h1: "Outsourced bookkeeping for US accounting firms, done by one dedicated person.",
+  h1: "Outsourced bookkeeping for CPA firms, by one dedicated person.",
   intro:
     "You assign the clients. Your bookkeeper does the reconciliations, the payables, the receivables and the month-end close inside your own software, on your own process, and hands the work back to you for review. No shared teams, no rotating staff, no work leaving your systems.",
 } as const;
@@ -153,20 +152,6 @@ export const software = {
     "Using something not on this list? We will train your bookkeeper on it during onboarding at no charge.",
 } as const;
 
-/* --- Section 5: Pricing extra (7.2.6) ---------------------------- *
- * The shared price block, plus one element unique to this page.        */
-
-export const pricingExtra = {
-  h4: "What firms typically charge their own clients",
-  body: `Firms typically bill their bookkeeping clients between $500 and $1,500 a month per client. One full-time tryACOwork bookkeeper handling ten of those clients costs you ${usd(
-    pricing.fullTime
-  )} a month in total. We are telling you this because the arithmetic is the point, and you will do it anyway.`,
-  link: {
-    label: "See the day-by-day onboarding timeline",
-    href: routes.howItWorks,
-  },
-} as const;
-
 /* --- Section 6: What we do not do (7.2.7, replaced by CO-02) ------ *
  * The line is drawn at JUDGEMENT rather than at service type, so every item
  * stays true permanently. The previous list excluded "audit or assurance
@@ -193,7 +178,7 @@ export const boundaries = {
     "Making audit judgements. We do not determine materiality, conclude on going concern, or decide whether audit evidence is sufficient.",
     "Talking to your clients, unless you specifically ask us to and set it up with them first.",
     "Holding your clients’ data on our own systems. It stays in yours.",
-    "Bookkeeping for businesses directly. We only work with accounting firms, so we will never compete with you for your client.",
+    "Going around your firm to your clients. A client you bring through your firm stays yours - we will never approach them to work with us directly.",
   ],
   closing:
     "That last point matters more than it might look. Some providers sell to firms and to small businesses at the same time. We do not, and we never will.",
@@ -221,7 +206,7 @@ export const fit = {
       "All the work is on desktop software with no remote access and no plan to change",
       "You need someone to make judgement calls without review, which no outsourced provider should ever do",
       "You need tax return preparation, which we do not offer",
-      "You want the cheapest hourly rate available - there are providers at $6 an hour and we are not competing with them",
+      "You want the cheapest hourly rate available - there are offshore providers racing to the bottom on price, and we are not competing with them",
     ],
   },
   closing:

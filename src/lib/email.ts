@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 
 import { site } from "@/lib/site";
-import type { ChecklistInput, PilotInput } from "@/lib/validations";
+import type { PilotInput } from "@/lib/validations";
 
 /**
  * Transactional email (spec 8.4).
@@ -25,6 +25,13 @@ import type { ChecklistInput, PilotInput } from "@/lib/validations";
 
 const apiKey = process.env.RESEND_API_KEY;
 const fromEmail = process.env.CONTACT_FROM_EMAIL ?? site.email;
+/**
+ * Where every form notification lands. The client confirmed on 23 November
+ * that this must be hello@tryacowork.com - which is exactly what site.email
+ * resolves to from content/settings.json, so the default delivers that even
+ * with no environment variable set. Only set CONTACT_TO_EMAIL in a deploy if
+ * the client has asked for a different inbox in writing.
+ */
 const toEmail = process.env.CONTACT_TO_EMAIL ?? site.email;
 const resend = apiKey ? new Resend(apiKey) : null;
 
@@ -120,66 +127,13 @@ export async function sendPilotAcknowledgement(data: PilotInput) {
 /* Checklist lead magnet                                               */
 /* ------------------------------------------------------------------ */
 
-export async function notifyChecklistSignup(data: ChecklistInput) {
-  const subject = `Checklist download - ${data.firstName}`;
-
-  if (!resend) {
-    console.info("[email] checklist signup (Resend not configured):", subject);
-    return;
-  }
-
-  await resend.emails.send({
-    from: `tryACOwork website <${fromEmail}>`,
-    to: toEmail,
-    replyTo: data.workEmail,
-    subject,
-    html: `
-      <h2 style="font-family:Georgia,serif">Checklist download</h2>
-      <table style="font-family:system-ui,sans-serif;font-size:15px;border-collapse:collapse">
-        ${row("First name", data.firstName)}
-        ${row("Work email", data.workEmail)}
-        ${row("Signed up from", data.formLocation)}
-      </table>
-    `,
-  });
-}
-
-/**
- * The checklist email. Copy from spec 8.4.
- *
- * The form promises "no sales sequence - we send the checklist and that is it",
- * and spec 8.5 requires that promise be honoured. This is the only email this
- * address will receive about the checklist. If a nurture sequence is ever
- * added, the copy on the form has to change first.
+/*
+ * The checklist lead magnet was REMOVED entirely on 23 November at the
+ * client's instruction ("I do not want to send any checklist"). The form,
+ * the API route, the thank-you page, the PDF and both emails are gone. If a
+ * lead magnet ever returns, it is a new feature - do not resurrect this one
+ * from git without asking.
  */
-export async function sendChecklist(data: ChecklistInput) {
-  const downloadUrl = `${site.url}/12-questions-offshore-bookkeeper-checklist.pdf`;
-
-  if (!resend) {
-    console.info("[email] checklist (Resend not configured):", data.workEmail);
-    return;
-  }
-
-  await resend.emails.send({
-    from: `${site.founder.firstName} at tryACOwork <${fromEmail}>`,
-    to: data.workEmail,
-    replyTo: toEmail,
-    subject:
-      "Your checklist - 12 questions to ask before you hire an offshore bookkeeper",
-    text: [
-      `Hi ${data.firstName},`,
-      "",
-      `Here is the checklist: ${downloadUrl}`,
-      "",
-      "That is the only email you will get from us about it - no sequence, as promised.",
-      "",
-      `If you would rather talk it through, my calendar is here: ${bookingLink}`,
-      "",
-      site.founder.firstName,
-      "tryACOwork",
-    ].join("\n"),
-  });
-}
 
 /** Optional Slack ping, if a webhook is configured. Never blocks a submission. */
 export async function pingSlack(text: string) {

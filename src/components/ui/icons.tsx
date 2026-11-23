@@ -44,7 +44,7 @@ function Icon({
 export function CheckIcon(props: IconProps) {
   return (
     <Icon {...props}>
-      <path d="m4 12.5 5 5L20 6.5" />
+      <path pathLength={1} d="m4 12.5 5 5L20 6.5" />
     </Icon>
   );
 }
@@ -52,8 +52,8 @@ export function CheckIcon(props: IconProps) {
 export function CrossIcon(props: IconProps) {
   return (
     <Icon {...props}>
-      <path d="M18 6 6 18" />
-      <path d="m6 6 12 12" />
+      <path pathLength={1} d="M18 6 6 18" />
+      <path pathLength={1} d="m6 6 12 12" />
     </Icon>
   );
 }
@@ -93,6 +93,15 @@ export function PlusMinusIcon({
         style={{ transform: open ? "rotate(90deg)" : "none" }}
       />
     </svg>
+  );
+}
+
+export function UserIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <circle cx="12" cy="8" r="3.5" />
+      <path d="M5 19.5c1.2-3.2 3.8-4.8 7-4.8s5.8 1.6 7 4.8" />
+    </Icon>
   );
 }
 

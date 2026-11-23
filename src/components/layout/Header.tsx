@@ -38,7 +38,7 @@ export function Header() {
       className={cn(
         "sticky top-0 z-50 transition-[background-color,border-color,box-shadow] duration-150 ease-out",
         solid
-          ? "border-b border-border bg-paper"
+          ? "border-b border-border bg-paper/85 backdrop-blur-md"
           : "border-b border-transparent bg-transparent",
         scrolled && "shadow-rest"
       )}
@@ -95,7 +95,7 @@ export function Header() {
                       dense ? "text-small xl:text-[17px]" : "text-[17px]",
                       current
                         ? "font-semibold underline decoration-ochre decoration-2 underline-offset-8"
-                        : "font-medium hover:text-fern"
+                        : "nav-anim font-medium hover:text-fern"
                     )}
                   >
                     {item.label}

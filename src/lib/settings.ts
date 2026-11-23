@@ -67,8 +67,8 @@ export const business = {
   linkedin: value(settings.business.linkedin),
   /** e.g. "There are nine of us today." Honest number or nothing. */
   teamSizeStatement: value(settings.business.teamSizeStatement),
-  founderName: value(settings.business.founderName) ?? "Naveen Gupta",
-  founderRole: value(settings.business.founderRole) ?? "Co-founder",
+  founderName: value(settings.business.founderName) ?? "Sheky Goyal",
+  founderRole: value(settings.business.founderRole) ?? "Founder",
 } as const;
 
 /**
@@ -105,23 +105,6 @@ export function isConfirmed(key: string): boolean {
   return confirmedItems.has(key);
 }
 
-export const pricingSettings = {
-  fullTime: settings.pricing.fullTimeMonthly,
-  partTime: settings.pricing.partTimeMonthly,
-  extraHourly: settings.pricing.extraHourlyRate,
-  usHoursPremium: settings.pricing.usHoursPremiumMonthly,
-  /**
-   * The two monthly figures are confirmed; the extra-hours rate and the
-   * US-hours premium are not, so they still render their [CONFIRM RATE]
-   * markers (CO-01, and Section 3 items 1 and 2 of the change order).
-   *
-   * The change order is explicit that the site cannot go live with a marker
-   * showing, and equally explicit not to quietly ship a guessed number - so
-   * the marker is visible rather than silently absent.
-   */
-  extraHourlyConfirmed: confirmedItems.has("extraHourlyRate"),
-  usHoursPremiumConfirmed: confirmedItems.has("usHoursPremium"),
-} as const;
 
 export const pilotSettings = {
   /** Null removes the line entirely rather than publishing a vague limit. */

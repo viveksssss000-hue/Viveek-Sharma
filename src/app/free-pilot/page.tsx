@@ -60,7 +60,7 @@ export default function FreePilotPage() {
           {twoWeeks.weeks.map((week) => (
             <div
               key={week.label}
-              className="rounded-[12px] border border-border bg-surface p-6"
+              className="rounded-[16px] border border-border bg-surface p-6"
             >
               <h3 className="font-sans text-h4 font-semibold">{week.label}</h3>
               <p className="mt-3 measure text-body text-ink-muted">

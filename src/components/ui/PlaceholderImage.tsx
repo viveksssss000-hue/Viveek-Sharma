@@ -43,7 +43,7 @@ export function PlaceholderImage({
   className,
   rounded = true,
 }: Props) {
-  const shape = cn(rounded && "rounded-[12px]", className);
+  const shape = cn(rounded && "rounded-[16px]", className);
 
   if (src) {
     return (

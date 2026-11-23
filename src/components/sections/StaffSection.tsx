@@ -38,7 +38,7 @@ export function StaffSection() {
           {staff.profiles.map((profile) => (
             <li
               key={profile.name}
-              className="w-[85%] shrink-0 snap-start rounded-[12px] border border-border bg-surface p-6 shadow-rest sm:w-[60%] lg:w-auto lg:p-8"
+              className="w-[85%] shrink-0 snap-start rounded-[16px] border border-border bg-surface p-6 shadow-rest sm:w-[60%] lg:w-auto lg:p-8"
             >
               <PlaceholderImage
                 src={profile.photo}
@@ -79,7 +79,7 @@ export function StaffSection() {
           ))}
         </ul>
       ) : (
-        <div className="mt-12 max-w-text rounded-[12px] border border-border bg-surface p-6 shadow-rest lg:p-8">
+        <div className="mt-12 max-w-text rounded-[16px] border border-border bg-surface p-6 shadow-rest lg:p-8">
           <h3 className="font-sans text-h4 font-semibold">
             {staff.hiringStandard.h4}
           </h3>

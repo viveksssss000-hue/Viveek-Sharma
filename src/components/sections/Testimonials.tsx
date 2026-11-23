@@ -39,7 +39,7 @@ export function Testimonials() {
         {testimonials.map((item) => (
           <li
             key={item.name}
-            className="rounded-[12px] border border-border bg-surface p-6 shadow-rest lg:p-8"
+            className="rounded-[16px] border border-border bg-surface p-6 shadow-rest lg:p-8"
           >
             <blockquote>
               <p

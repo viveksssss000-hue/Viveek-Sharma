@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
 import { FAQ } from "@/components/sections/FAQ";
-import { PriceBlock } from "@/components/sections/PriceBlock";
+import { ScopeBlock } from "@/components/sections/ScopeBlock";
 import { Eyebrow, Section, SectionHeading } from "@/components/sections/Section";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { BreadcrumbSchema, FaqSchema, ServiceSchema } from "@/components/seo/JsonLd";
-import { ArrowRightIcon, CheckIcon, CrossIcon } from "@/components/ui/icons";
+import { CheckIcon, CrossIcon } from "@/components/ui/icons";
 import { routes } from "@/content/global";
 import {
   boundaries,
@@ -15,14 +14,13 @@ import {
   faqs,
   fit,
   header,
-  pricingExtra,
   software,
   taskGroups,
   threeWays,
 } from "@/content/services";
 import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = buildMetadata(routes.services);
+export const metadata: Metadata = buildMetadata(routes.servicesForFirms);
 
 /**
  * Services page (spec 7.2). URL: /bookkeeping-services-for-cpa-firms
@@ -51,7 +49,7 @@ export default function ServicesPage() {
           {threeWays.cards.map((card) => (
             <li
               key={card.h4}
-              className="rounded-[12px] border border-border bg-surface p-6 shadow-rest lg:p-8"
+              className="rounded-[16px] border border-border bg-surface p-6 shadow-rest lg:p-8"
             >
               <h3 className="font-sans text-h4 font-semibold">{card.h4}</h3>
               <p className="mt-3 text-body text-ink-muted">{card.body}</p>
@@ -111,29 +109,8 @@ export default function ServicesPage() {
         </p>
       </Section>
 
-      {/* 5 - Pricing. The anchor the whole site links to. */}
-      <PriceBlock
-        id="pricing"
-        page={routes.services}
-        extra={
-          <div className="mt-12 rounded-[12px] border-l-4 border-fern bg-sand-deep/40 p-6">
-            <h3 className="font-sans text-h4 font-semibold">
-              {pricingExtra.h4}
-            </h3>
-            <p className="mt-3 measure text-body">{pricingExtra.body}</p>
-            <Link
-              href={pricingExtra.link.href}
-              className="group mt-4 inline-flex min-h-11 items-center gap-2 text-fern underline decoration-2 underline-offset-4 hover:decoration-[3px]"
-            >
-              {pricingExtra.link.label}
-              <ArrowRightIcon
-                size={18}
-                className="transition-transform duration-150 group-hover:translate-x-1"
-              />
-            </Link>
-          </div>
-        }
-      />
+      {/* 5 - Scope and how pricing is agreed. The anchor the site links to. */}
+      <ScopeBlock id="pricing" page={routes.servicesForFirms} />
 
       {/* 6 - What we do not do. Boundary setting: it builds trust and prevents
           bad-fit enquiries. */}
@@ -157,7 +134,7 @@ export default function ServicesPage() {
         <h2 className="max-w-text">{fit.h2}</h2>
 
         <div className="mt-12 grid gap-8 md:grid-cols-2 lg:gap-12">
-          <div className="rounded-[12px] border border-border bg-surface p-6 lg:p-8">
+          <div className="rounded-[16px] border border-border bg-surface p-6 lg:p-8">
             <h3 className="font-sans text-h4 font-semibold">{fit.good.h4}</h3>
             <ul className="mt-6 grid gap-3">
               {fit.good.items.map((item) => (
@@ -169,7 +146,7 @@ export default function ServicesPage() {
             </ul>
           </div>
 
-          <div className="rounded-[12px] border border-border bg-surface p-6 lg:p-8">
+          <div className="rounded-[16px] border border-border bg-surface p-6 lg:p-8">
             <h3 className="font-sans text-h4 font-semibold">{fit.bad.h4}</h3>
             <ul className="mt-6 grid gap-3">
               {fit.bad.items.map((item) => (
@@ -193,7 +170,10 @@ export default function ServicesPage() {
       <ServiceSchema />
       <FaqSchema faqs={faqs} />
       <BreadcrumbSchema
-        trail={[{ name: "Services", path: routes.services }]}
+        trail={[
+          { name: "Services", path: routes.services },
+          { name: "For CPA firms", path: routes.servicesForFirms },
+        ]}
       />
     </>
   );

@@ -98,6 +98,11 @@ export default function RootLayout({
           {microcopy.skipLink}
         </a>
 
+        {/* Reading progress, drawn by a CSS scroll timeline - zero
+            JavaScript. Hidden under reduced motion and in browsers without
+            scroll timelines (see globals.css). */}
+        <div className="scroll-progress" aria-hidden="true" />
+
         <Header />
 
         {/* Bottom padding clears the 68px sticky mobile bar plus 16px, so the

@@ -1,16 +1,16 @@
 {
   "business": {
-    "legalName": "VSH Enterprise Pvt Ltd",
-    "officeCity": "New Delhi",
-    "addressStreet": "A-113, Rishal Garden, Ranhola, Nangloi",
-    "addressRegion": "Delhi",
-    "addressPostalCode": "110041",
+    "legalName": "Vision Accounting Pvt Ltd",
+    "officeCity": "Noida",
+    "addressStreet": "Plot No.C, 001, Sector 16B",
+    "addressRegion": "Uttar Pradesh",
+    "addressPostalCode": "201301",
     "email": "hello@tryacowork.com",
     "phone": "",
     "linkedin": "https://www.linkedin.com/company/tryacowork",
     "teamSizeStatement": "",
-    "founderName": "Naveen Gupta",
-    "founderRole": "Co-founder"
+    "founderName": "Sheky Goyal",
+    "founderRole": "Founder"
   },
   "search": {
     "googleSiteVerification": "",
@@ -18,12 +18,6 @@
   },
   "booking": {
     "calLink": ""
-  },
-  "pricing": {
-    "fullTimeMonthly": 1600,
-    "partTimeMonthly": 880,
-    "extraHourlyRate": 12,
-    "usHoursPremiumMonthly": 150
   },
   "pilot": {
     "monthlyLimitLine": "We run a limited number of pilots each month, because each one uses a real person’s real time. If we are full, we will tell you when the next slot is."
@@ -34,7 +28,7 @@
   },
   "testimonials": [],
   "about": {
-    "founderStory": "For nine years I worked alongside US accounting firms from India, and I kept seeing the same thing go wrong. A firm would hire an offshore bookkeeper, get a different person every few months, and quietly give up on the idea.\n\nThe work was rarely the problem. The problem was that nobody owned it. Staff were shared across five firms at once, so they never learned how any single firm liked things done.\n\nThen a two-partner firm in Ohio told me they had turned away eleven clients in one year because they could not hire fast enough. That stayed with me. They did not need another vendor. They needed one person who arrived each morning already knowing their clients.\n\nSo we built tryACOwork around exactly that. One bookkeeper, one firm, for years. We publish our prices, you meet the person before you commit, and the review always stays yours."
+    "founderStory": ""
   },
   "security": {
     "insuranceStatement": ""
@@ -53,15 +47,11 @@
     "address",
     "noTeamSizeSentence",
     "noInsuranceStatement",
-    "monthlyPrices",
-    "extraHourlyRate",
-    "usHoursPremium",
     "professionalStandardsWording"
   ],
   "deferred": [
     "testimonials",
     "staffProfiles",
-    "checklistPdf",
     "booking",
     "environmentVariables"
   ]

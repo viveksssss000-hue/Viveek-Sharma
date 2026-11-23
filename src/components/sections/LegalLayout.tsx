@@ -25,7 +25,7 @@ export function LegalLayout({ doc }: { doc: LegalDoc }) {
         )}
 
         {doc.status !== "live" && (
-          <div className="mt-8 rounded-[12px] border border-border bg-sand-deep/40 p-6">
+          <div className="mt-8 rounded-[16px] border border-border bg-sand-deep/40 p-6">
             <p className="text-small font-semibold uppercase tracking-[0.08em] text-ochre-text">
               {doc.status === "brief"
                 ? "Not yet the final document"

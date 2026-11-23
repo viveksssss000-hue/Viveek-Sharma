@@ -1,5 +1,5 @@
 /**
- * Global copy: navigation, footer, the shared price block, the closing
+ * Global copy: navigation, footer, the shared scope block, the closing
  * call-to-action band, and the microcopy reference from Appendix C.
  *
  * Every string here is FINAL COPY from the build specification and is used
@@ -8,15 +8,10 @@
  * never drift apart.
  *
  * House style (spec 2.3 and the client's note): plain hyphens, never em
- * dashes. American spelling. No exclamation marks. Prices as "$1,600 a month".
+ * dashes. American spelling. No exclamation marks. No published prices - they are quoted after a call.
  */
 
-import {
-  extraHourlyRate,
-  pricing,
-  site,
-  usHoursPremiumRate,
-} from "@/lib/site";
+import { site, terms } from "@/lib/site";
 
 /* ------------------------------------------------------------------ */
 /* Routes - one place, so no link is ever typed by hand                */
@@ -24,8 +19,14 @@ import {
 
 export const routes = {
   home: "/",
-  services: "/bookkeeping-services-for-cpa-firms",
-  pricing: "/bookkeeping-services-for-cpa-firms#pricing",
+  /** The PRIMARY offer: bookkeeping and accounting run by our team. */
+  services: "/bookkeeping-and-accounting-services",
+  /** The firm-specific services page. The long URL is the SEO asset the old
+   *  site built - it must never be renamed or redirected away. */
+  servicesForFirms: "/bookkeeping-services-for-cpa-firms",
+  /** The SECONDARY offer: a dedicated person on our payroll. */
+  staffing: "/hire-dedicated-staff",
+  pricing: "/bookkeeping-and-accounting-services#pricing",
   howItWorks: "/how-it-works",
   security: "/security",
   about: "/about",
@@ -36,7 +37,6 @@ export const routes = {
   terms: "/terms",
   thankYou: "/thank-you",
   thankYouCall: "/thank-you-call",
-  thankYouChecklist: "/thank-you-checklist",
 } as const;
 
 /* ------------------------------------------------------------------ */
@@ -86,7 +86,6 @@ export const microcopy = {
   seeHowItWorks: "See how it works",
   startPilot: "Start with a free 20-hour pilot",
   pilotSubmit: "Request a free 20-hour pilot",
-  checklistSubmit: "Send me the checklist",
   submitting: "Sending...",
   menuOpen: "Open menu",
   menuClose: "Close menu",
@@ -96,10 +95,6 @@ export const microcopy = {
   cookieAccept: "Accept",
   cookieDecline: "Decline",
   cookieSettings: "Cookie settings",
-  checklistHeading:
-    "The 12 questions to ask before you hire an offshore bookkeeper",
-  checklistBody:
-    "A one-page checklist. No sales sequence - we send the checklist and that is it.",
   privacyLineForms:
     "We will only use your details to reply to you. We do not sell data.",
   privacyLineBooking:
@@ -131,6 +126,7 @@ export const microcopy = {
  */
 export const mainNav = [
   { label: "Services", href: routes.services },
+  { label: "Dedicated Staff", href: routes.staffing },
   { label: "How It Works", href: routes.howItWorks },
   { label: "Security", href: routes.security },
   { label: "About", href: routes.about },
@@ -139,7 +135,7 @@ export const mainNav = [
 
 /** The mobile menu carries two extra links that the desktop bar does not. */
 export const mobileNavExtra = [
-  { label: "Pricing", href: routes.pricing },
+  { label: "What it costs", href: routes.pricing },
   { label: "Free pilot", href: routes.freePilot },
 ] as const;
 
@@ -149,15 +145,17 @@ export const mobileNavExtra = [
 
 export const footer = {
   blurb: [
-    "Bookkeeping capacity for US accounting firms.",
-    "Dedicated bookkeepers in India, working only for your firm.",
+    "Bookkeeping and accounting services for US businesses and firms.",
+    "And dedicated staff through us, when you would rather build your own team.",
   ],
   columns: [
     {
       heading: "Company",
       links: [
+        { label: "Services", href: routes.services },
+        { label: "Dedicated staff", href: routes.staffing },
+        { label: "For CPA firms", href: routes.servicesForFirms },
         { label: "About", href: routes.about },
-        { label: "How It Works", href: routes.howItWorks },
         { label: "Security", href: routes.security },
         { label: "Resources", href: routes.blog },
       ],
@@ -167,7 +165,7 @@ export const footer = {
       links: [
         { label: microcopy.bookCall, href: routes.bookACall },
         { label: "Free 20-hour pilot", href: routes.freePilot },
-        { label: "Pricing", href: routes.pricing },
+        { label: "What it costs", href: routes.pricing },
       ],
     },
   ],
@@ -182,23 +180,11 @@ export const footer = {
 /* Services. The single strongest differentiator on the site.          */
 /* ------------------------------------------------------------------ */
 
-export const priceBlock = {
-  h2: "Here is what it costs. No form to fill in first.",
+export const scopeBlock = {
+  h2: "What it costs, and how we agree it.",
   intro:
-    "One price, billed monthly, in US dollars. It covers the person, their equipment, their office, their manager and their replacement if you ever need one.",
-  cards: [
-    {
-      label: "Full-time bookkeeper",
-      amount: pricing.fullTime,
-      sub: "160 hours a month, about 40 hours a week, dedicated to your firm only. Works your chosen hours.",
-    },
-    {
-      label: "Part-time bookkeeper",
-      amount: pricing.partTime,
-      sub: "80 hours a month, about 20 hours a week. A good way to start if you are not sure you can fill a full week yet.",
-    },
-  ],
-  includedHeading: "Included in both, at no extra cost:",
+    "We do not publish a rate card. A business with one set of books and a firm with forty clients need different things, so we scope your actual work on a short call and put the price in writing before you commit to anything.",
+  includedHeading: "Included in every engagement, at no extra cost:",
   included: [
     "Salary, taxes and benefits",
     "A laptop and a second monitor",
@@ -207,14 +193,14 @@ export const priceBlock = {
     "A team lead who oversees their work",
     "Ongoing US GAAP and software training",
     "A free replacement if the fit is wrong",
-    `${pricing.noticeDays} days notice to cancel, any time`,
+    `${terms.noticeDays} days notice to cancel, any time`,
   ],
   notIncludedHeading: "Not included, and we will not pretend otherwise:",
   notIncluded: [
-    "Software licences stay in your name, because your clients’ data should live in your systems, not ours",
-    "Work outside bookkeeping, such as tax return preparation, which we do not offer",
-    `Hours above the ones you have bought, which are billed at ${extraHourlyRate} an hour and only with your written approval`,
-    `Full US-hours coverage from 9am to 5pm Eastern, which is a night shift in India and costs ${usHoursPremiumRate} a month more per person`,
+    "Software licences stay in your name, because the books should live in your systems, not ours",
+    "Work we are not qualified or authorised to sign off on, including audit opinions",
+    "Hours above the ones agreed, which are quoted in advance and billed only with your written approval",
+    "Full US-hours coverage from 9am to 5pm Eastern, which is a night shift in India and is quoted separately",
   ],
   buttonLabel: microcopy.startPilot,
   linkLabel: "See exactly what is included",
@@ -241,7 +227,6 @@ export const closingCtaExcludedPaths = [
   routes.freePilot,
   routes.thankYou,
   routes.thankYouCall,
-  routes.thankYouChecklist,
   routes.privacy,
   routes.terms,
 ] as const;
@@ -254,9 +239,9 @@ export const notFound = {
   h1: "That page has moved, or never existed.",
   body: "Sorry about that. Here are the pages most people are looking for.",
   links: [
-    { label: "What our bookkeepers do", href: routes.services },
+    { label: "Bookkeeping and accounting services", href: routes.services },
+    { label: "Hire dedicated staff", href: routes.staffing },
     { label: "How it works", href: routes.howItWorks },
-    { label: "Pricing", href: routes.pricing },
     { label: microcopy.bookCall, href: routes.bookACall },
   ],
   buttonLabel: "Back to the home page",
@@ -302,15 +287,3 @@ export const thankYouPilot = {
   ],
 } as const;
 
-export const thankYouChecklist = {
-  h1: "Here is your checklist.",
-  body1:
-    "The 12 questions to ask before you hire an offshore bookkeeper. It is on its way to your inbox, and you can download it right here as well.",
-  buttonLabel: "Download the checklist (PDF)",
-  /** Served from this site's own domain so the link never expires (spec 8.5). */
-  downloadHref: "/12-questions-offshore-bookkeeper-checklist.pdf",
-  body2:
-    "That is genuinely all we will send. No sales sequence, as promised. If you want to talk it through, the calendar is below.",
-  linkLabel: microcopy.bookCall,
-  linkHref: routes.bookACall,
-} as const;

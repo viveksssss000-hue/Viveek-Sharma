@@ -16,7 +16,6 @@ import {
   bookingSettings,
   business,
   imageSettings,
-  pricingSettings,
 } from "@/lib/settings";
 
 export const site = {
@@ -41,7 +40,8 @@ export const site = {
    * The domain, the email address and every URL stay all-lower-case
    * (tryacowork.com), because that is what they actually are.
    */
-  tagline: "Bookkeeping capacity for US accounting firms.",
+  tagline:
+    "Reliable bookkeeping, accounting services, and dedicated offshore talent for growing businesses and US accounting firms.",
   domain: "www.tryacowork.com",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.tryacowork.com",
 
@@ -88,76 +88,12 @@ export const booking = {
   durationMinutes: 20,
 } as const;
 
-/** Prices - the site's main differentiator (spec 3.4, 7.1.5). */
-export const pricing = {
-  /** Full-time: 160 hours a month. */
-  fullTime: pricingSettings.fullTime,
-  /** Part-time: 80 hours a month. */
-  partTime: pricingSettings.partTime,
-  /** Hours above the ones bought, per hour, written approval only. */
-  extraHourly: pricingSettings.extraHourly,
-  /** Full US-hours coverage, 9am-5pm Eastern, per person per month. */
-  usHoursPremium: pricingSettings.usHoursPremium,
+/** Engagement terms. Prices are not published - they are quoted after a call. */
+export const terms = {
   /** The free pilot, in hours. Spec 14.3: keep it at 20. */
   pilotHours: 20,
   /** Cancellation notice, in days. */
   noticeDays: 30,
 } as const;
 
-/**
- * US median annual wage, bookkeeping/accounting/auditing clerks: $49,210.
- * US Bureau of Labor Statistics, May 2024. Verified, Appendix B.
- *
- * Hard-coded on purpose: it is a cited external figure, not a business setting,
- * and it must not be editable without also editing the attribution beside it.
- */
-export const BLS_MEDIAN_WAGE = 49210;
 
-/** Format money the way the brand writes it: "$1,600", never "$1600" (spec 2.3). */
-export function usd(amount: number): string {
-  return `$${amount.toLocaleString("en-US")}`;
-}
-
-/**
- * The digits alone, e.g. "1,600".
- *
- * The big price figures set the dollar sign at 21px alongside a 48px numeral
- * (spec 4.2.2), so those two need to be separate elements. Everywhere else -
- * body copy, tables, the not-included list - `usd()` keeps them together.
- */
-export function usdDigits(amount: number): string {
-  return amount.toLocaleString("en-US");
-}
-
-/**
- * A money figure that carries its [CONFIRM RATE] marker until the client has
- * signed the number off (CO-01).
- *
- * The change order's rule: build with the figure v1.0 has, keep the marker
- * visible in staging, never quietly ship a guess, and never delete the line.
- * Launch QA then blocks on the marker still being there.
- *
- * Both open rates flow from here, so the figure and its marker can only ever
- * appear together - and the US-hours premium, which appears in two places, can
- * never show one number in the price block and another in the FAQ.
- */
-export function usdRate(amount: number, confirmed: boolean): string {
-  return confirmed ? usd(amount) : `${usd(amount)} [CONFIRM RATE]`;
-}
-
-/** The extra-hours rate, with its marker if still open. */
-export const extraHourlyRate = usdRate(
-  pricing.extraHourly,
-  pricingSettings.extraHourlyConfirmed
-);
-
-/** The US-hours premium, with its marker if still open. Used in TWO places:
- *  the price block's not-included list and Home FAQ answer 4 (CO-17). */
-export const usHoursPremiumRate = usdRate(
-  pricing.usHoursPremium,
-  pricingSettings.usHoursPremiumConfirmed
-);
-
-/** The annual equivalent, for the comparison table. Spec 7.1.9 requires this to
- *  recalculate whenever the monthly price changes. */
-export const annualFullTime = pricing.fullTime * 12;

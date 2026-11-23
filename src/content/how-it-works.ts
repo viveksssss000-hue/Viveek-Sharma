@@ -10,7 +10,7 @@
  * before launch - a missed published promise is worse than no promise.
  */
 
-import { pricing } from "@/lib/site";
+import { terms } from "@/lib/site";
 import { routes } from "@/content/global";
 
 export const header = {
@@ -95,7 +95,7 @@ export const commitments = {
     { what: "Reply to any question from you", when: "Within 4 working hours, in your business day" },
     { what: "Month-end close delivered for review", when: "By the date agreed in your process document" },
     { what: "Replacement bookkeeper in place", when: "Within 10 business days of your request" },
-    { what: "Notice to cancel", when: `${pricing.noticeDays} days, any time, no exit fee` },
+    { what: "Notice to cancel", when: `${terms.noticeDays} days, any time, no exit fee` },
     { what: "Practice week and any replacement ramp-up", when: "Not billed" },
   ],
   note: "If we miss one of these, tell us and we will credit the affected days. We would rather publish these numbers and be held to them than write “fast turnaround” and hope you do not ask.",

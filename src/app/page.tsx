@@ -3,9 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
-import { ComparisonTable } from "@/components/sections/ComparisonTable";
 import { FAQ } from "@/components/sections/FAQ";
-import { PriceBlock } from "@/components/sections/PriceBlock";
+import { GrowthGlow } from "@/components/brand/Decor";
+import { PathChooser } from "@/components/sections/PathChooser";
+import { ScopeBlock } from "@/components/sections/ScopeBlock";
 import { Section, Eyebrow } from "@/components/sections/Section";
 import { StaffSection } from "@/components/sections/StaffSection";
 import { Testimonials } from "@/components/sections/Testimonials";
@@ -56,8 +57,27 @@ export default function HomePage() {
           confident text hero reads far better than an apology for a missing
           image. Drop a photograph into settings and the two-column layout
           returns on its own. */}
-      <section className="bg-paper">
-        <div className="gutter mx-auto max-w-content pt-16 pb-16 lg:pt-32 lg:pb-24">
+      {/* overflow-CLIP, not hidden: a box with overflow:hidden is a scroll
+          container, and the artwork's CSS view() timeline would bind to it
+          (scroll offset permanently 0) instead of the page - freezing the
+          parallax. clip clips identically without becoming a scroller. */}
+      <section className="relative overflow-clip bg-paper">
+        {/* Brand artwork in the space the missing photograph left behind.
+            Decorative, aria-hidden, and clipped by the section - it can
+            never widen the page. */}
+        {/* Ambient light: two soft blurred pools of the brand's own sand
+            and ochre, far behind the text. They give the hero depth at every
+            width, where the bar artwork only appears at xl. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-48 right-[-8%] h-[560px] w-[560px] rounded-full bg-sand opacity-70 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-40 left-[-10%] h-[420px] w-[420px] rounded-full bg-ochre-light opacity-[0.14] blur-3xl"
+        />
+        <GrowthGlow className="absolute -right-10 top-20 hidden w-[400px] xl:block" />
+        <div className="gutter relative mx-auto max-w-content pt-16 pb-16 lg:pt-32 lg:pb-24">
           <div
             className={
               hero.image.src
@@ -66,29 +86,25 @@ export default function HomePage() {
             }
           >
             <div>
-              <Eyebrow>{hero.eyebrow}</Eyebrow>
+              <Eyebrow className="enter">{hero.eyebrow}</Eyebrow>
 
               {/* The only H1 on the page. */}
-              <h1 className="mt-4">{hero.h1}</h1>
+              <h1 className="mt-4 enter enter-1">
+                {hero.h1Lead}{" "}
+                <span className="hl-marker">{hero.h1Accent}</span>
+              </h1>
 
-              <p className="mt-6 measure text-lead text-ink-muted">
+              <p className="mt-4 measure text-lead font-semibold text-fern enter enter-2">
+                {hero.lead}
+              </p>
+
+              <p className="mt-4 measure text-body text-ink-muted enter enter-3">
                 {hero.intro}
               </p>
 
-              {/* The price line sits between the intro and the buttons, with a
-                  3px ochre underline under the dollar figure only. */}
-              <p className="mt-8 text-[19px] font-semibold text-fern">
-                {hero.priceLine.before}
-                <span
-                  data-price
-                  className="price-figure underline decoration-ochre decoration-[3px] underline-offset-4"
-                >
-                  {hero.priceLine.figure}
-                </span>
-                {hero.priceLine.after}
-              </p>
-
-              <HeroCtas />
+              <div className="enter enter-4">
+                <HeroCtas />
+              </div>
 
               <p className="mt-4 text-small text-ink-muted">
                 {hero.reassurance.before}
@@ -112,12 +128,17 @@ export default function HomePage() {
                 height={hero.image.height}
                 priority
                 sizes="(min-width: 1024px) 42vw, 100vw"
-                className="h-auto w-full rounded-[12px] object-cover"
+                className="h-auto w-full rounded-[16px] object-cover"
               />
             )}
           </div>
         </div>
       </section>
+
+      {/* 1b - The chooser. One question, two paths, so the right visitor
+          lands on the right page instead of both offers pitching at
+          everyone (client decision, 23 November). */}
+      <PathChooser />
 
       {/* 2 - The problem, in her words. No icons: just words, so it reads like
           a letter rather than a brochure. */}
@@ -131,7 +152,7 @@ export default function HomePage() {
 
         <div className="mt-12 grid gap-8 md:grid-cols-3 lg:gap-12">
           {problem.columns.map((column) => (
-            <div key={column.quote}>
+            <div key={column.quote} className="rv-item">
               <h3 className="font-serif text-h3 font-semibold">
                 {column.quote}
               </h3>
@@ -163,7 +184,7 @@ export default function HomePage() {
           {threeSteps.steps.map((step, index) => {
             const Icon = iconByName[step.icon as keyof typeof iconByName];
             return (
-              <li key={step.title} className="relative">
+              <li key={step.title} className="rv-item relative">
                 {/* A large numeral in sand sitting behind the step title. */}
                 <span
                   aria-hidden="true"
@@ -195,8 +216,8 @@ export default function HomePage() {
         </Link>
       </Section>
 
-      {/* 4 - The price block. The strongest single differentiator on the site. */}
-      <PriceBlock page={routes.home} />
+      {/* 4 - What is included, and how pricing is agreed. */}
+      <ScopeBlock page={routes.home} />
 
       {/* 5 - Meet the kind of bookkeeper you would hire. */}
       <StaffSection />
@@ -209,8 +230,8 @@ export default function HomePage() {
           {dayOneWork.columns.map((column, index) => (
             <ul key={index} className="grid content-start gap-4">
               {column.map((item) => (
-                <li key={item} className="flex items-start gap-3">
-                  <CheckIcon size={20} className="mt-1 text-fern" />
+                <li key={item} className="rv-item flex items-start gap-3">
+                  <CheckIcon size={20} className="icon-draw mt-1 text-fern" />
                   <span className="text-body">{item}</span>
                 </li>
               ))}
@@ -231,7 +252,7 @@ export default function HomePage() {
 
         <div className="mt-12 grid gap-8 md:grid-cols-3 lg:gap-12">
           {securityBand.columns.map((column) => (
-            <div key={column.h4}>
+            <div key={column.h4} className="rv-item">
               <h3 className="font-sans text-h4 font-semibold text-paper">
                 {column.h4}
               </h3>
@@ -251,9 +272,6 @@ export default function HomePage() {
           />
         </Link>
       </Section>
-
-      {/* 8 - The comparison table. */}
-      <ComparisonTable />
 
       {/* 9 - Testimonials. Renders nothing until real, attributed quotes with
           written permission exist (spec 3.7). */}

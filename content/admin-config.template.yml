@@ -60,8 +60,8 @@ collections:
         hint: "150 to 158 characters. This is the sentence people read in Google."
       - { name: date, label: Published, widget: datetime, date_format: YYYY-MM-DD, time_format: false, picker_utc: true }
       - { name: updated, label: Last updated, widget: datetime, date_format: YYYY-MM-DD, time_format: false, picker_utc: true, required: false }
-      - { name: author, label: Author, widget: string, required: false, default: "Naveen Gupta" }
-      - { name: authorRole, label: Author role, widget: string, required: false, default: "Co-founder" }
+      - { name: author, label: Author, widget: string, required: false, default: "Sheky Goyal" }
+      - { name: authorRole, label: Author role, widget: string, required: false, default: "Founder" }
       - { name: image, label: Header image, widget: image, required: false, hint: "800x450. Optional." }
       - name: imageAlt
         label: Header image description
@@ -168,15 +168,6 @@ collections:
                   redirect to /thank-you-call after a booking, or bookings will
                   not be counted. Blank shows an email fallback instead of a
                   broken calendar.
-
-          - name: pricing
-            label: Prices
-            widget: object
-            fields:
-              - { name: fullTimeMonthly, label: Full-time, per month (USD), widget: number, value_type: int, min: 1 }
-              - { name: partTimeMonthly, label: Part-time, per month (USD), widget: number, value_type: int, min: 1 }
-              - { name: extraHourlyRate, label: Extra hours, per hour (USD), widget: number, value_type: int, min: 1 }
-              - { name: usHoursPremiumMonthly, label: Full US-hours premium, per month (USD), widget: number, value_type: int, min: 0 }
 
           - name: pilot
             label: Free pilot

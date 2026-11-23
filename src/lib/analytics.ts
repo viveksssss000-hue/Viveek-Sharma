@@ -9,7 +9,6 @@
  * Key events (the only three marked as conversions in GA4, spec 11.3):
  *   call_booked ........... primary
  *   pilot_requested ....... secondary
- *   checklist_downloaded .. tertiary
  * Nothing else may be marked as a conversion; marking scroll depth or button
  * clicks as conversions makes the reports meaningless.
  */
@@ -41,13 +40,6 @@ export function trackCallBooked(referrer: string) {
 /** Fires on /thank-you after the pilot form. */
 export function trackPilotRequested() {
   track("pilot_requested", { form_name: "free_pilot" });
-}
-
-/** Fires on /thank-you-checklist - not on form submit (spec 7.10.3). */
-export function trackChecklistDownloaded(
-  formLocation: "footer" | "blog_index" | "article" | "unknown"
-) {
-  track("checklist_downloaded", { form_location: formLocation });
 }
 
 /* --- Engagement ---------------------------------------------------- */

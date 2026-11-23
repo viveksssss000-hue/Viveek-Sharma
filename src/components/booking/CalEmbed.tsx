@@ -42,6 +42,7 @@ export function CalEmbed() {
   useEffect(() => {
     if (!calLink) return;
     let cancelled = false;
+    let onBooked: (() => void) | undefined;
 
     (async () => {
       try {
@@ -59,10 +60,13 @@ export function CalEmbed() {
           },
         });
 
-        cal("on", {
-          action: "bookingSuccessful",
-          callback: () => router.push(booking.successPath),
-        });
+        // Kept so the cleanup can deregister it: the Cal embed is a
+        // page-global singleton that outlives client-side navigations, and
+        // app/template.tsx remounts this component on every visit. Without
+        // the matching off(), N visits stack N callbacks and a single booking
+        // pushes N duplicate history entries.
+        onBooked = () => router.push(booking.successPath);
+        cal("on", { action: "bookingSuccessful", callback: onBooked });
       } catch {
         // The embed script could not load - show the fallback rather than an
         // empty box. Never a broken embed.
@@ -72,6 +76,16 @@ export function CalEmbed() {
 
     return () => {
       cancelled = true;
+      if (onBooked) {
+        const cb = onBooked;
+        getCalApi()
+          .then((cal) =>
+            cal("off", { action: "bookingSuccessful", callback: cb })
+          )
+          .catch(() => {
+            /* embed never loaded - nothing was registered */
+          });
+      }
     };
   }, [router, calLink]);
 
@@ -80,7 +94,7 @@ export function CalEmbed() {
   }
 
   return (
-    <div className="overflow-hidden rounded-[12px] border border-border bg-surface">
+    <div className="overflow-hidden rounded-[16px] border border-border bg-surface">
       <Cal
         calLink={calLink}
         // A fixed minimum height keeps the calendar visible without scrolling
@@ -99,7 +113,7 @@ export function CalEmbed() {
  */
 function BookingFallback({ configured }: { configured: boolean }) {
   return (
-    <div className="rounded-[12px] border border-border bg-surface p-6 lg:p-8">
+    <div className="rounded-[16px] border border-border bg-surface p-6 lg:p-8">
       <h2 className="text-h3">
         {configured ? "The calendar could not load" : "Email us to book a time"}
       </h2>
@@ -109,7 +123,11 @@ function BookingFallback({ configured }: { configured: boolean }) {
           : "Send us a note with a couple of times that suit you and we will confirm one, usually within a few hours. Because we are in India, a reply will often be waiting for you in the morning."}
       </p>
       <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
-        <Button asChild>
+        {/* whitespace-normal overrides the Button default of nowrap. The
+            label carries a full email address, and at 360px in Archivo its
+            min-content width forced the grid track 10px past the viewport.
+            Wrapping is better than a horizontally scrolling page. */}
+        <Button asChild className="whitespace-normal text-center">
           <a href={`mailto:${site.email}?subject=Booking a 20-minute call`}>
             Email {site.email}
           </a>

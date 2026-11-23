@@ -1,6 +1,6 @@
 ---
 title: Terms of Service
-updated: 2026-08-23
+updated: 2026-11-22
 status: draft
 ---
 
@@ -8,8 +8,8 @@ These terms cover your use of **this website**. They are not the agreement under
 which we would do bookkeeping for your firm - that is a separate written
 contract, and nothing on this website replaces it or commits either of us to it.
 
-The website is operated by **VSH Enterprise Pvt Ltd**, trading as tryACOwork, of
-A-113, Rishal Garden, Ranhola, Nangloi, New Delhi 110041, India. Contact us at
+The website is operated by **Vision Accounting Pvt Ltd**, trading as tryACOwork, of
+Plot No.C, 001, Sector 16B, Noida, Uttar Pradesh 201301, India. Contact us at
 **hello@tryacowork.com**.
 
 By using the site you accept these terms. If you do not, please do not use it.
@@ -107,8 +107,8 @@ service agreement, not here.
 
 ## Governing law
 
-These terms are governed by the laws of India, and the courts of Delhi have
-exclusive jurisdiction over any dispute about this website.
+These terms are governed by the laws of India, and the courts at Gautam Buddh
+Nagar, Uttar Pradesh have exclusive jurisdiction over any dispute about this website.
 
 If you are a consumer in a jurisdiction whose law gives you the right to bring
 proceedings locally, this clause does not take that right away.

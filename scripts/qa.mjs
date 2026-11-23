@@ -51,6 +51,8 @@ const CHROME_PATHS = [
 
 const ROUTES = [
   "/",
+  "/bookkeeping-and-accounting-services",
+  "/hire-dedicated-staff",
   "/bookkeeping-services-for-cpa-firms",
   "/how-it-works",
   "/security",
@@ -62,7 +64,6 @@ const ROUTES = [
   "/terms",
   "/thank-you",
   "/thank-you-call",
-  "/thank-you-checklist",
 ];
 
 const WIDTHS = [360, 390, 768, 1024, 1280, 1440];
@@ -98,6 +99,8 @@ const APPROVED_AUDIT_CONTEXTS = [
   "bookkeeping, accounting and auditing clerks",
   // (e) the Wall Street Journal statistic
   "US accountants and auditors left their jobs",
+  // (f) the scope block's not-included list, on Home and Services
+  "including audit opinions",
 ];
 
 /**
@@ -160,7 +163,7 @@ const EXCLUSION_ITEMS = [
   "Making audit judgements",
   "Talking to your clients",
   "Holding your clients",
-  "Bookkeeping for businesses directly",
+  "Going around your firm to your clients",
 ];
 
 /** Spec 9.1: total JavaScript shipped to the browser, compressed. */
@@ -938,23 +941,36 @@ if (process.env.NEXT_PUBLIC_STAGING !== "true") {
       `the US-hours premium differs between the price block and FAQ 4: ${[...allPremiums].join(" vs ")} (CO-16)`
     );
 
-  // CO-01/CO-16: the annual figure equals the monthly price times twelve.
-  const monthly = Number(
-    (home.prices.find((p) => p && /^\$?[\d,]+$/.test(p)) ?? "").replace(/[^\d]/g, "")
-  );
-  const annual = home.text.match(/\$([\d,]+) a year(?! median)/);
-  if (monthly && annual) {
-    const annualValue = Number(annual[1].replace(/,/g, ""));
-    if (annualValue !== monthly * 12)
+  // PRICING IS NOT PUBLISHED.
+  //
+  // This check used to run the other way: it warned when the Services page
+  // carried NO price figures, because a published price was the site's single
+  // strongest differentiator. The client reversed that decision in the
+  // November 2026 rebrand - scope and pricing are now agreed in writing after
+  // a call - so the check now fails if a figure comes BACK, which is the
+  // mistake that is actually possible from here.
+  //
+  // "From $X" counts as publishing a price.
+  const priceLike = /\$\s?\d[\d,]*/;
+  for (const [route, text] of [
+    ["/", home.text],
+    ["/bookkeeping-services-for-cpa-firms", servicesText],
+  ]) {
+    const hit = text.match(priceLike);
+    if (hit)
       record(
         "FAIL",
-        "/",
-        `the comparison table's annual figure (${annual[1]}) is not the monthly price times twelve (CO-01)`
+        route,
+        `a price figure is published ("${hit[0]}"), but pricing is quoted after a call`
       );
   }
 
-  if (servicesPrices.length === 0)
-    record("WARN", "/bookkeeping-services-for-cpa-firms", "no [data-price] figures found");
+  if (home.prices.length || servicesPrices.length)
+    record(
+      "FAIL",
+      "/",
+      `${home.prices.length + servicesPrices.length} [data-price] element(s) still render`
+    );
 
   await page.close();
 }

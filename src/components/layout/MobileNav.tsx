@@ -1,7 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/layout/Logo";
@@ -89,7 +95,7 @@ export function MobileNav({ currentPath }: { currentPath: string }) {
         ref={dialogRef}
         aria-label="Menu"
         className={cn(
-          "m-0 h-full max-h-full w-full max-w-full border-0 bg-paper p-0 text-ink",
+          "m-dialog m-0 h-full max-h-full w-full max-w-full border-0 bg-paper p-0 text-ink",
           "backdrop:bg-ink/40 open:flex open:flex-col lg:hidden"
         )}
       >
@@ -110,7 +116,7 @@ export function MobileNav({ currentPath }: { currentPath: string }) {
           className="gutter flex-1 overflow-y-auto pt-6 pb-8"
         >
           <ul className="flex flex-col gap-5">
-            {links.map((item) => {
+            {links.map((item, index) => {
               const current =
                 currentPath === item.href ||
                 (item.href === routes.blog && currentPath.startsWith("/blog"));
@@ -120,8 +126,9 @@ export function MobileNav({ currentPath }: { currentPath: string }) {
                     href={item.href}
                     onClick={close}
                     aria-current={current ? "page" : undefined}
+                    style={{ "--i": index } as CSSProperties}
                     className={cn(
-                      "flex min-h-11 items-center text-[22px]",
+                      "m-link flex min-h-11 items-center text-[22px]",
                       current
                         ? "font-semibold underline decoration-ochre decoration-2 underline-offset-8"
                         : "font-medium text-ink"

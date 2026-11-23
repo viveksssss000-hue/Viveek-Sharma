@@ -11,22 +11,62 @@
  * fallback until the client supplies real material.
  */
 
-import { pricing, site, usd, usHoursPremiumRate } from "@/lib/site";
+import { site, terms } from "@/lib/site";
 import { staffSettings, testimonialSettings } from "@/lib/settings";
 import { routes } from "@/content/global";
+
+/* --- The chooser (client decision, 23 November) --------------------- *
+ * One question, two paths, so the right visitor lands on the right page
+ * instead of both offers pitching at everyone. Services is the primary
+ * offer and carries the primary button; staffing is secondary.           */
+
+export const pathChooser = {
+  eyebrow: "Two ways to work with us",
+  h2: "What are you looking for?",
+  intro:
+    "Two different needs, two different paths. Pick the one that sounds like you, and the right page takes it from there.",
+  cards: [
+    {
+      eyebrow: "Our professional services",
+      title: "You want the books handled for you.",
+      body: "Hand us the bookkeeping and accounting. Our own team runs it, month after month, and returns everything for your review.",
+      points: [
+        "Reconciliations, payables, receivables and payroll support",
+        "Month-end close, reporting and cleanups",
+        "Scoped and quoted in writing after one short call",
+      ],
+      ctaLabel: "See our services",
+      href: routes.services,
+      primary: true,
+    },
+    {
+      eyebrow: "Experienced staff",
+      title: "You want a dedicated person of your own.",
+      body: "We place an experienced accounting professional who works only for you - your software, your process, your direction - while staying on our payroll.",
+      points: [
+        "You interview the person and you choose",
+        "Salary, equipment, office and cover handled by us",
+        "A free replacement if the fit is wrong",
+      ],
+      ctaLabel: "See dedicated staffing",
+      href: routes.staffing,
+      primary: false,
+    },
+  ],
+} as const;
 
 /* --- Section 1: Hero (7.1.2) --------------------------------------- */
 
 export const hero = {
-  eyebrow: "For US CPA and accounting firms",
-  h1: "Hire a bookkeeper who works only for your firm.",
+  eyebrow: "For US businesses and CPA firms",
+  /** Rendered as two sentences; the second carries the marker highlight. */
+  h1Lead: "Your accounting team.",
+  h1Accent: "Without the overhead.",
+  /** Sits directly under the H1. The H1 is kept to two lines on desktop
+   *  (spec 4.2.2), so the fuller sentence lives here instead. */
+  lead: "Your outsourced accounting team, without the overhead of building one.",
   intro:
-    "tryACOwork gives US accounting firms trained, dedicated bookkeepers in India. They work inside your software, on your clients, to your process - for a fixed monthly fee, with no recruiting, no payroll and no office to pay for.",
-  priceLine: {
-    before: "From ",
-    figure: usd(pricing.fullTime),
-    after: " a month for a full-time bookkeeper. Everything included.",
-  },
+    "tryACOwork runs bookkeeping and accounting for US businesses and CPA firms through our own team - reconciliations, payables, receivables, payroll support, month-end close and reporting. If you would rather run your own operation, we also place experienced offshore accounting professionals with you on a dedicated basis: they work only for you, and stay on our payroll.",
   reassurance: {
     before: "No commitment. Start with a ",
     linkLabel: "free 20-hour pilot",
@@ -82,26 +122,26 @@ export const problem = {
 /* --- Section 3: How it works, in three steps (7.1.4) --------------- */
 
 export const threeSteps = {
-  h2: "Three steps, about two weeks.",
+  h2: "Three steps, whichever path you choose.",
   steps: [
     {
-      title: "We find the person",
-      body: "Tell us what you need on a 20-minute call. We shortlist from our team and from candidates we recruit for you, then send you two or three profiles with real work samples. You interview them yourself, by video. You choose.",
+      title: "Tell us what you need",
+      body: "A 20-minute call about your books, your software and what you want off your plate. We will tell you honestly which path fits - our services, or a dedicated hire - and what it would involve.",
       icon: "search",
     },
     {
-      title: "We train them on your firm",
-      body: "Before your bookkeeper touches live client work, we build a written process document with you, set up access inside your systems, and run them through a paid practice week on sample files. You do not pay for that week.",
+      title: "We put it in writing",
+      body: "For services: a written scope and quote covering exactly what we will run each month. For a dedicated hire: two or three candidate profiles with real work samples - you interview them yourself, by video, and you choose.",
       icon: "clipboard",
     },
     {
-      title: "They start, and you review",
-      body: "Your bookkeeper works your hours, in your software, on the clients you assign. Work comes back to you for review and sign-off, because the professional responsibility stays with your firm - always. We handle their salary, benefits, equipment, office, HR and replacement.",
+      title: "You start, and you review",
+      body: "Services begin with the same named people on your books every month. A dedicated hire starts with a practice week on sample files that you do not pay for. Either way, the work comes back to you - review and sign-off stay with you, always.",
       icon: "check",
     },
   ],
   link: {
-    label: "See the full onboarding timeline, day by day",
+    label: "See the dedicated-hire timeline, day by day",
     href: routes.howItWorks,
   },
 } as const;
@@ -203,28 +243,6 @@ export const securityBand = {
   },
 } as const;
 
-/* --- Section 8: The comparison table (7.1.9) ---------------------- *
- * The source line MUST appear in full. No "save 70 percent" headline over
- * the top of it - the table is more persuasive than the percentage.     */
-
-export const comparison = {
-  h2: "What the same work costs two ways.",
-  intro:
-    "An honest comparison, using published US wage data rather than our own numbers.",
-  columnHeads: ["", "US in-house bookkeeper", "tryACOwork bookkeeper"],
-  rows: [
-    { label: "Salary or fee", inHouse: "$49,210 a year median", tryacowork: "ANNUAL_PRICE" },
-    { label: "Payroll taxes and benefits", inHouse: "Roughly 20 to 30 percent on top", tryacowork: "Included" },
-    { label: "Recruiting and onboarding cost", inHouse: "Your time, plus agency fees", tryacowork: "Included" },
-    { label: "Equipment and desk", inHouse: "Yours to buy", tryacowork: "Included" },
-    { label: "Paid time off and sick cover", inHouse: "Yours to absorb", tryacowork: "Covered by us" },
-    { label: "If they leave", inHouse: "Start hiring again", tryacowork: "Free replacement" },
-    { label: "Notice to end", inHouse: "Employment law applies", tryacowork: `${pricing.noticeDays} days` },
-  ],
-  source:
-    "US median annual wage for bookkeeping, accounting and auditing clerks: $49,210, US Bureau of Labor Statistics, May 2024. Fully loaded cost of a US in-house bookkeeper is commonly estimated at $58,000 or more once payroll taxes, healthcare, retirement contributions, paid time off and equipment are counted. Your own costs will differ.",
-} as const;
-
 /* --- Section 9: Testimonials (7.1.10) ---------------------------- *
  * CLIENT TO SUPPLY. Only real, attributed quotes with written permission
  * may appear (spec 3.7). While this array is empty the whole section is
@@ -267,10 +285,7 @@ export const faqs = [
   },
   {
     q: "What hours will they work?",
-    // CO-17 change 2: this figure and the one in the price block's
-    // not-included list are the same string, so they cannot disagree and their
-    // markers cannot resolve independently.
-    a: `You choose. The standard arrangement is an early Indian shift that overlaps your morning, roughly 7:00am to 11:00am Eastern, so you can talk to them at the start of your day and find the work finished when you arrive the next morning. Full US-hours coverage is available for ${usHoursPremiumRate} a month more per person.`,
+    a: `You choose. The standard arrangement is an early Indian shift that overlaps your morning, roughly 7:00am to 11:00am Eastern, so you can talk to them at the start of your day and find the work finished when you arrive the next morning. Full US-hours coverage is available, and is quoted separately because it is a night shift in India.`,
   },
   {
     q: "How good is their English?",
@@ -282,7 +297,7 @@ export const faqs = [
   },
   {
     q: "What is the minimum commitment?",
-    a: `One month, and ${pricing.noticeDays} days notice to stop. There is no annual contract, no setup fee and no recruitment fee.`,
+    a: `One month, and ${terms.noticeDays} days notice to stop. There is no annual contract, no setup fee and no recruitment fee.`,
   },
   {
     q: "How long until someone is actually working?",

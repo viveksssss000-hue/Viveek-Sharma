@@ -17,7 +17,6 @@ import {
   whereWeAre,
   whyWeStarted,
 } from "@/content/about";
-import { site } from "@/lib/site";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata(routes.about);
@@ -40,52 +39,33 @@ export default function AboutPage() {
     <>
       <PageHeader h1={header.h1} intro={header.intro} />
 
-      {/* Why we started, with the founder beside it. */}
+      {/* Why we started - rendered only when there is a real story to tell.
+          The client left the founder story empty, so rather than publish an
+          editorial brief to visitors ("150 to 250 words in Sheky's own
+          voice"), the section states who runs the firm and stops there. A
+          thin true section beats a placeholder. */}
       <Section tone="paper" width="text">
-        <h2>{whyWeStarted.h2}</h2>
-
         {whyWeStarted.founderStory ? (
-          <div className="mt-6 grid gap-4">
-            {whyWeStarted.founderStory.split("\n\n").map((paragraph) => (
-              <p key={paragraph} className="measure text-body">
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        ) : (
-          <div className="mt-6 rounded-[12px] border border-border bg-sand-deep/40 p-6">
-            <p className="text-small font-semibold uppercase tracking-[0.08em] text-ochre-text">
-              Founder story needed
-            </p>
-            <p className="mt-3 measure text-body">
-              150 to 250 words in {site.founder.firstName}&rsquo;s own voice. It
-              should answer three things:
-            </p>
-            <ul className="mt-4 grid list-disc gap-2 pl-6">
-              {whyWeStarted.brief.map((item) => (
-                <li key={item} className="text-body">
-                  {item}
-                </li>
+          <>
+            <h2>{whyWeStarted.h2}</h2>
+            <div className="mt-6 grid gap-4">
+              {whyWeStarted.founderStory.split("\n\n").map((paragraph) => (
+                <p key={paragraph} className="measure text-body">
+                  {paragraph}
+                </p>
               ))}
-            </ul>
-            <p className="mt-4 measure text-small text-ink-muted">
-              Specific beats polished. &ldquo;I watched a two-partner firm in
-              Ohio turn down eleven clients in one year because they could not
-              hire&rdquo; is worth more than a paragraph about passion for
-              excellence.
-            </p>
-          </div>
+            </div>
+          </>
+        ) : (
+          <h2>Who runs it.</h2>
         )}
 
-        {/* A plain signature, not a profile card. The story is written in
-            the first person, so it needs a name against it - an unsigned "I"
-            is weaker than no story at all. No photograph and no biography:
-            those were placeholders and the client removed them. */}
+        {/* A plain signature, not a profile card. No photograph and no
+            biography: those were placeholders and the client removed them. */}
         <p className="mt-8 text-body">
           <span className="font-semibold">{founder.name}</span>
           <span className="text-ink-muted">, {founder.role}</span>
         </p>
-
       </Section>
 
       {/* What we believe */}
@@ -93,7 +73,7 @@ export default function AboutPage() {
         <h2>{beliefs.h2}</h2>
         <dl className="mt-8 grid gap-6">
           {beliefs.items.map((item) => (
-            <div key={item.title}>
+            <div key={item.title} className="rv-item">
               <dt className="font-sans text-h4 font-semibold">{item.title}</dt>
               <dd className="mt-2 measure text-body text-ink-muted">
                 {item.body}
@@ -130,7 +110,7 @@ export default function AboutPage() {
           {[howWeHire.before, howWeHire.after].map((group) => (
             <div
               key={group.h4}
-              className="rounded-[12px] border border-border bg-surface p-6 lg:p-8"
+              className="rounded-[16px] border border-border bg-surface p-6 lg:p-8"
             >
               <h3 className="font-sans text-h4 font-semibold">{group.h4}</h3>
               <ul className="mt-6 grid gap-3">

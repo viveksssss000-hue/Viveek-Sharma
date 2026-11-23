@@ -20,7 +20,7 @@ const buttonVariants = cva(
   [
     "inline-flex items-center justify-center gap-2 whitespace-nowrap",
     "font-sans font-semibold text-btn leading-none",
-    "rounded-[10px] transition-[background-color,border-color,color,transform] duration-150 ease-out",
+    "rounded-[10px] transition-[background-color,border-color,color,transform,box-shadow] duration-150 ease-out",
     "disabled:pointer-events-none disabled:opacity-60",
     // Only ever a single right-pointing arrow inside a button (spec 4.4.1).
     "[&_svg]:size-[18px] [&_svg]:shrink-0 [&_svg]:transition-transform [&_svg]:duration-150",
@@ -30,7 +30,7 @@ const buttonVariants = cva(
       variant: {
         /** The single most important action on the screen. */
         primary:
-          "bg-ochre text-white hover:bg-ochre-dark hover:-translate-y-px active:translate-y-0 hover:[&_svg]:translate-x-1",
+          "btn-sheen bg-ochre text-white hover:bg-ochre-dark hover:-translate-y-px hover:shadow-[0_10px_28px_rgb(154_107_34/0.35)] active:translate-y-0 active:shadow-none hover:[&_svg]:translate-x-1",
         /** The alternative action next to a primary. */
         secondary:
           "border-[1.5px] border-fern bg-transparent text-fern hover:bg-fern/8",
@@ -39,7 +39,7 @@ const buttonVariants = cva(
           "text-fern underline decoration-2 underline-offset-4 hover:decoration-[3px]",
         /** Only inside a forest or fern coloured band. */
         onDark:
-          "bg-paper text-forest hover:bg-white hover:-translate-y-px active:translate-y-0 hover:[&_svg]:translate-x-1",
+          "btn-sheen btn-sheen--ink bg-paper text-forest hover:bg-white hover:-translate-y-px hover:shadow-[0_10px_28px_rgb(0_0_0/0.3)] active:translate-y-0 active:shadow-none hover:[&_svg]:translate-x-1",
         /** Outlined, for use inside a dark band next to an onDark primary. */
         onDarkOutline:
           "border-[1.5px] border-paper/40 bg-transparent text-paper hover:border-paper hover:bg-paper/10",
